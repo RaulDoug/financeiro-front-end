@@ -8,13 +8,7 @@ import { PublicRoute } from './PublicRoute.tsx';
 import { PrivateRoute } from './PrivateRoute.tsx';
 import { OnboardingPage } from '../pages/onboarding/OnboardingPage.tsx';
 import { AppLayout } from '../layouts/AppLayout.tsx';
-
-const DashboardPlaceholder = () => (
-  <div className="p-8 text-center">
-    <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">Dashboard FinFlow</h1>
-    <p className="text-zinc-500 mt-2">Área autenticada com sucesso.</p>
-  </div>
-);
+import { DashboardPage } from '../pages/Dashboard/DashboardPage.tsx';
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -32,7 +26,7 @@ export const AppRoutes: React.FC = () => {
         {/* Rotas Privadas */}
         <Route element={<PrivateRoute />}>
           <Route element={<AppLayout />}>
-            <Route path="/dashboard" element={<DashboardPlaceholder />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
           </Route>
           <Route path="/onboarding" element={<OnboardingPage />} />
         </Route>
