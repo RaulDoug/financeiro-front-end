@@ -19,11 +19,31 @@ test('AC-002: Credenciais inválidas @spec:AC-002', () => {
 });
 
 // US-001 — Acesso ao sistema (Login)
-test('AC-003: Limite de tentativas excedido (Rate limit) @spec:AC-003', () => {
-  // Dado: que o usuário está tentando fazer login
-  // Quando: falha 5 vezes na mesma janela de 15 minutos (recebendo erro 429 da API)
-  // Então: o sistema exibe uma mensagem bloqueando novas tentativas por um período e orientando o usuário a aguardar
-  assert.fail('critério de aceite AC-003 ainda não provado — implemente este teste');
+test('AC-003: Limite de tentativas excedido (Rate limit) @spec:AC-003', async () => {
+  const { authService, AuthError } = await import('../src/services/auth.service.ts');
+  const { api } = await import('../src/lib/axios.ts');
+
+  const originalPost = api.post;
+  api.post = async () => {
+    const error = new Error('Too many requests');
+    error.response = {
+      status: 429,
+      data: { message: 'Muitas tentativas de login. Tente novamente em 15 minutos.' },
+    };
+    throw error;
+  };
+
+  try {
+    await authService.login({ email: 'bloqueado@email.com', password: 'wrong-password' });
+    assert.fail('Deveria ter lançado erro 429');
+  } catch (err) {
+    assert.ok(err instanceof AuthError);
+    assert.equal(err.status, 429);
+    assert.equal(err.isRateLimit, true);
+    assert.match(err.message, /15 minutos/);
+  } finally {
+    api.post = originalPost;
+  }
 });
 
 // US-002 — Registro de novo usuário
@@ -35,19 +55,89 @@ test('AC-004: Senha forte @spec:AC-004', () => {
 });
 
 // US-002 — Registro de novo usuário
-test('AC-005: Registro com sucesso e auto-login @spec:AC-005', () => {
-  // Dado: que o formulário de registro foi preenchido corretamente (nome de 2 a 255 chars, e-mail válido, senha forte)
-  // Quando: o usuário submete o formulário
-  // Então: a conta é criada via `POST /api/auth/register`, o front-end executa o auto-login chamando `POST /api/auth/login` em segundo plano e direciona o usuário para o Onboarding/Dashboard
-  assert.fail('critério de aceite AC-005 ainda não provado — implemente este teste');
+test('AC-005: Registro com sucesso e auto-login @spec:AC-005', async () => {
+  const { authService } = await import('../src/services/auth.service.ts');
+  const { api } = await import('../src/lib/axios.ts');
+  const { useAuthStore } = await import('../src/stores/auth.store.ts');
+
+  const calls = [];
+  const originalPost = api.post;
+  api.post = async (url, data) => {
+    calls.push({ url, data });
+    if (url === '/auth/register') {
+      return {
+        status: 201,
+        data: {
+          message: 'Usuário criado com sucesso!',
+          user: { id: 'uuid-123', name: data.name, email: data.email },
+        },
+      };
+    }
+    if (url === '/auth/login') {
+      return {
+        status: 200,
+        data: {
+          message: 'Login realizado com sucesso!',
+          userInfo: {
+            token: 'jwt-token-autologin',
+            id: 'uuid-123',
+            name: data.email.split('@')[0],
+            email: data.email,
+          },
+        },
+      };
+    }
+    throw new Error(`Unhandled url: ${url}`);
+  };
+
+  try {
+    const result = await authService.registerAndLogin({
+      name: 'João Silva',
+      email: 'joao@email.com',
+      password: 'Senha@Forte123',
+    });
+
+    assert.equal(calls.length, 2);
+    assert.equal(calls[0].url, '/auth/register');
+    assert.equal(calls[1].url, '/auth/login');
+    assert.equal(result.userInfo.token, 'jwt-token-autologin');
+    assert.equal(useAuthStore.getState().isAuthenticated, true);
+    assert.equal(useAuthStore.getState().token, 'jwt-token-autologin');
+  } finally {
+    api.post = originalPost;
+  }
 });
 
 // US-002 — Registro de novo usuário
-test('AC-006: E-mail já em uso @spec:AC-006', () => {
-  // Dado: que o usuário preenche o registro
-  // Quando: utiliza um e-mail que já está cadastrado
-  // Então: o sistema informa que o e-mail já está em uso
-  assert.fail('critério de aceite AC-006 ainda não provado — implemente este teste');
+test('AC-006: E-mail já em uso @spec:AC-006', async () => {
+  const { authService, AuthError } = await import('../src/services/auth.service.ts');
+  const { api } = await import('../src/lib/axios.ts');
+
+  const originalPost = api.post;
+  api.post = async () => {
+    const error = new Error('Email já cadastrado');
+    error.response = {
+      status: 400,
+      data: { message: 'Email já cadastrado' },
+    };
+    throw error;
+  };
+
+  try {
+    await authService.register({
+      name: 'João Silva',
+      email: 'joao@email.com',
+      password: 'Senha@Forte123',
+    });
+    assert.fail('Deveria ter lançado erro de e-mail já cadastrado');
+  } catch (err) {
+    assert.ok(err instanceof AuthError);
+    assert.equal(err.status, 400);
+    assert.equal(err.isEmailInUse, true);
+    assert.match(err.message, /Email já cadastrado/i);
+  } finally {
+    api.post = originalPost;
+  }
 });
 
 // US-003 — Proteção de rotas e Gestão de Sessão
