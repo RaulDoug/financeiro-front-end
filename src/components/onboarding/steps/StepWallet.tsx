@@ -149,3 +149,4 @@ export const StepWallet: React.FC = () => {
 };
 
 export default StepWallet;
+

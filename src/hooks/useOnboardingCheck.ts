@@ -62,3 +62,4 @@ export function useOnboardingCheck(currentPath: string) {
     needsOnboarding: hasCheckedWallets ? wallets.length === 0 : false,
   };
 }
+

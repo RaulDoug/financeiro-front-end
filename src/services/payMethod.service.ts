@@ -71,3 +71,4 @@ export const payMethodService = {
 };
 
 export default payMethodService;
+
