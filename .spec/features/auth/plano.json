@@ -1,0 +1,140 @@
+{
+  "runId": "Front-End_Financeiro-auth-mu1m4e4r",
+  "feature": "auth",
+  "agent": "antigravity",
+  "modo": "sequencial",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-14 19:05",
+  "branchTrabalho": "spec/auth",
+  "baseDir": ".spec/features/auth",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "logsDir": "../onp-worktrees/Front-End_Financeiro-auth-logs",
+  "ondas": [],
+  "faixas": [],
+  "sequenciais": [
+    {
+      "id": "T-001",
+      "titulo": "Configuração do Store e Interceptor Axios",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/stores/auth.store.ts",
+        "src/lib/axios.ts"
+      ],
+      "refs": [
+        "US-003",
+        "AC-008"
+      ]
+    },
+    {
+      "id": "T-002",
+      "titulo": "Serviços de API (Login e Register)",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/services/auth.service.ts"
+      ],
+      "refs": [
+        "US-001",
+        "US-002",
+        "AC-003",
+        "AC-005",
+        "AC-006"
+      ]
+    },
+    {
+      "id": "T-003",
+      "titulo": "Layout Base de Autenticação",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/layouts/AuthLayout.tsx",
+        "src/components/ui/AuthCard.tsx"
+      ],
+      "refs": [
+        "US-001",
+        "US-002"
+      ]
+    },
+    {
+      "id": "T-004",
+      "titulo": "Página de Login",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/auth/LoginPage.tsx"
+      ],
+      "refs": [
+        "US-001",
+        "AC-001",
+        "AC-002",
+        "AC-003"
+      ]
+    },
+    {
+      "id": "T-005",
+      "titulo": "Página de Registro",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/auth/RegisterPage.tsx"
+      ],
+      "refs": [
+        "US-002",
+        "AC-004",
+        "AC-005",
+        "AC-006"
+      ]
+    },
+    {
+      "id": "T-006",
+      "titulo": "Página de Recuperação de Senha (Placeholder)",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/auth/ForgotPasswordPage.tsx"
+      ],
+      "refs": [
+        "US-003",
+        "AC-010",
+        "AC-011"
+      ]
+    },
+    {
+      "id": "T-007",
+      "titulo": "Guardas de Rota Privadas/Públicas",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/routes/PrivateRoute.tsx",
+        "src/routes/PublicRoute.tsx"
+      ],
+      "refs": [
+        "US-003",
+        "AC-007",
+        "AC-009",
+        "AC-012"
+      ]
+    },
+    {
+      "id": "T-008",
+      "titulo": "Integração Geral das Rotas de Auth",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/App.tsx",
+        "src/routes/index.tsx"
+      ],
+      "refs": [
+        "US-001",
+        "US-002",
+        "US-003"
+      ]
+    }
+  ],
+  "concluidas": [],
+  "avisos": []
+}

@@ -103,9 +103,7 @@ Content-Type: application/json
 └──────────┴──────────────────────────────────────────┘
 ```
 
-**Seletor de Carteira:** Componente global no topbar. Ao trocar a carteira, **todo o contexto da aplicação recarrega** (novos dados de contas, categorias, transações etc.). O `wallet_id` selecionado é enviado no header `x-wallet-id` de toda requisição.
-
-> **Importante:** Não existe rota GET para listar as carteiras do usuário no back-end atual. O login retorna o `id` do usuário — será necessário armazenar o `wallet_id` retornado no momento da criação da carteira, ou criar essa rota futuramente.
+**Seletor de Carteira:** Componente global no topbar. Ao trocar a carteira, **todo o contexto da aplicação recarrega** (novos dados de contas, categorias, transações etc.). O `wallet_id` selecionado é enviado no header `x-wallet-id` de toda requisição. As carteiras do usuário logado são obtidas via `GET /api/wallet`.
 
 ---
 
@@ -172,10 +170,10 @@ A carteira é o **contexto central** da aplicação. Tudo (contas, categorias, t
 
 ```
 1. Usuário faz login → recebe token
-2. Front verifica se existe wallet_id salvo
-   → Se sim: define como ativa, carrega dashboard
-   → Se não: redireciona para tela de criação de carteira
-3. Toda requisição subsequente envia: x-wallet-id: <uuid>
+2. Front chama GET /api/wallet para obter as carteiras do usuário:
+   → Se lista com carteiras: define uma como ativa (a primeira ou a última salva no cache) e carrega dashboard
+   → Se lista vazia: redireciona para onboarding / tela de criação de carteira (POST /api/wallet/register)
+3. Toda requisição subsequente envia: x-wallet-id: <uuid-da-carteira-ativa>
 ```
 
 ### Criação da primeira carteira
@@ -199,6 +197,7 @@ Após criar, salvar o `wallet.id` como carteira ativa.
 
 | Ação     | Endpoint                        | Permissão necessária         |
 | -------- | ------------------------------- | ---------------------------- |
+| Listar   | `GET /api/wallet`               | Qualquer usuário autenticado |
 | Criar    | `POST /api/wallet/register`     | Qualquer usuário autenticado |
 | Renomear | `PATCH /api/wallet/update/:id`  | `owner` ou `editor`          |
 | Excluir  | `DELETE /api/wallet/delete/:id` | Apenas `owner`               |
@@ -496,6 +495,8 @@ Todos enviados como query params na URL:
 | Data de criação (de/até)    | `created_at_from` / `created_at_to`       | Datepicker range  | ❌                        |
 | Recorrente                  | `is_recurrent`                            | Toggle            | ❌ (`"true"` / `"false"`) |
 | Ordenação                   | `order_by` + `order_dir`                  | Select + ASC/DESC | ❌                        |
+| Paginação (página)          | `page`                                    | Número (def: `1`) | ❌                        |
+| Paginação (limite)          | `limit`                                   | Número 20-100     | ❌                        |
 
 **Valores aceitos em `type`:** `incomings`, `expenses`, `transfers`  
 **Valores aceitos em `status`:** `pending`, `completed`, `cancelled`, `expired`  
@@ -645,7 +646,9 @@ A tabela `categories` tem campo `type` que é `incomings` ou `expenses`. O front
 
 **Endpoint:** `GET /api/dashboard-report/credit-card-summary`
 
-**Query param:** `includeTransactions=true` para ver as transações da fatura.
+**Query params (opcionais):**
+- `includeTransactions=true` para ver as transações da fatura.
+- `startDate` e `endDate` (`AAAA-MM-DD`): intervalo de datas de vencimento da fatura (padrão: mês corrente).
 
 **Resposta com transações:**
 ```json
@@ -922,6 +925,7 @@ Acessível via Configurações. Permite renomear e excluir a carteira ativa.
 | Config > Categorias   | CRUD                 | `/api/categorie/*`                             | GET/POST/PATCH/DELETE |
 | Config > Contrapartes | CRUD                 | `/api/counterpartie/*`                         | GET/POST/PATCH/DELETE |
 | Config > Métodos Pag. | CRUD                 | `/api/pay-method/*`                            | GET/POST/PATCH/DELETE |
+| Config > Carteira     | Listar               | `/api/wallet`                                  | GET                   |
 | Config > Carteira     | Editar/Excluir       | `/api/wallet/*`                                | PATCH/DELETE          |
 
 ---
@@ -954,13 +958,13 @@ Acessível via Configurações. Permite renomear e excluir a carteira ativa.
 
 ### Padrão de resposta de Transaction
 
-| Cenário            | Shape                                                             |
-| ------------------ | ----------------------------------------------------------------- |
-| GET (lista)        | `{ "rows": [{...}] }`                                             |
-| GET (vazio)        | `{ "rows": [], "message": "..." }`                                |
-| POST simples       | `{ "message": "...", "item": {...} }`                             |
-| POST parcelado     | `{ "message": "...", "itens": [{...}] }`                          |
-| POST transferência | `{ "message": "...", "expenseRow": {...}, "incomingRow": {...} }` |
+| Cenário            | Shape                                                                                                                               |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| GET (lista)        | `{ "rows": [{...}], "pagination": { "page": 1, "limit": 20, "total_items": 45, "total_pages": 3, "has_more": true } }`              |
+| GET (vazio)        | `{ "rows": [], "pagination": { "page": 1, "limit": 20, "total_items": 0, "total_pages": 0, "has_more": false }, "message": "..." }` |
+| POST simples       | `{ "message": "...", "item": {...} }`                                                                                               |
+| POST parcelado     | `{ "message": "...", "itens": [{...}] }`                                                                                            |
+| POST transferência | `{ "message": "...", "expenseRow": {...}, "incomingRow": {...} }`                                                                   |
 
 ---
 
