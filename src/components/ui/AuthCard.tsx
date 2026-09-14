@@ -23,3 +23,4 @@ export const AuthCard: React.FC<AuthCardProps> = ({ title, subtitle, children })
     </div>
   );
 };
+

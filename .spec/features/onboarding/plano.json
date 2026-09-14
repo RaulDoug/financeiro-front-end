@@ -1,0 +1,109 @@
+{
+  "runId": "Front-End_Financeiro-onboarding-mu1o007a",
+  "feature": "onboarding",
+  "agent": "antigravity",
+  "modo": "sequencial",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-14 19:57",
+  "branchTrabalho": "spec/onboarding",
+  "baseDir": ".spec/features/onboarding",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "logsDir": "../onp-worktrees/Front-End_Financeiro-onboarding-logs",
+  "ondas": [],
+  "faixas": [],
+  "sequenciais": [
+    {
+      "id": "T-009",
+      "titulo": "Lógica Global de Redirecionamento para Onboarding",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/hooks/useOnboardingCheck.ts",
+        "src/routes/PrivateRoute.tsx",
+        "src/stores/wallet.store.ts"
+      ],
+      "refs": [
+        "US-004",
+        "AC-013",
+        "AC-019"
+      ]
+    },
+    {
+      "id": "T-010",
+      "titulo": "Serviços de API da Configuração Inicial",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/services/wallet.service.ts",
+        "src/services/bankAccount.service.ts",
+        "src/services/payMethod.service.ts"
+      ],
+      "refs": [
+        "US-004",
+        "US-005"
+      ]
+    },
+    {
+      "id": "T-011",
+      "titulo": "Estrutura Base e Layout do Wizard (Stepper)",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/onboarding/OnboardingPage.tsx",
+        "src/components/onboarding/Stepper.tsx",
+        "src/stores/onboarding.store.ts"
+      ],
+      "refs": [
+        "US-004",
+        "US-005"
+      ]
+    },
+    {
+      "id": "T-012",
+      "titulo": "Step 1: Criação da Carteira",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/components/onboarding/steps/StepWallet.tsx"
+      ],
+      "refs": [
+        "US-004",
+        "AC-014"
+      ]
+    },
+    {
+      "id": "T-013",
+      "titulo": "Step 2: Criação da Conta Bancária Inicial",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/components/onboarding/steps/StepBankAccount.tsx"
+      ],
+      "refs": [
+        "US-005",
+        "AC-015",
+        "AC-016"
+      ]
+    },
+    {
+      "id": "T-014",
+      "titulo": "Step 3: Cartão de Crédito Opcional e Finalização",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/components/onboarding/steps/StepCreditCard.tsx"
+      ],
+      "refs": [
+        "US-005",
+        "AC-017",
+        "AC-018",
+        "AC-020"
+      ]
+    }
+  ],
+  "concluidas": [],
+  "avisos": []
+}
