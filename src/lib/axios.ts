@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useAuthStore } from '../stores/auth.store.ts';
+import { useWalletStore } from '../stores/wallet.store.ts';
 
 export const api = axios.create({
   baseURL: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE_URL) || 'http://localhost:3000/api',
@@ -9,9 +10,12 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const state = useAuthStore.getState();
-  const token = state.token || (typeof localStorage !== 'undefined' ? localStorage.getItem('auth_token') : null);
-  const activeWalletId = state.activeWalletId || (typeof localStorage !== 'undefined' ? localStorage.getItem('active_wallet_id') : null);
+  const authState = useAuthStore.getState();
+  const token = authState.token || (typeof localStorage !== 'undefined' ? localStorage.getItem('auth_token') : null);
+  const activeWalletId =
+    authState.activeWalletId ||
+    useWalletStore.getState().currentWalletId ||
+    (typeof localStorage !== 'undefined' ? localStorage.getItem('active_wallet_id') : null);
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;

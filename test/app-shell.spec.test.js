@@ -80,11 +80,32 @@ test('AC-026: Recarregamento ao trocar de carteira @spec:AC-026', async () => {
 });
 
 // US-007 — Alternância de contexto (Wallet)
-test('AC-027: Header obrigatório nas requisições @spec:AC-027', () => {
+test('AC-027: Header obrigatório nas requisições @spec:AC-027', async () => {
+  const { useWalletStore } = await import('../src/stores/wallet.store.ts');
+  const { useAuthStore } = await import('../src/stores/auth.store.ts');
+  const { api } = await import('../src/lib/axios.ts');
+
   // Dado: que uma carteira está selecionada
-  // Quando: a aplicação faz uma requisição para a API (ex: buscar dashboard)
-  // Então: o cabeçalho `x-wallet-id` deve ser incluído automaticamente com o ID da carteira ativa.
-  assert.fail('critério de aceite AC-027 ainda não provado — implemente este teste');
+  useAuthStore.getState().setAuth({ id: 'u1', name: 'User', email: 'user@teste.com' }, 'mock-token-xyz');
+  useWalletStore.getState().setCurrentWalletId('wallet-active-999');
+
+  let interceptedHeaders = null;
+  const originalAdapter = api.defaults.adapter;
+  api.defaults.adapter = async (config) => {
+    interceptedHeaders = config.headers;
+    return { data: { success: true }, status: 200, statusText: 'OK', headers: {}, config };
+  };
+
+  try {
+    // Quando: a aplicação faz uma requisição para a API (ex: buscar dashboard)
+    await api.get('/dashboard-report/summary');
+
+    // Então: o cabeçalho `x-wallet-id` deve ser incluído automaticamente com o ID da carteira ativa.
+    assert.equal(interceptedHeaders['x-wallet-id'], 'wallet-active-999');
+    assert.equal(interceptedHeaders['Authorization'], 'Bearer mock-token-xyz');
+  } finally {
+    api.defaults.adapter = originalAdapter;
+  }
 });
 
 // US-007 — Alternância de contexto (Wallet)
