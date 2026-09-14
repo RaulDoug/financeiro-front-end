@@ -1,0 +1,52 @@
+{
+  "feature": "onboarding",
+  "timestamp": "2026-09-14T20:10:50.565Z",
+  "gitRev": "8c97924",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 0,
+  "testsParsed": 20,
+  "results": {
+    "AC-013": {
+      "status": "pass",
+      "testName": "AC-013: Redirecionamento forçado ao onboarding @spec:AC-013",
+      "method": "tap"
+    },
+    "AC-014": {
+      "status": "pass",
+      "testName": "AC-014: Criação da primeira carteira (Step 1) @spec:AC-014",
+      "method": "tap"
+    },
+    "AC-015": {
+      "status": "pass",
+      "testName": "AC-015: Criação da primeira conta bancária (Step 2) @spec:AC-015",
+      "method": "tap"
+    },
+    "AC-016": {
+      "status": "pass",
+      "testName": "AC-016: Saldo inicial padrão (Conta Bancária) @spec:AC-016",
+      "method": "tap"
+    },
+    "AC-017": {
+      "status": "pass",
+      "testName": "AC-017: Adição de Cartão de Crédito (Step 3 - Opcional) @spec:AC-017",
+      "method": "tap"
+    },
+    "AC-018": {
+      "status": "pass",
+      "testName": "AC-018: Pular adição de Cartão de Crédito (Step 3 - Opcional) @spec:AC-018",
+      "method": "tap"
+    },
+    "AC-019": {
+      "status": "pass",
+      "testName": "AC-019: Prevenção de abandono do Wizard @spec:AC-019",
+      "method": "tap"
+    },
+    "AC-020": {
+      "status": "pass",
+      "testName": "AC-020: Registro do estado concluído @spec:AC-020",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

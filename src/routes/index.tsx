@@ -6,18 +6,12 @@ import { RegisterPage } from '../pages/auth/RegisterPage.tsx';
 import { ForgotPasswordPage } from '../pages/auth/ForgotPasswordPage.tsx';
 import { PublicRoute } from './PublicRoute.tsx';
 import { PrivateRoute } from './PrivateRoute.tsx';
+import { OnboardingPage } from '../pages/onboarding/OnboardingPage.tsx';
 
 const DashboardPlaceholder = () => (
   <div className="p-8 text-center">
     <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">Dashboard FinFlow</h1>
     <p className="text-zinc-500 mt-2">Área autenticada com sucesso.</p>
-  </div>
-);
-
-const OnboardingPlaceholder = () => (
-  <div className="p-8 text-center">
-    <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">Onboarding FinFlow</h1>
-    <p className="text-zinc-500 mt-2">Bem-vindo ao fluxo de configuração inicial.</p>
   </div>
 );
 
@@ -37,7 +31,7 @@ export const AppRoutes: React.FC = () => {
         {/* Rotas Privadas */}
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<DashboardPlaceholder />} />
-          <Route path="/onboarding" element={<OnboardingPlaceholder />} />
+          <Route path="/onboarding" element={<OnboardingPage />} />
         </Route>
 
         {/* Fallback & Redirecionamentos */}
