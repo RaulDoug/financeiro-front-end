@@ -1,0 +1,82 @@
+{
+  "feature": "dashboard",
+  "timestamp": "2026-09-14T20:44:35.251Z",
+  "gitRev": "3a91e7a",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 0,
+  "testsParsed": 42,
+  "results": {
+    "AC-029": {
+      "status": "pass",
+      "testName": "AC-029: Cartões de KPI Principais @spec:AC-029",
+      "method": "tap"
+    },
+    "AC-030": {
+      "status": "pass",
+      "testName": "AC-030: Saldos das Contas @spec:AC-030",
+      "method": "tap"
+    },
+    "AC-031": {
+      "status": "pass",
+      "testName": "AC-031: Resumo de Cartões de Crédito @spec:AC-031",
+      "method": "tap"
+    },
+    "AC-032": {
+      "status": "pass",
+      "testName": "AC-032: Estado vazio para KPIs @spec:AC-032",
+      "method": "tap"
+    },
+    "AC-033": {
+      "status": "pass",
+      "testName": "AC-033: Lista de transações recentes @spec:AC-033",
+      "method": "tap"
+    },
+    "AC-034": {
+      "status": "pass",
+      "testName": "AC-034: Transações recentes vazias @spec:AC-034",
+      "method": "tap"
+    },
+    "AC-035": {
+      "status": "pass",
+      "testName": "AC-035: Gráfico de Receitas vs Despesas (Barras com seletor de ano) @spec:AC-035",
+      "method": "tap"
+    },
+    "AC-036": {
+      "status": "pass",
+      "testName": "AC-036: Gráfico de Despesas por Categoria (Rosca) @spec:AC-036",
+      "method": "tap"
+    },
+    "AC-037": {
+      "status": "pass",
+      "testName": "AC-037: Interatividade nos gráficos @spec:AC-037",
+      "method": "tap"
+    },
+    "AC-038": {
+      "status": "pass",
+      "testName": "AC-038: Tratamento de gráficos sem dados @spec:AC-038",
+      "method": "tap"
+    },
+    "AC-039": {
+      "status": "pass",
+      "testName": "AC-039: Alertas de Atraso @spec:AC-039",
+      "method": "tap"
+    },
+    "AC-040": {
+      "status": "pass",
+      "testName": "AC-040: Estado \"Tudo em dia\" @spec:AC-040",
+      "method": "tap"
+    },
+    "AC-041": {
+      "status": "pass",
+      "testName": "AC-041: Ações rápidas de lançamento (Receita/Despesa) @spec:AC-041",
+      "method": "tap"
+    },
+    "AC-042": {
+      "status": "pass",
+      "testName": "AC-042: Ação rápida de transferência @spec:AC-042",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}
