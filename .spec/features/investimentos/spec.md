@@ -1,7 +1,7 @@
 # Spec: Investimentos
 
 > feature: investimentos
-> status: pendente
+> status: implementada
 
 ## Contexto
 

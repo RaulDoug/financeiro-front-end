@@ -1,7 +1,7 @@
 # Spec: App Shell
 
 > feature: app-shell
-> status: concluída
+> status: implementada
 
 ## Contexto
 

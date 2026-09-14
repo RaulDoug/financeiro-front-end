@@ -1,0 +1,62 @@
+{
+  "feature": "cartoes-credito",
+  "timestamp": "2026-09-14T21:45:37.654Z",
+  "gitRev": "6a5a164",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 0,
+  "testsParsed": 107,
+  "results": {
+    "AC-069": {
+      "status": "pass",
+      "testName": "AC-069: Listagem dos cartões @spec:AC-069",
+      "method": "tap"
+    },
+    "AC-070": {
+      "status": "pass",
+      "testName": "AC-070: Indicador de limite saudável (Verde) @spec:AC-070",
+      "method": "tap"
+    },
+    "AC-071": {
+      "status": "pass",
+      "testName": "AC-071: Indicador de limite em atenção (Amarelo) @spec:AC-071",
+      "method": "tap"
+    },
+    "AC-072": {
+      "status": "pass",
+      "testName": "AC-072: Indicador de limite crítico (Vermelho) @spec:AC-072",
+      "method": "tap"
+    },
+    "AC-073": {
+      "status": "pass",
+      "testName": "AC-073: Resumo da fatura com navegação por mês @spec:AC-073",
+      "method": "tap"
+    },
+    "AC-074": {
+      "status": "pass",
+      "testName": "AC-074: Lista de transações da fatura @spec:AC-074",
+      "method": "tap"
+    },
+    "AC-075": {
+      "status": "pass",
+      "testName": "AC-075: Cadastro com sucesso @spec:AC-075",
+      "method": "tap"
+    },
+    "AC-076": {
+      "status": "pass",
+      "testName": "AC-076: Validação de campos obrigatórios @spec:AC-076",
+      "method": "tap"
+    },
+    "AC-077": {
+      "status": "pass",
+      "testName": "AC-077: Edição do cartão via menu do card @spec:AC-077",
+      "method": "tap"
+    },
+    "AC-078": {
+      "status": "pass",
+      "testName": "AC-078: Exclusão do cartão via menu do card @spec:AC-078",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

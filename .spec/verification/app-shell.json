@@ -1,11 +1,11 @@
 {
   "feature": "app-shell",
-  "timestamp": "2026-09-14T20:38:51.802Z",
-  "gitRev": "79f8ace",
+  "timestamp": "2026-09-14T21:46:16.977Z",
+  "gitRev": "6a5a164",
   "command": "node --test --test-reporter=tap",
   "reporter": "tap",
   "exitCode": 0,
-  "testsParsed": 28,
+  "testsParsed": 107,
   "results": {
     "AC-021": {
       "status": "pass",

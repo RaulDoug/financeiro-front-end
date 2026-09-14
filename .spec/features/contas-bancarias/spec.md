@@ -1,7 +1,7 @@
 # Spec: Contas Bancarias
 
 > feature: contas-bancarias
-> status: pronto
+> status: implementada
 
 ## Contexto
 

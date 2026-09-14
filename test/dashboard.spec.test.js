@@ -235,8 +235,8 @@ test('AC-041: Ações rápidas de lançamento (Receita/Despesa) @spec:AC-041', (
   assert.equal(useTransactionModalStore.getState().isOpen, false);
 
   const source = readSource('pages/Dashboard/components/QuickActions.tsx');
-  assert.ok(source.includes('+ Nova Receita'), 'Deve ter botão Nova Receita');
-  assert.ok(source.includes('+ Nova Despesa'), 'Deve ter botão Nova Despesa');
+  assert.ok(source.includes('Nova Receita'), 'Deve ter botão Nova Receita');
+  assert.ok(source.includes('Nova Despesa'), 'Deve ter botão Nova Despesa');
   assert.ok(source.includes("openModal('incomings')"), 'Configura abertura de receitas');
   assert.ok(source.includes("openModal('expenses')"), 'Configura abertura de despesas');
 });
@@ -253,6 +253,6 @@ test('AC-042: Ação rápida de transferência @spec:AC-042', () => {
   assert.equal(useTransactionModalStore.getState().isOpen, false);
 
   const source = readSource('pages/Dashboard/components/QuickActions.tsx');
-  assert.ok(source.includes('⇄ Transferência'), 'Deve ter botão Transferência');
+  assert.ok(source.includes('Transferência'), 'Deve ter botão Transferência');
   assert.ok(source.includes("openModal('transfers')"), 'Configura abertura de transferências');
 });

@@ -33,9 +33,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ topbar, sidebar, children 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex flex-col">
+    <div className="min-h-screen bg-[#faf8ff] flex flex-col">
       {/* Topbar container */}
-      <div className="sticky top-0 z-40 w-full border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 backdrop-blur">
+      <div className="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/80 backdrop-blur">
         {topbar || (
           <Topbar
             onToggleMobileMenu={() => setMobileMenuOpen((prev) => !prev)}

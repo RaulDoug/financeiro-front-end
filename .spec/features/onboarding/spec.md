@@ -1,7 +1,7 @@
 # Spec: Onboarding
 
 > feature: onboarding
-> status: pronto
+> status: implementada
 
 ## Contexto
 

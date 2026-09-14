@@ -1,7 +1,7 @@
 # Spec: Configurações
 
 > feature: configuracoes
-> status: pendente
+> status: implementada
 
 ## Contexto
 

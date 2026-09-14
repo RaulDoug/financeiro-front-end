@@ -1,7 +1,7 @@
 # Spec: Auth
 
 > feature: auth
-> status: pronto
+> status: implementada
 
 ## Contexto
 

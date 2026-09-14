@@ -19,7 +19,7 @@ export const CreditCardSummary: React.FC<CreditCardSummaryProps> = ({ cards = []
     <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm" data-testid="credit-card-summary">
       <div className="flex items-center justify-between pb-3 border-b border-gray-100">
         <div className="flex items-center gap-2">
-          <div className="p-1.5 bg-purple-50 text-purple-600 rounded-lg">
+          <div className="p-1.5 bg-blue-50 text-blue-600 rounded-lg">
             <CreditCard className="w-4 h-4" />
           </div>
           <h3 className="text-base font-semibold text-gray-900">Cartões de Crédito</h3>

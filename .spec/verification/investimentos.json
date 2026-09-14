@@ -1,0 +1,47 @@
+{
+  "feature": "investimentos",
+  "timestamp": "2026-09-14T21:45:41.409Z",
+  "gitRev": "6a5a164",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 0,
+  "testsParsed": 107,
+  "results": {
+    "AC-089": {
+      "status": "pass",
+      "testName": "AC-089: Listagem de Ativos @spec:AC-089",
+      "method": "tap"
+    },
+    "AC-090": {
+      "status": "pass",
+      "testName": "AC-090: Criação de Ativo de Investimento @spec:AC-090",
+      "method": "tap"
+    },
+    "AC-091": {
+      "status": "pass",
+      "testName": "AC-091: Edição de Ativo de Investimento @spec:AC-091",
+      "method": "tap"
+    },
+    "AC-092": {
+      "status": "pass",
+      "testName": "AC-092: Exclusão de Ativo de Investimento @spec:AC-092",
+      "method": "tap"
+    },
+    "AC-093": {
+      "status": "pass",
+      "testName": "AC-093: Validação de Nome Inválido @spec:AC-093",
+      "method": "tap"
+    },
+    "AC-094": {
+      "status": "pass",
+      "testName": "AC-094: Conta Bancária Obrigatória @spec:AC-094",
+      "method": "tap"
+    },
+    "AC-095": {
+      "status": "pass",
+      "testName": "AC-095: Banner de Em Breve @spec:AC-095",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

@@ -39,35 +39,35 @@ export const UserMenu: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative" ref={menuRef}>
+    <div className="relative z-50" ref={menuRef}>
       <button
         type="button"
         data-testid="user-avatar-button"
         aria-label="Menu do Usuário"
         aria-expanded={isOpen}
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex items-center gap-2 p-1.5 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+        className="flex items-center gap-2 p-1.5 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer"
       >
-        <div className="w-8 h-8 rounded-full bg-emerald-600 text-white font-semibold text-xs flex items-center justify-center shadow-xs">
+        <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-semibold text-xs flex items-center justify-center shadow-xs">
           {initials || <User className="w-4 h-4" />}
         </div>
-        <span className="text-sm font-medium text-zinc-700 dark:text-zinc-200 hidden sm:block">
+        <span className="text-sm font-medium text-slate-800 hidden sm:block">
           {displayName}
         </span>
-        <ChevronDown className="w-4 h-4 text-zinc-400" />
+        <ChevronDown className="w-4 h-4 text-slate-400" />
       </button>
 
       {isOpen && (
         <div
           data-testid="user-dropdown-menu"
-          className="absolute right-0 mt-2 w-56 bg-white dark:bg-zinc-900 rounded-2xl shadow-lg border border-zinc-200 dark:border-zinc-800 py-1.5 z-50 animate-in fade-in zoom-in-95 duration-100"
+          className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-slate-200 py-1.5 z-50 animate-in fade-in zoom-in-95 duration-100"
         >
-          <div className="px-4 py-2 border-b border-zinc-100 dark:border-zinc-800">
-            <p className="text-sm font-semibold text-zinc-900 dark:text-white truncate">
+          <div className="px-4 py-2.5 border-b border-slate-100">
+            <p className="text-sm font-semibold text-slate-900 truncate">
               {displayName}
             </p>
             {displayEmail && (
-              <p className="text-xs text-zinc-400 truncate mt-0.5">{displayEmail}</p>
+              <p className="text-xs text-slate-500 truncate mt-0.5 font-normal">{displayEmail}</p>
             )}
           </div>
 
@@ -75,9 +75,9 @@ export const UserMenu: React.FC = () => {
             type="button"
             data-testid="user-menu-profile"
             onClick={handleNavigateProfile}
-            className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer text-left"
+            className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors cursor-pointer text-left"
           >
-            <Settings className="w-4 h-4 text-zinc-400" />
+            <Settings className="w-4 h-4 text-slate-400" />
             Perfil & Configurações
           </button>
 
@@ -85,7 +85,7 @@ export const UserMenu: React.FC = () => {
             type="button"
             data-testid="user-menu-logout"
             onClick={handleLogout}
-            className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors cursor-pointer text-left border-t border-zinc-100 dark:border-zinc-800"
+            className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer text-left border-t border-slate-100 font-medium"
           >
             <LogOut className="w-4 h-4" />
             Sair (Logout)

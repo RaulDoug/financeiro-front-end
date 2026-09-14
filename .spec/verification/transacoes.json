@@ -1,0 +1,102 @@
+{
+  "feature": "transacoes",
+  "timestamp": "2026-09-14T22:06:05.788Z",
+  "gitRev": "6a5a164",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 0,
+  "testsParsed": 107,
+  "results": {
+    "AC-043": {
+      "status": "pass",
+      "testName": "AC-043: Listagem padrão de transações @spec:AC-043",
+      "method": "tap"
+    },
+    "AC-044": {
+      "status": "pass",
+      "testName": "AC-044: Filtro por tipo de transação @spec:AC-044",
+      "method": "tap"
+    },
+    "AC-045": {
+      "status": "pass",
+      "testName": "AC-045: Filtro por data e busca textual @spec:AC-045",
+      "method": "tap"
+    },
+    "AC-046": {
+      "status": "pass",
+      "testName": "AC-046: Indicador visual de parcelamento @spec:AC-046",
+      "method": "tap"
+    },
+    "AC-060": {
+      "status": "pass",
+      "testName": "AC-060: Rolagem infinita ao aproximar do final da lista @spec:AC-060",
+      "method": "tap"
+    },
+    "AC-047": {
+      "status": "pass",
+      "testName": "AC-047: Fluxo \"Cafézinho\" rápido (≤ 10 segundos) @spec:AC-047",
+      "method": "tap"
+    },
+    "AC-048": {
+      "status": "pass",
+      "testName": "AC-048: Validação de formulário de transação @spec:AC-048",
+      "method": "tap"
+    },
+    "AC-049": {
+      "status": "pass",
+      "testName": "AC-049: Categorias filtradas pelo tipo de transação @spec:AC-049",
+      "method": "tap"
+    },
+    "AC-050": {
+      "status": "pass",
+      "testName": "AC-050: Marcação de \"Já está pago\" @spec:AC-050",
+      "method": "tap"
+    },
+    "AC-051": {
+      "status": "pass",
+      "testName": "AC-051: Aba de transferência no modal @spec:AC-051",
+      "method": "tap"
+    },
+    "AC-052": {
+      "status": "pass",
+      "testName": "AC-052: Validação de contas distintas @spec:AC-052",
+      "method": "tap"
+    },
+    "AC-053": {
+      "status": "pass",
+      "testName": "AC-053: Confirmação visual de transferência criada @spec:AC-053",
+      "method": "tap"
+    },
+    "AC-054": {
+      "status": "pass",
+      "testName": "AC-054: Campos de parcelamento @spec:AC-054",
+      "method": "tap"
+    },
+    "AC-055": {
+      "status": "pass",
+      "testName": "AC-055: Bloqueio de cartão como receita recorrente @spec:AC-055",
+      "method": "tap"
+    },
+    "AC-056": {
+      "status": "pass",
+      "testName": "AC-056: Edição de transação simples @spec:AC-056",
+      "method": "tap"
+    },
+    "AC-057": {
+      "status": "pass",
+      "testName": "AC-057: Edição em lote de parcelas @spec:AC-057",
+      "method": "tap"
+    },
+    "AC-058": {
+      "status": "pass",
+      "testName": "AC-058: Exclusão de transação concluída com aviso @spec:AC-058",
+      "method": "tap"
+    },
+    "AC-059": {
+      "status": "pass",
+      "testName": "AC-059: Exclusão de transferência remove ambos registros @spec:AC-059",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

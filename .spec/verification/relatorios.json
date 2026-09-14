@@ -1,0 +1,62 @@
+{
+  "feature": "relatorios",
+  "timestamp": "2026-09-14T21:45:42.871Z",
+  "gitRev": "6a5a164",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 0,
+  "testsParsed": 107,
+  "results": {
+    "AC-096": {
+      "status": "pass",
+      "testName": "AC-096: Resumo Mensal DRE @spec:AC-096",
+      "method": "tap"
+    },
+    "AC-097": {
+      "status": "pass",
+      "testName": "AC-097: Seleção de Ano @spec:AC-097",
+      "method": "tap"
+    },
+    "AC-098": {
+      "status": "pass",
+      "testName": "AC-098: Gráfico de Barras DRE @spec:AC-098",
+      "method": "tap"
+    },
+    "AC-099": {
+      "status": "pass",
+      "testName": "AC-099: Listagem por Categorias @spec:AC-099",
+      "method": "tap"
+    },
+    "AC-100": {
+      "status": "pass",
+      "testName": "AC-100: Filtro de Período para Categorias @spec:AC-100",
+      "method": "tap"
+    },
+    "AC-101": {
+      "status": "pass",
+      "testName": "AC-101: Gráfico de Pizza ou Rosca @spec:AC-101",
+      "method": "tap"
+    },
+    "AC-102": {
+      "status": "pass",
+      "testName": "AC-102: Consolidação de Contrapartes via Frontend @spec:AC-102",
+      "method": "tap"
+    },
+    "AC-103": {
+      "status": "pass",
+      "testName": "AC-103: Tabela de Contrapartes @spec:AC-103",
+      "method": "tap"
+    },
+    "AC-104": {
+      "status": "pass",
+      "testName": "AC-104: Diferenciação de Despesas e Receitas por Contraparte @spec:AC-104",
+      "method": "tap"
+    },
+    "AC-105": {
+      "status": "pass",
+      "testName": "AC-105: Navegação na Rota de Relatórios @spec:AC-105",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

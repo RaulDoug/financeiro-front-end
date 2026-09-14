@@ -1,7 +1,7 @@
 # Spec: Cartoes de Credito
 
 > feature: cartoes-credito
-> status: pronto
+> status: implementada
 
 ## Contexto
 

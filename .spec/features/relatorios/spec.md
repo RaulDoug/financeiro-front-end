@@ -1,7 +1,7 @@
 # Spec: Relatórios
 
 > feature: relatorios
-> status: pendente
+> status: implementada
 
 ## Contexto
 

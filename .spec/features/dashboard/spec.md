@@ -1,7 +1,7 @@
 # Spec: Dashboard
 
 > feature: dashboard
-> status: concluída
+> status: implementada
 
 ## Contexto
 

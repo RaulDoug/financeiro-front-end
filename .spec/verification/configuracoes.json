@@ -1,0 +1,72 @@
+{
+  "feature": "configuracoes",
+  "timestamp": "2026-09-14T21:45:40.188Z",
+  "gitRev": "6a5a164",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 0,
+  "testsParsed": 107,
+  "results": {
+    "AC-106": {
+      "status": "pass",
+      "testName": "AC-106: Listagem em Abas com Contadores @spec:AC-106",
+      "method": "tap"
+    },
+    "AC-107": {
+      "status": "pass",
+      "testName": "AC-107: Criação de Categoria @spec:AC-107",
+      "method": "tap"
+    },
+    "AC-108": {
+      "status": "pass",
+      "testName": "AC-108: Restrição de Exclusão Padrão @spec:AC-108",
+      "method": "tap"
+    },
+    "AC-109": {
+      "status": "pass",
+      "testName": "AC-109: Listagem em Abas de Contrapartes @spec:AC-109",
+      "method": "tap"
+    },
+    "AC-110": {
+      "status": "pass",
+      "testName": "AC-110: Criação e Edição de Contraparte @spec:AC-110",
+      "method": "tap"
+    },
+    "AC-111": {
+      "status": "pass",
+      "testName": "AC-111: Indicador de Cartão de Crédito @spec:AC-111",
+      "method": "tap"
+    },
+    "AC-112": {
+      "status": "pass",
+      "testName": "AC-112: Bloqueio de Edição do Tipo do Cartão @spec:AC-112",
+      "method": "tap"
+    },
+    "AC-113": {
+      "status": "pass",
+      "testName": "AC-113: Criação de Método de Pagamento @spec:AC-113",
+      "method": "tap"
+    },
+    "AC-114": {
+      "status": "pass",
+      "testName": "AC-114: Renomear Carteira @spec:AC-114",
+      "method": "tap"
+    },
+    "AC-115": {
+      "status": "pass",
+      "testName": "AC-115: Exclusão Crítica com Digitação do Nome (Owner Only) @spec:AC-115",
+      "method": "tap"
+    },
+    "AC-116": {
+      "status": "pass",
+      "testName": "AC-116: Interface de Equipe @spec:AC-116",
+      "method": "tap"
+    },
+    "AC-117": {
+      "status": "pass",
+      "testName": "AC-117: Navegação das Configurações @spec:AC-117",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

@@ -10,6 +10,9 @@ import {
   useExpenseByCategory,
   DASHBOARD_QUERY_KEYS,
 } from '../../hooks/useDashboardData.ts';
+import { useTransactionModalStore } from '../../stores/transactionModal.store.ts';
+import { useTransactionMutations } from '../../hooks/useTransactionMutations.ts';
+import { TransactionModal } from '../../components/transactions/TransactionModal.tsx';
 import { KpiCards } from './components/KpiCards.tsx';
 import { AccountBalances } from './components/AccountBalances.tsx';
 import { CreditCardSummary } from './components/CreditCardSummary.tsx';
@@ -23,7 +26,11 @@ import { RefreshCw } from 'lucide-react';
 
 export const DashboardPage: React.FC = () => {
   const [selectedYear, setSelectedYear] = useState<number>(() => new Date().getFullYear());
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const queryClient = useQueryClient();
+
+  const { isOpen: isModalOpen, defaultType, closeModal } = useTransactionModalStore();
+  const { createMutation } = useTransactionMutations();
 
   const summaryQuery = useDashboardSummary();
   const balancesQuery = useAccountBalances();
@@ -39,7 +46,16 @@ export const DashboardPage: React.FC = () => {
     creditCardsQuery.isLoading;
 
   const handleRefresh = async () => {
-    await queryClient.invalidateQueries({ queryKey: DASHBOARD_QUERY_KEYS.all });
+    try {
+      setIsRefreshing(true);
+      await Promise.all([
+        queryClient.refetchQueries({ queryKey: DASHBOARD_QUERY_KEYS.all }),
+        queryClient.refetchQueries({ queryKey: ['transactions'] }),
+        queryClient.refetchQueries({ queryKey: ['bank-accounts'] }),
+      ]);
+    } finally {
+      setIsRefreshing(false);
+    }
   };
 
   if (isInitialLoading) {
@@ -67,10 +83,11 @@ export const DashboardPage: React.FC = () => {
             type="button"
             data-testid="btn-dashboard-refresh"
             onClick={handleRefresh}
+            disabled={isRefreshing}
             title="Atualizar dados"
-            className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg border border-gray-200 transition cursor-pointer"
+            className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg border border-gray-200 transition cursor-pointer disabled:opacity-50"
           >
-            <RefreshCw className="w-4 h-4" />
+            <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin text-blue-600' : ''}`} />
           </button>
         </div>
       </div>
@@ -121,6 +138,18 @@ export const DashboardPage: React.FC = () => {
       <RecentTransactions
         transactions={recentTransactionsQuery.data?.recentTransactions}
         isLoading={recentTransactionsQuery.isLoading}
+      />
+
+      {/* Modal de Transação acionado via QuickActions */}
+      <TransactionModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        initialType={defaultType}
+        onSubmit={async (data) => {
+          await createMutation.mutateAsync(data);
+          closeModal();
+        }}
+        isSubmitting={createMutation.isPending}
       />
     </div>
   );

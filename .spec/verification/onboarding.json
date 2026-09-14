@@ -1,11 +1,11 @@
 {
   "feature": "onboarding",
-  "timestamp": "2026-09-14T20:12:01.195Z",
-  "gitRev": "ba98b3c",
+  "timestamp": "2026-09-14T21:45:27.639Z",
+  "gitRev": "6a5a164",
   "command": "node --test --test-reporter=tap",
   "reporter": "tap",
   "exitCode": 0,
-  "testsParsed": 20,
+  "testsParsed": 107,
   "results": {
     "AC-013": {
       "status": "pass",
