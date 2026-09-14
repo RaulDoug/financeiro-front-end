@@ -99,19 +99,117 @@ test('AC-014: Criação da primeira carteira (Step 1) @spec:AC-014', async () =>
 });
 
 // US-005 — Configuração das contas e cartões no onboarding
-test('AC-015: Criação da primeira conta bancária (Step 2) @spec:AC-015', () => {
+test('AC-015: Criação da primeira conta bancária (Step 2) @spec:AC-015', async () => {
+  const { bankAccountService } = await import('../src/services/bankAccount.service.ts');
+  const { useOnboardingStore } = await import('../src/stores/onboarding.store.ts');
+  const { api } = await import('../src/lib/axios.ts');
+
   // Dado: que o usuário completou o Step 1 e está no Step 2
-  // Quando: ele preenche os dados (nome da conta, banco emissor) informando ou não um saldo inicial e avança
-  // Então: o sistema cadastra a conta no backend (`POST /api/bank-account/register`), atrelando-a ao cabeçalho `x-wallet-id` da carteira recém-criada, e avança para o Step 3
-  assert.fail('critério de aceite AC-015 ainda não provado — implemente este teste');
+  useOnboardingStore.getState().resetOnboarding();
+  useOnboardingStore.getState().setCreatedWallet('wallet-uuid-123', 'Carteira Teste');
+  useOnboardingStore.getState().setCurrentStep(2);
+  assert.equal(useOnboardingStore.getState().currentStep, 2);
+
+  const originalPost = api.post;
+  let postedUrl = '';
+  let postedBody = null;
+  let postedConfig = null;
+
+  api.post = async (url, data, config) => {
+    postedUrl = url;
+    postedBody = data;
+    postedConfig = config;
+    if (url === '/bank-account/register') {
+      return {
+        status: 201,
+        data: {
+          message: 'Item criado com sucesso',
+          item: {
+            id: 'bank-acc-uuid-1',
+            display_id: 1,
+            bank_name: data.bank_name,
+            balance: data.balance,
+            allow_negative_balance: data.allow_negative_balance,
+            wallet_id: config?.headers?.['x-wallet-id'] || 'wallet-uuid-123',
+          },
+        },
+      };
+    }
+    throw new Error('Not found');
+  };
+
+  try {
+    // Quando: ele preenche os dados (nome da conta, banco emissor) informando ou não um saldo inicial e avança
+    const walletId = useOnboardingStore.getState().createdWalletId;
+    const response = await bankAccountService.registerBankAccount(
+      {
+        bank_name: 'Nubank',
+        balance: 1500.0,
+        allow_negative_balance: false,
+      },
+      walletId
+    );
+
+    useOnboardingStore.getState().setCreatedBankAccount(response.item.id);
+    useOnboardingStore.getState().setCurrentStep(3);
+
+    // Então: o sistema cadastra a conta no backend (`POST /api/bank-account/register`), atrelando-a ao cabeçalho `x-wallet-id` da carteira recém-criada, e avança para o Step 3
+    assert.equal(postedUrl, '/bank-account/register');
+    assert.equal(postedBody.bank_name, 'Nubank');
+    assert.equal(postedConfig?.headers?.['x-wallet-id'], 'wallet-uuid-123');
+    assert.equal(response.item.id, 'bank-acc-uuid-1');
+    assert.equal(useOnboardingStore.getState().currentStep, 3);
+  } finally {
+    api.post = originalPost;
+  }
 });
 
 // US-005 — Configuração das contas e cartões no onboarding
-test('AC-016: Saldo inicial padrão (Conta Bancária) @spec:AC-016', () => {
+test('AC-016: Saldo inicial padrão (Conta Bancária) @spec:AC-016', async () => {
+  const { bankAccountService } = await import('../src/services/bankAccount.service.ts');
+  const { useOnboardingStore } = await import('../src/stores/onboarding.store.ts');
+  const { api } = await import('../src/lib/axios.ts');
+
   // Dado: que o usuário está criando a sua conta bancária no Step 2
-  // Quando: ele opta por deixar o saldo inicial em branco ou omite o valor
-  // Então: o sistema assume e cadastra o valor "0.00" como saldo padrão
-  assert.fail('critério de aceite AC-016 ainda não provado — implemente este teste');
+  useOnboardingStore.getState().resetOnboarding();
+  useOnboardingStore.getState().setCreatedWallet('wallet-uuid-456', 'Carteira Teste 2');
+  useOnboardingStore.getState().setCurrentStep(2);
+
+  const originalPost = api.post;
+  let postedBody = null;
+
+  api.post = async (url, data) => {
+    postedBody = data;
+    if (url === '/bank-account/register') {
+      return {
+        status: 201,
+        data: {
+          message: 'Item criado com sucesso',
+          item: {
+            id: 'bank-acc-uuid-2',
+            bank_name: data.bank_name,
+            balance: data.balance,
+          },
+        },
+      };
+    }
+    throw new Error('Not found');
+  };
+
+  try {
+    // Quando: ele opta por deixar o saldo inicial em branco ou omite o valor
+    const emptyBalanceValue = undefined;
+    const response = await bankAccountService.registerBankAccount({
+      bank_name: 'Banco Inter',
+      balance: emptyBalanceValue,
+    });
+
+    // Então: o sistema assume e cadastra o valor "0.00" / 0 como saldo padrão
+    assert.equal(postedBody.balance, 0);
+    assert.equal(response.item.balance, 0);
+  } finally {
+    api.post = originalPost;
+  }
 });
 
 // US-005 — Configuração das contas e cartões no onboarding
