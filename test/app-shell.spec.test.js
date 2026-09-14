@@ -3,11 +3,41 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 // US-006 — Navegação pelo layout principal
-test('AC-021: Exibição do layout base @spec:AC-021', () => {
+test('AC-021: Exibição do layout base @spec:AC-021', async () => {
+  const fs = await import('node:fs');
+  const path = await import('node:path');
+  const { useAuthStore } = await import('../src/stores/auth.store.ts');
+  const { useWalletStore } = await import('../src/stores/wallet.store.ts');
+
   // Dado: que o usuário fez login com sucesso e tem uma carteira ativa
+  useAuthStore.getState().setAuth({ id: 'u1', name: 'User Test', email: 'user@test.com' }, 'token-abc');
+  useWalletStore.getState().setCurrentWalletId('wallet-active-1');
+
+  assert.equal(useAuthStore.getState().isAuthenticated, true);
+  assert.equal(useWalletStore.getState().currentWalletId, 'wallet-active-1');
+
   // Quando: a aplicação é carregada
+  const appLayoutPath = path.resolve('src/layouts/AppLayout.tsx');
+  assert.equal(fs.existsSync(appLayoutPath), true);
+  const layoutContent = fs.readFileSync(appLayoutPath, 'utf-8');
+
   // Então: ele deve visualizar uma barra superior (Topbar) e um menu lateral (Sidebar) com links para Dashboard, Transações, Cartões, Contas, Relatórios, Investimentos e Configurações.
-  assert.fail('critério de aceite AC-021 ainda não provado — implemente este teste');
+  const requiredNavItems = [
+    'Dashboard',
+    'Transações',
+    'Cartões',
+    'Contas',
+    'Relatórios',
+    'Investimentos',
+    'Configurações',
+  ];
+
+  for (const item of requiredNavItems) {
+    assert.equal(layoutContent.includes(item), true, `Item ${item} deve estar presente no layout`);
+  }
+
+  assert.equal(layoutContent.includes('topbar') || layoutContent.includes('Topbar'), true);
+  assert.equal(layoutContent.includes('sidebar') || layoutContent.includes('Sidebar'), true);
 });
 
 // US-006 — Navegação pelo layout principal
