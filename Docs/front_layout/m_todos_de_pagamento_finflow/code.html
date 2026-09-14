@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><title>FinFlow</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-surface": "#283044", "on-primary-fixed-variant": "#003ea8", "error-container": "#ffdad6", "on-error-container": "#93000a", "inverse-on-surface": "#eef0ff", "primary-container": "#2563eb", "surface-variant": "#dae2fd", "on-secondary": "#ffffff", "surface-container-lowest": "#ffffff", "tertiary-fixed": "#ffdad7", "inverse-primary": "#b4c5ff", "on-secondary-fixed-variant": "#005236", "tertiary-container": "#cf2c30", "error": "#ba1a1a", "on-secondary-fixed": "#002113", "surface-container": "#eaedff", "outline-variant": "#c3c6d7", "on-tertiary-fixed": "#410004", "on-primary-container": "#eeefff", "outline": "#737686", "on-primary": "#ffffff", "surface": "#faf8ff", "on-error": "#ffffff", "secondary": "#006c49", "primary-fixed": "#dbe1ff", "on-secondary-container": "#00714d", "surface-bright": "#faf8ff", "on-surface": "#131b2e", "secondary-fixed": "#6ffbbe", "surface-container-high": "#e2e7ff", "background": "#faf8ff", "on-primary-fixed": "#00174b", "tertiary": "#ab0b1c", "surface-container-highest": "#dae2fd", "secondary-fixed-dim": "#4edea3", "tertiary-fixed-dim": "#ffb3ad", "on-tertiary-container": "#ffecea", "surface-dim": "#d2d9f4", "surface-tint": "#0053db", "on-tertiary-fixed-variant": "#930013", "primary": "#004ac6", "primary-fixed-dim": "#b4c5ff", "secondary-container": "#6cf8bb", "on-tertiary": "#ffffff", "on-surface-variant": "#434655", "surface-container-low": "#f2f3ff", "on-background": "#131b2e" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xs": "0.25rem", "gutter": "1rem", "space-lg": "1rem", "margin-desktop": "2rem", "space-xl": "1.5rem", "space-sm": "0.5rem", "space-md": "0.75rem", "margin": "1rem", "space-2xl": "2rem" }, "fontFamily": { "display-currency-mobile": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "title-sm": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "label-xs": ["Plus Jakarta Sans"], "display-currency": ["Plus Jakarta Sans"] }, "fontSize": { "display-currency-mobile": ["1.875rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.025em", "fontWeight": "700" }], "body-sm": ["0.8125rem", { "lineHeight": "1.125rem", "fontWeight": "400" }], "headline-lg": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["0.8125rem", { "lineHeight": "1rem", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-md": ["0.9375rem", { "lineHeight": "1.375rem", "fontWeight": "400" }], "title-sm": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-md": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.015em", "fontWeight": "600" }], "label-xs": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.04em", "fontWeight": "600" }], "display-currency": ["2.25rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.03em", "fontWeight": "700" }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#faf8ff;}body{overscroll-behavior-y:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col selection:bg-primary/20"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-space-lg flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="FinFlow App Logo" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1Ww3BbCik93FlHWW0mtBa2GXkGlHOHvMvZ5a5Ug6h2TyzFx1drBi4fRdasCchKHF0h5I9YW5DPExekxJUKQhqCqSqY4H1q3i-4KsC8Fu9ndhHZYl7fkDkKmv_PDL6sGtQ30F4-4YOyK5yeFKKQTRMojbV4Z8tnXMKnNSWouSgHg-ZP8teHU3P3_E2tgR-A9tzDnxjGqagxiCu7hrPWOz2R9gDKHrn4Kb2wvBWW6bqtUD-KUqsdAiLVQR8Y"/><span class="font-headline-md text-headline-md text-primary tracking-tight truncate hidden xs:inline">FinFlow</span></div><button class="flex items-center gap-space-xs px-space-md py-1.5 bg-surface-container-lowest rounded-full shadow-[0_1px_4px_rgba(0,0,0,0.04)] active:scale-95 transition-transform shrink-0"><span class="material-symbols-outlined text-primary text-[18px]">work</span><span class="font-label-md text-label-md text-on-surface truncate max-w-[110px]">Minha Carteira</span><span class="material-symbols-outlined text-outline text-[16px]">arrow_drop_down</span></button><div class="flex items-center gap-space-xs shrink-0"><button aria-label="Notificações" class="w-11 h-11 relative flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container active:scale-95 transition-all"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 flex items-center justify-center min-w-[16px] h-4 px-1 rounded-full bg-error text-on-error font-label-xs text-label-xs font-bold ring-2 ring-surface">2</span></button><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_1px_3px_rgba(0,0,0,0.08)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAzNdWMya8vtHRk4QcxfngDDib9fix6I5snCYb9ce6xOzUL6HWXb41WN9KdltaeKJO_0fPDTCRBcB_Kt0xuLe0eBn5stE7cfwccxtwZpHRiogPi4Mt6H_kZuM9sUZ67RPTcU8TNYx6WIul3mX-TH3WLo4CRv6vD71cxVxNlLC0X-zJEkQhh-AZPr2J2Sg8sXJGZg17FzCd585LmNPT1xy7wFYi6ijCm1W5J31xkQbYfjk9w2OUTmvu"/></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface px-space-lg"><div class="flex flex-col w-full pb-8">
+<!-- Top Auxiliary Navigation & Header -->
+<div class="flex flex-col gap-space-sm mb-space-lg">
+<a class="inline-flex items-center gap-1 text-primary font-label-md text-label-md hover:underline w-fit active:opacity-70 transition-opacity" href="#">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+<span>Cadastros Auxiliares</span>
+</a>
+<div class="flex items-center justify-between gap-space-sm mt-1">
+<div class="min-w-0">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight truncate">Métodos de Pagamento</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Formas de liquidação, débito e cartões</p>
+</div>
+<button class="flex items-center gap-1 px-3 py-2 bg-primary text-on-primary rounded-lg shadow-sm font-label-md text-label-md shrink-0 active:scale-95 transition-transform hover:bg-on-primary-fixed-variant" id="btn-scroll-to-create">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Novo Método</span>
+</button>
+</div>
+</div>
+<!-- Summary KPI Filter Tabs -->
+<div class="flex gap-2 overflow-x-auto pb-1 mb-space-lg scrollbar-none">
+<button class="filter-tab flex items-center gap-2 px-3 py-2 rounded-full font-label-md text-label-md bg-primary text-on-primary shadow-sm shrink-0 transition-all active:scale-95" data-filter="all">
+<span>Todos</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container-lowest text-primary font-label-xs text-label-xs">6</span>
+</button>
+<button class="filter-tab flex items-center gap-2 px-3 py-2 rounded-full font-label-md text-label-md bg-surface-container-low text-on-surface-variant hover:text-on-surface shrink-0 transition-all active:scale-95" data-filter="immediate">
+<span>Imediatos / Contas</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs">4</span>
+</button>
+<button class="filter-tab flex items-center gap-2 px-3 py-2 rounded-full font-label-md text-label-md bg-surface-container-low text-on-surface-variant hover:text-on-surface shrink-0 transition-all active:scale-95" data-filter="credit">
+<span>Cartões de Crédito</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs">2</span>
+</button>
+</div>
+<!-- Methods List Section -->
+<div class="flex flex-col gap-space-md mb-space-xl" id="methods-container">
+<!-- Card 1: PIX -->
+<div class="method-card bg-surface-container-lowest p-space-md rounded-xl shadow-[0_1px_3px_rgba(15,23,42,0.04)] flex flex-col gap-space-sm" data-type="immediate">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-11 h-11 rounded-full bg-secondary-container/30 flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[24px]">bolt</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<h2 class="font-title-sm text-title-sm text-on-surface truncate">PIX Instantâneo</h2>
+<span class="px-2 py-0.5 rounded-full bg-[#ecfdf5] text-[#065f46] font-label-xs text-label-xs">Ativo</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Liquidação Imediata • Contas Integradas</p>
+</div>
+</div>
+<div class="relative">
+<button aria-label="Ações" class="menu-trigger w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+<div class="menu-dropdown hidden absolute right-0 top-9 w-32 bg-surface-container-lowest shadow-md rounded-lg py-1 z-20">
+<button class="w-full text-left px-3 py-1.5 font-body-sm text-body-sm text-on-surface hover:bg-surface-container-low flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">edit</span>Editar
+            </button>
+<button class="w-full text-left px-3 py-1.5 font-body-sm text-body-sm text-error hover:bg-error-container/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">delete</span>Remover
+            </button>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2 bg-surface-container-low/50 px-3 py-1.5 rounded-lg">
+<span class="font-label-xs text-label-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">sync_alt</span> Movimentação
+        </span>
+<span class="font-label-md text-label-md text-on-surface">42 transações este mês</span>
+</div>
+</div>
+<!-- Card 2: Nubank Platinum (Credit) -->
+<div class="method-card bg-surface-container-lowest p-space-md rounded-xl shadow-[0_1px_3px_rgba(15,23,42,0.04)] flex flex-col gap-space-sm" data-type="credit">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-11 h-11 rounded-full bg-primary-fixed/50 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">credit_card</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<h2 class="font-title-sm text-title-sm text-on-surface truncate">Nubank Platinum (Final 1234)</h2>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-label-xs text-label-xs">Crédito</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Vence dia 10 • Fecha dia 03</p>
+</div>
+</div>
+<div class="relative">
+<button aria-label="Ações" class="menu-trigger w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+<div class="menu-dropdown hidden absolute right-0 top-9 w-32 bg-surface-container-lowest shadow-md rounded-lg py-1 z-20">
+<button class="w-full text-left px-3 py-1.5 font-body-sm text-body-sm text-on-surface hover:bg-surface-container-low flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">edit</span>Editar
+            </button>
+<button class="w-full text-left px-3 py-1.5 font-body-sm text-body-sm text-error hover:bg-error-container/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">delete</span>Remover
+            </button>
+</div>
+</div>
+</div>
+<!-- Credit Limit Progress Bar -->
+<div class="bg-surface-container-low/40 p-3 rounded-lg flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-xs text-label-xs">
+<span class="text-on-surface-variant">Uso do Limite (24%)</span>
+<span class="text-on-surface font-semibold">R$ 1.200,00 <span class="text-on-surface-variant font-normal">/ R$ 5.000,00</span></span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 24%;"></div>
+</div>
+</div>
+</div>
+<!-- Card 3: Boleto -->
+<div class="method-card bg-surface-container-lowest p-space-md rounded-xl shadow-[0_1px_3px_rgba(15,23,42,0.04)] flex flex-col gap-space-sm" data-type="immediate">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-11 h-11 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant shrink-0">
+<span class="material-symbols-outlined text-[24px]">barcode_scanner</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<h2 class="font-title-sm text-title-sm text-on-surface truncate">Boleto Bancário</h2>
+<span class="px-2 py-0.5 rounded-full bg-[#ecfdf5] text-[#065f46] font-label-xs text-label-xs">Ativo</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Compensação (D+1/D+3) • Emissão Direta</p>
+</div>
+</div>
+<div class="relative">
+<button aria-label="Ações" class="menu-trigger w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+<div class="menu-dropdown hidden absolute right-0 top-9 w-32 bg-surface-container-lowest shadow-md rounded-lg py-1 z-20">
+<button class="w-full text-left px-3 py-1.5 font-body-sm text-body-sm text-on-surface hover:bg-surface-container-low flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">edit</span>Editar
+            </button>
+<button class="w-full text-left px-3 py-1.5 font-body-sm text-body-sm text-error hover:bg-error-container/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">delete</span>Remover
+            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 4: TED -->
+<div class="method-card bg-surface-container-lowest p-space-md rounded-xl shadow-[0_1px_3px_rgba(15,23,42,0.04)] flex flex-col gap-space-sm" data-type="immediate">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-11 h-11 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant shrink-0">
+<span class="material-symbols-outlined text-[24px]">sync_alt</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<h2 class="font-title-sm text-title-sm text-on-surface truncate">TED / Transferência</h2>
+<span class="px-2 py-0.5 rounded-full bg-[#ecfdf5] text-[#065f46] font-label-xs text-label-xs">Ativo</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Eletrônico Interbancário • STR/SPB</p>
+</div>
+</div>
+<div class="relative">
+<button aria-label="Ações" class="menu-trigger w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+<div class="menu-dropdown hidden absolute right-0 top-9 w-32 bg-surface-container-lowest shadow-md rounded-lg py-1 z-20">
+<button class="w-full text-left px-3 py-1.5 font-body-sm text-body-sm text-on-surface hover:bg-surface-container-low flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">edit</span>Editar
+            </button>
+<button class="w-full text-left px-3 py-1.5 font-body-sm text-body-sm text-error hover:bg-error-container/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">delete</span>Remover
+            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 5: XP Visa Infinite (Credit) -->
+<div class="method-card bg-surface-container-lowest p-space-md rounded-xl shadow-[0_1px_3px_rgba(15,23,42,0.04)] flex flex-col gap-space-sm" data-type="credit">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-11 h-11 rounded-full bg-primary-fixed/50 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">credit_card</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<h2 class="font-title-sm text-title-sm text-on-surface truncate">XP Visa Infinite (Final 8890)</h2>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-label-xs text-label-xs">Crédito</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Vence dia 25 • Fecha dia 17</p>
+</div>
+</div>
+<div class="relative">
+<button aria-label="Ações" class="menu-trigger w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+<div class="menu-dropdown hidden absolute right-0 top-9 w-32 bg-surface-container-lowest shadow-md rounded-lg py-1 z-20">
+<button class="w-full text-left px-3 py-1.5 font-body-sm text-body-sm text-on-surface hover:bg-surface-container-low flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">edit</span>Editar
+            </button>
+<button class="w-full text-left px-3 py-1.5 font-body-sm text-body-sm text-error hover:bg-error-container/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">delete</span>Remover
+            </button>
+</div>
+</div>
+</div>
+<!-- Credit Limit Progress Bar -->
+<div class="bg-surface-container-low/40 p-3 rounded-lg flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-xs text-label-xs">
+<span class="text-on-surface-variant">Uso do Limite (28%)</span>
+<span class="text-on-surface font-semibold">R$ 4.250,00 <span class="text-on-surface-variant font-normal">/ R$ 15.000,00</span></span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 28.3%;"></div>
+</div>
+</div>
+</div>
+<!-- Card 6: Dinheiro -->
+<div class="method-card bg-surface-container-lowest p-space-md rounded-xl shadow-[0_1px_3px_rgba(15,23,42,0.04)] flex flex-col gap-space-sm" data-type="immediate">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-11 h-11 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant shrink-0">
+<span class="material-symbols-outlined text-[24px]">payments</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<h2 class="font-title-sm text-title-sm text-on-surface truncate">Dinheiro / Espécie</h2>
+<span class="px-2 py-0.5 rounded-full bg-[#ecfdf5] text-[#065f46] font-label-xs text-label-xs">Ativo</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Físico • Carteira Pessoal</p>
+</div>
+</div>
+<div class="relative">
+<button aria-label="Ações" class="menu-trigger w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+<div class="menu-dropdown hidden absolute right-0 top-9 w-32 bg-surface-container-lowest shadow-md rounded-lg py-1 z-20">
+<button class="w-full text-left px-3 py-1.5 font-body-sm text-body-sm text-on-surface hover:bg-surface-container-low flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">edit</span>Editar
+            </button>
+<button class="w-full text-left px-3 py-1.5 font-body-sm text-body-sm text-error hover:bg-error-container/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">delete</span>Remover
+            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Business Rule Callout Card -->
+<div class="bg-surface-container-high/60 p-space-md rounded-xl shadow-sm flex items-start gap-3 mb-space-xl">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+</div>
+<div class="flex flex-col gap-1 min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Regra de Integridade</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+        O tipo <strong>Cartão de Crédito</strong> possui validações estritas de limite, dia de fechamento e vencimento, e <strong>não pode ser convertido</strong> em método comum após o cadastro (<code>POST /api/pay-method</code>).
+      </p>
+</div>
+</div>
+<!-- Fast Registration Form Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm flex flex-col gap-space-md" id="register-section">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface">Novo Método de Pagamento</h2>
+<span class="font-label-xs text-label-xs text-primary bg-primary-fixed px-2 py-0.5 rounded-full font-mono">POST /api/pay-method</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Configure os parâmetros operacionais do instrumento financeiro</p>
+</div>
+<!-- Toggle Credit Card -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[22px]">credit_score</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">É Cartão de Crédito?</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Habilita controle de faturas e limites</span>
+</div>
+</div>
+<button aria-pressed="false" class="w-12 h-7 bg-surface-container-highest rounded-full p-0.5 transition-colors relative" id="toggle-credit-btn" type="button">
+<div class="w-6 h-6 bg-surface-container-lowest rounded-full shadow-sm transition-transform" id="toggle-circle"></div>
+</button>
+</div>
+<form class="flex flex-col gap-space-md" id="pay-method-form" onsubmit="event.preventDefault();">
+<!-- General Field: Name -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface" for="method-name">Nome do Método</label>
+<input class="w-full h-12 px-4 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none shadow-sm placeholder:text-outline/60" id="method-name" placeholder="Ex: Vale Alimentação ou Nubank Black" type="text"/>
+</div>
+<!-- Dynamic Credit Card Fields Group -->
+<div class="hidden flex-col gap-space-md pt-2" id="credit-fields-group">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface" for="bank-account-select">Conta Bancária Vinculada</label>
+<div class="relative">
+<select class="w-full h-12 px-4 pr-10 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md appearance-none focus:outline-none shadow-sm" id="bank-account-select">
+<option value="1">Nubank Conta Corrente</option>
+<option value="2">Itaú Personnalité Principal</option>
+<option value="3">BTG Pactual Investimentos</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-outline pointer-events-none text-[22px]">expand_more</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface" for="closing-day">Dia Fechamento</label>
+<input class="w-full h-12 px-4 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none shadow-sm placeholder:text-outline/60" id="closing-day" max="31" min="1" placeholder="Ex: 3" type="number"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface" for="due-day">Dia Vencimento</label>
+<input class="w-full h-12 px-4 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none shadow-sm placeholder:text-outline/60" id="due-day" max="31" min="1" placeholder="Ex: 10" type="number"/>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface" for="last-digits">Últimos 4 Dígitos</label>
+<input class="w-full h-12 px-4 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none shadow-sm placeholder:text-outline/60" id="last-digits" maxlength="4" placeholder="Ex: 1234" type="text"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface" for="credit-limit">Limite Total</label>
+<input class="w-full h-12 px-4 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none shadow-sm placeholder:text-outline/60" id="credit-limit" placeholder="R$ 5.000,00" type="text"/>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full h-12 mt-2 bg-primary text-on-primary rounded-lg font-label-md text-label-md shadow-md active:scale-[0.99] hover:bg-on-primary-fixed-variant transition-all flex items-center justify-center gap-2" id="submit-btn" type="button">
+<span class="material-symbols-outlined text-[20px]">save</span>
+<span>Cadastrar Método de Pagamento</span>
+</button>
+</form>
+</div>
+</div>
+<script>
+  (function() {
+    // Quick scroll to registration
+    const scrollBtn = document.getElementById('btn-scroll-to-create');
+    const registerSection = document.getElementById('register-section');
+    if (scrollBtn && registerSection) {
+      scrollBtn.addEventListener('click', () => {
+        registerSection.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
+    // Toggle Credit Card Switch
+    const toggleBtn = document.getElementById('toggle-credit-btn');
+    const toggleCircle = document.getElementById('toggle-circle');
+    const creditFields = document.getElementById('credit-fields-group');
+    let isCredit = false;
+
+    if (toggleBtn && toggleCircle && creditFields) {
+      toggleBtn.addEventListener('click', () => {
+        isCredit = !isCredit;
+        toggleBtn.setAttribute('aria-pressed', isCredit ? 'true' : 'false');
+        if (isCredit) {
+          toggleBtn.classList.remove('bg-surface-container-highest');
+          toggleBtn.classList.add('bg-primary');
+          toggleCircle.classList.add('translate-x-5');
+          creditFields.classList.remove('hidden');
+          creditFields.classList.add('flex');
+        } else {
+          toggleBtn.classList.add('bg-surface-container-highest');
+          toggleBtn.classList.remove('bg-primary');
+          toggleCircle.classList.remove('translate-x-5');
+          creditFields.classList.remove('flex');
+          creditFields.classList.add('hidden');
+        }
+      });
+    }
+
+    // Filter tabs micro-interaction
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const methodCards = document.querySelectorAll('.method-card');
+
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        filterTabs.forEach(t => {
+          t.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+          t.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+          const badge = t.querySelector('span:last-child');
+          if (badge) {
+            badge.classList.remove('bg-surface-container-lowest', 'text-primary');
+            badge.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+          }
+        });
+
+        tab.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+        tab.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+        const badge = tab.querySelector('span:last-child');
+        if (badge) {
+          badge.classList.add('bg-surface-container-lowest', 'text-primary');
+          badge.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+        }
+
+        const filter = tab.getAttribute('data-filter');
+        methodCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-type') === filter) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // 3-dots menus toggle
+    const menuTriggers = document.querySelectorAll('.menu-trigger');
+    menuTriggers.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const menu = btn.nextElementSibling;
+        document.querySelectorAll('.menu-dropdown').forEach(m => {
+          if (m !== menu) m.classList.add('hidden');
+        });
+        menu.classList.toggle('hidden');
+      });
+    });
+
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.menu-dropdown').forEach(m => m.classList.add('hidden'));
+    });
+
+    // Submit animation feedback
+    const submitBtn = document.getElementById('submit-btn');
+    if (submitBtn) {
+      submitBtn.addEventListener('click', () => {
+        const originalHtml = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[20px]">progress_activity</span><span>Processando...</span>';
+        setTimeout(() => {
+          submitBtn.innerHTML = '<span class="material-symbols-outlined text-[20px]">check_circle</span><span>Método Salvo com Sucesso!</span>';
+          submitBtn.classList.remove('bg-primary');
+          submitBtn.classList.add('bg-secondary');
+          setTimeout(() => {
+            submitBtn.innerHTML = originalHtml;
+            submitBtn.classList.remove('bg-secondary');
+            submitBtn.classList.add('bg-primary');
+            submitBtn.disabled = false;
+          }, 2000);
+        }, 900);
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_-4px_16px_rgba(0,0,0,0.03)] pb-safe" data-active-classes="text-primary bg-primary-fixed/40"><div class="relative flex items-center justify-around h-16 px-space-xs"><a class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 rounded-xl text-on-surface-variant hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[22px]">bar_chart</span><span class="font-label-xs text-label-xs">Início</span></a><a class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 rounded-xl text-on-surface-variant hover:text-on-surface transition-colors" data-path="transactions" href="#"><span class="material-symbols-outlined text-[22px]">receipt_long</span><span class="font-label-xs text-label-xs">Transações</span></a><div class="relative -top-5 flex justify-center items-center w-14 shrink-0"><a aria-label="Nova Transação" class="w-14 h-14 rounded-full bg-primary-container text-on-primary shadow-[0_8px_16px_rgba(37,99,235,0.35)] flex items-center justify-center active:scale-95 transition-transform" data-path="quick-entry" href="#"><span class="material-symbols-outlined text-[28px]">add</span></a></div><a class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 rounded-xl text-on-surface-variant hover:text-on-surface transition-colors" data-path="credit-cards" href="#"><span class="material-symbols-outlined text-[22px]">credit_card</span><span class="font-label-xs text-label-xs">Cartões</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 rounded-xl transition-colors text-primary bg-primary-fixed/40" data-path="more" href="#"><span class="material-symbols-outlined text-[22px]">grid_view</span><span class="font-label-xs text-label-xs">Mais</span></a></div></nav></body></html>

@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-secondary-fixed": "#002113",
+          "surface-container-lowest": "#ffffff",
+          "on-primary-fixed-variant": "#003ea8",
+          "on-tertiary": "#ffffff",
+          "on-error-container": "#93000a",
+          "tertiary-fixed": "#ffdad7",
+          "secondary": "#006c49",
+          "on-surface-variant": "#434655",
+          "surface-tint": "#0053db",
+          "tertiary-container": "#cf2c30",
+          "error-container": "#ffdad6",
+          "primary": "#004ac6",
+          "surface": "#faf8ff",
+          "surface-dim": "#d2d9f4",
+          "on-tertiary-fixed": "#410004",
+          "surface-variant": "#dae2fd",
+          "secondary-fixed": "#6ffbbe",
+          "primary-fixed-dim": "#b4c5ff",
+          "on-primary": "#ffffff",
+          "tertiary": "#ab0b1c",
+          "primary-container": "#2563eb",
+          "inverse-on-surface": "#eef0ff",
+          "surface-container": "#eaedff",
+          "secondary-container": "#6cf8bb",
+          "on-background": "#131b2e",
+          "inverse-primary": "#b4c5ff",
+          "on-surface": "#131b2e",
+          "primary-fixed": "#dbe1ff",
+          "tertiary-fixed-dim": "#ffb3ad",
+          "outline-variant": "#c3c6d7",
+          "on-error": "#ffffff",
+          "on-tertiary-container": "#ffecea",
+          "surface-bright": "#faf8ff",
+          "background": "#faf8ff",
+          "on-secondary-container": "#00714d",
+          "on-primary-fixed": "#00174b",
+          "outline": "#737686",
+          "surface-container-high": "#e2e7ff",
+          "on-tertiary-fixed-variant": "#930013",
+          "inverse-surface": "#283044",
+          "on-primary-container": "#eeefff",
+          "on-secondary": "#ffffff",
+          "error": "#ba1a1a",
+          "surface-container-low": "#f2f3ff",
+          "secondary-fixed-dim": "#4edea3",
+          "on-secondary-fixed-variant": "#005236",
+          "surface-container-highest": "#dae2fd"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "margin": "1rem",
+          "margin-desktop": "2rem",
+          "space-md": "0.75rem",
+          "space-sm": "0.5rem",
+          "gutter": "1rem",
+          "space-2xl": "2rem",
+          "space-xs": "0.25rem",
+          "space-xl": "1.5rem",
+          "space-lg": "1rem"
+        },
+        "fontFamily": {
+          "body-sm": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-md": [
+            "Plus Jakarta Sans"
+          ],
+          "display-currency-mobile": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "display-currency": [
+            "Plus Jakarta Sans"
+          ],
+          "label-xs": [
+            "Plus Jakarta Sans"
+          ],
+          "body-md": [
+            "Plus Jakarta Sans"
+          ],
+          "label-md": [
+            "Plus Jakarta Sans"
+          ],
+          "title-sm": [
+            "Plus Jakarta Sans"
+          ]
+        },
+        "fontSize": {
+          "body-sm": [
+            "0.8125rem",
+            {
+              "lineHeight": "1.125rem",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-md": [
+            "1.25rem",
+            {
+              "lineHeight": "1.75rem",
+              "letterSpacing": "-0.015em",
+              "fontWeight": "600"
+            }
+          ],
+          "display-currency-mobile": [
+            "1.875rem",
+            {
+              "lineHeight": "2.25rem",
+              "letterSpacing": "-0.025em",
+              "fontWeight": "700"
+            }
+          ],
+          "headline-lg": [
+            "1.5rem",
+            {
+              "lineHeight": "2rem",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "700"
+            }
+          ],
+          "display-currency": [
+            "2.25rem",
+            {
+              "lineHeight": "2.5rem",
+              "letterSpacing": "-0.03em",
+              "fontWeight": "700"
+            }
+          ],
+          "label-xs": [
+            "0.6875rem",
+            {
+              "lineHeight": "0.875rem",
+              "letterSpacing": "0.04em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-md": [
+            "0.9375rem",
+            {
+              "lineHeight": "1.375rem",
+              "fontWeight": "400"
+            }
+          ],
+          "label-md": [
+            "0.8125rem",
+            {
+              "lineHeight": "1rem",
+              "letterSpacing": "0.01em",
+              "fontWeight": "600"
+            }
+          ],
+          "title-sm": [
+            "1rem",
+            {
+              "lineHeight": "1.5rem",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased min-h-screen"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-40 flex flex-col justify-between pt-20 pb-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)] overflow-y-auto"><div class="flex flex-col gap-space-lg"><div class="px-space-lg"><p class="text-on-surface-variant font-label-xs text-label-xs uppercase tracking-wider px-space-md mb-space-xs">Principal</p><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary text-on-primary font-title-sm text-title-sm shadow-sm"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant font-title-sm text-title-sm hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">space_dashboard</span><span>Dashboard</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant font-title-sm text-title-sm hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="transacoes" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span>Transações</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant font-title-sm text-title-sm hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="cartoes-de-credito" href="#"><span class="material-symbols-outlined text-[20px]">credit_card</span><span>Cartões de Crédito</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant font-title-sm text-title-sm hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contas-bancarias" href="#"><span class="material-symbols-outlined text-[20px]">account_balance</span><span>Contas Bancárias</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant font-title-sm text-title-sm hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="investimentos" href="#"><span class="material-symbols-outlined text-[20px]">trending_up</span><span>Investimentos</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant font-title-sm text-title-sm hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="relatorios-e-dre" href="#"><span class="material-symbols-outlined text-[20px]">monitoring</span><span>Relatórios &amp; DRE</span></a></nav></div><div class="px-space-lg"><p class="text-on-surface-variant font-label-xs text-label-xs uppercase tracking-wider px-space-md mb-space-xs">Gestão &amp; Cadastros</p><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary text-on-primary font-title-sm text-title-sm shadow-sm"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant font-title-sm text-title-sm hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="categorias" href="#"><span class="material-symbols-outlined text-[20px]">label</span><span>Categorias</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant font-title-sm text-title-sm hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contrapartes" href="#"><span class="material-symbols-outlined text-[20px]">handshake</span><span>Contrapartes</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant font-title-sm text-title-sm hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="metodos-de-pagamento" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Métodos de Pagamento</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant font-title-sm text-title-sm hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="membros-e-equipe" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Membros &amp; Equipe</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant font-title-sm text-title-sm hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="configuracoes" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Configurações</span></a></nav></div></div><div class="px-space-lg pt-space-md"><div class="p-space-md rounded-xl bg-surface-container flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="text-on-surface-variant font-label-xs text-label-xs uppercase">Plano Pro</span><span class="text-secondary font-label-xs text-label-xs">Ativo</span></div><p class="font-title-sm text-title-sm text-on-surface">FinFlow Prime</p><p class="text-on-surface-variant font-body-sm text-body-sm">Sincronização bancária automática em andamento.</p></div></div></aside><header class="fixed top-0 left-0 right-0 h-16 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex items-center justify-between px-space-lg lg:px-margin-desktop"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><img alt="Brand logo. - Primary color: #2563eb
+- Font: plusJakartaSans
+- Mode: light
+- Roundness: rounded-md
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Ww3BbCik93FlHWW0mtBa2GXkGlHOHvMvZ5a5Ug6h2TyzFx1drBi4fRdasCchKHF0h5I9YW5DPExekxJUKQhqCqSqY4H1q3i-4KsC8Fu9ndhHZYl7fkDkKmv_PDL6sGtQ30F4-4YOyK5yeFKKQTRMojbV4Z8tnXMKnNSWouSgHg-ZP8teHU3P3_E2tgR-A9tzDnxjGqagxiCu7hrPWOz2R9gDKHrn4Kb2wvBWW6bqtUD-KUqsdAiLVQR8Y"/><span class="font-headline-md text-headline-md text-on-surface tracking-tight">FinFlow</span></div><div class="h-6 w-px bg-surface-container-highest hidden sm:block"></div><button class="flex items-center gap-space-sm bg-surface-container-low hover:bg-surface-container-high text-on-surface px-space-md py-space-xs rounded-full transition-colors" type="button"><span class="material-symbols-outlined text-primary text-[18px]">account_balance_wallet</span><span class="font-label-md text-label-md">Minha Carteira Pessoal</span><span class="material-symbols-outlined text-on-surface-variant text-[16px]">expand_more</span></button></div><div class="hidden md:flex flex-1 max-w-md mx-space-xl"><div class="w-full flex items-center gap-space-sm bg-surface-container-lowest px-space-md py-space-xs rounded-xl shadow-[0_1px_3px_0_rgba(15,23,42,0.04)]"><span class="material-symbols-outlined text-outline text-[20px]">search</span><input class="w-full bg-transparent border-0 outline-none text-on-surface placeholder:text-outline font-body-sm text-body-sm" placeholder="Buscar transações, contas ou categorias..." type="text"/></div></div><div class="flex items-center gap-space-md"><button class="flex items-center gap-space-xs bg-primary hover:bg-primary-container text-on-primary px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-colors shadow-sm" type="button"><span class="material-symbols-outlined text-[18px]">add</span><span class="hidden sm:inline">Novo Lançamento</span></button><button aria-label="Notificações" class="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high text-on-surface-variant transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-tertiary-container ring-2 ring-surface"></span></button><div class="flex items-center gap-space-sm pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1VAYcP5DGg5fHiocYWUtvJ67ukWk0rDsfEdxJ6tlcahW30EYdtCihY7dovJHuKsVTT_cV_dN3NCVgHDlP0sz0UEm-wunjWvzu9fZPkePqCy4LTqJEoUG87Iw58o2wVbNGrXDA3VOEH9kYWydeJAQgl1RGr6NRZttZbBd1XZ0VJy9hTOwV9GzO7hYG7D6q9_ENJsJWPpJy9UpHiSlT1juFHxbZ4z826Ey8GnwX_AH0_2WDXNeUSB9uTakuQ"/><div class="hidden xl:flex flex-col text-left leading-none"><span class="font-label-md text-label-md text-on-surface">Carlos Silva</span><span class="font-label-xs text-label-xs text-on-surface-variant">Administrador</span></div></div></div></header><div class="pl-64"><main class="w-full pt-16 bg-surface"><div class="w-full max-w-7xl mx-auto px-space-lg lg:px-margin-desktop py-space-xl"><div class="flex flex-col w-full gap-space-xl">
+<!-- Dynamic Notification Banner (Micro-feedback on invite actions) -->
+<div class="hidden transition-all duration-300 transform -translate-y-2 opacity-0 flex items-center justify-between p-space-md rounded-xl bg-secondary-container text-on-secondary-container shadow-md" id="toastNotification">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+<span class="font-title-sm text-title-sm" id="toastMessage">Convite reenviado com sucesso!</span>
+</div>
+<button class="text-on-secondary-container/80 hover:text-on-secondary-container" onclick="dismissToast()" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Header Section with Breadcrumb Context -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-lg pb-space-xs">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-xs text-label-xs uppercase tracking-widest">
+<span>Configurações</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-semibold">Membros &amp; Equipe</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Configurações da Carteira &amp; Equipe</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+        Gerencie os participantes com acesso compartilhado à carteira, permissões granulares de visualização e edição, e preferências globais de governança financeira.
+      </p>
+</div>
+<div class="flex items-center gap-space-md self-start md:self-center">
+<button class="flex items-center gap-space-xs bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-space-md py-space-sm rounded-lg font-label-md text-label-md transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+<span>Log de Auditoria</span>
+</button>
+<button class="flex items-center gap-space-xs bg-primary hover:bg-primary-container text-on-primary px-space-lg py-space-sm rounded-lg font-title-sm text-title-sm transition-all shadow-md active:scale-95" onclick="toggleInviteDrawer(true)" type="button">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+<span>Convidar Novo Membro</span>
+</button>
+</div>
+</div>
+<!-- Settings Segmented Tabs Navigation -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-space-xs">
+<button class="flex items-center gap-space-xs px-space-lg py-space-sm rounded-full bg-primary text-on-primary font-title-sm text-title-sm shadow-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">group</span>
+<span>Membros &amp; Permissões</span>
+<span class="ml-space-xs px-2 py-0.5 rounded-full bg-surface-container-lowest/20 font-label-xs text-label-xs">4</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-lg py-space-sm rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-title-sm text-title-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+<span>Dados da Carteira (Nome &amp; Propriedade)</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-lg py-space-sm rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-title-sm text-title-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span>Preferências &amp; Notificações</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-lg py-space-sm rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-title-sm text-title-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">security</span>
+<span>Segurança &amp; Auditoria</span>
+</button>
+</div>
+<!-- Overview Bento Metric Summary -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+<!-- Active Vault Info -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant">Carteira em Operação</span>
+<h2 class="font-title-sm text-title-sm text-on-surface">Familiar &amp; Negócios Prime</h2>
+<span class="font-body-sm text-body-sm text-on-surface-variant">ID: wlt_finflow_99482701</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">corporate_fare</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm pt-space-xs">
+<span class="px-space-sm py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+          Multiusuário Ativo
+        </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">• 2 bancos sincronizados</span>
+</div>
+</div>
+<!-- Active Seats & Capacity Progress -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant">Assentos &amp; Licenças</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-currency text-display-currency text-on-surface">3 <span class="font-headline-md text-headline-md text-on-surface-variant">/ 5</span></span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Membros com acesso direto</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">badge</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 60%;"></div>
+</div>
+<div class="flex justify-between text-on-surface-variant font-label-xs text-label-xs">
+<span>60% do limite do plano</span>
+<span class="text-primary font-semibold">+2 assentos disponíveis</span>
+</div>
+</div>
+</div>
+<!-- Security & Invitations Pulse -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant">Status da Governança</span>
+<div class="flex items-center gap-space-sm">
+<span class="font-title-sm text-title-sm text-on-surface">1 Convite Aguardando</span>
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">2FA mandatório para papéis Owner e Editor</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">shield_person</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Auditoria criptográfica ativa</span>
+<button class="text-primary hover:underline font-label-md text-label-md" type="button">Revisar políticas</button>
+</div>
+</div>
+</div>
+<!-- Main Content Grid: Member List (Left 8 cols) + Contextual Quick Invite (Right 4 cols) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- Active Members & Invites Section (8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- Member Table Card -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-lg">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div>
+<h3 class="font-title-sm text-title-sm text-on-surface">Participantes com Acesso Concedido</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Controle granular de visualização de saldos, conciliação e exportação de DRE.</p>
+</div>
+<div class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[18px] text-outline">search</span>
+<input class="bg-transparent border-0 outline-none text-on-surface placeholder:text-outline font-body-sm text-body-sm w-44" placeholder="Filtrar por nome ou e-mail..." type="text"/>
+</div>
+</div>
+<!-- Members Rows Stack -->
+<div class="flex flex-col gap-space-sm">
+<!-- Member 1: João Silva (Owner) -->
+<div class="p-space-md rounded-xl bg-surface-container-low/60 hover:bg-surface-container-low transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="relative flex-shrink-0">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Close-up professional portrait of João Silva, a friendly Brazilian financial manager in modern office with warm architectural lighting and blue ambient tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt7iJ5efwhsGSq2CMMu4A5KzU_6U2ss6vozRvOC4RFKqvOBW_8mUJDodJtbKTCOG_V-8pY-lbyZJUkYTCfnKFdp6JTVaB_pXs4iYn4qDCs7tSBPvF4XyzjdSJRv_hwQNSJ8V9zRLnLrrVFVYon4FKchh8k0_4yWX5-keASYBzUrgHaMVo-wFY7bKgwMTQSudtoppDu0rC9-fEc6b_61Cwp1hwnIF3JJh8EFOJZGnAU2v4bhdFQkD5c"/>
+<span class="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-secondary flex items-center justify-center text-on-secondary text-[10px]">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-title-sm text-title-sm text-on-surface truncate">João Silva</span>
+<span class="px-space-sm py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-xs text-label-xs uppercase font-semibold">Você</span>
+<span class="px-space-sm py-0.5 rounded-full bg-primary text-on-primary font-label-xs text-label-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">key</span>
+                    Proprietário (Owner)
+                  </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">joao@finflow.io</span>
+<span class="font-label-xs text-label-xs text-outline mt-0.5">Acesso irrestrito a todas as contas, cartões e configurações fiscais</span>
+</div>
+</div>
+<div class="flex items-center justify-between sm:justify-end gap-space-md flex-shrink-0">
+<span class="px-space-sm py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs">
+                Acesso Total
+              </span>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container text-outline font-label-md text-label-md cursor-not-allowed" disabled="" type="button">
+                Titular
+              </button>
+</div>
+</div>
+<!-- Member 2: Mariana Costa (Editor) -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest hover:bg-surface-container-low/40 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="relative flex-shrink-0">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of Mariana Costa, a financial controller woman smiling confidently in a modern studio environment with minimalist background and navy blue palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp3CT2VnLt36dWmHXoV0Zv-i-qB70_I7NzomgH46jPTc02-wcWgZ1NmHa0jpRgad7T1alYVABnBuKbDJwqFc2GrP45SSCXd4WY6sjViHn4YDdVSEPs8Nb8ALC4Wyf1RL3BUn86OCpob-TZLRoiukcem_CavT0ar9oUna7UNCNcRzZZgr8dShGcT8HULkvdgxJNDVnRdrwlQiKwvo0ogakbffOPlOXV3VbzyrpfPpstWHWgNUvMa12N"/>
+<span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-secondary"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-title-sm text-title-sm text-on-surface truncate">Mariana Costa</span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-xs text-label-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">edit_note</span>
+                    Editor
+                  </span>
+<span class="px-space-sm py-0.5 rounded-full bg-secondary-fixed/50 text-secondary font-label-xs text-label-xs">Ativo</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">mariana@finflow.io</span>
+<span class="font-label-xs text-label-xs text-outline mt-0.5">Pode criar, editar transações e conciliar extratos de 3 contas</span>
+</div>
+</div>
+<div class="flex items-center justify-between sm:justify-end gap-space-sm flex-shrink-0">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" onclick="showRoleModal('Mariana Costa', 'Editor')" type="button">
+                Alterar Papel
+              </button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-tertiary-fixed text-tertiary transition-colors" onclick="confirmRevoke('Mariana Costa')" title="Revogar acesso" type="button">
+<span class="material-symbols-outlined text-[18px]">person_remove</span>
+</button>
+</div>
+</div>
+<!-- Member 3: Carlos Eduardo (Viewer) -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest hover:bg-surface-container-low/40 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="relative flex-shrink-0">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of Carlos Eduardo, an executive auditor wearing glasses and casual formal blazer in a brightly lit architectural workspace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBm4LUxQ2YDV_ZbPou8yV668EEaguJ-6r6V8UjhChNVJHMW1VkS7Utq7DSj88NQzaA15tLcZbajJeX6kFaTCApXvSoRJ36pv0lgJ8txQnNgB8myFw4ECvytXPd1Tzk6_r7SkqHZjLhLcBhrrhxW2WKC5tyD9iIkwtMVRlY9SSx7m44Ak0gy_yDFzP_jJipadt7QW-ny2aTpoeu2hhFMuLQ8dxFzU83JoQdeC2my6awKui_T0i8hnEh_"/>
+<span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-secondary"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-title-sm text-title-sm text-on-surface truncate">Carlos Eduardo</span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-xs text-label-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">visibility</span>
+                    Visualizador (Viewer)
+                  </span>
+<span class="px-space-sm py-0.5 rounded-full bg-secondary-fixed/50 text-secondary font-label-xs text-label-xs">Ativo</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">carlos@finflow.io</span>
+<span class="font-label-xs text-label-xs text-outline mt-0.5">Apenas leitura de relatórios mensais, gráficos analíticos e DRE gerencial</span>
+</div>
+</div>
+<div class="flex items-center justify-between sm:justify-end gap-space-sm flex-shrink-0">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" onclick="showRoleModal('Carlos Eduardo', 'Visualizador')" type="button">
+                Alterar Papel
+              </button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-tertiary-fixed text-tertiary transition-colors" onclick="confirmRevoke('Carlos Eduardo')" title="Revogar acesso" type="button">
+<span class="material-symbols-outlined text-[18px]">person_remove</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Pending Invitations Subsection -->
+<div class="pt-space-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-tertiary-container">schedule_send</span>
+<span class="font-title-sm text-title-sm text-on-surface">Convites Pendentes de Aceite (1)</span>
+</div>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Links expiram em 7 dias</span>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col sm:flex-row sm:items-center justify-between gap-space-md transition-all" id="pendingInviteRow">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">mail</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-title-sm text-title-sm text-on-surface">beatriz@exemplo.com</span>
+<span class="px-space-sm py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-xs text-label-xs font-medium">Aguardando Confirmação</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Papel pré-atribuído: Editor • Acesso a todas as contas Nubank</span>
+<span class="font-label-xs text-label-xs text-outline mt-0.5">Enviado em 14 de Outubro (há 2 dias)</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs self-end sm:self-center">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-md text-label-md transition-colors flex items-center gap-1" onclick="triggerToast('Link de convite reenviado para beatriz@exemplo.com')" type="button">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+<span>Reenviar</span>
+</button>
+<button class="px-space-md py-1.5 rounded-lg hover:bg-tertiary-fixed text-tertiary font-label-md text-label-md transition-colors" onclick="cancelPendingInvite()" type="button">
+                Cancelar
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Permission Matrix Explanatory Card -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">admin_panel_settings</span>
+<h3 class="font-title-sm text-title-sm text-on-surface">Níveis de Permissão na FinFlow</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-1.5 text-primary font-title-sm text-title-sm">
+<span class="material-symbols-outlined text-[18px]">key</span>
+<span>Proprietário (Owner)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Controle absoluto da carteira, gestão de assinaturas, convite/remoção de membros e exclusão definitiva do cofre.
+            </p>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-1.5 text-on-surface font-title-sm text-title-sm">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+<span>Editor</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Pode lançar despesas, receitas, anexar comprovantes fiscais e conciliar lançamentos das contas autorizadas.
+            </p>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-1.5 text-on-surface-variant font-title-sm text-title-sm">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span>Visualizador (Viewer)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Acesso restrito para auditoria e acompanhamento de gráficos, saldos consolidados e demonstrativo DRE sem permissão de edição.
+            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Invite / Fast Grant Panel (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+</div>
+<div>
+<h3 class="font-title-sm text-title-sm text-on-surface">Convidar Participante</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Envie acesso via e-mail corporativo ou pessoal</p>
+</div>
+</div>
+<!-- Invite Form -->
+<form class="flex flex-col gap-space-md" id="inviteForm" onsubmit="handleSendInvite(event)">
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface">E-mail do Participante</label>
+<div class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-2.5 rounded-lg">
+<span class="material-symbols-outlined text-[20px] text-outline">alternate_email</span>
+<input class="w-full bg-transparent border-0 outline-none text-on-surface placeholder:text-outline font-body-sm text-body-sm" id="inviteEmail" placeholder="ex: contabilidade@empresa.com" required="" type="email"/>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface">Nível de Acesso (Papel)</label>
+<div class="flex flex-col gap-space-xs">
+<label class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container flex items-start gap-space-sm cursor-pointer transition-colors">
+<input checked="" class="mt-1 accent-primary" name="inviteRole" type="radio" value="editor"/>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface">Editor</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Pode lançar transações e anexos</span>
+</div>
+</label>
+<label class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container flex items-start gap-space-sm cursor-pointer transition-colors">
+<input class="mt-1 accent-primary" name="inviteRole" type="radio" value="viewer"/>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface">Visualizador (Viewer)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Apenas leitura de relatórios e saldos</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Account Scope Delegation -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface">Contas Visíveis</label>
+<button class="font-label-xs text-label-xs text-primary hover:underline" onclick="selectAllAccounts()" type="button">Selecionar Todas</button>
+</div>
+<div class="flex flex-col gap-space-xs max-h-44 overflow-y-auto pr-1">
+<label class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-space-sm">
+<input checked="" class="account-checkbox accent-primary rounded" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Nubank Conta PJ</span>
+</div>
+<span class="font-label-xs text-label-xs text-outline">R$ 48.250</span>
+</label>
+<label class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-space-sm">
+<input checked="" class="account-checkbox accent-primary rounded" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Bradesco Prime Corporativo</span>
+</div>
+<span class="font-label-xs text-label-xs text-outline">R$ 112.430</span>
+</label>
+<label class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-space-sm">
+<input checked="" class="account-checkbox accent-primary rounded" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Cartão XP Infinite Master</span>
+</div>
+<span class="font-label-xs text-label-xs text-outline">Limite R$ 35.000</span>
+</label>
+</div>
+</div>
+<div class="pt-space-sm">
+<button class="w-full h-12 bg-primary hover:bg-primary-container text-on-primary rounded-lg font-title-sm text-title-sm flex items-center justify-center gap-space-xs transition-colors shadow-sm" type="submit">
+<span class="material-symbols-outlined text-[20px]">send</span>
+<span>Disparar Convite por E-mail</span>
+</button>
+<p class="font-label-xs text-label-xs text-center text-outline mt-space-xs">
+              O destinatário receberá instruções criptografadas para aceitar.
+            </p>
+</div>
+</form>
+</div>
+<!-- Quick Tips Card -->
+<div class="p-space-lg rounded-xl bg-surface-container flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-[18px]">lightbulb</span>
+<span class="font-title-sm text-title-sm">Dica de Segurança</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Nunca conceda o papel de Proprietário a terceiros temporários. Para contadores ou auditores externos, prefira o papel <strong>Visualizador</strong> com escopo delimitado por conta bancária.
+        </p>
+</div>
+</div>
+</div>
+<!-- Wallet General Information & Danger Zone Section (Section 4 & 11) -->
+<div class="flex flex-col gap-space-lg pt-space-md">
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-xl">
+<!-- General Wallet Details (PATCH /api/wallet/update/:id) -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Propriedade &amp; Dados Gerais da Carteira</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Atualize as configurações primárias desta carteira (Endpoint: PATCH /api/wallet/update/:id).</p>
+</div>
+<button class="px-space-lg py-space-sm rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-primary font-title-sm text-title-sm transition-colors shadow-sm flex items-center gap-1.5" onclick="saveWalletSettings()" type="button">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Salvar Alterações</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg pt-space-xs">
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface">Nome Oficial da Carteira</label>
+<input class="px-space-md py-space-sm rounded-lg bg-surface-container-low text-on-surface font-title-sm text-title-sm border-0 outline-none focus:ring-2 focus:ring-primary" id="walletNameInput" type="text" value="Familiar &amp; Negócios Prime"/>
+<span class="font-label-xs text-label-xs text-outline">Visível para todos os membros convidados no alternador superior.</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface">Moeda Base de Consolidação</label>
+<select class="px-space-md py-space-sm rounded-lg bg-surface-container-low text-on-surface font-title-sm text-title-sm border-0 outline-none">
+<option selected="">BRL (R$) - Real Brasileiro</option>
+<option>USD ($) - Dólar Comercial</option>
+<option>EUR (€) - Euro Oficial</option>
+</select>
+<span class="font-label-xs text-label-xs text-outline">Todas as conversões e demonstrativos DRE serão consolidados nesta moeda.</span>
+</div>
+</div>
+</div>
+<!-- Danger Zone / Delete Wallet (DELETE /api/wallet/delete/:id) -->
+<div class="p-space-lg rounded-xl bg-error-container/30 flex flex-col gap-space-md">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined text-[22px]">warning</span>
+</div>
+<div>
+<h4 class="font-title-sm text-title-sm text-tertiary">Zona de Perigo: Exclusão Permanente da Carteira</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Uma vez excluída, todas as transações, vínculos bancários, metas e rateios multiusuário desta carteira serão destruídos irreversivelmente.
+              </p>
+</div>
+</div>
+<button class="px-space-lg py-space-sm rounded-lg bg-tertiary hover:bg-tertiary-container text-on-tertiary font-title-sm text-title-sm transition-all shadow-sm flex items-center gap-1.5 flex-shrink-0" onclick="confirmDeleteWallet()" type="button">
+<span class="material-symbols-outlined text-[18px]">delete_forever</span>
+<span>Excluir Carteira</span>
+</button>
+</div>
+<div class="flex items-center gap-space-xs text-outline font-label-xs text-label-xs">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+<span>Apenas o Proprietário (Owner) possui autorização na API para invocar DELETE /api/wallet/delete/:id</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Role Change Interactive Dialog Modal -->
+<div class="fixed inset-0 z-50 hidden flex items-center justify-center p-space-md bg-inverse-surface/40 backdrop-blur-sm" id="roleModal">
+<div class="w-full max-w-md bg-surface-container-lowest p-space-lg rounded-xl shadow-xl flex flex-col gap-space-lg">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">manage_accounts</span>
+<h3 class="font-title-sm text-title-sm text-on-surface">Alterar Nível de Acesso</h3>
+</div>
+<button class="text-outline hover:text-on-surface" onclick="closeRoleModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Selecione o novo papel operacional para <strong class="text-on-surface" id="targetMemberName">Membro</strong> nesta carteira compartilhada:
+        </p>
+</div>
+<div class="flex flex-col gap-space-sm">
+<label class="flex items-center gap-space-sm p-space-md rounded-lg bg-surface-container-low hover:bg-surface-container cursor-pointer">
+<input class="accent-primary" name="modalRoleRadio" type="radio" value="Proprietário"/>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface">Transferir Propriedade (Owner)</span>
+<span class="font-label-xs text-label-xs text-outline">Você deixará de ser o proprietário primário</span>
+</div>
+</label>
+<label class="flex items-center gap-space-sm p-space-md rounded-lg bg-surface-container-low hover:bg-surface-container cursor-pointer">
+<input checked="" class="accent-primary" name="modalRoleRadio" type="radio" value="Editor"/>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface">Editor</span>
+<span class="font-label-xs text-label-xs text-outline">Lançamento e edição de despesas/receitas</span>
+</div>
+</label>
+<label class="flex items-center gap-space-sm p-space-md rounded-lg bg-surface-container-low hover:bg-surface-container cursor-pointer">
+<input class="accent-primary" name="modalRoleRadio" type="radio" value="Visualizador"/>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface">Visualizador (Viewer)</span>
+<span class="font-label-xs text-label-xs text-outline">Apenas leitura e relatórios consolidados</span>
+</div>
+</label>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md py-space-sm rounded-lg bg-surface-container text-on-surface font-label-md text-label-md" onclick="closeRoleModal()" type="button">
+          Cancelar
+        </button>
+<button class="px-space-lg py-space-sm rounded-lg bg-primary hover:bg-primary-container text-on-primary font-title-sm text-title-sm shadow-sm" onclick="applyRoleUpdate()" type="button">
+          Confirmar Atualização
+        </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function triggerToast(msg) {
+    const toast = document.getElementById('toastNotification');
+    const label = document.getElementById('toastMessage');
+    if (toast && label) {
+      label.textContent = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.remove('opacity-0', '-translate-y-2');
+      }, 20);
+      setTimeout(() => {
+        dismissToast();
+      }, 4500);
+    }
+  }
+
+  function dismissToast() {
+    const toast = document.getElementById('toastNotification');
+    if (toast) {
+      toast.classList.add('opacity-0', '-translate-y-2');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 300);
+    }
+  }
+
+  function toggleInviteDrawer(open) {
+    const emailInput = document.getElementById('inviteEmail');
+    if (emailInput) {
+      emailInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      emailInput.focus();
+    }
+  }
+
+  function handleSendInvite(e) {
+    e.preventDefault();
+    const email = document.getElementById('inviteEmail').value;
+    if (email) {
+      triggerToast('Convite oficial enviado com sucesso para ' + email);
+      document.getElementById('inviteEmail').value = '';
+    }
+  }
+
+  function cancelPendingInvite() {
+    const row = document.getElementById('pendingInviteRow');
+    if (row) {
+      row.classList.add('opacity-0', 'scale-95');
+      setTimeout(() => {
+        row.remove();
+        triggerToast('O convite pendente foi revogado e invalidado.');
+      }, 250);
+    }
+  }
+
+  function confirmRevoke(name) {
+    if (confirm('Deseja realmente revogar o acesso de ' + name + ' a esta carteira? O usuário perderá acesso imediato.')) {
+      triggerToast('Acesso de ' + name + ' revogado.');
+    }
+  }
+
+  function showRoleModal(name, currentRole) {
+    const modal = document.getElementById('roleModal');
+    const target = document.getElementById('targetMemberName');
+    if (modal && target) {
+      target.textContent = name;
+      modal.classList.remove('hidden');
+    }
+  }
+
+  function closeRoleModal() {
+    const modal = document.getElementById('roleModal');
+    if (modal) {
+      modal.classList.add('hidden');
+    }
+  }
+
+  function applyRoleUpdate() {
+    closeRoleModal();
+    triggerToast('Papel de acesso atualizado e gravado com sucesso.');
+  }
+
+  function selectAllAccounts() {
+    const boxes = document.querySelectorAll('.account-checkbox');
+    boxes.forEach(b => b.checked = true);
+  }
+
+  function saveWalletSettings() {
+    const name = document.getElementById('walletNameInput').value;
+    triggerToast('Carteira atualizada: "' + name + '" salva via PATCH /api/wallet/update.');
+  }
+
+  function confirmDeleteWallet() {
+    const answer = prompt('ATENÇÃO: Digite "EXCLUIR" para confirmar a exclusão definitiva desta carteira e de todos os lançamentos:');
+    if (answer === 'EXCLUIR') {
+      alert('Ordem DELETE /api/wallet/delete/:id executada. Redirecionando...');
+    }
+  }
+</script></div></main></div></body></html>

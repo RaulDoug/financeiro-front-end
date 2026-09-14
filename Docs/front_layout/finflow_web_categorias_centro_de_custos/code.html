@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-container-high":"#e2e7ff","on-surface":"#131b2e","inverse-on-surface":"#eef0ff","on-error":"#ffffff","surface":"#faf8ff","on-primary-fixed-variant":"#003ea8","surface-tint":"#0053db","on-tertiary":"#ffffff","tertiary-container":"#cf2c30","on-primary":"#ffffff","tertiary":"#ab0b1c","on-secondary-fixed":"#002113","secondary-fixed-dim":"#4edea3","on-tertiary-container":"#ffecea","secondary-container":"#6cf8bb","primary":"#004ac6","background":"#faf8ff","surface-container-highest":"#dae2fd","on-primary-fixed":"#00174b","surface-dim":"#d2d9f4","outline":"#737686","on-secondary-container":"#00714d","inverse-surface":"#283044","surface-container-lowest":"#ffffff","surface-variant":"#dae2fd","tertiary-fixed":"#ffdad7","surface-bright":"#faf8ff","error":"#ba1a1a","tertiary-fixed-dim":"#ffb3ad","error-container":"#ffdad6","primary-fixed":"#dbe1ff","on-tertiary-fixed-variant":"#930013","on-background":"#131b2e","surface-container":"#eaedff","inverse-primary":"#b4c5ff","secondary":"#006c49","primary-fixed-dim":"#b4c5ff","on-primary-container":"#eeefff","on-error-container":"#93000a","outline-variant":"#c3c6d7","secondary-fixed":"#6ffbbe","surface-container-low":"#f2f3ff","on-secondary":"#ffffff","on-surface-variant":"#434655","primary-container":"#2563eb","on-tertiary-fixed":"#410004","on-secondary-fixed-variant":"#005236"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"margin":"1rem","space-2xl":"2rem","space-sm":"0.5rem","margin-desktop":"2rem","gutter":"1rem","space-xs":"0.25rem","space-xl":"1.5rem","space-md":"0.75rem","space-lg":"1rem"},fontFamily:{"label-xs":["Plus Jakarta Sans"],"display-currency":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"title-sm":["Plus Jakarta Sans"],"display-currency-mobile":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"]},fontSize:{"label-xs":["0.6875rem",{"lineHeight":"0.875rem","letterSpacing":"0.04em","fontWeight":"600"}],"display-currency":["2.25rem",{"lineHeight":"2.5rem","letterSpacing":"-0.03em","fontWeight":"700"}],"body-sm":["0.8125rem",{"lineHeight":"1.125rem","fontWeight":"400"}],"label-md":["0.8125rem",{"lineHeight":"1rem","letterSpacing":"0.01em","fontWeight":"600"}],"title-sm":["1rem",{"lineHeight":"1.5rem","letterSpacing":"-0.01em","fontWeight":"600"}],"display-currency-mobile":["1.875rem",{"lineHeight":"2.25rem","letterSpacing":"-0.025em","fontWeight":"700"}],"body-md":["0.9375rem",{"lineHeight":"1.375rem","fontWeight":"400"}],"headline-md":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-lg":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.02em","fontWeight":"700"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col h-full overflow-hidden"><div class="h-16 px-6 flex items-center gap-3 shrink-0 bg-surface-container-lowest"><img alt="Brand logo. - Primary color: #2563eb
+- Font: plusJakartaSans
+- Mode: light
+- Roundness: rounded-md
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Ww3BbCik93FlHWW0mtBa2GXkGlHOHvMvZ5a5Ug6h2TyzFx1drBi4fRdasCchKHF0h5I9YW5DPExekxJUKQhqCqSqY4H1q3i-4KsC8Fu9ndhHZYl7fkDkKmv_PDL6sGtQ30F4-4YOyK5yeFKKQTRMojbV4Z8tnXMKnNSWouSgHg-ZP8teHU3P3_E2tgR-A9tzDnxjGqagxiCu7hrPWOz2R9gDKHrn4Kb2wvBWW6bqtUD-KUqsdAiLVQR8Y"/><div class="flex flex-col"><span class="font-headline-md text-headline-md tracking-tight font-bold text-on-surface leading-none">FinFlow</span><span class="font-label-xs text-label-xs uppercase tracking-wider text-outline mt-0.5">Enterprise Finance</span></div></div><div class="flex-1 overflow-y-auto px-4 py-4 space-y-6"><div class="space-y-1"><p class="px-3 font-label-xs text-label-xs uppercase tracking-wider text-outline mb-2">Principal</p><nav class="space-y-1" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="transacoes" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span>Transações</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="cartoes-de-credito" href="#"><span class="material-symbols-outlined text-[20px]">credit_card</span><span>Cartões de Crédito</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contas-bancarias" href="#"><span class="material-symbols-outlined text-[20px]">account_balance</span><span>Contas Bancárias</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="investimentos" href="#"><span class="material-symbols-outlined text-[20px]">trending_up</span><span>Investimentos</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="relatorios-e-dre" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span>Relatórios &amp; DRE</span></a></nav></div><div class="space-y-1"><p class="px-3 font-label-xs text-label-xs uppercase tracking-wider text-outline mb-2">Gestão &amp; Cadastros</p><nav class="space-y-1" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><a aria-current="page" class="flex items-center gap-3 px-3 py-2.5 transition-colors bg-primary-container text-on-primary-container font-semibold rounded-lg" data-path="categorias" href="#"><span class="material-symbols-outlined text-[20px]">category</span><span>Categorias</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contrapartes" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span>Contrapartes</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="metodos-de-pagamento" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Métodos de Pagamento</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="membros-e-equipe" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Membros &amp; Equipe</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="configuracoes" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Configurações</span></a></nav></div></div><div class="p-4 shrink-0 bg-surface-container-low mx-4 mb-4 rounded-xl"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-secondary"></span><span class="font-label-xs text-label-xs text-on-surface-variant font-medium">Sincronizado</span></div><span class="font-label-xs text-label-xs text-outline">v2.4.0</span></div></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-8"><div class="flex items-center gap-4"><button class="flex items-center gap-2 h-10 px-3.5 bg-surface-container-lowest rounded-lg shadow-[0_1px_3px_rgba(15,23,42,0.04)] hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[18px] text-primary">account_balance_wallet</span><span class="font-title-sm text-title-sm text-on-surface font-medium">Minha Carteira Pessoal</span><span class="material-symbols-outlined text-[18px] text-outline">expand_more</span></button><div class="relative w-80"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span><input class="w-full h-10 pl-10 pr-4 bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded-lg border-none focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_1px_3px_rgba(15,23,42,0.08)] transition-all" placeholder="Pesquisar transações, contas..." type="text"/></div></div><div class="flex items-center gap-4"><button class="h-10 px-4 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md rounded-lg flex items-center gap-2 transition-colors shadow-[0_1px_3px_rgba(15,23,42,0.08)]" type="button"><span class="material-symbols-outlined text-[18px]">add</span><span>Novo Lançamento</span></button><button class="relative w-10 h-10 rounded-lg flex items-center justify-center bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-tertiary-container ring-2 ring-surface-container-lowest"></span></button><div class="flex items-center gap-3 pl-2"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1VAYcP5DGg5fHiocYWUtvJ67ukWk0rDsfEdxJ6tlcahW30EYdtCihY7dovJHuKsVTT_cV_dN3NCVgHDlP0sz0UEm-wunjWvzu9fZPkePqCy4LTqJEoUG87Iw58o2wVbNGrXDA3VOEH9kYWydeJAQgl1RGr6NRZttZbBd1XZ0VJy9hTOwV9GzO7hYG7D6q9_ENJsJWPpJy9UpHiSlT1juFHxbZ4z826Ey8GnwX_AH0_2WDXNeUSB9uTakuQ"/><div class="flex flex-col text-left"><span class="font-title-sm text-title-sm text-on-surface font-semibold leading-tight">Carlos Silva</span><span class="font-label-xs text-label-xs text-outline">Administrador</span></div></div></div></header><main class="w-full pt-16 px-8 bg-surface"><div class="flex flex-col w-full pb-16">
+<!-- Top Navigation & Executive Header -->
+<div class="flex flex-col gap-6 pt-6 mb-8">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2 font-label-xs text-label-xs uppercase tracking-widest text-outline">
+<span>Configurações</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">Categorias &amp; Plano de Contas</span>
+</div>
+<div class="flex items-center gap-3">
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Categorias &amp; Centro de Custos</h1>
+<span class="px-2.5 py-0.5 rounded-full font-label-xs text-label-xs bg-surface-container-high text-primary font-semibold">Plano v2.4</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-3xl">
+          Mantenha a integridade da sua DRE separando rigorosamente as naturezas contábeis entre <strong class="text-tertiary">Despesas (expenses)</strong> e <strong class="text-secondary">Receitas (incomings)</strong>. Cada transação deve herdar as propriedades e regras automáticas cadastradas abaixo.
+        </p>
+</div>
+<div class="flex items-center gap-3 self-start sm:self-auto">
+<button class="h-10 px-4 bg-surface-container-lowest text-on-surface hover:bg-surface-container rounded-lg font-label-md text-label-md flex items-center gap-2 shadow-sm transition-all" id="btn-export" type="button">
+<span class="material-symbols-outlined text-[18px] text-outline">file_download</span>
+<span>Exportar DRE</span>
+</button>
+<button class="h-10 px-5 bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md rounded-lg flex items-center gap-2 shadow-md hover:shadow-lg transition-all" id="btn-open-modal" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Nova Categoria</span>
+</button>
+</div>
+</div>
+<!-- Executive Stat Cards (3-up Bento) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<!-- Card 1: Total Categorias -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex items-center justify-between relative overflow-hidden">
+<div class="flex flex-col gap-1 z-10">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline">Total Cadastrado</span>
+<div class="flex items-baseline gap-2">
+<span class="font-display-currency text-display-currency text-on-surface">24</span>
+<span class="font-label-md text-label-md text-secondary font-semibold">100% ativas</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">16 despesas • 8 receitas</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-primary z-10">
+<span class="material-symbols-outlined text-[26px]">account_tree</span>
+</div>
+<div class="absolute -right-4 -bottom-4 w-28 h-28 bg-surface-container/60 rounded-full blur-xl pointer-events-none"></div>
+</div>
+<!-- Card 2: Maior Centro de Custo -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex items-center justify-between relative overflow-hidden">
+<div class="flex flex-col gap-1 z-10">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline">Maior Desembolso (Mês Atual)</span>
+<div class="flex items-baseline gap-2">
+<span class="font-title-sm text-title-sm text-tertiary font-bold">Habitação &amp; Aluguel</span>
+</div>
+<div class="flex items-center gap-1.5 font-body-sm text-body-sm text-on-surface-variant">
+<span class="font-bold text-on-surface">R$ 5.420,00</span>
+<span class="text-tertiary font-medium">32.8% do orçamento</span>
+</div>
+</div>
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center text-tertiary z-10">
+<span class="material-symbols-outlined text-[26px]">apartment</span>
+</div>
+<div class="absolute -right-4 -bottom-4 w-28 h-28 bg-tertiary-fixed/30 rounded-full blur-xl pointer-events-none"></div>
+</div>
+<!-- Card 3: Cobertura Contábil -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex items-center justify-between relative overflow-hidden">
+<div class="flex flex-col gap-1 z-10">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline">Acurácia &amp; Conciliação</span>
+<div class="flex items-baseline gap-2">
+<span class="font-display-currency text-display-currency text-secondary">99.4%</span>
+<span class="font-label-md text-label-md text-secondary font-semibold">↑ +2.1%</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">0 transações órfãs na carteira</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary z-10">
+<span class="material-symbols-outlined text-[26px]">verified</span>
+</div>
+<div class="absolute -right-4 -bottom-4 w-28 h-28 bg-secondary-container/40 rounded-full blur-xl pointer-events-none"></div>
+</div>
+</div>
+<!-- Filter Toolbar & Search Bar -->
+<div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-surface-container-lowest p-3 rounded-xl shadow-sm">
+<div class="flex items-center gap-2 overflow-x-auto">
+<button class="category-filter-btn h-9 px-4 rounded-lg font-label-md text-label-md bg-primary text-on-primary font-medium transition-all shadow-sm" data-filter="all" type="button">
+          Todas (24)
+        </button>
+<button class="category-filter-btn h-9 px-4 rounded-lg font-label-md text-label-md bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-all flex items-center gap-1.5" data-filter="expenses" type="button">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span>Despesas (16)</span>
+</button>
+<button class="category-filter-btn h-9 px-4 rounded-lg font-label-md text-label-md bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-all flex items-center gap-1.5" data-filter="incomings" type="button">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Receitas (8)</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative flex-1 md:w-72">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full h-9 pl-9 pr-3 bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded-lg border-none focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_1px_3px_rgba(15,23,42,0.08)] transition-all" id="search-input" placeholder="Filtrar por nome ou display_id..." type="text"/>
+</div>
+<div class="h-6 w-px bg-surface-container-highest"></div>
+<button class="h-9 px-3 bg-surface-container-low text-on-surface-variant hover:text-on-surface rounded-lg font-label-md text-label-md flex items-center gap-1.5 transition-colors" title="Ordenar lista" type="button">
+<span class="material-symbols-outlined text-[18px]">swap_vert</span>
+<span class="hidden sm:inline">Volume</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Dual Column Master-Detail Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+<!-- COLUNA 1: DESPESAS (EXPENSES) -->
+<div class="flex flex-col gap-4" id="col-expenses">
+<!-- Section Header with totalizer -->
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-2.5">
+<div class="w-3.5 h-3.5 rounded-md bg-tertiary"></div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">Despesas (Expenses)</h2>
+<span class="px-2 py-0.5 rounded-full font-label-xs text-label-xs bg-tertiary-fixed text-tertiary font-bold">16 ativas</span>
+</div>
+<div class="text-right">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline block">Total Consumido</span>
+<span class="font-title-sm text-title-sm text-tertiary font-bold">R$ 16.520,40</span>
+</div>
+</div>
+<!-- Categories Container (Expenses) -->
+<div class="flex flex-col gap-3">
+<!-- Expense Item 1 -->
+<div class="category-card bg-surface-container-lowest p-4 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col gap-3 group" data-search="habitação aluguel moradia exp-001" data-type="expenses">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3.5 min-w-0">
+<div class="w-11 h-11 rounded-xl bg-tertiary-fixed flex items-center justify-center text-tertiary shrink-0">
+<span class="material-symbols-outlined text-[22px]">apartment</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<h3 class="font-title-sm text-title-sm text-on-surface font-bold truncate">Habitação &amp; Aluguel</h3>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-md bg-surface-container-high text-on-surface-variant font-mono">exp-001</span>
+</div>
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-outline mt-0.5">
+<span>3 regras auto-conciliação</span>
+<span>•</span>
+<span class="text-on-surface-variant">Fixa Mensal</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-title-sm text-title-sm text-on-surface font-bold">- R$ 5.420,00</span>
+<span class="font-label-xs text-label-xs text-tertiary font-semibold">32.8% do total</span>
+</div>
+</div>
+<!-- Progress Bar & Subcategories snippet -->
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-tertiary h-1.5 rounded-full" style="width: 32.8%"></div>
+</div>
+<div class="flex items-center justify-between pt-1 font-label-xs text-label-xs text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Aluguel Loft</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Condomínio</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">IPTU</span>
+</div>
+<div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Adicionar subcategoria" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Editar categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-error" title="Excluir categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Expense Item 2 -->
+<div class="category-card bg-surface-container-lowest p-4 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col gap-3 group" data-search="alimentação refeição supermercado restaurante exp-002" data-type="expenses">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3.5 min-w-0">
+<div class="w-11 h-11 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">restaurant</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<h3 class="font-title-sm text-title-sm text-on-surface font-bold truncate">Alimentação &amp; Refeição</h3>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-md bg-surface-container-high text-on-surface-variant font-mono">exp-002</span>
+</div>
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-outline mt-0.5">
+<span>5 regras de débito/crédito</span>
+<span>•</span>
+<span class="text-on-surface-variant">Variável</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-title-sm text-title-sm text-on-surface font-bold">- R$ 3.840,90</span>
+<span class="font-label-xs text-label-xs text-tertiary font-semibold">23.2% do total</span>
+</div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-orange-500 h-1.5 rounded-full" style="width: 23.2%"></div>
+</div>
+<div class="flex items-center justify-between pt-1 font-label-xs text-label-xs text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Supermercados</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Delivery &amp; iFood</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Cafeterias</span>
+</div>
+<div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Adicionar subcategoria" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Editar categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-error" title="Excluir categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Expense Item 3 -->
+<div class="category-card bg-surface-container-lowest p-4 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col gap-3 group" data-search="transporte mobilidade uber combustível exp-003" data-type="expenses">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3.5 min-w-0">
+<div class="w-11 h-11 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">directions_car</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<h3 class="font-title-sm text-title-sm text-on-surface font-bold truncate">Transporte &amp; Mobilidade</h3>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-md bg-surface-container-high text-on-surface-variant font-mono">exp-003</span>
+</div>
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-outline mt-0.5">
+<span>2 regras automáticas</span>
+<span>•</span>
+<span class="text-on-surface-variant">Variável</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-title-sm text-title-sm text-on-surface font-bold">- R$ 1.950,00</span>
+<span class="font-label-xs text-label-xs text-tertiary font-semibold">11.8% do total</span>
+</div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-purple-500 h-1.5 rounded-full" style="width: 11.8%"></div>
+</div>
+<div class="flex items-center justify-between pt-1 font-label-xs text-label-xs text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Combustível</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Uber / 99</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Pedágios &amp; Estac.</span>
+</div>
+<div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Adicionar subcategoria" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Editar categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-error" title="Excluir categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Expense Item 4 -->
+<div class="category-card bg-surface-container-lowest p-4 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col gap-3 group" data-search="saúde farmácia exames plano exp-004" data-type="expenses">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3.5 min-w-0">
+<div class="w-11 h-11 rounded-xl bg-red-100 text-red-700 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">medical_services</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<h3 class="font-title-sm text-title-sm text-on-surface font-bold truncate">Saúde &amp; Bem-estar</h3>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-md bg-surface-container-high text-on-surface-variant font-mono">exp-004</span>
+</div>
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-outline mt-0.5">
+<span>1 regra associada</span>
+<span>•</span>
+<span class="text-on-surface-variant">Recorrente</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-title-sm text-title-sm text-on-surface font-bold">- R$ 1.830,00</span>
+<span class="font-label-xs text-label-xs text-tertiary font-semibold">11.0% do total</span>
+</div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-red-500 h-1.5 rounded-full" style="width: 11.0%"></div>
+</div>
+<div class="flex items-center justify-between pt-1 font-label-xs text-label-xs text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Plano de Saúde</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Farmácia</span>
+</div>
+<div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Adicionar subcategoria" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Editar categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-error" title="Excluir categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Expense Item 5 -->
+<div class="category-card bg-surface-container-lowest p-4 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col gap-3 group" data-search="lazer streaming viagens entretenimento exp-005" data-type="expenses">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3.5 min-w-0">
+<div class="w-11 h-11 rounded-xl bg-pink-100 text-pink-700 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">sports_esports</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<h3 class="font-title-sm text-title-sm text-on-surface font-bold truncate">Lazer &amp; Streaming</h3>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-md bg-surface-container-high text-on-surface-variant font-mono">exp-005</span>
+</div>
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-outline mt-0.5">
+<span>6 assinaturas sincronizadas</span>
+<span>•</span>
+<span class="text-on-surface-variant">Variável</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-title-sm text-title-sm text-on-surface font-bold">- R$ 1.479,50</span>
+<span class="font-label-xs text-label-xs text-tertiary font-semibold">8.9% do total</span>
+</div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-pink-500 h-1.5 rounded-full" style="width: 8.9%"></div>
+</div>
+<div class="flex items-center justify-between pt-1 font-label-xs text-label-xs text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Netflix / HBO</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Cinema</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Jogos</span>
+</div>
+<div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Adicionar subcategoria" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Editar categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-error" title="Excluir categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Expense Item 6 -->
+<div class="category-card bg-surface-container-lowest p-4 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col gap-3 group" data-search="educação cursos faculdade livros exp-006" data-type="expenses">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3.5 min-w-0">
+<div class="w-11 h-11 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">school</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<h3 class="font-title-sm text-title-sm text-on-surface font-bold truncate">Educação &amp; Aperfeiçoamento</h3>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-md bg-surface-container-high text-on-surface-variant font-mono">exp-006</span>
+</div>
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-outline mt-0.5">
+<span>1 cobrança semestral</span>
+<span>•</span>
+<span class="text-on-surface-variant">Investimento pessoal</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-title-sm text-title-sm text-on-surface font-bold">- R$ 2.000,00</span>
+<span class="font-label-xs text-label-xs text-tertiary font-semibold">12.1% do total</span>
+</div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-blue-500 h-1.5 rounded-full" style="width: 12.1%"></div>
+</div>
+<div class="flex items-center justify-between pt-1 font-label-xs text-label-xs text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">MBA Executivo</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Livros Técnicos</span>
+</div>
+<div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Adicionar subcategoria" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Editar categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-error" title="Excluir categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- COLUNA 2: RECEITAS (INCOMINGS) -->
+<div class="flex flex-col gap-4" id="col-incomings">
+<!-- Section Header with totalizer -->
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-2.5">
+<div class="w-3.5 h-3.5 rounded-md bg-secondary"></div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">Receitas (Incomings)</h2>
+<span class="px-2 py-0.5 rounded-full font-label-xs text-label-xs bg-secondary-fixed text-secondary font-bold">8 ativas</span>
+</div>
+<div class="text-right">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline block">Volume Previsto/Real</span>
+<span class="font-title-sm text-title-sm text-secondary font-bold">+ R$ 38.250,00</span>
+</div>
+</div>
+<!-- Categories Container (Incomings) -->
+<div class="flex flex-col gap-3">
+<!-- Income Item 1 -->
+<div class="category-card bg-surface-container-lowest p-4 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col gap-3 group" data-search="salário clt líquido pró-labore remuneração inc-001" data-type="incomings">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3.5 min-w-0">
+<div class="w-11 h-11 rounded-xl bg-secondary-fixed text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">payments</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<h3 class="font-title-sm text-title-sm text-on-surface font-bold truncate">Salário CLT Líquido</h3>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-md bg-surface-container-high text-on-surface-variant font-mono">inc-001</span>
+</div>
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-outline mt-0.5">
+<span>Regra: Transferência dia 05</span>
+<span>•</span>
+<span class="text-on-surface-variant">Ativa Recorrente</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-title-sm text-title-sm text-secondary font-bold">+ R$ 22.400,00</span>
+<span class="font-label-xs text-label-xs text-secondary font-semibold">58.5% da receita</span>
+</div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 58.5%"></div>
+</div>
+<div class="flex items-center justify-between pt-1 font-label-xs text-label-xs text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Folha de Pagamento</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Bônus &amp; PLR</span>
+</div>
+<div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Adicionar subcategoria" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Editar categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-error" title="Excluir categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Income Item 2 -->
+<div class="category-card bg-surface-container-lowest p-4 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col gap-3 group" data-search="rendimentos fiis ações dividendos proventos jcp inc-002" data-type="incomings">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3.5 min-w-0">
+<div class="w-11 h-11 rounded-xl bg-teal-100 text-teal-800 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">trending_up</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<h3 class="font-title-sm text-title-sm text-on-surface font-bold truncate">Rendimentos de FIIs &amp; Ações</h3>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-md bg-surface-container-high text-on-surface-variant font-mono">inc-002</span>
+</div>
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-outline mt-0.5">
+<span>Open Finance Sync B3</span>
+<span>•</span>
+<span class="text-on-surface-variant">Isento IRPF</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-title-sm text-title-sm text-secondary font-bold">+ R$ 6.350,00</span>
+<span class="font-label-xs text-label-xs text-secondary font-semibold">16.6% da receita</span>
+</div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-teal-600 h-1.5 rounded-full" style="width: 16.6%"></div>
+</div>
+<div class="flex items-center justify-between pt-1 font-label-xs text-label-xs text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Dividendos Ações</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Rendimentos FIIs</span>
+</div>
+<div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Adicionar subcategoria" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Editar categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-error" title="Excluir categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Income Item 3 -->
+<div class="category-card bg-surface-container-lowest p-4 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col gap-3 group" data-search="freelance consultorias projetos software inc-003" data-type="incomings">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3.5 min-w-0">
+<div class="w-11 h-11 rounded-xl bg-cyan-100 text-cyan-800 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">laptop_mac</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<h3 class="font-title-sm text-title-sm text-on-surface font-bold truncate">Projetos Freelance &amp; Consultoria</h3>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-md bg-surface-container-high text-on-surface-variant font-mono">inc-003</span>
+</div>
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-outline mt-0.5">
+<span>PJ Emitido com NF-e</span>
+<span>•</span>
+<span class="text-on-surface-variant">Variável</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-title-sm text-title-sm text-secondary font-bold">+ R$ 7.500,00</span>
+<span class="font-label-xs text-label-xs text-secondary font-semibold">19.6% da receita</span>
+</div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-cyan-600 h-1.5 rounded-full" style="width: 19.6%"></div>
+</div>
+<div class="flex items-center justify-between pt-1 font-label-xs text-label-xs text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Assessoria Tech</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Honorários Design</span>
+</div>
+<div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Adicionar subcategoria" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Editar categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-error" title="Excluir categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Income Item 4 -->
+<div class="category-card bg-surface-container-lowest p-4 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col gap-3 group" data-search="reembolsos corporativos despesas viagens inc-004" data-type="incomings">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3.5 min-w-0">
+<div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">receipt</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<h3 class="font-title-sm text-title-sm text-on-surface font-bold truncate">Reembolsos Corporativos</h3>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded-md bg-surface-container-high text-on-surface-variant font-mono">inc-004</span>
+</div>
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-outline mt-0.5">
+<span>Compensação de despesa</span>
+<span>•</span>
+<span class="text-on-surface-variant">Esporádica</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-title-sm text-title-sm text-secondary font-bold">+ R$ 2.000,00</span>
+<span class="font-label-xs text-label-xs text-secondary font-semibold">5.3% da receita</span>
+</div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-emerald-600 h-1.5 rounded-full" style="width: 5.3%"></div>
+</div>
+<div class="flex items-center justify-between pt-1 font-label-xs text-label-xs text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Viagens de Negócios</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-outline">Refeições Equipe</span>
+</div>
+<div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Adicionar subcategoria" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" title="Editar categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-error" title="Excluir categoria" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal / Lateral Slideover for Category Creation (POST /api/categorie/register) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-inverse-surface/40 backdrop-blur-sm hidden transition-opacity" id="category-modal">
+<div class="bg-surface-container-lowest rounded-2xl max-w-lg w-full p-6 shadow-2xl flex flex-col gap-5 transform transition-all scale-95 opacity-0 duration-200" id="modal-content">
+<!-- Modal Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">category</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">Cadastrar Categoria</h2>
+<p class="font-body-sm text-body-sm text-outline">Configuração contábil e motor de regras</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container transition-colors" id="btn-close-modal" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Form Body -->
+<form class="flex flex-col gap-4" id="form-category-register">
+<!-- Field: Type Selector (strict incomings or expenses) -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold">Tipo Contábil <span class="text-tertiary">*</span></label>
+<div class="grid grid-cols-2 gap-3">
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="type" type="radio" value="expenses"/>
+<div class="flex items-center justify-center gap-2 p-3 rounded-lg bg-surface-container-low peer-checked:bg-tertiary-fixed peer-checked:text-tertiary peer-checked:font-bold text-on-surface-variant transition-all">
+<span class="material-symbols-outlined text-[18px]">trending_down</span>
+<span class="font-label-md text-label-md">Despesa (expenses)</span>
+</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="type" type="radio" value="incomings"/>
+<div class="flex items-center justify-center gap-2 p-3 rounded-lg bg-surface-container-low peer-checked:bg-secondary-fixed peer-checked:text-secondary peer-checked:font-bold text-on-surface-variant transition-all">
+<span class="material-symbols-outlined text-[18px]">trending_up</span>
+<span class="font-label-md text-label-md">Receita (incomings)</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Field: Category Name -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="cat-name">Nome da Categoria <span class="text-tertiary">*</span></label>
+<input class="h-12 px-4 rounded-lg bg-surface-container-low text-on-surface placeholder:text-outline font-body-md text-body-md border-none focus:outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="cat-name" minlength="2" placeholder="Ex: Assinaturas Digitais, Consultorias..." required="" type="text"/>
+<span class="font-label-xs text-label-xs text-outline">Mínimo de 2 caracteres conforme documentação API.</span>
+</div>
+<!-- Field: Display ID -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="cat-display-id">Display ID (Código DRE)</label>
+<input class="h-12 px-4 rounded-lg bg-surface-container-low text-on-surface placeholder:text-outline font-body-md text-body-md font-mono border-none focus:outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="cat-display-id" placeholder="Ex: exp-007 ou inc-005" type="text"/>
+</div>
+<!-- Field: Icon Selection -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold">Ícone Sugerido</label>
+<div class="flex items-center gap-2 flex-wrap" id="icon-picker">
+<button class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors ring-2 ring-primary" data-icon="payments" type="button">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors" data-icon="restaurant" type="button">
+<span class="material-symbols-outlined text-[20px]">restaurant</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors" data-icon="apartment" type="button">
+<span class="material-symbols-outlined text-[20px]">apartment</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors" data-icon="shopping_cart" type="button">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors" data-icon="medical_services" type="button">
+<span class="material-symbols-outlined text-[20px]">medical_services</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors" data-icon="directions_car" type="button">
+<span class="material-symbols-outlined text-[20px]">directions_car</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors" data-icon="school" type="button">
+<span class="material-symbols-outlined text-[20px]">school</span>
+</button>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center justify-end gap-3 pt-4">
+<button class="h-11 px-5 rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-dim font-label-md text-label-md transition-colors" id="btn-cancel-modal" type="button">
+            Cancelar
+          </button>
+<button class="h-11 px-6 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md flex items-center gap-2 shadow-md hover:shadow-lg transition-all" type="submit">
+<span class="material-symbols-outlined text-[18px]">check</span>
+<span>Salvar Categoria</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<script>
+  // Filter buttons logic
+  const filterBtns = document.querySelectorAll('.category-filter-btn');
+  const cards = document.querySelectorAll('.category-card');
+  const colExpenses = document.getElementById('col-expenses');
+  const colIncomings = document.getElementById('col-incomings');
+  const searchInput = document.getElementById('search-input');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => {
+        b.classList.remove('bg-primary', 'text-on-primary');
+        b.classList.add('bg-surface-container', 'text-on-surface-variant');
+      });
+      btn.classList.add('bg-primary', 'text-on-primary');
+      btn.classList.remove('bg-surface-container', 'text-on-surface-variant');
+
+      const filter = btn.dataset.filter;
+      if (filter === 'all') {
+        colExpenses.style.display = 'flex';
+        colIncomings.style.display = 'flex';
+      } else if (filter === 'expenses') {
+        colExpenses.style.display = 'flex';
+        colIncomings.style.display = 'none';
+      } else if (filter === 'incomings') {
+        colExpenses.style.display = 'none';
+        colIncomings.style.display = 'flex';
+      }
+    });
+  });
+
+  // Search input live filtering
+  searchInput.addEventListener('input', (e) => {
+    const term = e.target.value.toLowerCase().trim();
+    cards.forEach(card => {
+      const searchContent = card.dataset.search.toLowerCase();
+      if (!term || searchContent.includes(term)) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+
+  // Modal interaction logic
+  const modal = document.getElementById('category-modal');
+  const modalContent = document.getElementById('modal-content');
+  const btnOpenModal = document.getElementById('btn-open-modal');
+  const btnCloseModal = document.getElementById('btn-close-modal');
+  const btnCancelModal = document.getElementById('btn-cancel-modal');
+  const form = document.getElementById('form-category-register');
+
+  function openModal() {
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+      modalContent.classList.remove('scale-95', 'opacity-0');
+      modalContent.classList.add('scale-100', 'opacity-100');
+    }, 10);
+  }
+
+  function closeModal() {
+    modalContent.classList.remove('scale-100', 'opacity-100');
+    modalContent.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      form.reset();
+    }, 150);
+  }
+
+  btnOpenModal.addEventListener('click', openModal);
+  btnCloseModal.addEventListener('click', closeModal);
+  btnCancelModal.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  // Icon picker selection highlight
+  const iconPickerBtns = document.querySelectorAll('#icon-picker button');
+  iconPickerBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      iconPickerBtns.forEach(b => b.classList.remove('ring-2', 'ring-primary'));
+      btn.classList.add('ring-2', 'ring-primary');
+    });
+  });
+
+  // Mock Form Submit to /api/categorie/register
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('cat-name').value;
+    const type = form.querySelector('input[name="type"]:checked').value;
+    
+    // Feedback visual
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalContent = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[18px]">progress_activity</span><span>Gravando...</span>';
+    submitBtn.disabled = true;
+
+    setTimeout(() => {
+      submitBtn.innerHTML = originalContent;
+      submitBtn.disabled = false;
+      closeModal();
+      alert(`Categoria "${name}" (${type}) registrada com sucesso na base contábil!`);
+    }, 600);
+  });
+</script></main></div></body></html>

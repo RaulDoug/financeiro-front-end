@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><title>FinFlow</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-surface": "#283044", "on-primary-fixed-variant": "#003ea8", "error-container": "#ffdad6", "on-error-container": "#93000a", "inverse-on-surface": "#eef0ff", "primary-container": "#2563eb", "surface-variant": "#dae2fd", "on-secondary": "#ffffff", "surface-container-lowest": "#ffffff", "tertiary-fixed": "#ffdad7", "inverse-primary": "#b4c5ff", "on-secondary-fixed-variant": "#005236", "tertiary-container": "#cf2c30", "error": "#ba1a1a", "on-secondary-fixed": "#002113", "surface-container": "#eaedff", "outline-variant": "#c3c6d7", "on-tertiary-fixed": "#410004", "on-primary-container": "#eeefff", "outline": "#737686", "on-primary": "#ffffff", "surface": "#faf8ff", "on-error": "#ffffff", "secondary": "#006c49", "primary-fixed": "#dbe1ff", "on-secondary-container": "#00714d", "surface-bright": "#faf8ff", "on-surface": "#131b2e", "secondary-fixed": "#6ffbbe", "surface-container-high": "#e2e7ff", "background": "#faf8ff", "on-primary-fixed": "#00174b", "tertiary": "#ab0b1c", "surface-container-highest": "#dae2fd", "secondary-fixed-dim": "#4edea3", "tertiary-fixed-dim": "#ffb3ad", "on-tertiary-container": "#ffecea", "surface-dim": "#d2d9f4", "surface-tint": "#0053db", "on-tertiary-fixed-variant": "#930013", "primary": "#004ac6", "primary-fixed-dim": "#b4c5ff", "secondary-container": "#6cf8bb", "on-tertiary": "#ffffff", "on-surface-variant": "#434655", "surface-container-low": "#f2f3ff", "on-background": "#131b2e" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xs": "0.25rem", "gutter": "1rem", "space-lg": "1rem", "margin-desktop": "2rem", "space-xl": "1.5rem", "space-sm": "0.5rem", "space-md": "0.75rem", "margin": "1rem", "space-2xl": "2rem" }, "fontFamily": { "display-currency-mobile": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "title-sm": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "label-xs": ["Plus Jakarta Sans"], "display-currency": ["Plus Jakarta Sans"] }, "fontSize": { "display-currency-mobile": ["1.875rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.025em", "fontWeight": "700" }], "body-sm": ["0.8125rem", { "lineHeight": "1.125rem", "fontWeight": "400" }], "headline-lg": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["0.8125rem", { "lineHeight": "1rem", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-md": ["0.9375rem", { "lineHeight": "1.375rem", "fontWeight": "400" }], "title-sm": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-md": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.015em", "fontWeight": "600" }], "label-xs": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.04em", "fontWeight": "600" }], "display-currency": ["2.25rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.03em", "fontWeight": "700" }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#faf8ff;}body{overscroll-behavior-y:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col selection:bg-primary/20"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-space-lg flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="FinFlow App Logo" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1Ww3BbCik93FlHWW0mtBa2GXkGlHOHvMvZ5a5Ug6h2TyzFx1drBi4fRdasCchKHF0h5I9YW5DPExekxJUKQhqCqSqY4H1q3i-4KsC8Fu9ndhHZYl7fkDkKmv_PDL6sGtQ30F4-4YOyK5yeFKKQTRMojbV4Z8tnXMKnNSWouSgHg-ZP8teHU3P3_E2tgR-A9tzDnxjGqagxiCu7hrPWOz2R9gDKHrn4Kb2wvBWW6bqtUD-KUqsdAiLVQR8Y"/><span class="font-headline-md text-headline-md text-primary tracking-tight truncate hidden xs:inline">FinFlow</span></div><button class="flex items-center gap-space-xs px-space-md py-1.5 bg-surface-container-lowest rounded-full shadow-[0_1px_4px_rgba(0,0,0,0.04)] active:scale-95 transition-transform shrink-0"><span class="material-symbols-outlined text-primary text-[18px]">work</span><span class="font-label-md text-label-md text-on-surface truncate max-w-[110px]">Minha Carteira</span><span class="material-symbols-outlined text-outline text-[16px]">arrow_drop_down</span></button><div class="flex items-center gap-space-xs shrink-0"><button aria-label="Notificações" class="w-11 h-11 relative flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container active:scale-95 transition-all"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 flex items-center justify-center min-w-[16px] h-4 px-1 rounded-full bg-error text-on-error font-label-xs text-label-xs font-bold ring-2 ring-surface">2</span></button><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_1px_3px_rgba(0,0,0,0.08)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAzNdWMya8vtHRk4QcxfngDDib9fix6I5snCYb9ce6xOzUL6HWXb41WN9KdltaeKJO_0fPDTCRBcB_Kt0xuLe0eBn5stE7cfwccxtwZpHRiogPi4Mt6H_kZuM9sUZ67RPTcU8TNYx6WIul3mX-TH3WLo4CRv6vD71cxVxNlLC0X-zJEkQhh-AZPr2J2Sg8sXJGZg17FzCd585LmNPT1xy7wFYi6ijCm1W5J31xkQbYfjk9w2OUTmvu"/></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface px-space-lg"><div class="flex flex-col w-full pb-6 space-y-space-xl">
+<!-- 1. Top Action Navigation & Header -->
+<header class="flex flex-col space-y-space-sm pt-2">
+<div class="flex items-center justify-between">
+<a class="inline-flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors py-1 -ml-1" href="#">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+<span class="font-label-md text-label-md">Configurações</span>
+</a>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary text-on-primary rounded-full shadow-sm active:scale-95 transition-transform" id="quick-invite-btn">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span class="font-label-md text-label-md">Convidar</span>
+</button>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Membros &amp; Acesso</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+        Controle quem pode visualizar ou lançar despesas compartilhadas nesta carteira.
+      </p>
+</div>
+</header>
+<!-- 2. Wallet Context & Stat Highlights -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<div class="flex items-start justify-between gap-2">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-11 h-11 rounded-xl bg-primary-fixed flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">account_balance_wallet</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<h2 class="font-title-sm text-title-sm text-on-surface truncate">Minha Carteira Pessoal</h2>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-xs text-label-xs">
+              Co-gestão
+            </span>
+</div>
+<p class="font-label-xs text-label-xs text-outline font-mono mt-0.5">ID: wlt_8923a41f90</p>
+</div>
+</div>
+</div>
+<!-- Active Counters Grid -->
+<div class="grid grid-cols-2 gap-space-sm mt-4 pt-3 border-t border-surface-container">
+<div class="bg-surface-container-low rounded-lg p-space-sm">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-primary">groups</span>
+<span class="font-label-xs text-label-xs">Membros Ativos</span>
+</div>
+<p class="font-headline-md text-headline-md text-on-surface mt-1 font-bold">3 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">pessoas</span></p>
+</div>
+<div class="bg-surface-container-low rounded-lg p-space-sm">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary">mail</span>
+<span class="font-label-xs text-label-xs">Convites Pendentes</span>
+</div>
+<p class="font-headline-md text-headline-md text-on-surface mt-1 font-bold">1 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">aguardando</span></p>
+</div>
+</div>
+</section>
+<!-- 3. Active Members List -->
+<section class="space-y-space-md">
+<div class="flex items-center justify-between px-0.5">
+<h3 class="font-title-sm text-title-sm text-on-surface flex items-center gap-2">
+<span>Membros da Carteira</span>
+<span class="px-2 py-0.5 bg-surface-container-highest text-primary font-label-xs text-label-xs rounded-full">3</span>
+</h3>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Funções ativas</span>
+</div>
+<div class="space-y-space-sm">
+<!-- Member 1: Owner (Self) -->
+<article class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-3">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="relative">
+<img class="w-11 h-11 rounded-full object-cover" data-alt="Close-up professional portrait of a Brazilian young man named Joao Silva with friendly smile, modern tech studio lighting, clean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdvgZX7YJHXcDEtP-0mQ5iEowa-DRfRiEXdnD_UboQRL-dBlBmUzXaVMJcYYWkRHpHxm4OrR23QW-Trg7n07odhZeTMM3Lko-sbOiniEFivXkMgImz4De6lhri3--JOE6XOjxb2nBK9TgARf8Yz_p4MG87x2-1ea7MeO-UDFO6JrMqGOTqTWdxlYA-su6DzXBehg96RBp0mCPqlccVQmcx1hLLLb1gsrlzLx7H_DtEztWWoszJDDfB"/>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 bg-primary rounded-full flex items-center justify-center text-on-primary ring-2 ring-surface-container-lowest">
+<span class="material-symbols-outlined text-[11px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<p class="font-title-sm text-title-sm text-on-surface truncate">João Silva</p>
+<span class="px-1.5 py-0.2 bg-surface-container-high text-on-surface-variant rounded font-label-xs text-label-xs">Você</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">joao.silva@email.com</p>
+</div>
+</div>
+<span class="px-2.5 py-1 bg-primary-fixed text-on-primary-fixed font-label-xs text-label-xs rounded-full font-semibold shrink-0">
+            Proprietário
+          </span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant bg-surface-container-low rounded-lg px-2.5 py-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">verified_user</span>
+<p class="font-body-sm text-body-sm">Criador da carteira • Acesso total e governança</p>
+</div>
+</article>
+<!-- Member 2: Editor -->
+<article class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-3">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<img class="w-11 h-11 rounded-full object-cover" data-alt="Warm portrait of a smiling Brazilian professional woman named Mariana Souza wearing casual business clothing in contemporary bright office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDm_22BEtjjftWeoF5dJh2getm_5sGHWIWdLaoOvVPopq2Zed_6U1NrK3kgU8oJFs-D1iHLql1U9vB6JGGdM14JhLNkTeWyhDsIlSE4PJmKZkrV-I-Mkl4bw-6V-Z78dhT3JiEYMLnDYeSUScM_f0ebuP5HBahAtSLjTQA5XGgeVB79zeiZ6M8m73B74ov6GUhPIV7IprDklAEmwZo6dUUvco4M3zGm7pHygISznmf_JZGOtljSV5rW"/>
+<div class="min-w-0">
+<p class="font-title-sm text-title-sm text-on-surface truncate">Mariana Souza</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">mariana.souza@email.com</p>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<span class="px-2.5 py-1 bg-secondary-container text-on-secondary-container font-label-xs text-label-xs rounded-full font-semibold">
+              Editor
+            </span>
+<button aria-label="Mais opções para Mariana" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant bg-surface-container-low rounded-lg px-2.5 py-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">edit_note</span>
+<p class="font-body-sm text-body-sm">Pode criar, editar e conciliar transações</p>
+</div>
+</article>
+<!-- Member 3: Viewer -->
+<article class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-3">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<img class="w-11 h-11 rounded-full object-cover" data-alt="Headshot of a middle-aged Brazilian accountant with glasses and navy blazer, corporate executive backdrop with neutral aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZtjel4ObQIc_RtWPTn3sakJyeJ2g6opsMMx4TAlR1WGdDMJBJ9dMyPv4QghjjlusPZKwrW4mU9uQiUevjt8THaJ3BjAOs8Y4gu8p4FrzuwykqADphPfl09JfMWcx7U6VtnwsprmxxSkHy0LsrnwG5cNbwIbcElZd67ZsDHcCa5XO2WnY4pfHO3WbgFyrD9zsR6nv3CNtenuipZKmzlfXbtPfKBFKZLjRDWi-lSX-pUU4JVfKZeqtK"/>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<p class="font-title-sm text-title-sm text-on-surface truncate">Carlos Mendes</p>
+<span class="text-on-surface-variant font-label-xs text-label-xs truncate">(Contador)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">carlos.contabil@gestao.com</p>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<span class="px-2.5 py-1 bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs rounded-full font-semibold">
+              Visualizador
+            </span>
+<button aria-label="Mais opções para Carlos" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant bg-surface-container-low rounded-lg px-2.5 py-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">visibility</span>
+<p class="font-body-sm text-body-sm">Apenas leitura de relatórios, gráficos e extratos</p>
+</div>
+</article>
+</div>
+</section>
+<!-- 4. Pending Invitations Section -->
+<section class="space-y-space-md">
+<div class="flex items-center justify-between px-0.5">
+<h3 class="font-title-sm text-title-sm text-on-surface flex items-center gap-2">
+<span>Convites Pendentes</span>
+<span class="px-2 py-0.5 bg-error-container text-on-error-container font-label-xs text-label-xs rounded-full">1</span>
+</h3>
+<span class="font-label-xs text-label-xs text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Aguardando
+      </span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-3">
+<div class="flex items-start justify-between gap-2">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-11 h-11 rounded-full bg-surface-container flex items-center justify-center text-outline shrink-0">
+<span class="material-symbols-outlined text-[22px]">mark_email_unread</span>
+</div>
+<div class="min-w-0">
+<p class="font-title-sm text-title-sm text-on-surface truncate">Beatriz Lima</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">beatriz.l@email.com</p>
+</div>
+</div>
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container font-label-xs text-label-xs rounded-full shrink-0">
+          Editor Convidado
+        </span>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-surface-container">
+<button class="text-tertiary hover:opacity-80 font-label-md text-label-md py-1 px-2 rounded active:scale-95 transition-all">
+          Cancelar
+        </button>
+<button class="inline-flex items-center gap-1 text-primary bg-primary-fixed/40 hover:bg-primary-fixed px-3 py-1.5 rounded-lg font-label-md text-label-md active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[16px]">send</span>
+          Reenviar Convite
+        </button>
+</div>
+</div>
+</section>
+<!-- 5. Invite Form Section -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-space-md" id="invite-section">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">person_add_alt</span>
+</div>
+<div>
+<h3 class="font-title-sm text-title-sm text-on-surface">Convidar Novo Membro</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Adicione parceiros, cônjuges ou contabilidade</p>
+</div>
+</div>
+<form class="space-y-4" id="invite-form" onsubmit="event.preventDefault();">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5" for="invite-email">
+          E-mail do Convidado
+        </label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-outline text-[20px]">alternate_email</span>
+<input class="w-full h-12 pl-10 pr-3 rounded-lg bg-surface-container-low text-on-surface placeholder:text-outline text-body-md focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary" id="invite-email" placeholder="socio@empresa.com ou parceiro@email.com" required="" type="email"/>
+</div>
+</div>
+<div>
+<span class="block font-label-md text-label-md text-on-surface mb-2">
+          Nível de Permissão
+        </span>
+<div class="grid grid-cols-2 gap-space-sm" id="role-selector">
+<!-- Option Editor -->
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="member_role" type="radio" value="editor"/>
+<div class="h-full p-3 rounded-xl bg-surface-container-low peer-checked:bg-primary-fixed/40 peer-checked:text-primary transition-all flex flex-col justify-between">
+<div class="flex items-center justify-between mb-1.5">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+<span class="material-symbols-outlined text-[18px] opacity-0 peer-checked:opacity-100 text-primary">check_circle</span>
+</div>
+<div>
+<p class="font-title-sm text-title-sm text-on-surface font-semibold">Editor</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-tight mt-0.5">Cria, edita e categoriza</p>
+</div>
+</div>
+</label>
+<!-- Option Viewer -->
+<label class="cursor-pointer">
+<input class="peer sr-only" name="member_role" type="radio" value="viewer"/>
+<div class="h-full p-3 rounded-xl bg-surface-container-low peer-checked:bg-primary-fixed/40 peer-checked:text-primary transition-all flex flex-col justify-between">
+<div class="flex items-center justify-between mb-1.5">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+<span class="material-symbols-outlined text-[18px] opacity-0 peer-checked:opacity-100 text-primary">check_circle</span>
+</div>
+<div>
+<p class="font-title-sm text-title-sm text-on-surface font-semibold">Visualizador</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-tight mt-0.5">Apenas leitura de saldos</p>
+</div>
+</div>
+</label>
+</div>
+</div>
+<button class="w-full h-12 bg-primary text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 shadow-sm hover:bg-primary/90 active:scale-[0.98] transition-all" id="submit-invite" type="button">
+<span class="material-symbols-outlined text-[20px]">forward_to_inbox</span>
+<span>Enviar Convite de Acesso</span>
+</button>
+<div class="flex items-start gap-2 pt-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-outline shrink-0 mt-0.5">lock</span>
+<p class="font-body-sm text-body-sm">
+          O convidado receberá um link protegido por token para se autenticar com segurança na carteira.
+        </p>
+</div>
+</form>
+</section>
+<!-- 6. Governance & Role Matrix -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">policy</span>
+<h3 class="font-title-sm text-title-sm text-on-surface">Diretrizes de Governança FinFlow</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+      Visão geral de privilégios de acordo com o esquema de segurança <code class="font-mono text-outline text-label-xs">users_wallets</code>:
+    </p>
+<div class="space-y-2.5 pt-1">
+<div class="p-2.5 rounded-lg bg-surface-container-low flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">admin_panel_settings</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Proprietário (Owner):</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Controle pleno da carteira. Pode renomear, transferir posse, excluir dados e gerenciar permissões de todos os participantes.</p>
+</div>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low flex items-start gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[18px] mt-0.5">edit_document</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Editor:</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Registra receitas, despesas, faturas de cartão e categorias. Não possui permissão para excluir a carteira ou revogar o proprietário.</p>
+</div>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low flex items-start gap-2.5">
+<span class="material-symbols-outlined text-outline text-[18px] mt-0.5">visibility</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Visualizador (Viewer):</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Acesso de auditoria e prestação de contas. Permite exportar extratos, verificar fluxo de caixa e relatórios sem alterar registros.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Script for Smooth UX -->
+<script>
+    (function() {
+      const inviteBtn = document.getElementById('quick-invite-btn');
+      const inviteSection = document.getElementById('invite-section');
+      const emailInput = document.getElementById('invite-email');
+      const submitInvite = document.getElementById('submit-invite');
+
+      if (inviteBtn && inviteSection) {
+        inviteBtn.addEventListener('click', () => {
+          inviteSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          if (emailInput) {
+            setTimeout(() => emailInput.focus(), 350);
+          }
+        });
+      }
+
+      if (submitInvite && emailInput) {
+        submitInvite.addEventListener('click', () => {
+          if (!emailInput.value || !emailInput.value.includes('@')) {
+            emailInput.focus();
+            return;
+          }
+          const originalText = submitInvite.innerHTML;
+          submitInvite.innerHTML = '<span class="material-symbols-outlined text-[20px] animate-spin">progress_activity</span><span>Enviando convite...</span>';
+          submitInvite.disabled = true;
+
+          setTimeout(() => {
+            submitInvite.innerHTML = '<span class="material-symbols-outlined text-[20px]">check</span><span>Convite Enviado!</span>';
+            submitInvite.classList.remove('bg-primary');
+            submitInvite.classList.add('bg-secondary');
+            emailInput.value = '';
+
+            setTimeout(() => {
+              submitInvite.innerHTML = originalText;
+              submitInvite.classList.remove('bg-secondary');
+              submitInvite.classList.add('bg-primary');
+              submitInvite.disabled = false;
+            }, 2500);
+          }, 800);
+        });
+      }
+    })();
+  </script>
+</div></main><nav class="fixed bottom-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_-4px_16px_rgba(0,0,0,0.03)] pb-safe" data-active-classes="text-primary bg-primary-fixed/40"><div class="relative flex items-center justify-around h-16 px-space-xs"><a class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 rounded-xl text-on-surface-variant hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[22px]">bar_chart</span><span class="font-label-xs text-label-xs">Início</span></a><a class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 rounded-xl text-on-surface-variant hover:text-on-surface transition-colors" data-path="transactions" href="#"><span class="material-symbols-outlined text-[22px]">receipt_long</span><span class="font-label-xs text-label-xs">Transações</span></a><div class="relative -top-5 flex justify-center items-center w-14 shrink-0"><a aria-label="Nova Transação" class="w-14 h-14 rounded-full bg-primary-container text-on-primary shadow-[0_8px_16px_rgba(37,99,235,0.35)] flex items-center justify-center active:scale-95 transition-transform" data-path="quick-entry" href="#"><span class="material-symbols-outlined text-[28px]">add</span></a></div><a class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 rounded-xl text-on-surface-variant hover:text-on-surface transition-colors" data-path="credit-cards" href="#"><span class="material-symbols-outlined text-[22px]">credit_card</span><span class="font-label-xs text-label-xs">Cartões</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 rounded-xl transition-colors text-primary bg-primary-fixed/40" data-path="more" href="#"><span class="material-symbols-outlined text-[22px]">grid_view</span><span class="font-label-xs text-label-xs">Mais</span></a></div></nav></body></html>

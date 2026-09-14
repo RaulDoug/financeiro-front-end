@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><title>FinFlow</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-surface": "#283044", "on-primary-fixed-variant": "#003ea8", "error-container": "#ffdad6", "on-error-container": "#93000a", "inverse-on-surface": "#eef0ff", "primary-container": "#2563eb", "surface-variant": "#dae2fd", "on-secondary": "#ffffff", "surface-container-lowest": "#ffffff", "tertiary-fixed": "#ffdad7", "inverse-primary": "#b4c5ff", "on-secondary-fixed-variant": "#005236", "tertiary-container": "#cf2c30", "error": "#ba1a1a", "on-secondary-fixed": "#002113", "surface-container": "#eaedff", "outline-variant": "#c3c6d7", "on-tertiary-fixed": "#410004", "on-primary-container": "#eeefff", "outline": "#737686", "on-primary": "#ffffff", "surface": "#faf8ff", "on-error": "#ffffff", "secondary": "#006c49", "primary-fixed": "#dbe1ff", "on-secondary-container": "#00714d", "surface-bright": "#faf8ff", "on-surface": "#131b2e", "secondary-fixed": "#6ffbbe", "surface-container-high": "#e2e7ff", "background": "#faf8ff", "on-primary-fixed": "#00174b", "tertiary": "#ab0b1c", "surface-container-highest": "#dae2fd", "secondary-fixed-dim": "#4edea3", "tertiary-fixed-dim": "#ffb3ad", "on-tertiary-container": "#ffecea", "surface-dim": "#d2d9f4", "surface-tint": "#0053db", "on-tertiary-fixed-variant": "#930013", "primary": "#004ac6", "primary-fixed-dim": "#b4c5ff", "secondary-container": "#6cf8bb", "on-tertiary": "#ffffff", "on-surface-variant": "#434655", "surface-container-low": "#f2f3ff", "on-background": "#131b2e" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xs": "0.25rem", "gutter": "1rem", "space-lg": "1rem", "margin-desktop": "2rem", "space-xl": "1.5rem", "space-sm": "0.5rem", "space-md": "0.75rem", "margin": "1rem", "space-2xl": "2rem" }, "fontFamily": { "display-currency-mobile": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "title-sm": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "label-xs": ["Plus Jakarta Sans"], "display-currency": ["Plus Jakarta Sans"] }, "fontSize": { "display-currency-mobile": ["1.875rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.025em", "fontWeight": "700" }], "body-sm": ["0.8125rem", { "lineHeight": "1.125rem", "fontWeight": "400" }], "headline-lg": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["0.8125rem", { "lineHeight": "1rem", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-md": ["0.9375rem", { "lineHeight": "1.375rem", "fontWeight": "400" }], "title-sm": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-md": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.015em", "fontWeight": "600" }], "label-xs": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.04em", "fontWeight": "600" }], "display-currency": ["2.25rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.03em", "fontWeight": "700" }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#faf8ff;}body{overscroll-behavior-y:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col selection:bg-primary/20"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-space-lg flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="FinFlow App Logo" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1Ww3BbCik93FlHWW0mtBa2GXkGlHOHvMvZ5a5Ug6h2TyzFx1drBi4fRdasCchKHF0h5I9YW5DPExekxJUKQhqCqSqY4H1q3i-4KsC8Fu9ndhHZYl7fkDkKmv_PDL6sGtQ30F4-4YOyK5yeFKKQTRMojbV4Z8tnXMKnNSWouSgHg-ZP8teHU3P3_E2tgR-A9tzDnxjGqagxiCu7hrPWOz2R9gDKHrn4Kb2wvBWW6bqtUD-KUqsdAiLVQR8Y"/><span class="font-headline-md text-headline-md text-primary tracking-tight truncate hidden xs:inline">FinFlow</span></div><button class="flex items-center gap-space-xs px-space-md py-1.5 bg-surface-container-lowest rounded-full shadow-[0_1px_4px_rgba(0,0,0,0.04)] active:scale-95 transition-transform shrink-0"><span class="material-symbols-outlined text-primary text-[18px]">work</span><span class="font-label-md text-label-md text-on-surface truncate max-w-[110px]">Minha Carteira</span><span class="material-symbols-outlined text-outline text-[16px]">arrow_drop_down</span></button><div class="flex items-center gap-space-xs shrink-0"><button aria-label="Notificações" class="w-11 h-11 relative flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container active:scale-95 transition-all"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 flex items-center justify-center min-w-[16px] h-4 px-1 rounded-full bg-error text-on-error font-label-xs text-label-xs font-bold ring-2 ring-surface">2</span></button><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_1px_3px_rgba(0,0,0,0.08)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAzNdWMya8vtHRk4QcxfngDDib9fix6I5snCYb9ce6xOzUL6HWXb41WN9KdltaeKJO_0fPDTCRBcB_Kt0xuLe0eBn5stE7cfwccxtwZpHRiogPi4Mt6H_kZuM9sUZ67RPTcU8TNYx6WIul3mX-TH3WLo4CRv6vD71cxVxNlLC0X-zJEkQhh-AZPr2J2Sg8sXJGZg17FzCd585LmNPT1xy7wFYi6ijCm1W5J31xkQbYfjk9w2OUTmvu"/></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface px-space-lg"><div class="flex flex-col w-full space-y-space-xl">
+<!-- Top Navigation & Header Context -->
+<div class="flex flex-col w-full gap-space-md">
+<div class="flex items-center justify-between">
+<a class="inline-flex items-center gap-space-xs text-primary font-label-md text-label-md hover:underline active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+<span>Configurações</span>
+</a>
+<button class="inline-flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md shadow-sm active:scale-95 transition-transform" id="quickInviteScrollBtn">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span>+ Convidar</span>
+</button>
+</div>
+<div class="space-y-space-xs">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Membros &amp; Acesso</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Controle quem pode visualizar ou lançar despesas compartilhadas nesta carteira.</p>
+</div>
+</div>
+<!-- Active Wallet Status Card -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-lg shadow-sm">
+<div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-primary-fixed/30 pointer-events-none blur-xl"></div>
+<div class="relative flex flex-col gap-space-md">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center text-primary shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[22px]">account_balance_wallet</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm text-on-surface">Minha Carteira Pessoal</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs">Co-gestão</span>
+</div>
+<span class="font-label-xs text-label-xs text-outline font-mono">ID: wlt_8923a41f90</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-[20px]">verified_user</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-low">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">groups</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">3 pessoas</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant truncate">Membros Ativos</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-low">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">1 aguardando</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant truncate">Convites Pendentes</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Members Section -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<h2 class="font-headline-md text-headline-md text-on-surface">Membros da Carteira</h2>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs">3</span>
+</div>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Sincronizado</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Member 1: Owner (Self) -->
+<div class="flex flex-col p-space-md rounded-xl bg-surface-container-lowest shadow-sm gap-space-xs transition-all">
+<div class="flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="relative shrink-0">
+<img alt="Avatar de João Silva" class="w-11 h-11 rounded-full object-cover shadow-sm" src="https://lh3.googleusercontent.com/aida/AEtjO1VAYcP5DGg5fHiocYWUtvJ67ukWk0rDsfEdxJ6tlcahW30EYdtCihY7dovJHuKsVTT_cV_dN3NCVgHDlP0sz0UEm-wunjWvzu9fZPkePqCy4LTqJEoUG87Iw58o2wVbNGrXDA3VOEH9kYWydeJAQgl1RGr6NRZttZbBd1XZ0VJy9hTOwV9GzO7hYG7D6q9_ENJsJWPpJy9UpHiSlT1juFHxbZ4z826Ey8GnwX_AH0_2WDXNeUSB9uTakuQ"/>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[10px]">shield_person</span>
+</div>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm text-on-surface truncate">João Silva</span>
+<span class="font-label-xs text-label-xs text-primary font-bold">(Você)</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">joao.silva@finflow.io</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-primary text-on-primary font-label-xs text-label-xs shrink-0 shadow-sm">Proprietário</span>
+</div>
+<div class="mt-space-xs pt-space-xs flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-primary">key</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Criador da carteira • Acesso total e governança</span>
+</div>
+</div>
+<!-- Member 2: Editor (Mariana) -->
+<div class="flex flex-col p-space-md rounded-xl bg-surface-container-lowest shadow-sm gap-space-xs transition-all">
+<div class="flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="relative shrink-0">
+<img class="w-11 h-11 rounded-full object-cover shadow-sm" data-alt="Portrait of a friendly Brazilian woman professional in business casual attire with natural office lighting and neutral clean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi3gFOQ4aGSmJq48gx93ObEigxulJhY6Ha8baKbTjs_Lb_gpR3ATq6D1O1TSefdeuvypUMjV91sGXWp3gTyELlfGXDGkUFu2Xuktuee4ncg7F1sEtb72r5h1F9SF6h85LFHTABUdpxu_6s61OHpZGPs8ajFToTkgrysMspGyzaIQgw-Dhzebh9aFl0G4Thj1FRW2JtV2amv-_mjpKZFFx9sbOkX7RAtq-ABq9wPb7ER5YjA-ymJlvt"/>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-secondary text-on-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[10px]">edit</span>
+</div>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-sm text-title-sm text-on-surface truncate">Mariana Souza</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">mariana.fin@empresa.com.br</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs shrink-0">
+<span class="px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs">Editor</span>
+<button aria-label="Ações de Mariana" class="w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="mt-space-xs pt-space-xs flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Pode criar, editar e conciliar transações</span>
+</div>
+</div>
+<!-- Member 3: Viewer (Carlos - Accounting) -->
+<div class="flex flex-col p-space-md rounded-xl bg-surface-container-lowest shadow-sm gap-space-xs transition-all">
+<div class="flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="relative shrink-0">
+<img class="w-11 h-11 rounded-full object-cover shadow-sm" data-alt="Portrait of a Brazilian male senior accountant wearing stylish modern spectacles in corporate office environment with soft focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBQGiO30iLq5nAp3B3pLBZYd57xcAu1am-qhFUu0aPP8y0w8uKdEreTfXsnsJfTx-ZyEEK5uaYT10OX_zd5Qqk-PTjyJhBrSN-h0JhMLd7rMUBASVAGfoB8dwd8mN2QLuVX2HBKBtovCD2ag5RuPyALpUUyljrHOsqhi0gmeMszvJdeu-zpWaucbSjGt03N6elN5Ynj0j6f3j3GX4hjJev-ry7wFpj1SnY9fW8rKuX8PGkcbT-B6ON"/>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[10px]">visibility</span>
+</div>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm text-on-surface truncate">Carlos Mendes</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">(Contabilidade)</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">carlos.mendes@auditoria.com</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs shrink-0">
+<span class="px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-xs text-label-xs">Visualizador</span>
+<button aria-label="Ações de Carlos" class="w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="mt-space-xs pt-space-xs flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-primary">analytics</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Apenas leitura de relatórios, gráficos e extratos</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Pending Invitations Section -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<h2 class="font-headline-md text-headline-md text-on-surface">Convites Pendentes</h2>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs">1</span>
+</div>
+<span class="font-label-xs text-label-xs text-outline">Expira em 7 dias</span>
+</div>
+<div class="flex flex-col p-space-md rounded-xl bg-surface-container-lowest shadow-sm gap-space-sm" id="pendingInviteItem">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-11 h-11 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">mark_email_unread</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm text-on-surface truncate">Beatriz Lima</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-variant text-on-surface-variant font-label-xs text-label-xs">Pendente</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">beatriz.lima@designstudio.io</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-secondary-fixed-dim text-on-secondary-fixed-variant font-label-xs text-label-xs shrink-0">Editor Convidado</span>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container text-tertiary font-label-md text-label-md active:scale-95 transition-transform" id="cancelInviteBtn">
+          Cancelar
+        </button>
+<button class="flex items-center gap-space-xs px-space-md py-1.5 rounded-lg bg-primary-fixed text-on-primary-fixed-variant font-label-md text-label-md active:scale-95 transition-transform" id="resendInviteBtn">
+<span class="material-symbols-outlined text-[16px]">send</span>
+<span>Reenviar Convite</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Invitation Form Section -->
+<div class="flex flex-col p-space-lg rounded-xl bg-surface-container-lowest shadow-sm gap-space-md" id="inviteFormContainer">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">group_add</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Convidar Novo Membro</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">O convidado receberá um e-mail com link exclusivo para integrar esta carteira compartilhada.</p>
+<form class="flex flex-col gap-space-md" id="inviteMemberForm">
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface" for="memberEmailInput">E-mail do Convidado</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-outline text-[20px]">mail</span>
+<input class="w-full h-12 pl-10 pr-4 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all" id="memberEmailInput" placeholder="exemplo@finflow.com" required="" type="email"/>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface">Nível de Permissão (Papel)</label>
+<div class="grid grid-cols-2 gap-space-sm" id="roleSelectorGroup">
+<label class="relative flex flex-col p-space-sm rounded-lg bg-surface-container-low cursor-pointer transition-all role-option active-role" data-role="editor">
+<input checked="" class="sr-only" name="memberRole" type="radio" value="editor"/>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface">Editor</span>
+<span class="material-symbols-outlined text-primary text-[18px] role-check">check_circle</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Lança e edita receitas e despesas.</span>
+</label>
+<label class="relative flex flex-col p-space-sm rounded-lg bg-surface-container-low cursor-pointer transition-all role-option" data-role="viewer">
+<input class="sr-only" name="memberRole" type="radio" value="viewer"/>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface">Visualizador</span>
+<span class="material-symbols-outlined text-outline-variant text-[18px] role-check">radio_button_unchecked</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Acesso somente leitura a relatórios.</span>
+</label>
+</div>
+</div>
+<button class="w-full h-12 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md flex items-center justify-center gap-space-xs shadow-md active:scale-98 transition-transform" type="submit">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+<span>Enviar Convite de Acesso</span>
+</button>
+</form>
+</div>
+<!-- FinFlow Governance Reference Card -->
+<div class="flex flex-col p-space-lg rounded-xl bg-surface-container-high text-on-surface gap-space-md shadow-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">policy</span>
+<h3 class="font-title-sm text-title-sm">Governança FinFlow</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Prerrogativas e políticas de acesso definidas pelo protocolo <code class="px-1.5 py-0.5 rounded bg-surface-container-highest text-primary font-mono text-[11px]">users_wallets</code>:</p>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-lowest">
+<div class="w-7 h-7 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]">shield</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Proprietário (Owner)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Controle total: arquivar ou excluir carteira, gerenciar papéis de membros e definir configurações fiscais.</span>
+</div>
+</div>
+<div class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-lowest">
+<div class="w-7 h-7 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]">draw</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Editor</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Cadastra transações, faz conciliação de cartões e contas, importa extratos e gerencia categorias.</span>
+</div>
+</div>
+<div class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-lowest">
+<div class="w-7 h-7 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Visualizador (Viewer)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Consulta saldos, exporta PDFs e balancetes contábeis sem permissão para alterar dados.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Toast Notification Notification Box -->
+<div class="fixed bottom-20 left-4 right-4 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-space-sm p-space-md rounded-xl bg-inverse-surface text-inverse-on-surface shadow-xl" id="actionToast">
+<span class="material-symbols-outlined text-secondary-fixed text-[20px]" id="toastIcon">check_circle</span>
+<span class="font-label-md text-label-md flex-1" id="toastMessage">Ação concluída com sucesso.</span>
+</div>
+</div>
+<script>
+  (function() {
+    const toast = document.getElementById('actionToast');
+    const toastMessage = document.getElementById('toastMessage');
+    const toastIcon = document.getElementById('toastIcon');
+
+    function showToast(msg, isSuccess = true) {
+      if (!toast) return;
+      toastMessage.textContent = msg;
+      toastIcon.textContent = isSuccess ? 'check_circle' : 'info';
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      }, 3200);
+    }
+
+    const scrollBtn = document.getElementById('quickInviteScrollBtn');
+    if (scrollBtn) {
+      scrollBtn.addEventListener('click', () => {
+        const form = document.getElementById('inviteFormContainer');
+        if (form) {
+          form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          const input = document.getElementById('memberEmailInput');
+          if (input) input.focus();
+        }
+      });
+    }
+
+    const roleOptions = document.querySelectorAll('.role-option');
+    roleOptions.forEach(opt => {
+      opt.addEventListener('click', () => {
+        roleOptions.forEach(o => {
+          const radio = o.querySelector('input[type="radio"]');
+          const checkIcon = o.querySelector('.role-check');
+          if (radio && checkIcon) {
+            radio.checked = false;
+            checkIcon.textContent = 'radio_button_unchecked';
+            checkIcon.className = 'material-symbols-outlined text-outline-variant text-[18px] role-check';
+            o.classList.remove('bg-surface-container');
+            o.classList.add('bg-surface-container-low');
+          }
+        });
+        const currentRadio = opt.querySelector('input[type="radio"]');
+        const currentCheck = opt.querySelector('.role-check');
+        if (currentRadio && currentCheck) {
+          currentRadio.checked = true;
+          currentCheck.textContent = 'check_circle';
+          currentCheck.className = 'material-symbols-outlined text-primary text-[18px] role-check';
+          opt.classList.remove('bg-surface-container-low');
+          opt.classList.add('bg-surface-container');
+        }
+      });
+    });
+
+    const inviteForm = document.getElementById('inviteMemberForm');
+    if (inviteForm) {
+      inviteForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const emailInput = document.getElementById('memberEmailInput');
+        if (emailInput && emailInput.value) {
+          const emailVal = emailInput.value;
+          emailInput.value = '';
+          showToast('Convite de acesso enviado para ' + emailVal + '!');
+        }
+      });
+    }
+
+    const resendBtn = document.getElementById('resendInviteBtn');
+    if (resendBtn) {
+      resendBtn.addEventListener('click', () => {
+        showToast('Convite reenviado para beatriz.lima@designstudio.io');
+      });
+    }
+
+    const cancelBtn = document.getElementById('cancelInviteBtn');
+    if (cancelBtn) {
+      cancelBtn.addEventListener('click', () => {
+        const item = document.getElementById('pendingInviteItem');
+        if (item) {
+          item.style.opacity = '0.4';
+          setTimeout(() => {
+            item.remove();
+            showToast('Convite para Beatriz Lima cancelado.', false);
+          }, 300);
+        }
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_-4px_16px_rgba(0,0,0,0.03)] pb-safe" data-active-classes="text-primary bg-primary-fixed/40"><div class="relative flex items-center justify-around h-16 px-space-xs"><a class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 rounded-xl text-on-surface-variant hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[22px]">bar_chart</span><span class="font-label-xs text-label-xs">Início</span></a><a class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 rounded-xl text-on-surface-variant hover:text-on-surface transition-colors" data-path="transactions" href="#"><span class="material-symbols-outlined text-[22px]">receipt_long</span><span class="font-label-xs text-label-xs">Transações</span></a><div class="relative -top-5 flex justify-center items-center w-14 shrink-0"><a aria-label="Nova Transação" class="w-14 h-14 rounded-full bg-primary-container text-on-primary shadow-[0_8px_16px_rgba(37,99,235,0.35)] flex items-center justify-center active:scale-95 transition-transform" data-path="quick-entry" href="#"><span class="material-symbols-outlined text-[28px]">add</span></a></div><a class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 rounded-xl text-on-surface-variant hover:text-on-surface transition-colors" data-path="credit-cards" href="#"><span class="material-symbols-outlined text-[22px]">credit_card</span><span class="font-label-xs text-label-xs">Cartões</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 rounded-xl transition-colors text-primary bg-primary-fixed/40" data-path="more" href="#"><span class="material-symbols-outlined text-[22px]">grid_view</span><span class="font-label-xs text-label-xs">Mais</span></a></div></nav></body></html>
