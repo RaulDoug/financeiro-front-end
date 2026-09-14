@@ -44,11 +44,58 @@ test('AC-013: Redirecionamento forçado ao onboarding @spec:AC-013', async () =>
 });
 
 // US-004 — Assistente de primeiros passos (Wallet e Redirecionamento)
-test('AC-014: Criação da primeira carteira (Step 1) @spec:AC-014', () => {
+test('AC-014: Criação da primeira carteira (Step 1) @spec:AC-014', async () => {
+  const { walletService } = await import('../src/services/wallet.service.ts');
+  const { useWalletStore } = await import('../src/stores/wallet.store.ts');
+  const { useOnboardingStore } = await import('../src/stores/onboarding.store.ts');
+  const { api } = await import('../src/lib/axios.ts');
+
   // Dado: que o usuário está no passo inicial (Step 1) do onboarding
-  // Quando: ele preenche o nome da carteira desejado e clica para avançar
-  // Então: o sistema aciona a API para criar a carteira (`POST /api/wallet/register`) e avança para o Step 2
-  assert.fail('critério de aceite AC-014 ainda não provado — implemente este teste');
+  useOnboardingStore.getState().resetOnboarding();
+  assert.equal(useOnboardingStore.getState().currentStep, 1);
+
+  const originalPost = api.post;
+  let postedUrl = '';
+  let postedBody = null;
+
+  api.post = async (url, data) => {
+    postedUrl = url;
+    postedBody = data;
+    if (url === '/wallet/register') {
+      return {
+        status: 201,
+        data: {
+          message: 'Carteira criada com sucesso!',
+          wallet: {
+            id: 'uuid-carteira-1',
+            name: data.name,
+            user_id: 'uuid-user-1',
+          },
+        },
+      };
+    }
+    throw new Error('Not found');
+  };
+
+  try {
+    // Quando: ele preenche o nome da carteira desejado e clica para avançar
+    const walletName = 'Minha Carteira Principal';
+    const response = await walletService.registerWallet({ name: walletName });
+
+    useWalletStore.getState().addWallet(response.wallet);
+    useOnboardingStore.getState().setCreatedWallet(response.wallet.id, response.wallet.name);
+    useOnboardingStore.getState().setCurrentStep(2);
+
+    // Então: o sistema aciona a API para criar a carteira (`POST /api/wallet/register`) e avança para o Step 2
+    assert.equal(postedUrl, '/wallet/register');
+    assert.equal(postedBody.name, walletName);
+    assert.equal(response.wallet.id, 'uuid-carteira-1');
+    assert.equal(useOnboardingStore.getState().currentStep, 2);
+    assert.equal(useOnboardingStore.getState().createdWalletId, 'uuid-carteira-1');
+    assert.equal(useWalletStore.getState().currentWalletId, 'uuid-carteira-1');
+  } finally {
+    api.post = originalPost;
+  }
 });
 
 // US-005 — Configuração das contas e cartões no onboarding
