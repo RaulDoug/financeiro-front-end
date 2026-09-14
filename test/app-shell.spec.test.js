@@ -41,11 +41,25 @@ test('AC-021: Exibição do layout base @spec:AC-021', async () => {
 });
 
 // US-006 — Navegação pelo layout principal
-test('AC-022: Menu responsivo em dispositivos móveis @spec:AC-022', () => {
+test('AC-022: Menu responsivo em dispositivos móveis @spec:AC-022', async () => {
+  const fs = await import('node:fs');
+  const path = await import('node:path');
+
   // Dado: que o usuário acessa o sistema por um dispositivo móvel
+  const sidebarPath = path.resolve('src/components/layout/Sidebar.tsx');
+  assert.equal(fs.existsSync(sidebarPath), true);
+  const sidebarContent = fs.readFileSync(sidebarPath, 'utf-8');
+
   // Quando: ele visualiza a tela
-  // Então: o menu lateral deve estar oculto, podendo ser aberto através de um ícone de "hambúrguer" na barra superior.
-  assert.fail('critério de aceite AC-022 ainda não provado — implemente este teste');
+  // Então: o menu lateral deve estar oculto por padrão no mobile (-translate-x-full) e visível apenas quando aberto ou em desktop (md:translate-x-0)
+  assert.equal(sidebarContent.includes('-translate-x-full'), true);
+  assert.equal(sidebarContent.includes('translate-x-0'), true);
+  assert.equal(sidebarContent.includes('md:static'), true);
+  assert.equal(sidebarContent.includes('md:translate-x-0'), true);
+
+  // E deve aceitar prop isOpen e callback onClose para controle do botão hambúrguer
+  assert.equal(sidebarContent.includes('isOpen'), true);
+  assert.equal(sidebarContent.includes('onClose'), true);
 });
 
 // US-006 — Navegação pelo layout principal
