@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { Topbar } from '../components/layout/Topbar.tsx';
+import { Sidebar } from '../components/layout/Sidebar.tsx';
+import { WalletSelector } from '../components/layout/WalletSelector.tsx';
 
 export interface NavItem {
   label: string;
@@ -32,12 +35,14 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ topbar, sidebar, children 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex flex-col">
       {/* Topbar container */}
-      <header
-        data-testid="app-topbar"
-        className="sticky top-0 z-40 w-full border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900"
-      >
-        {topbar}
-      </header>
+      <div className="sticky top-0 z-40 w-full border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 backdrop-blur">
+        {topbar || (
+          <Topbar
+            onToggleMobileMenu={() => setMobileMenuOpen((prev) => !prev)}
+            walletSelectorSlot={<WalletSelector />}
+          />
+        )}
+      </div>
 
       {/* Backdrop for mobile drawer */}
       {mobileMenuOpen && (
@@ -48,16 +53,14 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ topbar, sidebar, children 
         />
       )}
 
-      <div className="flex-1 flex">
-        {/* Sidebar container */}
-        <aside
-          data-testid="app-sidebar"
-          className={`fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-200 ease-in-out md:static md:translate-x-0 ${
-            mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}
-        >
-          {sidebar}
-        </aside>
+      <div className="flex-1 flex overflow-hidden">
+        {/* Sidebar */}
+        {sidebar || (
+          <Sidebar
+            isOpen={mobileMenuOpen}
+            onClose={() => setMobileMenuOpen(false)}
+          />
+        )}
 
         {/* Main Content Area */}
         <main
