@@ -43,11 +43,40 @@ test('AC-025: Seletor de carteira @spec:AC-025', () => {
 });
 
 // US-007 — Alternância de contexto (Wallet)
-test('AC-026: Recarregamento ao trocar de carteira @spec:AC-026', () => {
+test('AC-026: Recarregamento ao trocar de carteira @spec:AC-026', async () => {
+  const { useWalletStore, subscribeToWalletChange } = await import('../src/stores/wallet.store.ts');
+  const { useAuthStore } = await import('../src/stores/auth.store.ts');
+
   // Dado: que o usuário está visualizando os dados de uma carteira
-  // Quando: ele seleciona uma carteira diferente no seletor
-  // Então: toda a aplicação deve recarregar seu contexto (invalidar cache de dados) e exibir as informações da nova carteira selecionada.
-  assert.fail('critério de aceite AC-026 ainda não provado — implemente este teste');
+  useWalletStore.getState().setWallets([
+    { id: 'wallet-1', name: 'Carteira Pessoal', role: 'owner' },
+    { id: 'wallet-2', name: 'Carteira Empresa', role: 'editor' },
+  ]);
+  useWalletStore.getState().setCurrentWalletId('wallet-1');
+  assert.equal(useWalletStore.getState().currentWalletId, 'wallet-1');
+  assert.equal(useWalletStore.getState().currentWallet?.name, 'Carteira Pessoal');
+
+  let invalidatedQueries = false;
+  let switchedToWallet = null;
+
+  const unsubscribe = subscribeToWalletChange((newWalletId) => {
+    invalidatedQueries = true;
+    switchedToWallet = newWalletId;
+  });
+
+  try {
+    // Quando: ele seleciona uma carteira diferente no seletor
+    useWalletStore.getState().setCurrentWalletId('wallet-2');
+
+    // Então: toda a aplicação deve recarregar seu contexto (invalidar cache de dados) e exibir as informações da nova carteira selecionada.
+    assert.equal(invalidatedQueries, true);
+    assert.equal(switchedToWallet, 'wallet-2');
+    assert.equal(useWalletStore.getState().currentWalletId, 'wallet-2');
+    assert.equal(useWalletStore.getState().currentWallet?.name, 'Carteira Empresa');
+    assert.equal(useAuthStore.getState().activeWalletId, 'wallet-2');
+  } finally {
+    unsubscribe();
+  }
 });
 
 // US-007 — Alternância de contexto (Wallet)

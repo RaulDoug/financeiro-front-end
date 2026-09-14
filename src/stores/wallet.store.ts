@@ -34,6 +34,25 @@ const storage = typeof window !== 'undefined' && window.localStorage
       removeItem: (key: string) => { memoryStorage.delete(key); },
     };
 
+const walletChangeListeners = new Set<(newWalletId: string | null) => void>();
+
+export const subscribeToWalletChange = (listener: (newWalletId: string | null) => void) => {
+  walletChangeListeners.add(listener);
+  return () => {
+    walletChangeListeners.delete(listener);
+  };
+};
+
+export const notifyWalletChanged = (newWalletId: string | null) => {
+  walletChangeListeners.forEach((fn) => {
+    try {
+      fn(newWalletId);
+    } catch {
+      // ignore
+    }
+  });
+};
+
 export const useWalletStore = create<WalletState>()(
   persist(
     (set, get) => ({
@@ -63,12 +82,17 @@ export const useWalletStore = create<WalletState>()(
       },
 
       setCurrentWalletId: (id: string | null) => {
+        const previousId = get().currentWalletId;
         const wallet = get().wallets.find((w) => w.id === id) || null;
         useAuthStore.getState().setActiveWalletId(id);
         set({
           currentWalletId: id,
           currentWallet: wallet || (id ? ({ id, name: '' } as Wallet) : null),
         });
+
+        if (previousId !== id) {
+          notifyWalletChanged(id);
+        }
       },
 
       fetchWallets: async () => {
@@ -118,4 +142,3 @@ export const useWalletStore = create<WalletState>()(
     }
   )
 );
-
