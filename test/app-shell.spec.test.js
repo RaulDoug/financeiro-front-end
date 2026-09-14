@@ -109,9 +109,28 @@ test('AC-027: Header obrigatório nas requisições @spec:AC-027', async () => {
 });
 
 // US-007 — Alternância de contexto (Wallet)
-test('AC-028: Rota protegida sem carteira @spec:AC-028', () => {
+test('AC-028: Rota protegida sem carteira @spec:AC-028', async () => {
+  const { useWalletStore, resolveDefaultWallet } = await import('../src/stores/wallet.store.ts');
+  const { useAuthStore } = await import('../src/stores/auth.store.ts');
+
   // Dado: que o usuário acessa a aplicação
+  useAuthStore.getState().setAuth({ id: 'u1', name: 'User Test', email: 'user@test.com' }, 'token-abc');
+
+  const availableWallets = [
+    { id: 'wallet-alpha', name: 'Carteira Principal' },
+    { id: 'wallet-beta', name: 'Carteira Reserva' },
+  ];
+
   // Quando: nenhuma carteira foi selecionada previamente
+  const currentWalletId = null;
+  const resolvedWalletId = resolveDefaultWallet(currentWalletId, availableWallets);
+
   // Então: o sistema deve selecionar automaticamente a primeira carteira disponível e redirecioná-lo.
-  assert.fail('critério de aceite AC-028 ainda não provado — implemente este teste');
+  assert.equal(resolvedWalletId, 'wallet-alpha');
+
+  // Aplicando ao store
+  useWalletStore.getState().setWallets(availableWallets);
+  useWalletStore.getState().setCurrentWalletId(resolvedWalletId);
+  assert.equal(useWalletStore.getState().currentWalletId, 'wallet-alpha');
+  assert.equal(useAuthStore.getState().activeWalletId, 'wallet-alpha');
 });

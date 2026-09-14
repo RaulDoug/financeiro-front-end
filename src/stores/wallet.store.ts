@@ -53,6 +53,16 @@ export const notifyWalletChanged = (newWalletId: string | null) => {
   });
 };
 
+export function resolveDefaultWallet(
+  currentWalletId: string | null,
+  wallets: { id: string }[]
+): string | null {
+  if (currentWalletId && wallets.some((w) => w.id === currentWalletId)) {
+    return currentWalletId;
+  }
+  return wallets.length > 0 ? wallets[0].id : null;
+}
+
 export const useWalletStore = create<WalletState>()(
   persist(
     (set, get) => ({
