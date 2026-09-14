@@ -63,19 +63,42 @@ test('AC-022: Menu responsivo em dispositivos móveis @spec:AC-022', async () =>
 });
 
 // US-006 — Navegação pelo layout principal
-test('AC-023: Indicador de notificações @spec:AC-023', () => {
+test('AC-023: Indicador de notificações @spec:AC-023', async () => {
+  const fs = await import('node:fs');
+  const path = await import('node:path');
+
   // Dado: que há alertas de contas em atraso
+  const bellPath = path.resolve('src/components/layout/NotificationsBell.tsx');
+  assert.equal(fs.existsSync(bellPath), true);
+  const bellContent = fs.readFileSync(bellPath, 'utf-8');
+
   // Quando: o usuário olha para a barra superior
   // Então: o ícone de sino de notificações deve exibir um contador (badge) com o número de itens em atraso.
-  assert.fail('critério de aceite AC-023 ainda não provado — implemente este teste');
+  assert.equal(bellContent.includes('count > 0'), true);
+  assert.equal(bellContent.includes('notifications-badge'), true);
+  assert.equal(bellContent.includes('data-testid="notifications-bell"'), true);
 });
 
 // US-006 — Navegação pelo layout principal
-test('AC-024: Menu de perfil do usuário @spec:AC-024', () => {
+test('AC-024: Menu de perfil do usuário @spec:AC-024', async () => {
+  const fs = await import('node:fs');
+  const path = await import('node:path');
+  const { useAuthStore } = await import('../src/stores/auth.store.ts');
+
   // Dado: que o usuário está no layout principal
+  useAuthStore.getState().setAuth({ id: 'u1', name: 'João Silva', email: 'joao@test.com' }, 'token-abc');
+
+  const userMenuPath = path.resolve('src/components/layout/UserMenu.tsx');
+  assert.equal(fs.existsSync(userMenuPath), true);
+  const userMenuContent = fs.readFileSync(userMenuPath, 'utf-8');
+
   // Quando: ele clica no seu avatar na barra superior
   // Então: um menu suspenso deve aparecer, mostrando opções de Perfil e Sair (Logout).
-  assert.fail('critério de aceite AC-024 ainda não provado — implemente este teste');
+  assert.equal(userMenuContent.includes('user-dropdown-menu'), true);
+  assert.equal(userMenuContent.includes('user-menu-profile'), true);
+  assert.equal(userMenuContent.includes('user-menu-logout'), true);
+  assert.equal(userMenuContent.includes('Sair (Logout)'), true);
+  assert.equal(userMenuContent.includes('logout()'), true);
 });
 
 // US-007 — Alternância de contexto (Wallet)
