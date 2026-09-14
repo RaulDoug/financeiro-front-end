@@ -1,0 +1,114 @@
+{
+  "runId": "Front-End_Financeiro-app-shell-mu1p06li",
+  "feature": "app-shell",
+  "agent": "antigravity",
+  "modo": "sequencial",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-14 20:25",
+  "branchTrabalho": "spec/app-shell",
+  "baseDir": ".spec/features/app-shell",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "logsDir": "../onp-worktrees/Front-End_Financeiro-app-shell-logs",
+  "ondas": [],
+  "faixas": [],
+  "sequenciais": [
+    {
+      "id": "T-015",
+      "titulo": "Configurar Store de Wallet e Contexto Global",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/stores/wallet.store.ts"
+      ],
+      "refs": [
+        "US-007",
+        "AC-026"
+      ]
+    },
+    {
+      "id": "T-016",
+      "titulo": "Configurar Interceptor do Axios com Header x-wallet-id",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/lib/axios.ts"
+      ],
+      "refs": [
+        "AC-027"
+      ]
+    },
+    {
+      "id": "T-017",
+      "titulo": "Implementar Proteção de Rotas com Seleção de Carteira",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/routes/PrivateRoute.tsx",
+        "src/routes/index.tsx"
+      ],
+      "refs": [
+        "AC-028"
+      ]
+    },
+    {
+      "id": "T-018",
+      "titulo": "Layout Base com Áreas de Sidebar e Topbar",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/layouts/AppLayout.tsx"
+      ],
+      "refs": [
+        "AC-021"
+      ]
+    },
+    {
+      "id": "T-019",
+      "titulo": "Menu Lateral (Sidebar) Responsivo",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/components/layout/Sidebar.tsx",
+        "src/components/layout/SidebarItem.tsx"
+      ],
+      "refs": [
+        "AC-021",
+        "AC-022"
+      ]
+    },
+    {
+      "id": "T-020",
+      "titulo": "Barra Superior (Topbar) com Notificações e Menu de Perfil",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/components/layout/Topbar.tsx",
+        "src/components/layout/NotificationsBell.tsx",
+        "src/components/layout/UserMenu.tsx"
+      ],
+      "refs": [
+        "AC-023",
+        "AC-024"
+      ]
+    },
+    {
+      "id": "T-021",
+      "titulo": "Seletor de Carteira com Invalidação de Cache",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/components/layout/WalletSelector.tsx",
+        "src/hooks/useWallets.ts"
+      ],
+      "refs": [
+        "AC-025",
+        "AC-026"
+      ]
+    }
+  ],
+  "concluidas": [],
+  "avisos": []
+}
