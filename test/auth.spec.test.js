@@ -3,19 +3,71 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 // US-001 — Acesso ao sistema (Login)
-test('AC-001: Login com sucesso @spec:AC-001', () => {
-  // Dado: que o usuário está na tela de login
-  // Quando: preenche um e-mail válido e a senha correta, e clica em "Entrar"
-  // Então: o sistema salva o token na sessão e redireciona o usuário para a aplicação
-  assert.fail('critério de aceite AC-001 ainda não provado — implemente este teste');
+test('AC-001: Login com sucesso @spec:AC-001', async () => {
+  const { authService } = await import('../src/services/auth.service.ts');
+  const { api } = await import('../src/lib/axios.ts');
+  const { useAuthStore } = await import('../src/stores/auth.store.ts');
+
+  const originalPost = api.post;
+  api.post = async (url, data) => {
+    if (url === '/auth/login') {
+      return {
+        status: 200,
+        data: {
+          message: 'Login realizado com sucesso!',
+          userInfo: {
+            token: 'valid-jwt-token-123',
+            id: 'uuid-joao',
+            name: 'João Silva',
+            email: data.email,
+          },
+        },
+      };
+    }
+    throw new Error('Not found');
+  };
+
+  try {
+    const response = await authService.login({ email: 'joao@email.com', password: 'Senha@123' });
+    assert.equal(response.userInfo.token, 'valid-jwt-token-123');
+    assert.equal(useAuthStore.getState().isAuthenticated, true);
+    assert.equal(useAuthStore.getState().token, 'valid-jwt-token-123');
+    assert.equal(useAuthStore.getState().user?.email, 'joao@email.com');
+  } finally {
+    api.post = originalPost;
+  }
 });
 
 // US-001 — Acesso ao sistema (Login)
-test('AC-002: Credenciais inválidas @spec:AC-002', () => {
-  // Dado: que o usuário está na tela de login
-  // Quando: preenche e-mail ou senha incorretos e tenta entrar
-  // Então: o sistema exibe uma mensagem de erro ("Credenciais inválidas") e não faz o login
-  assert.fail('critério de aceite AC-002 ainda não provado — implemente este teste');
+test('AC-002: Credenciais inválidas @spec:AC-002', async () => {
+  const { authService, AuthError } = await import('../src/services/auth.service.ts');
+  const { api } = await import('../src/lib/axios.ts');
+  const { useAuthStore } = await import('../src/stores/auth.store.ts');
+
+  // Reset store to unauthenticated
+  useAuthStore.getState().logout();
+
+  const originalPost = api.post;
+  api.post = async () => {
+    const error = new Error('Credenciais inválidas');
+    error.response = {
+      status: 400,
+      data: { message: 'Credenciais inválidas' },
+    };
+    throw error;
+  };
+
+  try {
+    await authService.login({ email: 'joao@email.com', password: 'wrong' });
+    assert.fail('Deveria ter lançado erro');
+  } catch (err) {
+    assert.ok(err instanceof AuthError);
+    assert.equal(err.status, 400);
+    assert.equal(err.message, 'Credenciais inválidas');
+    assert.equal(useAuthStore.getState().isAuthenticated, false);
+  } finally {
+    api.post = originalPost;
+  }
 });
 
 // US-001 — Acesso ao sistema (Login)
