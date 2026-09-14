@@ -1,0 +1,146 @@
+{
+  "runId": "Front-End_Financeiro-dashboard-mu1pk6lv",
+  "feature": "dashboard",
+  "agent": "antigravity",
+  "modo": "sequencial",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-14 20:41",
+  "branchTrabalho": "spec/dashboard",
+  "baseDir": ".spec/features/dashboard",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "logsDir": "../onp-worktrees/Front-End_Financeiro-dashboard-logs",
+  "ondas": [],
+  "faixas": [],
+  "sequenciais": [
+    {
+      "id": "T-022",
+      "titulo": "Layout Estrutural do Dashboard e Skeleton Loaders",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/Dashboard/DashboardPage.tsx",
+        "src/pages/Dashboard/DashboardSkeleton.tsx"
+      ],
+      "refs": [
+        "US-008"
+      ]
+    },
+    {
+      "id": "T-023",
+      "titulo": "Cartões de KPI Principais e Estado Vazio",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/Dashboard/components/KpiCards.tsx",
+        "src/services/dashboard.service.ts",
+        "src/types/dashboard.ts"
+      ],
+      "refs": [
+        "AC-029",
+        "AC-032"
+      ]
+    },
+    {
+      "id": "T-024",
+      "titulo": "Saldos das Contas e Resumo de Cartões",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/Dashboard/components/AccountBalances.tsx",
+        "src/pages/Dashboard/components/CreditCardSummary.tsx"
+      ],
+      "refs": [
+        "AC-030",
+        "AC-031"
+      ]
+    },
+    {
+      "id": "T-025",
+      "titulo": "Seção de Transações Recentes e Ordenação",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/Dashboard/components/RecentTransactions.tsx",
+        "src/utils/formatDate.ts"
+      ],
+      "refs": [
+        "AC-033",
+        "AC-034"
+      ]
+    },
+    {
+      "id": "T-026",
+      "titulo": "Alertas de Atrasos e Estado Tudo em Dia",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/Dashboard/components/OverdueAlerts.tsx"
+      ],
+      "refs": [
+        "AC-039",
+        "AC-040"
+      ]
+    },
+    {
+      "id": "T-027",
+      "titulo": "Ações Rápidas de Lançamento e Store Global",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/Dashboard/components/QuickActions.tsx",
+        "src/stores/transactionModal.store.ts"
+      ],
+      "refs": [
+        "AC-041",
+        "AC-042"
+      ]
+    },
+    {
+      "id": "T-028",
+      "titulo": "Gráfico de Barras Receitas vs Despesas com Seletor de Ano",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/Dashboard/components/IncomeExpenseChart.tsx"
+      ],
+      "refs": [
+        "AC-035",
+        "AC-037",
+        "AC-038"
+      ]
+    },
+    {
+      "id": "T-029",
+      "titulo": "Gráfico de Rosca Despesas por Categoria",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/Dashboard/components/CategoryExpenseChart.tsx"
+      ],
+      "refs": [
+        "AC-036",
+        "AC-037",
+        "AC-038"
+      ]
+    },
+    {
+      "id": "T-030",
+      "titulo": "Orquestração de Dados com TanStack Query",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/hooks/useDashboardData.ts"
+      ],
+      "refs": [
+        "US-008",
+        "US-009",
+        "US-010"
+      ]
+    }
+  ],
+  "concluidas": [],
+  "avisos": []
+}
