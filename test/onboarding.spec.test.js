@@ -3,11 +3,44 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 // US-004 — Assistente de primeiros passos (Wallet e Redirecionamento)
-test('AC-013: Redirecionamento forçado ao onboarding @spec:AC-013', () => {
+test('AC-013: Redirecionamento forçado ao onboarding @spec:AC-013', async () => {
   // Dado: que o usuário fez login com sucesso no sistema
+  const { useAuthStore } = await import('../src/stores/auth.store.ts');
+  const { useWalletStore } = await import('../src/stores/wallet.store.ts');
+  const { evaluateOnboardingRedirect } = await import('../src/hooks/useOnboardingCheck.ts');
+  const { api } = await import('../src/lib/axios.ts');
+
+  useAuthStore.getState().setAuth({ id: 'u1', name: 'Novo Usuário', email: 'novo@teste.com' }, 'token-123');
+  useWalletStore.getState().clearWallets();
+
   // Quando: o front-end consulta `GET /api/wallet` e recebe `walletsList` vazio
-  // Então: ele é imediatamente redirecionado para a tela do Wizard de Onboarding ao invés do Dashboard principal
-  assert.fail('critério de aceite AC-013 ainda não provado — implemente este teste');
+  const originalGet = api.get;
+  api.get = async (url) => {
+    if (url === '/wallet') {
+      return { status: 200, data: { walletsList: [] } };
+    }
+    throw new Error('Not found');
+  };
+
+  try {
+    await useWalletStore.getState().fetchWallets();
+    const state = useWalletStore.getState();
+    assert.equal(state.wallets.length, 0);
+    assert.equal(state.hasCheckedWallets, true);
+
+    // Então: ele é imediatamente redirecionado para a tela do Wizard de Onboarding ao invés do Dashboard principal
+    const decision = evaluateOnboardingRedirect(
+      useAuthStore.getState().isAuthenticated,
+      state.hasCheckedWallets,
+      state.wallets.length,
+      '/dashboard'
+    );
+
+    assert.equal(decision.shouldRedirect, true);
+    assert.equal(decision.redirectPath, '/onboarding');
+  } finally {
+    api.get = originalGet;
+  }
 });
 
 // US-004 — Assistente de primeiros passos (Wallet e Redirecionamento)
@@ -51,11 +84,37 @@ test('AC-018: Pular adição de Cartão de Crédito (Step 3 - Opcional) @spec:AC
 });
 
 // US-005 — Configuração das contas e cartões no onboarding
-test('AC-019: Prevenção de abandono do Wizard @spec:AC-019', () => {
+test('AC-019: Prevenção de abandono do Wizard @spec:AC-019', async () => {
   // Dado: que o usuário iniciou o onboarding, mas não concluiu (não possui configuração mínima registrada)
+  const { useAuthStore } = await import('../src/stores/auth.store.ts');
+  const { useWalletStore } = await import('../src/stores/wallet.store.ts');
+  const { evaluateOnboardingRedirect } = await import('../src/hooks/useOnboardingCheck.ts');
+
+  useAuthStore.getState().setAuth({ id: 'u1', name: 'Usuário', email: 'user@teste.com' }, 'token-abc');
+  useWalletStore.getState().clearWallets();
+  useWalletStore.getState().setWallets([]); // 0 carteiras
+
   // Quando: ele tentar acessar diretamente qualquer outra rota da área logada como `/dashboard` pela URL
+  const decision = evaluateOnboardingRedirect(
+    useAuthStore.getState().isAuthenticated,
+    true, // hasCheckedWallets
+    useWalletStore.getState().wallets.length,
+    '/dashboard'
+  );
+
   // Então: o sistema o barra e o força de volta para o ambiente de Onboarding
-  assert.fail('critério de aceite AC-019 ainda não provado — implemente este teste');
+  assert.equal(decision.shouldRedirect, true);
+  assert.equal(decision.redirectPath, '/onboarding');
+
+  // Se já estiver em /onboarding, não deve redirecionar
+  const onOnboarding = evaluateOnboardingRedirect(
+    useAuthStore.getState().isAuthenticated,
+    true,
+    useWalletStore.getState().wallets.length,
+    '/onboarding'
+  );
+  assert.equal(onOnboarding.shouldRedirect, false);
+  assert.equal(onOnboarding.redirectPath, null);
 });
 
 // US-005 — Configuração das contas e cartões no onboarding
