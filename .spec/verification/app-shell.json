@@ -1,0 +1,52 @@
+{
+  "feature": "app-shell",
+  "timestamp": "2026-09-14T20:38:51.802Z",
+  "gitRev": "79f8ace",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 0,
+  "testsParsed": 28,
+  "results": {
+    "AC-021": {
+      "status": "pass",
+      "testName": "AC-021: Exibição do layout base @spec:AC-021",
+      "method": "tap"
+    },
+    "AC-022": {
+      "status": "pass",
+      "testName": "AC-022: Menu responsivo em dispositivos móveis @spec:AC-022",
+      "method": "tap"
+    },
+    "AC-023": {
+      "status": "pass",
+      "testName": "AC-023: Indicador de notificações @spec:AC-023",
+      "method": "tap"
+    },
+    "AC-024": {
+      "status": "pass",
+      "testName": "AC-024: Menu de perfil do usuário @spec:AC-024",
+      "method": "tap"
+    },
+    "AC-025": {
+      "status": "pass",
+      "testName": "AC-025: Seletor de carteira @spec:AC-025",
+      "method": "tap"
+    },
+    "AC-026": {
+      "status": "pass",
+      "testName": "AC-026: Recarregamento ao trocar de carteira @spec:AC-026",
+      "method": "tap"
+    },
+    "AC-027": {
+      "status": "pass",
+      "testName": "AC-027: Header obrigatório nas requisições @spec:AC-027",
+      "method": "tap"
+    },
+    "AC-028": {
+      "status": "pass",
+      "testName": "AC-028: Rota protegida sem carteira @spec:AC-028",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

@@ -7,6 +7,7 @@ import { ForgotPasswordPage } from '../pages/auth/ForgotPasswordPage.tsx';
 import { PublicRoute } from './PublicRoute.tsx';
 import { PrivateRoute } from './PrivateRoute.tsx';
 import { OnboardingPage } from '../pages/onboarding/OnboardingPage.tsx';
+import { AppLayout } from '../layouts/AppLayout.tsx';
 
 const DashboardPlaceholder = () => (
   <div className="p-8 text-center">
@@ -30,7 +31,9 @@ export const AppRoutes: React.FC = () => {
 
         {/* Rotas Privadas */}
         <Route element={<PrivateRoute />}>
-          <Route path="/dashboard" element={<DashboardPlaceholder />} />
+          <Route element={<AppLayout />}>
+            <Route path="/dashboard" element={<DashboardPlaceholder />} />
+          </Route>
           <Route path="/onboarding" element={<OnboardingPage />} />
         </Route>
 
