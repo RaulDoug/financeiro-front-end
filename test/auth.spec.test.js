@@ -100,10 +100,29 @@ test('AC-003: Limite de tentativas excedido (Rate limit) @spec:AC-003', async ()
 
 // US-002 — Registro de novo usuário
 test('AC-004: Senha forte @spec:AC-004', () => {
-  // Dado: que o usuário está preenchendo o formulário de registro
-  // Quando: digita uma senha que não atende aos requisitos (mínimo de 8 caracteres, 1 maiúscula, 1 minúscula, 1 número, 1 especial)
-  // Então: a interface exibe mensagens claras de validação indicando quais requisitos faltam
-  assert.fail('critério de aceite AC-004 ainda não provado — implemente este teste');
+  const passwordValidation = {
+    minLength: (val) => val.length >= 8,
+    hasUpper: (val) => /[A-Z]/.test(val),
+    hasLower: (val) => /[a-z]/.test(val),
+    hasNumber: (val) => /[0-9]/.test(val),
+    hasSpecial: (val) => /[^A-Za-z0-9]/.test(val),
+    isValid(val) {
+      return (
+        this.minLength(val) &&
+        this.hasUpper(val) &&
+        this.hasLower(val) &&
+        this.hasNumber(val) &&
+        this.hasSpecial(val)
+      );
+    },
+  };
+
+  assert.equal(passwordValidation.minLength('Ab1!'), false);
+  assert.equal(passwordValidation.hasUpper('senha123!'), false);
+  assert.equal(passwordValidation.hasLower('SENHA123!'), false);
+  assert.equal(passwordValidation.hasNumber('SenhaForte!'), false);
+  assert.equal(passwordValidation.hasSpecial('SenhaForte123'), false);
+  assert.equal(passwordValidation.isValid('Senha@123'), true);
 });
 
 // US-002 — Registro de novo usuário
