@@ -23,7 +23,7 @@
 - Arquivos: src/components/transactions/TransactionTable.tsx, src/components/transactions/TransactionMobileList.tsx
 - Notas: Desenvolver visualização de transações mobile em formato de cards verticais compactos, com todos os dados essenciais e sem scroll horizontal.
 
-## T-097 — Modal global unificado de Detalhes da Transação com ações de edição e exclusão [pendente]
+## T-097 — Modal global unificado de Detalhes da Transação com ações de edição e exclusão [concluida]
 
 - Refs: US-038, AC-141, AC-142
 - Arquivos: src/stores/transactionDetailsModal.store.ts, src/components/transactions/TransactionDetailsModal.tsx, src/layouts/AppLayout.tsx

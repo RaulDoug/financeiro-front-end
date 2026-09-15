@@ -4,6 +4,7 @@ import { Topbar } from '../components/layout/Topbar.tsx';
 import { Sidebar } from '../components/layout/Sidebar.tsx';
 import { WalletSelector } from '../components/layout/WalletSelector.tsx';
 import { MobileNav } from '../components/layout/MobileNav.tsx';
+import { TransactionDetailsModal } from '../components/transactions/TransactionDetailsModal.tsx';
 
 export interface NavItem {
   label: string;
@@ -74,6 +75,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ topbar, sidebar, children 
 
       {/* Mobile Bottom Navigation */}
       <MobileNav />
+
+      {/* Modal Global de Detalhes da Transação */}
+      <TransactionDetailsModal />
     </div>
   );
 };
