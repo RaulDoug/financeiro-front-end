@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Plus } from 'lucide-react';
 import { useTransactions } from '../../hooks/useTransactions.ts';
 import { useTransactionMutations } from '../../hooks/useTransactionMutations.ts';
@@ -21,12 +22,37 @@ const getInitialMonthRange = () => {
 };
 
 export const TransactionsPage: React.FC = () => {
-  const [filters, setFilters] = useState<FiltersType>(() => ({
-    ...getInitialMonthRange(),
-    order_by: 'due_date',
-    order_dir: 'ASC',
-    limit: 20,
-  }));
+  const [searchParams] = useSearchParams();
+  const statusParam = searchParams.get('status') as FiltersType['status'];
+
+  const [filters, setFilters] = useState<FiltersType>(() => {
+    if (statusParam) {
+      return {
+        status: statusParam,
+        order_by: 'due_date',
+        order_dir: 'ASC',
+        limit: 20,
+      };
+    }
+    return {
+      ...getInitialMonthRange(),
+      order_by: 'due_date',
+      order_dir: 'ASC',
+      limit: 20,
+    };
+  });
+
+  useEffect(() => {
+    const status = searchParams.get('status') as FiltersType['status'];
+    if (status) {
+      setFilters((prev) => ({
+        ...prev,
+        status,
+        due_date_from: undefined,
+        due_date_to: undefined,
+      }));
+    }
+  }, [searchParams]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null);

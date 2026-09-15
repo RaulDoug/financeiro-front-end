@@ -29,7 +29,7 @@
 - Arquivos: src/stores/transactionDetailsModal.store.ts, src/components/transactions/TransactionDetailsModal.tsx, src/layouts/AppLayout.tsx
 - Notas: Implementar modal padrão de exibição de dados completos da transação com botões Editar e Excluir integrados ao store e layouts globais.
 
-## T-098 — Centralização do popover de notificações e navegações do sino [pendente]
+## T-098 — Centralização do popover de notificações e navegações do sino [concluida]
 
 - Refs: US-039, AC-143, AC-144, AC-145
 - Arquivos: src/components/layout/NotificationsBell.tsx

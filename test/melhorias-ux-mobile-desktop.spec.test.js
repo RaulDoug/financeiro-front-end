@@ -214,26 +214,53 @@ test('AC-142: Ações de Edição e Exclusão a partir do Modal de Detalhes @spe
 
 // US-039 — Centralização e Rastreabilidade do Sino de Notificações
 test('AC-143: Popover de notificações centralizado horizontalmente @spec:AC-143', () => {
-  // Dado: o cabeçalho da aplicação em qualquer tamanho de tela
-  // Quando: o usuário clica no sino de notificações
-  // Então: o painel popover abre alinhado ao centro horizontal relativo ao header/viewport, sem transbordar para a borda direita da tela.
-  assert.fail('critério de aceite AC-143 ainda não provado — implemente este teste');
+  const bellSource = readSource('components/layout/NotificationsBell.tsx');
+
+  // Popover deve possuir classes de centralização horizontal
+  assert.ok(
+    bellSource.includes('data-testid="notifications-popover"') &&
+    bellSource.includes('left-1/2') &&
+    bellSource.includes('-translate-x-1/2'),
+    'Popover de notificações deve ser centralizado horizontalmente relativo ao acionador'
+  );
 });
 
 // US-039 — Centralização e Rastreabilidade do Sino de Notificações
 test('AC-144: Navegação direta para detalhes da transação a partir do alerta vencido @spec:AC-144', () => {
-  // Dado: a lista de contas atrasadas no popover de notificações
-  // Quando: o usuário clica em um item vencido
-  // Então: o popover se fecha e o modal de detalhes daquela transação é aberto imediatamente na tela.
-  assert.fail('critério de aceite AC-144 ainda não provado — implemente este teste');
+  const bellSource = readSource('components/layout/NotificationsBell.tsx');
+
+  // Ao clicar no item vencido, deve invocar o modal de detalhes e fechar o popover
+  assert.ok(
+    bellSource.includes('handleSelectOverdueItem') &&
+    bellSource.includes('useTransactionDetailsModalStore.getState().openModal'),
+    'Item vencido deve abrir o TransactionDetailsModal global'
+  );
+
+  assert.ok(
+    bellSource.includes('data-testid={`overdue-item-${item.id}`}') &&
+    bellSource.includes('onClick={() => handleSelectOverdueItem(item)}'),
+    'Item de alerta vencido deve possuir testid e handler de seleção'
+  );
 });
 
 // US-039 — Centralização e Rastreabilidade do Sino de Notificações
 test('AC-145: Redirecionamento com filtro de vencidas ao clicar em \'Ver transações vencidas\' @spec:AC-145', () => {
-  // Dado: o popover de notificações aberto
-  // Quando: o usuário clica no botão "Ver transações vencidas"
-  // Então: a aplicação navega para `/transactions` com o filtro pré-ativado para exibir apenas as transações vencidas/em atraso.
-  assert.fail('critério de aceite AC-145 ainda não provado — implemente este teste');
+  const bellSource = readSource('components/layout/NotificationsBell.tsx');
+  const transactionsSource = readSource('pages/Transactions/index.tsx');
+
+  // Botão/Link deve navegar para a rota de transações com o parâmetro status=expired
+  assert.ok(
+    bellSource.includes('data-testid="link-view-overdue"') &&
+    bellSource.includes('/transactions?status=expired'),
+    'Link deve apontar para transações com parâmetro status=expired'
+  );
+
+  // TransactionsPage deve ler searchParams e setar o status filtrado
+  assert.ok(
+    transactionsSource.includes('useSearchParams()') &&
+    transactionsSource.includes("searchParams.get('status')"),
+    'TransactionsPage deve aplicar o filtro de status vindo da query string'
+  );
 });
 
 // US-040 — Customização e Visualização de Cartões de Crédito
