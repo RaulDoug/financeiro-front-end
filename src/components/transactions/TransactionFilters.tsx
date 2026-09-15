@@ -1,6 +1,7 @@
-import React from 'react';
-import { Search, X, ChevronLeft, ChevronRight, Calendar, ArrowUpDown } from 'lucide-react';
+import React, { useState } from 'react';
+import { Search, X, ChevronLeft, ChevronRight, Calendar, ArrowUpDown, SlidersHorizontal } from 'lucide-react';
 import type { TransactionFilters as FiltersType, TransactionType, TransactionStatus } from '../../types/transaction.ts';
+import { TransactionAdvancedFiltersModal } from './TransactionAdvancedFiltersModal.tsx';
 
 interface Props {
   filters: FiltersType;
@@ -110,60 +111,76 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
   );
 
   const isAscending = (filters.order_dir ?? 'ASC') === 'ASC';
+  const [isAdvancedFiltersOpen, setIsAdvancedFiltersOpen] = useState(false);
+
+  const activeAdvancedCount = [
+    filters.category_id,
+    filters.pay_methods_id,
+    filters.bank_account_id,
+  ].filter(Boolean).length;
 
   return (
     <div className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-gray-100 dark:border-slate-800 shadow-sm space-y-4">
-      {/* Linha superior: Navegação de mês, busca e alternador de ordenação */}
+      {/* Linha superior: Navegação de mês, busca, filtros avançados e ordenação */}
       <div className="flex flex-col lg:flex-row gap-3 items-start lg:items-center justify-between">
-        {/* Navegador de Mês */}
-        <div className="flex items-center gap-1.5 bg-gray-50 dark:bg-slate-800/70 p-1 rounded-xl border border-gray-200 dark:border-slate-700">
-          <button
-            type="button"
-            onClick={handlePrevMonth}
-            className="p-1.5 rounded-lg text-gray-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 transition shadow-2xs"
-            title="Mês anterior"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-
-          <div className="flex items-center gap-1.5 px-3 py-1">
-            <Calendar className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-            <span className="text-xs font-semibold capitalize text-gray-800 dark:text-slate-200 min-w-[120px] text-center">
-              {formattedMonthLabel}
-            </span>
-          </div>
-
-          <button
-            type="button"
-            onClick={handleNextMonth}
-            className="p-1.5 rounded-lg text-gray-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 transition shadow-2xs"
-            title="Próximo mês"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-
-          <div className="h-4 w-px bg-gray-300 dark:bg-slate-600 mx-1" />
-
-          <button
-            type="button"
-            onClick={handleCurrentMonth}
-            className="px-2 py-1 text-[11px] font-medium text-blue-600 dark:text-blue-400 hover:bg-white dark:hover:bg-slate-700 rounded-lg transition"
-          >
-            Este Mês
-          </button>
-
-          {filters.due_date_from && (
+        {/* Navegador de Mês e Período (2 linhas no mobile, 1 linha no desktop) */}
+        <div
+          className="flex flex-col sm:flex-row items-stretch sm:items-center gap-1.5 bg-gray-50 dark:bg-slate-800/70 p-1.5 rounded-xl border border-gray-200 dark:border-slate-700 w-full lg:w-auto"
+          data-testid="month-filter-section"
+        >
+          {/* Linha superior no mobile: Seletor de mês */}
+          <div className="flex items-center justify-between sm:justify-start gap-1">
             <button
               type="button"
-              onClick={handleAllDates}
-              className="px-2 py-1 text-[11px] font-medium text-gray-500 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-700 rounded-lg transition"
+              onClick={handlePrevMonth}
+              className="p-1.5 rounded-lg text-gray-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 transition shadow-2xs cursor-pointer"
+              title="Mês anterior"
             >
-              Todas as datas
+              <ChevronLeft className="w-4 h-4" />
             </button>
-          )}
+
+            <div className="flex items-center justify-center gap-1.5 px-3 py-1 flex-1 sm:flex-initial">
+              <Calendar className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <span className="text-xs font-semibold capitalize text-gray-800 dark:text-slate-200 min-w-[120px] text-center">
+                {formattedMonthLabel}
+              </span>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleNextMonth}
+              className="p-1.5 rounded-lg text-gray-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 transition shadow-2xs cursor-pointer"
+              title="Próximo mês"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          <div className="hidden sm:block h-4 w-px bg-gray-300 dark:bg-slate-600 mx-1" />
+
+          {/* Linha inferior no mobile: Atalhos 'Este Mês' e 'Todas as datas' */}
+          <div className="flex items-center justify-center sm:justify-start gap-1 pt-1.5 sm:pt-0 border-t sm:border-t-0 border-gray-200 dark:border-slate-700">
+            <button
+              type="button"
+              onClick={handleCurrentMonth}
+              className="flex-1 sm:flex-none px-2.5 py-1 text-[11px] font-medium text-blue-600 dark:text-blue-400 hover:bg-white dark:hover:bg-slate-700 rounded-lg transition text-center cursor-pointer"
+            >
+              Este Mês
+            </button>
+
+            {filters.due_date_from && (
+              <button
+                type="button"
+                onClick={handleAllDates}
+                className="flex-1 sm:flex-none px-2.5 py-1 text-[11px] font-medium text-gray-500 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-700 rounded-lg transition text-center cursor-pointer"
+              >
+                Todas as datas
+              </button>
+            )}
+          </div>
         </div>
 
-        {/* Busca e Ordenação */}
+        {/* Busca, Filtros Avançados e Ordenação */}
         <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto">
           {/* Barra de busca */}
           <div className="relative flex-1 sm:w-64">
@@ -177,11 +194,28 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
             />
           </div>
 
+          {/* Botão de Filtros Avançados */}
+          <button
+            type="button"
+            onClick={() => setIsAdvancedFiltersOpen(true)}
+            data-testid="btn-advanced-filters"
+            className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 dark:border-slate-700 dark:bg-slate-800 rounded-lg text-xs font-medium text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition cursor-pointer"
+            title="Abrir filtros avançados"
+          >
+            <SlidersHorizontal className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+            <span>Filtros</span>
+            {activeAdvancedCount > 0 && (
+              <span className="w-4 h-4 rounded-full bg-blue-600 text-white text-[10px] flex items-center justify-center font-bold">
+                {activeAdvancedCount}
+              </span>
+            )}
+          </button>
+
           {/* Botão de Direção da Ordenação por Vencimento */}
           <button
             type="button"
             onClick={handleToggleOrderDir}
-            className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 dark:border-slate-700 dark:bg-slate-800 rounded-lg text-xs font-medium text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 dark:border-slate-700 dark:bg-slate-800 rounded-lg text-xs font-medium text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition cursor-pointer"
             title="Alternar direção de ordenação por data de vencimento"
           >
             <ArrowUpDown className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
@@ -301,6 +335,25 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
           </button>
         </div>
       </div>
+
+      {/* Modal de Filtros Avançados */}
+      <TransactionAdvancedFiltersModal
+        isOpen={isAdvancedFiltersOpen}
+        onClose={() => setIsAdvancedFiltersOpen(false)}
+        filters={filters}
+        onApply={(newFilters) => onChange({ ...filters, ...newFilters })}
+        onReset={() =>
+          onChange({
+            ...filters,
+            category_id: undefined,
+            pay_methods_id: undefined,
+            bank_account_id: undefined,
+            status: undefined,
+            type: undefined,
+            page: 1,
+          })
+        }
+      />
     </div>
   );
 };

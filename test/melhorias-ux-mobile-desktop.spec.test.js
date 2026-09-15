@@ -90,26 +90,56 @@ test('AC-136: Scroll horizontal e barras condensadas no gráfico de Receitas x D
 
 // US-037 — Reorganização e Filtros Avançados na Tela de Transações
 test('AC-137: Ocultação do botão de nova transação no mobile @spec:AC-137', () => {
-  // Dado: a página de Transações em viewport mobile (< 768px)
-  // Quando: o topo da página é visualizado
-  // Então: o botão de cabeçalho "Nova Transação" fica oculto, utilizando o botão (+) da barra inferior.
-  assert.fail('critério de aceite AC-137 ainda não provado — implemente este teste');
+  const transactionsSource = readSource('pages/Transactions/index.tsx');
+
+  // O botão de cabeçalho 'Nova Transação' deve possuir classe 'hidden md:flex' para ocultar no mobile
+  assert.ok(
+    transactionsSource.includes('hidden md:flex') && transactionsSource.includes('Nova Transação'),
+    'Botão Nova Transação da página deve ficar oculto no mobile'
+  );
 });
 
 // US-037 — Reorganização e Filtros Avançados na Tela de Transações
 test('AC-138: Reorganização da barra de período e filtros de data no mobile @spec:AC-138', () => {
-  // Dado: a barra de filtros da tela de transações em dispositivo móvel
-  // Quando: os controles são renderizados
-  // Então: o seletor de mês/ano fica posicionado na linha superior e os botões de atalho ("Este mês" e "Todas as datas") na linha inferior, contidos perfeitamente dentro dos limites do card sem transbordar.
-  assert.fail('critério de aceite AC-138 ainda não provado — implemente este teste');
+  const filtersSource = readSource('components/transactions/TransactionFilters.tsx');
+
+  // A seção de mês deve adotar flex-col no mobile e flex-row no desktop
+  assert.ok(
+    filtersSource.includes('flex flex-col sm:flex-row') && filtersSource.includes('data-testid="month-filter-section"'),
+    'Seção de filtros de período deve ser empilhada em duas linhas no mobile'
+  );
+
+  // Deve possuir atalhos 'Este Mês' e 'Todas as datas'
+  assert.ok(
+    filtersSource.includes('Este Mês') && filtersSource.includes('Todas as datas'),
+    'Deve conter botões de atalho Este Mês e Todas as datas'
+  );
 });
 
 // US-037 — Reorganização e Filtros Avançados na Tela de Transações
 test('AC-139: Botão e painel de Filtros Avançados (Desktop e Mobile) @spec:AC-139', () => {
-  // Dado: a barra de filtros de transações em qualquer dispositivo
-  // Quando: o usuário clica no botão "Filtros"
-  // Então: abre-se um painel modal ou gaveta contendo opções para filtrar por categoria específica, método de pagamento, tipo e status, aplicando os filtros instantaneamente à lista.
-  assert.fail('critério de aceite AC-139 ainda não provado — implemente este teste');
+  const filtersSource = readSource('components/transactions/TransactionFilters.tsx');
+  const modalSource = readSource('components/transactions/TransactionAdvancedFiltersModal.tsx');
+
+  // TransactionFilters deve possuir o botão Filtros
+  assert.ok(
+    filtersSource.includes('data-testid="btn-advanced-filters"'),
+    'Deve conter botão para acionar filtros avançados'
+  );
+
+  // TransactionAdvancedFiltersModal deve conter seletores de categoria, método de pagamento, conta e status
+  assert.ok(
+    modalSource.includes('data-testid="filter-category-select"') &&
+    modalSource.includes('data-testid="filter-pay-method-select"') &&
+    modalSource.includes('data-testid="filter-bank-account-select"') &&
+    modalSource.includes('data-testid="filter-status-select"'),
+    'Modal deve disponibilizar seletores de categoria, método de pagamento, conta bancária e status'
+  );
+
+  assert.ok(
+    modalSource.includes('data-testid="btn-apply-advanced-filters"'),
+    'Modal deve possuir botão para aplicar os filtros'
+  );
 });
 
 // US-037 — Reorganização e Filtros Avançados na Tela de Transações

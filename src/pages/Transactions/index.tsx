@@ -98,7 +98,7 @@ export const TransactionsPage: React.FC = () => {
 
         <button
           onClick={handleOpenNew}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold shadow-sm transition-colors"
+          className="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold shadow-sm transition-colors cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           Nova Transação

@@ -12,8 +12,7 @@
 - Arquivos: src/pages/Dashboard/DashboardPage.tsx, src/pages/Dashboard/components/IncomeExpenseChart.tsx, src/hooks/useDashboardData.ts
 - Notas: Implementar seletor de mês/ano na Dashboard com reatividade nas métricas e lista de transações; adicionar espaçamento compacto e touch scroll horizontal no gráfico de receitas x despesas.
 
-## T-095 — Reorganização de filtros e painel de Filtros Avançados na tela de Transações [pendente]
-
+## T-095 — Reorganização de filtros e painel de Filtros Avançados na tela de Transações [concluida]
 - Refs: US-037, AC-137, AC-138, AC-139
 - Arquivos: src/pages/Transactions/index.tsx, src/components/transactions/TransactionFilters.tsx, src/components/transactions/TransactionAdvancedFiltersModal.tsx
 - Notas: Esconder botão Nova Transação no mobile; reordenar seleção de período em duas linhas contidas no card; criar modal de filtros avançados por categoria, método de pagamento e conta para desktop e mobile.
