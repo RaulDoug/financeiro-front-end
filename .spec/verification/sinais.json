@@ -1841,10 +1841,10 @@
       "codigo": "GLOB_SEM_ARQUIVOS",
       "feature": "—",
       "ref": "P-002",
-      "ocorrencias": 17,
+      "ocorrencias": 20,
       "primeiraVez": "2026-09-14T13:21:58.420Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:04:13.727Z",
+      "gitRev": "8834cd3"
     },
     "AC_SEM_TESTE::cartoes-credito::AC-077": {
       "codigo": "AC_SEM_TESTE",
@@ -2066,46 +2066,46 @@
       "codigo": "ARQUIVO_ORFAO",
       "feature": "—",
       "ref": "src/assets/hero.png",
-      "ocorrencias": 15,
+      "ocorrencias": 18,
       "primeiraVez": "2026-09-14T19:01:38.382Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:04:13.727Z",
+      "gitRev": "8834cd3"
     },
     "ARQUIVO_ORFAO::—::src/assets/react.svg": {
       "codigo": "ARQUIVO_ORFAO",
       "feature": "—",
       "ref": "src/assets/react.svg",
-      "ocorrencias": 15,
+      "ocorrencias": 18,
       "primeiraVez": "2026-09-14T19:01:38.382Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:04:13.727Z",
+      "gitRev": "8834cd3"
     },
     "ARQUIVO_ORFAO::—::src/assets/vite.svg": {
       "codigo": "ARQUIVO_ORFAO",
       "feature": "—",
       "ref": "src/assets/vite.svg",
-      "ocorrencias": 15,
+      "ocorrencias": 18,
       "primeiraVez": "2026-09-14T19:01:38.382Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:04:13.727Z",
+      "gitRev": "8834cd3"
     },
     "ARQUIVO_ORFAO::—::src/components/index.ts": {
       "codigo": "ARQUIVO_ORFAO",
       "feature": "—",
       "ref": "src/components/index.ts",
-      "ocorrencias": 15,
+      "ocorrencias": 18,
       "primeiraVez": "2026-09-14T19:01:38.382Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:04:13.727Z",
+      "gitRev": "8834cd3"
     },
     "ARQUIVO_ORFAO::—::src/hooks/index.ts": {
       "codigo": "ARQUIVO_ORFAO",
       "feature": "—",
       "ref": "src/hooks/index.ts",
-      "ocorrencias": 15,
+      "ocorrencias": 18,
       "primeiraVez": "2026-09-14T19:01:38.382Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:04:13.727Z",
+      "gitRev": "8834cd3"
     },
     "ARQUIVO_ORFAO::—::src/index.css": {
       "codigo": "ARQUIVO_ORFAO",
@@ -2120,19 +2120,19 @@
       "codigo": "ARQUIVO_ORFAO",
       "feature": "—",
       "ref": "src/main.tsx",
-      "ocorrencias": 15,
+      "ocorrencias": 18,
       "primeiraVez": "2026-09-14T19:01:38.382Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:04:13.727Z",
+      "gitRev": "8834cd3"
     },
     "ARQUIVO_ORFAO::—::src/pages/index.ts": {
       "codigo": "ARQUIVO_ORFAO",
       "feature": "—",
       "ref": "src/pages/index.ts",
-      "ocorrencias": 15,
+      "ocorrencias": 18,
       "primeiraVez": "2026-09-14T19:01:38.382Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:04:13.727Z",
+      "gitRev": "8834cd3"
     },
     "ARQUIVO_ORFAO::—::src/services/api.ts": {
       "codigo": "ARQUIVO_ORFAO",
@@ -2147,10 +2147,10 @@
       "codigo": "ARQUIVO_ORFAO",
       "feature": "—",
       "ref": "src/services/index.ts",
-      "ocorrencias": 15,
+      "ocorrencias": 18,
       "primeiraVez": "2026-09-14T19:01:38.382Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:04:13.727Z",
+      "gitRev": "8834cd3"
     },
     "ARQUIVO_ORFAO::—::src/stores/authStore.ts": {
       "codigo": "ARQUIVO_ORFAO",
@@ -2165,19 +2165,19 @@
       "codigo": "ARQUIVO_ORFAO",
       "feature": "—",
       "ref": "src/stores/index.ts",
-      "ocorrencias": 15,
+      "ocorrencias": 18,
       "primeiraVez": "2026-09-14T19:01:38.382Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:04:13.727Z",
+      "gitRev": "8834cd3"
     },
     "VERIFY_OBSOLETO::auth::—": {
       "codigo": "VERIFY_OBSOLETO",
       "feature": "auth",
       "ref": "—",
-      "ocorrencias": 11,
+      "ocorrencias": 16,
       "primeiraVez": "2026-09-14T20:05:10.902Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:21:45.308Z",
+      "gitRev": "8834cd3"
     },
     "TASK_CONCLUIDA_SEM_PROVA::onboarding::T-009": {
       "codigo": "TASK_CONCLUIDA_SEM_PROVA",
@@ -2219,46 +2219,46 @@
       "codigo": "VERIFY_OBSOLETO",
       "feature": "onboarding",
       "ref": "—",
-      "ocorrencias": 10,
+      "ocorrencias": 15,
       "primeiraVez": "2026-09-14T20:38:18.754Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:21:45.308Z",
+      "gitRev": "8834cd3"
     },
     "VERIFY_OBSOLETO::app-shell::—": {
       "codigo": "VERIFY_OBSOLETO",
       "feature": "app-shell",
       "ref": "—",
-      "ocorrencias": 9,
+      "ocorrencias": 12,
       "primeiraVez": "2026-09-14T20:52:43.690Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:21:45.307Z",
+      "gitRev": "8834cd3"
     },
     "VERIFY_OBSOLETO::dashboard::—": {
       "codigo": "VERIFY_OBSOLETO",
       "feature": "dashboard",
       "ref": "—",
-      "ocorrencias": 9,
+      "ocorrencias": 14,
       "primeiraVez": "2026-09-14T20:52:43.690Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:21:45.308Z",
+      "gitRev": "8834cd3"
     },
     "ARQUIVO_ORFAO::—::src/lib/queryClient.ts": {
       "codigo": "ARQUIVO_ORFAO",
       "feature": "—",
       "ref": "src/lib/queryClient.ts",
-      "ocorrencias": 10,
+      "ocorrencias": 13,
       "primeiraVez": "2026-09-14T20:52:43.691Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:04:13.727Z",
+      "gitRev": "8834cd3"
     },
     "ARQUIVO_ORFAO::—::src/pages/Dashboard/index.ts": {
       "codigo": "ARQUIVO_ORFAO",
       "feature": "—",
       "ref": "src/pages/Dashboard/index.ts",
-      "ocorrencias": 10,
+      "ocorrencias": 13,
       "primeiraVez": "2026-09-14T20:52:43.691Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:04:13.727Z",
+      "gitRev": "8834cd3"
     },
     "ARQUIVO_ORFAO::—::src/services/category.service.ts": {
       "codigo": "ARQUIVO_ORFAO",
@@ -2273,37 +2273,37 @@
       "codigo": "VERIFY_OBSOLETO",
       "feature": "cartoes-credito",
       "ref": "—",
-      "ocorrencias": 7,
+      "ocorrencias": 11,
       "primeiraVez": "2026-09-14T21:39:05.320Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:12:19.389Z",
+      "gitRev": "8834cd3"
     },
     "VERIFY_OBSOLETO::contas-bancarias::—": {
       "codigo": "VERIFY_OBSOLETO",
       "feature": "contas-bancarias",
       "ref": "—",
-      "ocorrencias": 7,
+      "ocorrencias": 12,
       "primeiraVez": "2026-09-14T21:39:05.320Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:21:45.308Z",
+      "gitRev": "8834cd3"
     },
     "VERIFY_OBSOLETO::transacoes::—": {
       "codigo": "VERIFY_OBSOLETO",
       "feature": "transacoes",
       "ref": "—",
-      "ocorrencias": 7,
+      "ocorrencias": 12,
       "primeiraVez": "2026-09-14T21:39:05.320Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:21:45.308Z",
+      "gitRev": "8834cd3"
     },
     "ARQUIVO_ORFAO::—::src/components/credit-cards/CreditCardDeleteDialog.tsx": {
       "codigo": "ARQUIVO_ORFAO",
       "feature": "—",
       "ref": "src/components/credit-cards/CreditCardDeleteDialog.tsx",
-      "ocorrencias": 8,
+      "ocorrencias": 11,
       "primeiraVez": "2026-09-14T21:39:05.320Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:04:13.727Z",
+      "gitRev": "8834cd3"
     },
     "ARQUIVO_ORFAO::—::src/pages/Settings/SettingsLayout.tsx": {
       "codigo": "ARQUIVO_ORFAO",
@@ -2336,19 +2336,19 @@
       "codigo": "VERIFY_OBSOLETO",
       "feature": "configuracoes",
       "ref": "—",
-      "ocorrencias": 6,
+      "ocorrencias": 11,
       "primeiraVez": "2026-09-14T21:44:07.156Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:21:45.308Z",
+      "gitRev": "8834cd3"
     },
     "VERIFY_OBSOLETO::investimentos::—": {
       "codigo": "VERIFY_OBSOLETO",
       "feature": "investimentos",
       "ref": "—",
-      "ocorrencias": 6,
+      "ocorrencias": 11,
       "primeiraVez": "2026-09-14T21:44:07.156Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:21:45.308Z",
+      "gitRev": "8834cd3"
     },
     "ARQUIVO_ORFAO::—::src/schemas/investmentSchema.ts": {
       "codigo": "ARQUIVO_ORFAO",
@@ -2363,19 +2363,19 @@
       "codigo": "ARQUIVO_ORFAO",
       "feature": "—",
       "ref": "src/types/investment.ts",
-      "ocorrencias": 7,
+      "ocorrencias": 10,
       "primeiraVez": "2026-09-14T21:44:07.156Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:04:13.727Z",
+      "gitRev": "8834cd3"
     },
     "VERIFY_OBSOLETO::relatorios::—": {
       "codigo": "VERIFY_OBSOLETO",
       "feature": "relatorios",
       "ref": "—",
-      "ocorrencias": 5,
+      "ocorrencias": 10,
       "primeiraVez": "2026-09-14T22:05:56.720Z",
-      "ultimaVez": "2026-09-15T11:24:53.775Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:21:45.308Z",
+      "gitRev": "8834cd3"
     },
     "ID_DUPLICADO::auth::ASM-001": {
       "codigo": "ID_DUPLICADO",
@@ -2669,10 +2669,334 @@
       "codigo": "VERIFY_OBSOLETO",
       "feature": "ajustes-mobile-tema-notificacoes",
       "ref": "—",
-      "ocorrencias": 2,
+      "ocorrencias": 6,
       "primeiraVez": "2026-09-15T11:24:23.143Z",
-      "ultimaVez": "2026-09-15T11:24:53.774Z",
-      "gitRev": "c5a0356"
+      "ultimaVez": "2026-09-15T13:12:19.389Z",
+      "gitRev": "8834cd3"
+    },
+    "ARQUIVO_INEXISTENTE::melhorias-ux-mobile-desktop::T-095": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "T-095",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "ARQUIVO_INEXISTENTE::melhorias-ux-mobile-desktop::T-096": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "T-096",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "ARQUIVO_INEXISTENTE::melhorias-ux-mobile-desktop::T-097": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "T-097",
+      "ocorrencias": 2,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "ARQUIVO_INEXISTENTE::melhorias-ux-mobile-desktop::T-100": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "T-100",
+      "ocorrencias": 4,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "ARQUIVO_INEXISTENTE::melhorias-ux-mobile-desktop::T-101": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "T-101",
+      "ocorrencias": 2,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "ARQUIVO_INEXISTENTE::melhorias-ux-mobile-desktop::T-102": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "T-102",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-133": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-133",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-134": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-134",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-135": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-135",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-136": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-136",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-137": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-137",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-138": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-138",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-139": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-139",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-140": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-140",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-141": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-141",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-142": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-142",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-143": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-143",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-144": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-144",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-145": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-145",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-146": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-146",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-147": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-147",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-148": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-148",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-149": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-149",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-150": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-150",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-151": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-151",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-152": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-152",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-153": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-153",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-154": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-154",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "AC_SEM_TESTE::melhorias-ux-mobile-desktop::AC-155": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-155",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T11:28:28.635Z",
+      "ultimaVez": "2026-09-15T11:28:28.635Z",
+      "gitRev": "ccfc682"
+    },
+    "VERIFY_FALHOU::ajustes-mobile-tema-notificacoes::AC-124": {
+      "codigo": "VERIFY_FALHOU",
+      "feature": "ajustes-mobile-tema-notificacoes",
+      "ref": "AC-124",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:12:53.825Z",
+      "ultimaVez": "2026-09-15T13:12:53.825Z",
+      "gitRev": "8834cd3"
+    },
+    "VERIFY_FALHOU::cartoes-credito::AC-074": {
+      "codigo": "VERIFY_FALHOU",
+      "feature": "cartoes-credito",
+      "ref": "AC-074",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:12:54.983Z",
+      "ultimaVez": "2026-09-15T13:12:54.983Z",
+      "gitRev": "8834cd3"
+    },
+    "TASK_CONCLUIDA_SEM_PROVA::ajustes-mobile-tema-notificacoes::T-087": {
+      "codigo": "TASK_CONCLUIDA_SEM_PROVA",
+      "feature": "ajustes-mobile-tema-notificacoes",
+      "ref": "T-087",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:13:32.624Z",
+      "ultimaVez": "2026-09-15T13:13:32.624Z",
+      "gitRev": "8834cd3"
+    },
+    "TASK_CONCLUIDA_SEM_PROVA::ajustes-mobile-tema-notificacoes::T-092": {
+      "codigo": "TASK_CONCLUIDA_SEM_PROVA",
+      "feature": "ajustes-mobile-tema-notificacoes",
+      "ref": "T-092",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:13:32.624Z",
+      "ultimaVez": "2026-09-15T13:13:32.624Z",
+      "gitRev": "8834cd3"
+    },
+    "AC_SEM_PROVA::ajustes-mobile-tema-notificacoes::AC-124": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "ajustes-mobile-tema-notificacoes",
+      "ref": "AC-124",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:13:32.624Z",
+      "ultimaVez": "2026-09-15T13:13:32.624Z",
+      "gitRev": "8834cd3"
+    },
+    "TASK_CONCLUIDA_SEM_PROVA::cartoes-credito::T-049": {
+      "codigo": "TASK_CONCLUIDA_SEM_PROVA",
+      "feature": "cartoes-credito",
+      "ref": "T-049",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:13:32.624Z",
+      "ultimaVez": "2026-09-15T13:13:32.624Z",
+      "gitRev": "8834cd3"
+    },
+    "AC_SEM_PROVA::cartoes-credito::AC-074": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "cartoes-credito",
+      "ref": "AC-074",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:13:32.624Z",
+      "ultimaVez": "2026-09-15T13:13:32.624Z",
+      "gitRev": "8834cd3"
     }
   }
 }

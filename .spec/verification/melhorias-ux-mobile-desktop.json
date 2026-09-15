@@ -1,0 +1,127 @@
+{
+  "feature": "melhorias-ux-mobile-desktop",
+  "timestamp": "2026-09-15T13:21:09.334Z",
+  "gitRev": "8834cd3",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 0,
+  "testsParsed": 145,
+  "results": {
+    "AC-133": {
+      "status": "pass",
+      "testName": "AC-133: Ocultação de ações redundantes e menu hambúrguer no mobile @spec:AC-133",
+      "method": "tap"
+    },
+    "AC-134": {
+      "status": "pass",
+      "testName": "AC-134: Tipografia fluida e responsiva nos cards da Dashboard @spec:AC-134",
+      "method": "tap"
+    },
+    "AC-135": {
+      "status": "pass",
+      "testName": "AC-135: Filtro de mês e ano no Dashboard @spec:AC-135",
+      "method": "tap"
+    },
+    "AC-136": {
+      "status": "pass",
+      "testName": "AC-136: Scroll horizontal e barras condensadas no gráfico de Receitas x Despesas da Dashboard @spec:AC-136",
+      "method": "tap"
+    },
+    "AC-137": {
+      "status": "pass",
+      "testName": "AC-137: Ocultação do botão de nova transação no mobile @spec:AC-137",
+      "method": "tap"
+    },
+    "AC-138": {
+      "status": "pass",
+      "testName": "AC-138: Reorganização da barra de período e filtros de data no mobile @spec:AC-138",
+      "method": "tap"
+    },
+    "AC-139": {
+      "status": "pass",
+      "testName": "AC-139: Botão e painel de Filtros Avançados (Desktop e Mobile) @spec:AC-139",
+      "method": "tap"
+    },
+    "AC-140": {
+      "status": "pass",
+      "testName": "AC-140: Visualização compacta de transações em lista mobile sem scroll horizontal @spec:AC-140",
+      "method": "tap"
+    },
+    "AC-141": {
+      "status": "pass",
+      "testName": "AC-141: Abertura do card de detalhes da transação (Mobile e Desktop) @spec:AC-141",
+      "method": "tap"
+    },
+    "AC-142": {
+      "status": "pass",
+      "testName": "AC-142: Ações de Edição e Exclusão a partir do Modal de Detalhes @spec:AC-142",
+      "method": "tap"
+    },
+    "AC-143": {
+      "status": "pass",
+      "testName": "AC-143: Popover de notificações centralizado horizontalmente @spec:AC-143",
+      "method": "tap"
+    },
+    "AC-144": {
+      "status": "pass",
+      "testName": "AC-144: Navegação direta para detalhes da transação a partir do alerta vencido @spec:AC-144",
+      "method": "tap"
+    },
+    "AC-145": {
+      "status": "pass",
+      "testName": "AC-145: Redirecionamento com filtro de vencidas ao clicar em 'Ver transações vencidas' @spec:AC-145",
+      "method": "tap"
+    },
+    "AC-146": {
+      "status": "pass",
+      "testName": "AC-146: Exibição da data de compra nas transações da fatura @spec:AC-146",
+      "method": "tap"
+    },
+    "AC-147": {
+      "status": "pass",
+      "testName": "AC-147: Exibição do dia de vencimento fora da lista de transações @spec:AC-147",
+      "method": "tap"
+    },
+    "AC-148": {
+      "status": "pass",
+      "testName": "AC-148: Modal de detalhes da transação a partir da fatura do cartão @spec:AC-148",
+      "method": "tap"
+    },
+    "AC-149": {
+      "status": "pass",
+      "testName": "AC-149: Seletor de cores elegantes no cadastro de cartão @spec:AC-149",
+      "method": "tap"
+    },
+    "AC-150": {
+      "status": "pass",
+      "testName": "AC-150: Zoom e navegação horizontal no gráfico de evolução mensal @spec:AC-150",
+      "method": "tap"
+    },
+    "AC-151": {
+      "status": "pass",
+      "testName": "AC-151: Remoção do contorno preto ao interagir com gráficos @spec:AC-151",
+      "method": "tap"
+    },
+    "AC-152": {
+      "status": "pass",
+      "testName": "AC-152: Detalhamento DRE sem scroll horizontal no mobile @spec:AC-152",
+      "method": "tap"
+    },
+    "AC-153": {
+      "status": "pass",
+      "testName": "AC-153: Detalhamento por categoria e ranking de contrapartes sem scroll horizontal no mobile @spec:AC-153",
+      "method": "tap"
+    },
+    "AC-154": {
+      "status": "pass",
+      "testName": "AC-154: Exibição dinâmica de campos ao selecionar cartão de crédito @spec:AC-154",
+      "method": "tap"
+    },
+    "AC-155": {
+      "status": "pass",
+      "testName": "AC-155: Validação completa de campos para outros métodos de pagamento @spec:AC-155",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

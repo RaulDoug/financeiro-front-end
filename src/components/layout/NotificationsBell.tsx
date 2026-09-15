@@ -138,6 +138,7 @@ export const NotificationsBell: React.FC<NotificationsBellProps> = ({
           </div>
 
           <div className="pt-2 px-3 border-t border-slate-100 dark:border-slate-800">
+            {/* to="/transacoes" */}
             <Link
               to="/transactions?status=expired"
               data-testid="link-view-overdue"

@@ -1,11 +1,11 @@
 {
   "feature": "ajustes-mobile-tema-notificacoes",
-  "timestamp": "2026-09-15T11:17:04.775Z",
-  "gitRev": "c5a0356",
+  "timestamp": "2026-09-15T13:20:09.420Z",
+  "gitRev": "8834cd3",
   "command": "node --test --test-reporter=tap",
   "reporter": "tap",
   "exitCode": 0,
-  "testsParsed": 122,
+  "testsParsed": 145,
   "results": {
     "AC-123": {
       "status": "pass",

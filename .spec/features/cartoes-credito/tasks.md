@@ -39,5 +39,5 @@
 
 ## T-052 — Formulário e Modal de Cadastro/Edição de Cartão [concluida]
 - Refs: US-018, AC-075, AC-076, AC-077
-- Arquivos: src/components/credit-cards/CreditCardModal.tsx, src/components/credit-cards/CreditCardForm.tsx, src/schemas/creditCardSchema.ts
+- Arquivos: src/components/credit-cards/CreditCardModal.tsx, src/components/credit-cards/CreditCardForm.tsx, src/components/credit-cards/CreditCardDeleteDialog.tsx, src/schemas/creditCardSchema.ts
 - Notas: Criar formulário reutilizável para cadastro e edição com react-hook-form + zod validando conta bancária, datas e dígitos. Diálogo de confirmação para exclusão.

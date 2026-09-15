@@ -159,15 +159,15 @@ Como usuário configurando a aplicação, quero que o cadastro de métodos de pa
 
 ## Suposições
 
-| ID | Suposição | Status | Resolução |
-|---|---|---|---|
-| ASM-039 | O seletor de mês na Dashboard manterá por padrão o mês atual selecionado ao inicializar a página | confirmada | Permite visão imediata do período vigente com opção de navegação para meses anteriores |
-| ASM-040 | O modal de detalhes da transação será gerenciado por store Zustand compartilhada e acessível globalmente | confirmada | Unifica a abertura a partir de qualquer ponto (Transações, Dashboard, Cartões, Sino) |
-| ASM-041 | A paleta de cores dos cartões será gravada em campo suportado no payload de cartão ou mapeada de forma persistente | confirmada | Garante consistência visual no tema claro e escuro |
+| ID      | Suposição                                                                                                          | Status     | Resolução                                                                              |
+| ------- | ------------------------------------------------------------------------------------------------------------------ | ---------- | -------------------------------------------------------------------------------------- |
+| ASM-039 | O seletor de mês na Dashboard manterá por padrão o mês atual selecionado ao inicializar a página                   | confirmada | Permite visão imediata do período vigente com opção de navegação para meses anteriores |
+| ASM-040 | O modal de detalhes da transação será gerenciado por store Zustand compartilhada e acessível globalmente           | confirmada | Unifica a abertura a partir de qualquer ponto (Transações, Dashboard, Cartões, Sino)   |
+| ASM-041 | A paleta de cores dos cartões será gravada em campo suportado no payload de cartão ou mapeada de forma persistente | confirmada | Garante consistência visual no tema claro e escuro                                     |
 
 ## Perguntas em aberto
 
-| ID | Pergunta | Status | Resposta |
-|---|---|---|---|
-| Q-032 | A paleta de cores de cartão deve consistir em um conjunto de opções pré-definidas? | respondida | Sim: paleta fixa com 6 a 8 tons elegantes e escuros harmônicos com a aplicação |
+| ID    | Pergunta                                                                                             | Status     | Resposta                                                                                               |
+| ----- | ---------------------------------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------ |
+| Q-032 | A paleta de cores de cartão deve consistir em um conjunto de opções pré-definidas?                   | respondida | Sim: paleta fixa com 6 a 8 tons elegantes e escuros harmônicos com a aplicação                         |
 | Q-033 | Como o filtro de transações vencidas ativado pelo sino deve ser repassado para a tela de transações? | respondida | Via query parameter de busca ou navigation state `status=overdue` interceptado pelo TransactionFilters |

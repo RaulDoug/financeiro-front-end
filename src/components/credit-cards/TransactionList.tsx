@@ -67,7 +67,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
           <div className="flex flex-col min-w-0 pr-4">
             <span className="font-medium text-slate-800 truncate">{tx.description}</span>
             <span className="text-[11px] text-slate-400" data-testid="tx-purchase-date">
-              {formatDate(tx.purchase_date || tx.due_date)}
+              {tx.purchase_date ? formatDate(tx.purchase_date) : formatDate(tx.due_date)}
             </span>
           </div>
           <span className="font-semibold text-slate-900 whitespace-nowrap">

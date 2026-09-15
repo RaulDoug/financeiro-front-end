@@ -4,7 +4,7 @@
 
 ## T-022 — Layout Estrutural do Dashboard e Skeleton Loaders [concluida]
 - Refs: US-008
-- Arquivos: src/pages/Dashboard/DashboardPage.tsx, src/pages/Dashboard/DashboardSkeleton.tsx
+- Arquivos: src/pages/Dashboard/DashboardPage.tsx, src/pages/Dashboard/DashboardSkeleton.tsx, src/pages/Dashboard/index.ts
 - Notas: Implementar o layout estrutural da página de Dashboard (Grid principal) com estados de carregamento (Skeleton Loaders).
 
 ## T-023 — Cartões de KPI Principais e Estado Vazio [concluida]

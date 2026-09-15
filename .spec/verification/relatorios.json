@@ -1,11 +1,11 @@
 {
   "feature": "relatorios",
-  "timestamp": "2026-09-14T21:45:42.871Z",
-  "gitRev": "6a5a164",
+  "timestamp": "2026-09-15T13:22:27.505Z",
+  "gitRev": "8834cd3",
   "command": "node --test --test-reporter=tap",
   "reporter": "tap",
   "exitCode": 0,
-  "testsParsed": 107,
+  "testsParsed": 145,
   "results": {
     "AC-096": {
       "status": "pass",

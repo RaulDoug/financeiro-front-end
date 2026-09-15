@@ -5,7 +5,7 @@
 ## T-059 — Integração da API de Ativos de Investimento [concluida]
 
 - Refs: US-021, AC-089, AC-090, AC-091, AC-092
-- Arquivos: src/services/investment-asset.service.ts, src/hooks/useInvestmentAssets.ts
+- Arquivos: src/services/investment-asset.service.ts, src/hooks/useInvestmentAssets.ts, src/types/investment.ts
 - Notas: Implementar GET, POST, PATCH, DELETE para `/api/investiment-asset`. Configurar React Query.
 
 ## T-060 — Interface de Listagem de Ativos [concluida]

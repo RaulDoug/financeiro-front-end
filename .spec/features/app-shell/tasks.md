@@ -19,7 +19,7 @@
 
 ## T-018 — Layout Base com Áreas de Sidebar e Topbar [concluida]
 - Refs: AC-021
-- Arquivos: src/layouts/AppLayout.tsx
+- Arquivos: src/layouts/AppLayout.tsx, src/main.tsx, src/lib/queryClient.ts, src/assets/hero.png, src/assets/react.svg, src/assets/vite.svg, src/components/index.ts, src/hooks/index.ts, src/pages/index.ts, src/services/index.ts, src/stores/index.ts
 - Notas: Criar componente base de Layout com áreas para Sidebar e Topbar.
 
 ## T-019 — Menu Lateral (Sidebar) Responsivo [concluida]
