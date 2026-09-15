@@ -1,0 +1,209 @@
+{
+  "runId": "Front-End_Financeiro-melhorias-ux-mobile-desktop-mu2lag87",
+  "feature": "melhorias-ux-mobile-desktop",
+  "agent": "antigravity",
+  "modo": "sequencial",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-15 11:29",
+  "branchTrabalho": "spec/melhorias-ux-mobile-desktop",
+  "baseDir": ".spec/features/melhorias-ux-mobile-desktop",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "logsDir": "../onp-worktrees/Front-End_Financeiro-melhorias-ux-mobile-desktop-logs",
+  "ondas": [],
+  "faixas": [],
+  "sequenciais": [
+    {
+      "id": "T-093",
+      "titulo": "Ocultação de elementos redundantes e ajuste de fontes/cards no Mobile e Dashboard",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/components/layout/Topbar.tsx",
+        "src/pages/Dashboard/components/QuickActions.tsx",
+        "src/pages/Dashboard/components/KpiCards.tsx"
+      ],
+      "refs": [
+        "US-036",
+        "AC-133",
+        "AC-134"
+      ]
+    },
+    {
+      "id": "T-094",
+      "titulo": "Seletor de mês/ano e gráfico com scroll horizontal na Dashboard",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/Dashboard/DashboardPage.tsx",
+        "src/pages/Dashboard/components/IncomeExpenseChart.tsx",
+        "src/hooks/useDashboardData.ts"
+      ],
+      "refs": [
+        "US-036",
+        "AC-135",
+        "AC-136"
+      ]
+    },
+    {
+      "id": "T-095",
+      "titulo": "Reorganização de filtros e painel de Filtros Avançados na tela de Transações",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/Transactions/index.tsx",
+        "src/components/transactions/TransactionFilters.tsx",
+        "src/components/transactions/TransactionAdvancedFiltersModal.tsx"
+      ],
+      "refs": [
+        "US-037",
+        "AC-137",
+        "AC-138",
+        "AC-139"
+      ]
+    },
+    {
+      "id": "T-096",
+      "titulo": "Visualização compacta de transações em lista mobile sem scroll horizontal",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/components/transactions/TransactionTable.tsx",
+        "src/components/transactions/TransactionMobileList.tsx"
+      ],
+      "refs": [
+        "US-037",
+        "AC-140"
+      ]
+    },
+    {
+      "id": "T-097",
+      "titulo": "Modal global unificado de Detalhes da Transação com ações de edição e exclusão",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/stores/transactionDetailsModal.store.ts",
+        "src/components/transactions/TransactionDetailsModal.tsx",
+        "src/layouts/AppLayout.tsx"
+      ],
+      "refs": [
+        "US-038",
+        "AC-141",
+        "AC-142"
+      ]
+    },
+    {
+      "id": "T-098",
+      "titulo": "Centralização do popover de notificações e navegações do sino",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/components/layout/NotificationsBell.tsx"
+      ],
+      "refs": [
+        "US-039",
+        "AC-143",
+        "AC-144",
+        "AC-145"
+      ]
+    },
+    {
+      "id": "T-099",
+      "titulo": "Customização de cores, data da compra e detalhes na fatura de Cartões de Crédito",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/CreditCardsPage.tsx",
+        "src/components/credit-cards/TransactionList.tsx",
+        "src/components/credit-cards/CreditCardModal.tsx",
+        "src/components/credit-cards/CreditCardVisual.tsx"
+      ],
+      "refs": [
+        "US-040",
+        "AC-146",
+        "AC-147",
+        "AC-148",
+        "AC-149"
+      ]
+    },
+    {
+      "id": "T-100",
+      "titulo": "Responsividade sem scroll lateral e limpeza visual de gráficos nos Relatórios",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/ReportsPage.tsx",
+        "src/components/reports/MonthlyDreReport.tsx",
+        "src/components/reports/CategoryExpensesReport.tsx",
+        "src/components/reports/CounterpartyReport.tsx"
+      ],
+      "refs": [
+        "US-041",
+        "AC-150",
+        "AC-151",
+        "AC-152",
+        "AC-153"
+      ]
+    },
+    {
+      "id": "T-101",
+      "titulo": "Correção dinâmica e validação de formulário em Métodos de Pagamento",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/SettingsPage.tsx",
+        "src/components/settings/PaymentMethodModal.tsx"
+      ],
+      "refs": [
+        "US-042",
+        "AC-154",
+        "AC-155"
+      ]
+    },
+    {
+      "id": "T-102",
+      "titulo": "Testes Automatizados de Especificação da Feature",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "test/melhorias-ux-mobile-desktop.spec.test.js"
+      ],
+      "refs": [
+        "US-036",
+        "US-037",
+        "US-038",
+        "US-039",
+        "US-040",
+        "US-041",
+        "US-042",
+        "AC-133",
+        "AC-134",
+        "AC-135",
+        "AC-136",
+        "AC-137",
+        "AC-138",
+        "AC-139",
+        "AC-140",
+        "AC-141",
+        "AC-142",
+        "AC-143",
+        "AC-144",
+        "AC-145",
+        "AC-146",
+        "AC-147",
+        "AC-148",
+        "AC-149",
+        "AC-150",
+        "AC-151",
+        "AC-152",
+        "AC-153",
+        "AC-154",
+        "AC-155"
+      ]
+    }
+  ],
+  "concluidas": [],
+  "avisos": []
+}
