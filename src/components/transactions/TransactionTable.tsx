@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { Edit2, Trash2, Clock, CheckCircle2, AlertCircle, XCircle } from 'lucide-react';
 import { transactionService } from '../../services/transactionService.ts';
+import { useTransactionDetailsModalStore } from '../../stores/transactionDetailsModal.store.ts';
+import { TransactionMobileList } from './TransactionMobileList.tsx';
 import type { Transaction } from '../../types/transaction.ts';
 
 interface Props {
@@ -46,6 +48,12 @@ export const TransactionTable: React.FC<Props> = ({
     };
   }, [hasNextPage, isFetchingNextPage, onFetchNextPage]);
 
+  const openDetailsModal = useTransactionDetailsModalStore((state) => state.openModal);
+
+  const handleSelectTransaction = (t: Transaction) => {
+    openDetailsModal(t, { onEdit, onDelete });
+  };
+
   const formatCurrency = (val: string | number) => {
     const num = typeof val === 'string' ? parseFloat(val) : val;
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(isNaN(num) ? 0 : num);
@@ -81,7 +89,16 @@ export const TransactionTable: React.FC<Props> = ({
 
   return (
     <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-800 shadow-sm overflow-hidden">
-      <div className="overflow-x-auto">
+      {/* Visualização Mobile: Cards compactos verticais */}
+      <div className="block md:hidden">
+        <TransactionMobileList
+          transactions={transactions}
+          onSelect={handleSelectTransaction}
+        />
+      </div>
+
+      {/* Visualização Desktop: Tabela clássica */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-left text-sm">
           <thead className="bg-gray-50 dark:bg-slate-800/80 border-b border-gray-100 dark:border-slate-800 text-xs uppercase text-gray-400 dark:text-slate-400 font-semibold">
             <tr>
@@ -102,7 +119,11 @@ export const TransactionTable: React.FC<Props> = ({
               const isTransfer = t.type === 'transfers';
 
               return (
-                <tr key={t.id} className="hover:bg-gray-50/70 dark:hover:bg-slate-800/50 transition-colors">
+                <tr
+                  key={t.id}
+                  onClick={() => handleSelectTransaction(t)}
+                  className="hover:bg-gray-50/70 dark:hover:bg-slate-800/50 transition-colors cursor-pointer"
+                >
                   {/* Descrição + Chips */}
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
@@ -192,7 +213,10 @@ export const TransactionTable: React.FC<Props> = ({
                     <div className="flex items-center justify-end gap-1">
                       {onEdit && (
                         <button
-                          onClick={() => onEdit(t)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onEdit(t);
+                          }}
                           className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-slate-800 dark:hover:text-blue-400 rounded-md transition-colors"
                           title="Editar"
                         >
@@ -201,7 +225,10 @@ export const TransactionTable: React.FC<Props> = ({
                       )}
                       {onDelete && (
                         <button
-                          onClick={() => onDelete(t)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onDelete(t);
+                          }}
                           className="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-slate-800 dark:hover:text-rose-400 rounded-md transition-colors"
                           title="Excluir"
                         >

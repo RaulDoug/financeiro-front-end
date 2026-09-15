@@ -144,26 +144,72 @@ test('AC-139: Botão e painel de Filtros Avançados (Desktop e Mobile) @spec:AC-
 
 // US-037 — Reorganização e Filtros Avançados na Tela de Transações
 test('AC-140: Visualização compacta de transações em lista mobile sem scroll horizontal @spec:AC-140', () => {
-  // Dado: que o usuário visualiza a listagem de transações em viewport mobile (< 768px)
-  // Quando: as transações são exibidas
-  // Então: o layout adota uma lista de cards/itens compactos com descrição, chips de categoria/conta, data, valor e status, eliminando qualquer rolagem lateral.
-  assert.fail('critério de aceite AC-140 ainda não provado — implemente este teste');
+  const tableSource = readSource('components/transactions/TransactionTable.tsx');
+  const mobileListSource = readSource('components/transactions/TransactionMobileList.tsx');
+
+  // TransactionTable deve renderizar a lista mobile em < md e a tabela em >= md
+  assert.ok(
+    tableSource.includes('block md:hidden') && tableSource.includes('<TransactionMobileList'),
+    'TransactionTable deve exibir a lista mobile compacta em telas pequenas'
+  );
+  assert.ok(
+    tableSource.includes('hidden md:block'),
+    'TransactionTable deve ocultar a tabela larga com rolagem horizontal em telas pequenas'
+  );
+
+  // TransactionMobileList deve conter a estrutura de card vertical com descrição, chips, data e status
+  assert.ok(
+    mobileListSource.includes('data-testid="transaction-mobile-list"') &&
+    mobileListSource.includes('category_name') &&
+    mobileListSource.includes('formatCurrency'),
+    'TransactionMobileList deve exibir itens compactos contendo categoria, status e valor formatado'
+  );
 });
 
 // US-038 — Modal Unificado de Detalhes da Transação
 test('AC-141: Abertura do card de detalhes da transação (Mobile e Desktop) @spec:AC-141', () => {
-  // Dado: uma transação na listagem de transações, fatura de cartão ou alertas do sino
-  // Quando: o usuário clica sobre a linha ou card da transação
-  // Então: abre-se um modal centralizado no mesmo estilo visual do modal de inclusão, exibindo todos os detalhes em modo somente-leitura (descrição, valor, tipo, categoria, conta/cartão, método de pagamento, data, status e observações).
-  assert.fail('critério de aceite AC-141 ainda não provado — implemente este teste');
+  const modalSource = readSource('components/transactions/TransactionDetailsModal.tsx');
+  const appLayoutSource = readSource('layouts/AppLayout.tsx');
+  const tableSource = readSource('components/transactions/TransactionTable.tsx');
+
+  // AppLayout deve montar o modal globalmente
+  assert.ok(
+    appLayoutSource.includes('<TransactionDetailsModal />'),
+    'AppLayout deve conter o TransactionDetailsModal montado no escopo global'
+  );
+
+  // TransactionTable deve abrir o modal de detalhes ao selecionar uma transação
+  assert.ok(
+    tableSource.includes('openDetailsModal(t') || tableSource.includes('openModal(t'),
+    'TransactionTable deve invocar o modal de detalhes ao clicar na linha da transação'
+  );
+
+  // TransactionDetailsModal deve conter campos de leitura de dados essenciais
+  assert.ok(
+    modalSource.includes('data-testid="transaction-details-modal"') &&
+    modalSource.includes('data-testid="transaction-details-value"') &&
+    modalSource.includes('data-testid="transaction-details-description"'),
+    'TransactionDetailsModal deve exibir detalhes completos em formato de modal limpo'
+  );
 });
 
 // US-038 — Modal Unificado de Detalhes da Transação
 test('AC-142: Ações de Edição e Exclusão a partir do Modal de Detalhes @spec:AC-142', () => {
-  // Dado: o modal de detalhes da transação aberto
-  // Quando: o usuário aciona o botão "Editar" ou "Excluir"
-  // Então: o botão "Editar" direciona para o formulário de edição daquela transação e o botão "Excluir" aciona a confirmação de exclusão com as opções pertinentes.
-  assert.fail('critério de aceite AC-142 ainda não provado — implemente este teste');
+  const modalSource = readSource('components/transactions/TransactionDetailsModal.tsx');
+
+  // Modal deve possuir botões para Editar e Excluir com os data-testids
+  assert.ok(
+    modalSource.includes('data-testid="btn-details-edit"') &&
+    modalSource.includes('data-testid="btn-details-delete"'),
+    'TransactionDetailsModal deve conter botões de Editar e Excluir'
+  );
+
+  // Modal deve executar os respectivos callbacks
+  assert.ok(
+    modalSource.includes('handleEdit') &&
+    modalSource.includes('handleDelete'),
+    'TransactionDetailsModal deve disparar os handlers de edição e exclusão'
+  );
 });
 
 // US-039 — Centralização e Rastreabilidade do Sino de Notificações

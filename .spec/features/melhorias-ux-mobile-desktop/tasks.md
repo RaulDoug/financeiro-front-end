@@ -17,7 +17,7 @@
 - Arquivos: src/pages/Transactions/index.tsx, src/components/transactions/TransactionFilters.tsx, src/components/transactions/TransactionAdvancedFiltersModal.tsx
 - Notas: Esconder botão Nova Transação no mobile; reordenar seleção de período em duas linhas contidas no card; criar modal de filtros avançados por categoria, método de pagamento e conta para desktop e mobile.
 
-## T-096 — Visualização compacta de transações em lista mobile sem scroll horizontal [pendente]
+## T-096 — Visualização compacta de transações em lista mobile sem scroll horizontal [concluida]
 
 - Refs: US-037, AC-140
 - Arquivos: src/components/transactions/TransactionTable.tsx, src/components/transactions/TransactionMobileList.tsx
