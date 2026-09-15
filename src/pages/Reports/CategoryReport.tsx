@@ -83,7 +83,52 @@ export const CategoryReport: React.FC = () => {
             </p>
           </div>
 
-          <div className="overflow-x-auto">
+          {/* Layout Mobile: Cards compactos sem rolagem lateral (AC-153) */}
+          <div className="block md:hidden divide-y divide-slate-100" data-testid="category-mobile-list">
+            {isLoading ? (
+              <div className="py-8 text-center text-xs text-slate-400">
+                Carregando dados por categoria...
+              </div>
+            ) : categories.length === 0 ? (
+              <div className="py-8 text-center text-xs text-slate-400">
+                Nenhuma despesa encontrada para o período selecionado.
+              </div>
+            ) : (
+              categories.map((cat, index) => {
+                const rank = index + 1;
+                const percent = Number(cat.percentage || 0).toFixed(1);
+
+                return (
+                  <div
+                    key={cat.category_id || index}
+                    className="p-3.5 flex items-center justify-between gap-3 hover:bg-slate-50/60 transition-colors"
+                    data-testid={`category-mobile-card-${rank}`}
+                  >
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <span className="w-6 h-6 rounded-full bg-slate-100 text-slate-600 font-bold text-xs flex items-center justify-center shrink-0">
+                        {rank}
+                      </span>
+                      <span className="font-semibold text-xs sm:text-sm text-slate-900 truncate">
+                        {cat.category_name}
+                      </span>
+                    </div>
+
+                    <div className="text-right shrink-0 flex items-center gap-2">
+                      <span className="font-bold text-xs sm:text-sm text-rose-600 whitespace-nowrap">
+                        {formatCurrency(Number(cat.total_amount))}
+                      </span>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-700">
+                        {percent}%
+                      </span>
+                    </div>
+                  </div>
+                );
+              })
+            )}
+          </div>
+
+          {/* Layout Desktop: Tabela clássica */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-slate-50/75 border-b border-slate-100 text-xs font-semibold text-slate-500">

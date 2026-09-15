@@ -324,34 +324,79 @@ test('AC-149: Seletor de cores elegantes no cadastro de cartão @spec:AC-149', (
 
 // US-041 — Relatórios Financeiros Responsivos e Refinamento de Gráficos
 test('AC-150: Zoom e navegação horizontal no gráfico de evolução mensal @spec:AC-150', () => {
-  // Dado: o gráfico de evolução mensal de receitas versus despesas na tela de Relatórios
-  // Quando: o usuário aciona a opção de zoom
-  // Então: a escala do gráfico se ajusta permitindo arrastar horizontalmente para inspecionar meses específicos em detalhe.
-  assert.fail('critério de aceite AC-150 ainda não provado — implemente este teste');
+  const annualChartSource = readSource('pages/Reports/AnnualChart.tsx');
+
+  // AnnualChart deve possuir botões de zoom e contêiner com rolagem horizontal
+  assert.ok(
+    annualChartSource.includes('data-testid="btn-chart-zoom-in"') &&
+    annualChartSource.includes('data-testid="btn-chart-zoom-out"') &&
+    annualChartSource.includes('data-testid="chart-scroll-container"'),
+    'AnnualChart deve conter botões de zoom e contêiner de rolagem horizontal'
+  );
+
+  assert.ok(
+    annualChartSource.includes('overflow-x-auto') &&
+    annualChartSource.includes('setZoom'),
+    'AnnualChart deve permitir scroll horizontal e ajuste de escala do gráfico'
+  );
 });
 
 // US-041 — Relatórios Financeiros Responsivos e Refinamento de Gráficos
 test('AC-151: Remoção do contorno preto ao interagir com gráficos @spec:AC-151', () => {
-  // Dado: qualquer gráfico de barras ou pizza da tela de Relatórios e Dashboard
-  // Quando: o usuário clica sobre uma barra, fatia ou elemento do gráfico
-  // Então: o destaque visual ocorre sem a criação de borda escura/preta espessa ao redor do elemento.
-  assert.fail('critério de aceite AC-151 ainda não provado — implemente este teste');
+  const annualChartSource = readSource('pages/Reports/AnnualChart.tsx');
+  const categoryChartSource = readSource('pages/Reports/CategoryChart.tsx');
+
+  // Barras do AnnualChart não devem possuir contorno espesso/escuro
+  assert.ok(
+    annualChartSource.includes('activeBar={{ fillOpacity:') &&
+    annualChartSource.includes("stroke: 'none'"),
+    'AnnualChart deve remover borda escura ao clicar nas barras'
+  );
+
+  // Fatias da pizza do CategoryChart não devem possuir contorno
+  assert.ok(
+    categoryChartSource.includes('stroke="none"'),
+    'CategoryChart deve remover borda escura das fatias da pizza'
+  );
 });
 
 // US-041 — Relatórios Financeiros Responsivos e Refinamento de Gráficos
 test('AC-152: Detalhamento DRE sem scroll horizontal no mobile @spec:AC-152', () => {
-  // Dado: a seção de Detalhamento Mensal DRE em viewport mobile (< 768px)
-  // Quando: os dados do relatório são apresentados
-  // Então: o layout substitui a tabela larga por cards em grid multi-linhas, exibindo receitas, despesas e resultado sem necessidade de rolagem lateral.
-  assert.fail('critério de aceite AC-152 ainda não provado — implemente este teste');
+  const annualReportSource = readSource('pages/Reports/AnnualReport.tsx');
+
+  // AnnualReport deve conter o grid mobile multi-linhas sem scroll lateral
+  assert.ok(
+    annualReportSource.includes('data-testid="dre-mobile-grid"') &&
+    annualReportSource.includes('block md:hidden'),
+    'AnnualReport deve exibir cards em grid no mobile'
+  );
+
+  assert.ok(
+    annualReportSource.includes('hidden md:block'),
+    'AnnualReport deve ocultar a tabela com scroll horizontal no mobile'
+  );
 });
 
 // US-041 — Relatórios Financeiros Responsivos e Refinamento de Gráficos
 test('AC-153: Detalhamento por categoria e ranking de contrapartes sem scroll horizontal no mobile @spec:AC-153', () => {
-  // Dado: os relatórios de despesas por categoria e ranking de contrapartes em viewport mobile (< 768px)
-  // Quando: as listagens são exibidas
-  // Então: as informações são apresentadas em formato compacto adaptado à largura da tela sem scroll horizontal.
-  assert.fail('critério de aceite AC-153 ainda não provado — implemente este teste');
+  const categoryReportSource = readSource('pages/Reports/CategoryReport.tsx');
+  const counterpartyReportSource = readSource('pages/Reports/CounterpartyReport.tsx');
+
+  // CategoryReport deve possuir lista mobile e tabela desktop
+  assert.ok(
+    categoryReportSource.includes('data-testid="category-mobile-list"') &&
+    categoryReportSource.includes('block md:hidden') &&
+    categoryReportSource.includes('hidden md:block'),
+    'CategoryReport deve prover visualização mobile compacta sem scroll horizontal'
+  );
+
+  // CounterpartyReport deve possuir lista mobile e tabela desktop
+  assert.ok(
+    counterpartyReportSource.includes('data-testid="counterparty-mobile-list"') &&
+    counterpartyReportSource.includes('block md:hidden') &&
+    counterpartyReportSource.includes('hidden md:block'),
+    'CounterpartyReport deve prover visualização mobile compacta sem scroll horizontal'
+  );
 });
 
 // US-042 — Correção e Validação no Cadastro de Métodos de Pagamento

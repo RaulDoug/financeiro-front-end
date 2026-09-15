@@ -41,7 +41,7 @@
 - Arquivos: src/pages/CreditCardsPage.tsx, src/components/credit-cards/TransactionList.tsx, src/components/credit-cards/CreditCardModal.tsx, src/components/credit-cards/CreditCardVisual.tsx
 - Notas: Exibir data de compra nos itens da fatura; mover dia de vencimento para o resumo de limite; habilitar clique para abrir detalhes da transação; criar seletor de paleta de cores elegantes no cadastro.
 
-## T-100 — Responsividade sem scroll lateral e limpeza visual de gráficos nos Relatórios [pendente]
+## T-100 — Responsividade sem scroll lateral e limpeza visual de gráficos nos Relatórios [concluida]
 
 - Refs: US-041, AC-150, AC-151, AC-152, AC-153
 - Arquivos: src/pages/ReportsPage.tsx, src/components/reports/MonthlyDreReport.tsx, src/components/reports/CategoryExpensesReport.tsx, src/components/reports/CounterpartyReport.tsx

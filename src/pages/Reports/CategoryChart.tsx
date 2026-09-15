@@ -69,9 +69,10 @@ export const CategoryChart: React.FC<CategoryChartProps> = ({
                 outerRadius={95}
                 paddingAngle={3}
                 dataKey="value"
+                stroke="none"
               >
                 {chartData.map((_, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke="none" />
                 ))}
               </Pie>
               <Tooltip

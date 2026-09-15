@@ -95,7 +95,60 @@ export const AnnualReport: React.FC = () => {
           </p>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Layout Mobile: Cards em Grid multi-linhas sem scroll lateral (AC-152) */}
+        <div className="block md:hidden divide-y divide-slate-100" data-testid="dre-mobile-grid">
+          {monthlyRows.map((row) => {
+            const isPositive = row.balance >= 0;
+            const formattedRate = `${Math.abs(row.savingsRate).toFixed(1)}%`;
+
+            return (
+              <div
+                key={row.monthNumber}
+                className="p-4 space-y-3"
+                data-testid={`dre-mobile-card-${row.monthNumber}`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-sm text-slate-900">{row.monthName}</span>
+                  {isPositive ? (
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-100">
+                      <TrendingUp className="w-3 h-3" />
+                      Poupança: {formattedRate}
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-100">
+                      <TrendingDown className="w-3 h-3" />
+                      Déficit: -{formattedRate}
+                    </span>
+                  )}
+                </div>
+
+                <div className="grid grid-cols-3 gap-2 text-xs bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                  <div>
+                    <span className="text-[10px] text-slate-500 block uppercase font-medium">Receitas</span>
+                    <span className="font-semibold text-emerald-600 truncate block">
+                      {formatCurrency(row.income)}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-slate-500 block uppercase font-medium">Despesas</span>
+                    <span className="font-semibold text-rose-600 truncate block">
+                      {formatCurrency(row.expense)}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-slate-500 block uppercase font-medium">Resultado</span>
+                    <span className={`font-bold truncate block ${isPositive ? 'text-slate-900' : 'text-rose-600'}`}>
+                      {formatCurrency(row.balance)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Layout Desktop: Tabela clássica */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-slate-50/75 border-b border-slate-100 text-xs font-semibold text-slate-500">
