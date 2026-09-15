@@ -265,34 +265,61 @@ test('AC-145: Redirecionamento com filtro de vencidas ao clicar em \'Ver transa�
 
 // US-040 — Customização e Visualização de Cartões de Crédito
 test('AC-146: Exibição da data de compra nas transações da fatura @spec:AC-146', () => {
-  // Dado: a aba de faturas e compras do cartão de crédito
-  // Quando: a lista de transações da fatura é exibida
-  // Então: cada item apresenta a data em que a despesa foi realizada de forma clara.
-  assert.fail('critério de aceite AC-146 ainda não provado — implemente este teste');
+  const txListSource = readSource('components/credit-cards/TransactionList.tsx');
+
+  // Cada transação da fatura deve exibir a data da compra
+  assert.ok(
+    txListSource.includes('data-testid="tx-purchase-date"') &&
+    txListSource.includes('purchase_date'),
+    'TransactionList deve conter campo com data da compra'
+  );
 });
 
 // US-040 — Customização e Visualização de Cartões de Crédito
 test('AC-147: Exibição do dia de vencimento fora da lista de transações @spec:AC-147', () => {
-  // Dado: a tela de gestão do cartão de crédito
-  // Quando: os detalhes do cartão ativo são visualizados
-  // Então: a informação do dia de vencimento e fechamento da fatura é apresentada na seção de resumo/limite disponível, despoluindo as linhas individuais de transação.
-  assert.fail('critério de aceite AC-147 ainda não provado — implemente este teste');
+  const summarySource = readSource('components/credit-cards/InvoiceSummary.tsx');
+
+  // InvoiceSummary deve exibir as datas de vencimento e fechamento no resumo/limite
+  assert.ok(
+    summarySource.includes('data-testid="invoice-dates-info"') &&
+    summarySource.includes('card.due_day'),
+    'InvoiceSummary deve apresentar o dia de vencimento no resumo de limite'
+  );
 });
 
 // US-040 — Customização e Visualização de Cartões de Crédito
 test('AC-148: Modal de detalhes da transação a partir da fatura do cartão @spec:AC-148', () => {
-  // Dado: a lista de transações da fatura do cartão
-  // Quando: o usuário clica em qualquer compra
-  // Então: o modal unificado de detalhes da transação é aberto com os dados completos do lançamento.
-  assert.fail('critério de aceite AC-148 ainda não provado — implemente este teste');
+  const txListSource = readSource('components/credit-cards/TransactionList.tsx');
+
+  // Ao clicar em uma compra na fatura, deve abrir o TransactionDetailsModal
+  assert.ok(
+    txListSource.includes('useTransactionDetailsModalStore') &&
+    txListSource.includes('openModal(transaction)') &&
+    txListSource.includes('handleSelectTransaction'),
+    'TransactionList deve acionar a abertura do TransactionDetailsModal ao clicar na compra'
+  );
 });
 
 // US-040 — Customização e Visualização de Cartões de Crédito
 test('AC-149: Seletor de cores elegantes no cadastro de cartão @spec:AC-149', () => {
-  // Dado: o modal de cadastro ou edição de cartão de crédito
-  // Quando: o usuário preenche o formulário
-  // Então: é disponibilizada uma paleta de cores selecionáveis em tons escuros e sofisticados (ex: azul petróleo, grafite, verde esmeralda, vinho, índigo), aplicando a cor escolhida ao cartão visual.
-  assert.fail('critério de aceite AC-149 ainda não provado — implemente este teste');
+  const formSource = readSource('components/credit-cards/CreditCardForm.tsx');
+  const visualSource = readSource('components/credit-cards/CreditCardVisual.tsx');
+
+  // Formulário de cartão deve disponibilizar paleta de cores elegantes
+  assert.ok(
+    formSource.includes('data-testid="credit-card-color-palette"') &&
+    formSource.includes('navy') &&
+    formSource.includes('emerald') &&
+    formSource.includes('wine'),
+    'CreditCardForm deve possuir paleta de cores elegantes selecionáveis'
+  );
+
+  // Cartão visual deve incorporar a cor selecionada
+  assert.ok(
+    visualSource.includes('data-color=') &&
+    visualSource.includes('CARD_GRADIENTS'),
+    'CreditCardVisual deve aplicar a cor configurada'
+  );
 });
 
 // US-041 — Relatórios Financeiros Responsivos e Refinamento de Gráficos

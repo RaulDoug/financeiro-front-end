@@ -13,6 +13,15 @@ interface CreditCardVisualProps {
   onDelete: () => void;
 }
 
+const CARD_GRADIENTS: Record<string, string> = {
+  navy: 'bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950',
+  slate: 'bg-gradient-to-br from-neutral-900 via-neutral-800 to-slate-900',
+  emerald: 'bg-gradient-to-br from-emerald-950 via-slate-900 to-teal-950',
+  wine: 'bg-gradient-to-br from-rose-950 via-slate-900 to-purple-950',
+  violet: 'bg-gradient-to-br from-indigo-950 via-slate-900 to-blue-950',
+  bronze: 'bg-gradient-to-br from-amber-950 via-slate-900 to-stone-900',
+};
+
 export const CreditCardVisual: React.FC<CreditCardVisualProps> = ({
   card,
   isSelected = false,
@@ -23,16 +32,18 @@ export const CreditCardVisual: React.FC<CreditCardVisualProps> = ({
   const used = card.used_credit_limit ?? 0;
   const total = card.credit_limit || 0;
   const available = card.available_limit ?? Math.max(0, total - used);
+  const gradientClass = CARD_GRADIENTS[card.color || 'navy'] || CARD_GRADIENTS.navy;
 
   return (
     <div
       data-testid={`credit-card-card-${card.id}`}
+      data-color={card.color || 'navy'}
       onClick={onSelect}
       className={`relative overflow-hidden rounded-2xl p-6 transition-all cursor-pointer ${
         isSelected
           ? 'ring-2 ring-blue-500 shadow-lg scale-[1.01]'
           : 'hover:shadow-md border border-slate-800'
-      } bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950 text-white min-h-[220px] flex flex-col justify-between`}
+      } ${gradientClass} text-white min-h-[220px] flex flex-col justify-between`}
     >
       {/* Top row: Brand & Menu */}
       <div className="flex items-center justify-between">

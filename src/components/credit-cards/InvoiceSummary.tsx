@@ -57,13 +57,21 @@ export const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ card }) => {
           </p>
         </div>
 
-        <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-            Limite Disponível
-          </span>
-          <p className="text-2xl font-bold text-emerald-600 mt-1" data-testid="available-limit">
-            {formatCurrency(availableLimit)}
-          </p>
+        <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+          <div>
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+              Limite Disponível
+            </span>
+            <p className="text-2xl font-bold text-emerald-600 mt-1" data-testid="available-limit">
+              {formatCurrency(availableLimit)}
+            </p>
+          </div>
+          <div className="mt-2 pt-2 border-t border-slate-200/60 flex items-center justify-between text-[11px] text-slate-500" data-testid="invoice-dates-info">
+            <span>Vencimento dia <strong className="text-slate-700 font-semibold">{card.due_day}</strong></span>
+            {card.closing_day && (
+              <span>Fecha dia <strong className="text-slate-700 font-semibold">{card.closing_day}</strong></span>
+            )}
+          </div>
         </div>
       </div>
 

@@ -35,7 +35,7 @@
 - Arquivos: src/components/layout/NotificationsBell.tsx
 - Notas: Centralizar horizontalmente o popover abaixo do header; abrir modal de detalhes ao clicar na transação atrasada; direcionar para /transactions com filtro de vencidas ao clicar em 'Ver transações vencidas'.
 
-## T-099 — Customização de cores, data da compra e detalhes na fatura de Cartões de Crédito [pendente]
+## T-099 — Customização de cores, data da compra e detalhes na fatura de Cartões de Crédito [concluida]
 
 - Refs: US-040, AC-146, AC-147, AC-148, AC-149
 - Arquivos: src/pages/CreditCardsPage.tsx, src/components/credit-cards/TransactionList.tsx, src/components/credit-cards/CreditCardModal.tsx, src/components/credit-cards/CreditCardVisual.tsx

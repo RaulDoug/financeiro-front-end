@@ -13,6 +13,7 @@ export interface CreditCardItem {
   used_credit_limit?: number;
   available_limit?: number;
   current_invoice_total?: number;
+  color?: string;
   created_at?: string;
 }
 
@@ -22,6 +23,10 @@ export interface CreditCardTransaction {
   value: string | number;
   status: string;
   due_date: string;
+  purchase_date?: string | null;
+  category_name?: string | null;
+  pay_method_name?: string;
+  bank_account_name?: string;
 }
 
 export interface CreditCardSummaryWithTransactions {
@@ -41,5 +46,6 @@ export interface CreditCardFormData {
   closing_day: number;
   last_four_digits: string;
   credit_limit: number;
+  color?: string;
 }
 

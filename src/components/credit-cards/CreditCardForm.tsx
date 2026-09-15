@@ -11,6 +11,15 @@ interface CreditCardFormProps {
   isSubmitting?: boolean;
 }
 
+const COLOR_OPTIONS = [
+  { id: 'navy', label: 'Azul Petróleo', bgClass: 'bg-blue-950', ringClass: 'ring-blue-500' },
+  { id: 'slate', label: 'Grafite Nobre', bgClass: 'bg-neutral-800', ringClass: 'ring-neutral-400' },
+  { id: 'emerald', label: 'Verde Esmeralda', bgClass: 'bg-emerald-900', ringClass: 'ring-emerald-500' },
+  { id: 'wine', label: 'Vinho Imperial', bgClass: 'bg-rose-950', ringClass: 'ring-rose-500' },
+  { id: 'violet', label: 'Índigo Real', bgClass: 'bg-indigo-950', ringClass: 'ring-indigo-500' },
+  { id: 'bronze', label: 'Bronze Âmbar', bgClass: 'bg-amber-950', ringClass: 'ring-amber-500' },
+];
+
 export const CreditCardForm: React.FC<CreditCardFormProps> = ({
   initialData,
   onSubmit,
@@ -24,6 +33,7 @@ export const CreditCardForm: React.FC<CreditCardFormProps> = ({
   const [closingDay, setClosingDay] = useState(initialData?.closing_day?.toString() || '');
   const [lastFourDigits, setLastFourDigits] = useState(initialData?.last_four_digits || '');
   const [creditLimit, setCreditLimit] = useState(initialData?.credit_limit?.toString() || '');
+  const [color, setColor] = useState<string>(initialData?.color || 'navy');
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -52,6 +62,7 @@ export const CreditCardForm: React.FC<CreditCardFormProps> = ({
       closing_day: parseInt(closingDay, 10),
       last_four_digits: lastFourDigits.trim(),
       credit_limit: parseFloat(creditLimit),
+      color: color || 'navy',
     };
 
     const validation = creditCardSchema.safeParse(rawData);
@@ -205,6 +216,34 @@ export const CreditCardForm: React.FC<CreditCardFormProps> = ({
           {errors.due_day && (
             <p className="text-xs text-rose-500 mt-1">{errors.due_day}</p>
           )}
+        </div>
+      </div>
+
+      {/* Seletor de Paleta de Cores Elegantes */}
+      <div>
+        <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+          Cor do Cartão
+        </label>
+        <div className="grid grid-cols-3 sm:grid-cols-6 gap-2" data-testid="credit-card-color-palette">
+          {COLOR_OPTIONS.map((opt) => {
+            const isSelected = color === opt.id;
+            return (
+              <button
+                key={opt.id}
+                type="button"
+                data-testid={`color-option-${opt.id}`}
+                onClick={() => setColor(opt.id)}
+                className={`flex flex-col items-center gap-1 p-2 rounded-xl border text-center transition-all cursor-pointer ${
+                  isSelected
+                    ? 'border-blue-500 bg-blue-50/50 ring-2 ring-blue-500/30'
+                    : 'border-slate-200 hover:border-slate-300'
+                }`}
+              >
+                <span className={`w-6 h-6 rounded-full ${opt.bgClass} shadow-xs border border-white/20`} />
+                <span className="text-[10px] font-medium text-slate-600 truncate w-full">{opt.label}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
