@@ -53,7 +53,7 @@
 - Arquivos: src/pages/Settings/PayMethodModal.tsx, src/schemas/settingsSchemas.ts
 - Notas: Exibir campos obrigatórios de cartão de crédito dinamicamente ao marcar checkbox; validar todos os campos necessários em métodos de pagamento convencionais.
 
-## T-102 — Testes Automatizados de Especificação da Feature [pendente]
+## T-102 — Testes Automatizados de Especificação da Feature [concluida]
 
 - Refs: US-036, US-037, US-038, US-039, US-040, US-041, US-042, AC-133, AC-134, AC-135, AC-136, AC-137, AC-138, AC-139, AC-140, AC-141, AC-142, AC-143, AC-144, AC-145, AC-146, AC-147, AC-148, AC-149, AC-150, AC-151, AC-152, AC-153, AC-154, AC-155
 - Arquivos: test/melhorias-ux-mobile-desktop.spec.test.js
