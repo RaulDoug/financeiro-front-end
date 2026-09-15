@@ -6,7 +6,7 @@ export const QuickActions: React.FC = () => {
   const openModal = useTransactionModalStore((state) => state.openModal);
 
   return (
-    <div className="flex flex-wrap items-center gap-3" data-testid="quick-actions">
+    <div className="hidden md:flex flex-wrap items-center gap-3" data-testid="quick-actions">
       <button
         type="button"
         data-testid="btn-quick-income"

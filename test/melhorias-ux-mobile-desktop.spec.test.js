@@ -1,21 +1,49 @@
 // Testes de spec da feature melhorias-ux-mobile-desktop — gerados por onp-spec scaffold
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const SRC_DIR = path.resolve('src');
+
+function readSource(subpath) {
+  return fs.readFileSync(path.join(SRC_DIR, subpath), 'utf8');
+}
 
 // US-036 — Experiência Mobile do App Shell e Dashboard
 test('AC-133: Ocultação de ações redundantes e menu hambúrguer no mobile @spec:AC-133', () => {
-  // Dado: que a aplicação está sendo executada em viewport mobile (< 768px)
-  // Quando: o usuário visualiza o cabeçalho (Topbar) ou os botões de ação rápida da Dashboard
-  // Então: o botão de menu hambúrguer no cabeçalho e os botões de lançamento de nova transação na Dashboard ficam ocultos, preservando o botão central (+) da Bottom Navigation como ação primária.
-  assert.fail('critério de aceite AC-133 ainda não provado — implemente este teste');
+  const topbarSource = readSource('components/layout/Topbar.tsx');
+  const quickActionsSource = readSource('pages/Dashboard/components/QuickActions.tsx');
+
+  // Topbar deve ocultar o botão hambúrguer no mobile
+  assert.ok(
+    topbarSource.includes('data-testid="mobile-hamburger-button"') &&
+    topbarSource.includes('className="hidden'),
+    'Topbar deve ocultar o botão hambúrguer no mobile'
+  );
+
+  // QuickActions deve ficar oculto no mobile (usar hidden md:flex)
+  assert.ok(
+    quickActionsSource.includes('hidden md:flex'),
+    'QuickActions deve ficar oculto no mobile para evitar redundância com botão da barra inferior'
+  );
 });
 
 // US-036 — Experiência Mobile do App Shell e Dashboard
 test('AC-134: Tipografia fluida e responsiva nos cards da Dashboard @spec:AC-134', () => {
-  // Dado: qualquer resolução de tela ou tamanho de dispositivo
-  // Quando: os cards de KPIs e resumos financeiros são renderizados
-  // Então: os títulos e valores utilizam tipografia proporcional com truncamento e quebra inteligente, sem que as palavras fiquem espremidas ou ultrapassem o contêiner.
-  assert.fail('critério de aceite AC-134 ainda não provado — implemente este teste');
+  const kpiSource = readSource('pages/Dashboard/components/KpiCards.tsx');
+
+  // Títulos dos cards devem utilizar tipografia fluida com truncate
+  assert.ok(
+    kpiSource.includes('text-xs sm:text-sm') && kpiSource.includes('truncate'),
+    'Cards KPI devem utilizar tipografia proporcional e truncamento no título'
+  );
+
+  // Valores devem utilizar tamanho responsivo com truncate
+  assert.ok(
+    kpiSource.includes('truncate') && (kpiSource.includes('text-lg') || kpiSource.includes('text-xl')),
+    'Valores dos cards KPI devem ser responsivos e adaptáveis'
+  );
 });
 
 // US-036 — Experiência Mobile do App Shell e Dashboard

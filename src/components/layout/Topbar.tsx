@@ -18,12 +18,13 @@ export const Topbar: React.FC<TopbarProps> = ({
   return (
     <header className="h-16 px-3 sm:px-4 md:px-6 flex items-center justify-between gap-2 sm:gap-4 max-w-full">
       <div className="flex items-center gap-1.5 sm:gap-3 min-w-0">
+        {/* Menu hambúrguer ocultado no mobile pois a navegação é provida pela Bottom Navigation */}
         <button
           type="button"
           onClick={onToggleMobileMenu}
           data-testid="mobile-hamburger-button"
           aria-label="Abrir menu lateral"
-          className="p-1.5 sm:p-2 rounded-xl text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 md:hidden cursor-pointer shrink-0"
+          className="hidden p-1.5 sm:p-2 rounded-xl text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer shrink-0"
         >
           <Menu className="w-5 h-5" />
         </button>

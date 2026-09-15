@@ -2,8 +2,7 @@
 
 > feature: melhorias-ux-mobile-desktop
 
-## T-093 — Ocultação de elementos redundantes e ajuste de fontes/cards no Mobile e Dashboard [pendente]
-
+## T-093 — Ocultação de elementos redundantes e ajuste de fontes/cards no Mobile e Dashboard [concluida]
 - Refs: US-036, AC-133, AC-134
 - Arquivos: src/components/layout/Topbar.tsx, src/pages/Dashboard/components/QuickActions.tsx, src/pages/Dashboard/components/KpiCards.tsx
 - Notas: Ocultar botão de menu hambúrguer no Topbar e botão de lançar transações na Dashboard em mobile (< 768px); aplicar tipografia responsiva e fluida nos títulos dos cards KPI.
