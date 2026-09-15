@@ -44,13 +44,13 @@
 ## T-100 — Responsividade sem scroll lateral e limpeza visual de gráficos nos Relatórios [concluida]
 
 - Refs: US-041, AC-150, AC-151, AC-152, AC-153
-- Arquivos: src/pages/ReportsPage.tsx, src/components/reports/MonthlyDreReport.tsx, src/components/reports/CategoryExpensesReport.tsx, src/components/reports/CounterpartyReport.tsx
+- Arquivos: src/pages/Reports/AnnualChart.tsx, src/pages/Reports/CategoryChart.tsx, src/pages/Reports/AnnualReport.tsx, src/pages/Reports/CategoryReport.tsx, src/pages/Reports/CounterpartyReport.tsx
 - Notas: Habilitar zoom e pan no gráfico mensal; remover bordas escuras ao clicar nos gráficos; converter DRE mensal para grid multi-linhas no mobile; adaptar listas de categorias e contrapartes sem scroll lateral.
 
-## T-101 — Correção dinâmica e validação de formulário em Métodos de Pagamento [pendente]
+## T-101 — Correção dinâmica e validação de formulário em Métodos de Pagamento [concluida]
 
 - Refs: US-042, AC-154, AC-155
-- Arquivos: src/pages/SettingsPage.tsx, src/components/settings/PaymentMethodModal.tsx
+- Arquivos: src/pages/Settings/PayMethodModal.tsx, src/schemas/settingsSchemas.ts
 - Notas: Exibir campos obrigatórios de cartão de crédito dinamicamente ao marcar checkbox; validar todos os campos necessários em métodos de pagamento convencionais.
 
 ## T-102 — Testes Automatizados de Especificação da Feature [pendente]

@@ -401,16 +401,43 @@ test('AC-153: Detalhamento por categoria e ranking de contrapartes sem scroll ho
 
 // US-042 — Correção e Validação no Cadastro de Métodos de Pagamento
 test('AC-154: Exibição dinâmica de campos ao selecionar cartão de crédito @spec:AC-154', () => {
-  // Dado: o modal de criação/edição de método de pagamento em Configurações
-  // Quando: o usuário marca a opção indicando que é cartão de crédito
-  // Então: o formulário exibe os campos pertinentes (como vínculo ao cartão de crédito cadastrado) e valida o preenchimento antes do salvamento.
-  assert.fail('critério de aceite AC-154 ainda não provado — implemente este teste');
+  const modalSource = readSource('pages/Settings/PayMethodModal.tsx');
+  const schemasSource = readSource('schemas/settingsSchemas.ts');
+
+  // PayMethodModal deve conter contêiner e campos dinâmicos para cartão de crédito
+  assert.ok(
+    modalSource.includes('data-testid="credit-card-dynamic-fields"') &&
+    modalSource.includes('data-testid="credit-card-bank-account-select"') &&
+    modalSource.includes('data-testid="credit-card-limit-input"') &&
+    modalSource.includes('data-testid="credit-card-digits-input"'),
+    'PayMethodModal deve exibir campos obrigatórios de cartão de crédito'
+  );
+
+  // Schema deve validar os campos obrigatórios de cartão de crédito
+  assert.ok(
+    schemasSource.includes('fullPayMethodSchema') &&
+    schemasSource.includes('data.credit_card'),
+    'settingsSchemas deve validar regras de negócio específicas para cartões de crédito'
+  );
 });
 
 // US-042 — Correção e Validação no Cadastro de Métodos de Pagamento
 test('AC-155: Validação completa de campos para outros métodos de pagamento @spec:AC-155', () => {
-  // Dado: o formulário de método de pagamento para opções que não são cartão de crédito
-  // Quando: o usuário cadastra ou altera o método
-  // Então: todos os campos obrigatórios (nome, tipo, conta bancária associada) são validados e exibidos adequadamente.
-  assert.fail('critério de aceite AC-155 ainda não provado — implemente este teste');
+  const modalSource = readSource('pages/Settings/PayMethodModal.tsx');
+  const schemasSource = readSource('schemas/settingsSchemas.ts');
+
+  // PayMethodModal deve conter campos para métodos convencionais
+  assert.ok(
+    modalSource.includes('data-testid="standard-pay-method-fields"') &&
+    modalSource.includes('data-testid="pay-method-type-select"') &&
+    modalSource.includes('data-testid="pay-method-bank-account-select"'),
+    'PayMethodModal deve conter seletores de tipo e conta bancária para métodos convencionais'
+  );
+
+  // Schema deve validar nome, tipo e conta bancária para métodos que não são cartão
+  assert.ok(
+    schemasSource.includes('!data.type') &&
+    schemasSource.includes('!data.bank_account_id'),
+    'settingsSchemas deve validar tipo e conta bancária para métodos comuns'
+  );
 });
