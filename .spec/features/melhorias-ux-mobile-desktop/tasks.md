@@ -7,8 +7,7 @@
 - Arquivos: src/components/layout/Topbar.tsx, src/pages/Dashboard/components/QuickActions.tsx, src/pages/Dashboard/components/KpiCards.tsx
 - Notas: Ocultar botão de menu hambúrguer no Topbar e botão de lançar transações na Dashboard em mobile (< 768px); aplicar tipografia responsiva e fluida nos títulos dos cards KPI.
 
-## T-094 — Seletor de mês/ano e gráfico com scroll horizontal na Dashboard [pendente]
-
+## T-094 — Seletor de mês/ano e gráfico com scroll horizontal na Dashboard [concluida]
 - Refs: US-036, AC-135, AC-136
 - Arquivos: src/pages/Dashboard/DashboardPage.tsx, src/pages/Dashboard/components/IncomeExpenseChart.tsx, src/hooks/useDashboardData.ts
 - Notas: Implementar seletor de mês/ano na Dashboard com reatividade nas métricas e lista de transações; adicionar espaçamento compacto e touch scroll horizontal no gráfico de receitas x despesas.

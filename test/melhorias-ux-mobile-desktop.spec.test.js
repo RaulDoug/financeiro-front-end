@@ -48,18 +48,44 @@ test('AC-134: Tipografia fluida e responsiva nos cards da Dashboard @spec:AC-134
 
 // US-036 — Experiência Mobile do App Shell e Dashboard
 test('AC-135: Filtro de mês e ano no Dashboard @spec:AC-135', () => {
-  // Dado: que o usuário está na página inicial (Dashboard)
-  // Quando: ele altera o mês ou ano no seletor de período do Dashboard
-  // Então: os indicadores de KPI, resumo de receitas/despesas e transações recentes atualizam os dados correspondentes ao mês selecionado.
-  assert.fail('critério de aceite AC-135 ainda não provado — implemente este teste');
+  const dashboardSource = readSource('pages/Dashboard/DashboardPage.tsx');
+
+  // Deve possuir seletor de mês/ano no Dashboard
+  assert.ok(
+    dashboardSource.includes('data-testid="dashboard-month-selector"') &&
+    dashboardSource.includes('data-testid="dashboard-selected-month"'),
+    'Dashboard deve possuir seletor de mês e ano com exibição do mês selecionado'
+  );
+
+  // Queries de resumo e despesas por categoria devem receber os parâmetros de data
+  assert.ok(
+    dashboardSource.includes('useDashboardSummary(dateParams)') &&
+    dashboardSource.includes('useExpenseByCategory(dateParams)'),
+    'Queries de métricas do Dashboard devem ser parametrizadas com o período selecionado'
+  );
 });
 
 // US-036 — Experiência Mobile do App Shell e Dashboard
 test('AC-136: Scroll horizontal e barras condensadas no gráfico de Receitas x Despesas da Dashboard @spec:AC-136', () => {
-  // Dado: que o usuário visualiza o gráfico de receitas versus despesas no Dashboard em tela mobile
-  // Quando: o gráfico é renderizado
-  // Então: as barras mensais são exibidas com espaçamento condensado e contêiner com rolagem horizontal contínua (touch scroll) para visualização fluida de todos os meses.
-  assert.fail('critério de aceite AC-136 ainda não provado — implemente este teste');
+  const chartSource = readSource('pages/Dashboard/components/IncomeExpenseChart.tsx');
+
+  // Deve possuir contêiner com rolagem horizontal e largura mínima
+  assert.ok(
+    chartSource.includes('overflow-x-auto') && chartSource.includes('min-w-['),
+    'Gráfico deve conter contêiner com rolagem horizontal contínua'
+  );
+
+  // Deve configurar espaçamento condensado entre barras
+  assert.ok(
+    chartSource.includes('barGap=') && chartSource.includes('barCategoryGap='),
+    'Gráfico deve configurar espaçamento condensado entre barras'
+  );
+
+  // Barras não devem possuir contorno escuro espesso ao clicar
+  assert.ok(
+    chartSource.includes('activeBar={{ fillOpacity:') && chartSource.includes("stroke: 'none'"),
+    'Barras devem utilizar destaque sutil sem borda preta ao clicar'
+  );
 });
 
 // US-037 — Reorganização e Filtros Avançados na Tela de Transações

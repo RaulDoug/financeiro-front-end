@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import {
   useDashboardSummary,
@@ -22,23 +22,38 @@ import { QuickActions } from './components/QuickActions.tsx';
 import { IncomeExpenseChart } from './components/IncomeExpenseChart.tsx';
 import { CategoryExpenseChart } from './components/CategoryExpenseChart.tsx';
 import { DashboardSkeleton } from './DashboardSkeleton.tsx';
-import { RefreshCw } from 'lucide-react';
+import { RefreshCw, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const DashboardPage: React.FC = () => {
-  const [selectedYear, setSelectedYear] = useState<number>(() => new Date().getFullYear());
+  const [selectedDate, setSelectedDate] = useState<Date>(() => new Date());
   const [isRefreshing, setIsRefreshing] = useState(false);
   const queryClient = useQueryClient();
+
+  const selectedYear = selectedDate.getFullYear();
+
+  const dateParams = useMemo(() => {
+    const year = selectedDate.getFullYear();
+    const month = selectedDate.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+
+    const pad = (n: number) => String(n).padStart(2, '0');
+    const startStr = `${firstDay.getFullYear()}-${pad(firstDay.getMonth() + 1)}-${pad(firstDay.getDate())}`;
+    const endStr = `${lastDay.getFullYear()}-${pad(lastDay.getMonth() + 1)}-${pad(lastDay.getDate())}`;
+
+    return { startDate: startStr, endDate: endStr };
+  }, [selectedDate]);
 
   const { isOpen: isModalOpen, defaultType, closeModal } = useTransactionModalStore();
   const { createMutation } = useTransactionMutations();
 
-  const summaryQuery = useDashboardSummary();
+  const summaryQuery = useDashboardSummary(dateParams);
   const balancesQuery = useAccountBalances();
-  const creditCardsQuery = useCreditCardSummary();
+  const creditCardsQuery = useCreditCardSummary(dateParams);
   const recentTransactionsQuery = useRecentTransactions(5);
   const overdueAlertsQuery = useOverdueAlerts();
   const incomeVsExpenseQuery = useIncomeVsExpense(selectedYear);
-  const expenseByCategoryQuery = useExpenseByCategory();
+  const expenseByCategoryQuery = useExpenseByCategory(dateParams);
 
   const isInitialLoading =
     summaryQuery.isLoading &&
@@ -77,7 +92,44 @@ export const DashboardPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          {/* Seletor de Mês do Dashboard */}
+          <div
+            className="flex items-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-1 shadow-2xs text-sm"
+            data-testid="dashboard-month-selector"
+          >
+            <button
+              type="button"
+              aria-label="Mês anterior"
+              onClick={() =>
+                setSelectedDate(
+                  new Date(selectedDate.getFullYear(), selectedDate.getMonth() - 1, 1)
+                )
+              }
+              className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-500 dark:text-slate-400 cursor-pointer"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <span
+              className="px-2 font-medium text-slate-800 dark:text-slate-200 min-w-[120px] text-center capitalize text-xs sm:text-sm"
+              data-testid="dashboard-selected-month"
+            >
+              {selectedDate.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })}
+            </span>
+            <button
+              type="button"
+              aria-label="Próximo mês"
+              onClick={() =>
+                setSelectedDate(
+                  new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 1)
+                )
+              }
+              className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-500 dark:text-slate-400 cursor-pointer"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+
           <QuickActions />
           <button
             type="button"
@@ -85,7 +137,7 @@ export const DashboardPage: React.FC = () => {
             onClick={handleRefresh}
             disabled={isRefreshing}
             title="Atualizar dados"
-            className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg border border-gray-200 transition cursor-pointer disabled:opacity-50"
+            className="p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-800 transition cursor-pointer disabled:opacity-50"
           >
             <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin text-blue-600' : ''}`} />
           </button>
@@ -104,7 +156,7 @@ export const DashboardPage: React.FC = () => {
           <IncomeExpenseChart
             yearlyData={incomeVsExpenseQuery.data?.incomeVsExpense?.yearly}
             selectedYear={selectedYear}
-            onYearChange={setSelectedYear}
+            onYearChange={(year) => setSelectedDate(new Date(year, selectedDate.getMonth(), 1))}
             isLoading={incomeVsExpenseQuery.isLoading}
           />
         </div>
