@@ -1,11 +1,11 @@
 {
   "feature": "transacoes",
-  "timestamp": "2026-09-14T22:06:05.788Z",
-  "gitRev": "6a5a164",
+  "timestamp": "2026-09-15T11:20:10.868Z",
+  "gitRev": "c5a0356",
   "command": "node --test --test-reporter=tap",
   "reporter": "tap",
   "exitCode": 0,
-  "testsParsed": 107,
+  "testsParsed": 122,
   "results": {
     "AC-043": {
       "status": "pass",
@@ -95,6 +95,21 @@
     "AC-059": {
       "status": "pass",
       "testName": "AC-059: Exclusão de transferência remove ambos registros @spec:AC-059",
+      "method": "tap"
+    },
+    "AC-120": {
+      "status": "pass",
+      "testName": "AC-120: Responsividade Mobile do Modal de Lançamentos @spec:AC-120",
+      "method": "tap"
+    },
+    "AC-121": {
+      "status": "pass",
+      "testName": "AC-121: Carregamento Completo de Categorias no Card de Lançamento @spec:AC-121",
+      "method": "tap"
+    },
+    "AC-122": {
+      "status": "pass",
+      "testName": "AC-122: Ordenação por Data de Vencimento e Filtro Mensal Padrão @spec:AC-122",
       "method": "tap"
     }
   },

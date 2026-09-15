@@ -221,3 +221,48 @@ test('AC-028: Rota protegida sem carteira @spec:AC-028', async () => {
   assert.equal(useWalletStore.getState().currentWalletId, 'wallet-alpha');
   assert.equal(useAuthStore.getState().activeWalletId, 'wallet-alpha');
 });
+
+// US-034 — Alternância de Tema (Claro / Escuro / Sistema)
+test('AC-118: Alternância de Tema entre Claro, Escuro e Sistema @spec:AC-118', async () => {
+  const { useThemeStore } = await import('../src/stores/theme.store.ts');
+  const fs = await import('node:fs');
+  const path = await import('node:path');
+
+  // Dado que o store de tema é carregado
+  assert.ok(typeof useThemeStore.getState().setTheme === 'function');
+
+  // Quando o usuário alterna para 'dark'
+  useThemeStore.getState().setTheme('dark');
+  assert.equal(useThemeStore.getState().theme, 'dark');
+  assert.equal(useThemeStore.getState().resolvedTheme, 'dark');
+
+  // Quando o usuário alterna para 'light'
+  useThemeStore.getState().setTheme('light');
+  assert.equal(useThemeStore.getState().theme, 'light');
+  assert.equal(useThemeStore.getState().resolvedTheme, 'light');
+
+  // Quando o usuário alterna para 'system'
+  useThemeStore.getState().setTheme('system');
+  assert.equal(useThemeStore.getState().theme, 'system');
+
+  // E o componente ThemeToggle e Topbar devem conter os gatilhos
+  const topbarSource = fs.readFileSync(path.resolve('src/components/layout/Topbar.tsx'), 'utf-8');
+  assert.ok(topbarSource.includes('ThemeToggle'), 'Topbar deve renderizar ThemeToggle');
+
+  const toggleSource = fs.readFileSync(path.resolve('src/components/layout/ThemeToggle.tsx'), 'utf-8');
+  assert.ok(toggleSource.includes('theme-toggle-button'), 'ThemeToggle deve conter botão de alternância');
+  assert.ok(toggleSource.includes('Claro') && toggleSource.includes('Escuro') && toggleSource.includes('Sistema'), 'ThemeToggle deve conter opções Claro, Escuro e Sistema');
+});
+
+test('AC-119: Persistência e Sincronização do Tema @spec:AC-119', async () => {
+  const fs = await import('node:fs');
+  const path = await import('node:path');
+
+  // Verifica persistência e configuração de tema
+  const storeSource = fs.readFileSync(path.resolve('src/stores/theme.store.ts'), 'utf-8');
+  assert.ok(storeSource.includes('localStorage.setItem') && storeSource.includes('finflow_theme'), 'Deve salvar chave no localStorage');
+  assert.ok(storeSource.includes('prefers-color-scheme'), 'Deve ouvir preferências do sistema');
+
+  const cssSource = fs.readFileSync(path.resolve('src/index.css'), 'utf-8');
+  assert.ok(cssSource.includes('@custom-variant dark') || cssSource.includes('html.dark'), 'CSS deve definir classes para modo escuro');
+});

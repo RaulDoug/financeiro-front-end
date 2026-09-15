@@ -1,11 +1,11 @@
 {
   "feature": "app-shell",
-  "timestamp": "2026-09-14T21:46:16.977Z",
-  "gitRev": "6a5a164",
+  "timestamp": "2026-09-15T11:20:09.755Z",
+  "gitRev": "c5a0356",
   "command": "node --test --test-reporter=tap",
   "reporter": "tap",
   "exitCode": 0,
-  "testsParsed": 107,
+  "testsParsed": 122,
   "results": {
     "AC-021": {
       "status": "pass",
@@ -45,6 +45,16 @@
     "AC-028": {
       "status": "pass",
       "testName": "AC-028: Rota protegida sem carteira @spec:AC-028",
+      "method": "tap"
+    },
+    "AC-118": {
+      "status": "pass",
+      "testName": "AC-118: Alternância de Tema entre Claro, Escuro e Sistema @spec:AC-118",
+      "method": "tap"
+    },
+    "AC-119": {
+      "status": "pass",
+      "testName": "AC-119: Persistência e Sincronização do Tema @spec:AC-119",
       "method": "tap"
     }
   },

@@ -92,3 +92,17 @@
 - Refs: US-015, AC-058, AC-059
 - Arquivos: src/components/transactions/TransactionDeleteDialog.tsx, src/hooks/useTransactionMutations.ts
 - Notas: Diálogo de confirmação. Opções all_installments e redistribute. Avisa sobre reversão de saldo.
+
+## T-085 — Filtro de categorias em memória e suporte a mobile no modal [concluida]
+
+- Refs: US-035, AC-120, AC-121
+- Arquivos: src/services/category.service.ts, src/components/transactions/TransactionModal.tsx, src/components/transactions/TransactionFilters.tsx
+- Notas: Buscar categorias completas sem query params e filtrar por tipo em memória; ajustar dimensões, padding e scroll interno do modal para telas móveis.
+
+## T-086 — Ordenação por data de vencimento e filtro padrão do mês corrente [concluida]
+
+- Refs: US-011, AC-122
+- Arquivos: src/pages/Transactions/index.tsx, src/components/transactions/TransactionFilters.tsx, src/components/transactions/TransactionTable.tsx
+- Notas: Configurar ordenação padrão por `due_date`, inicializar período padrão do mês corrente usando `due_date_from` e `due_date_to`, manter ordenação ao limpar filtros e adicionar alternador de mês e direção.
+
+

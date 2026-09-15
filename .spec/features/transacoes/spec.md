@@ -137,6 +137,26 @@ Como usuário, quero poder corrigir informações ou remover registros incorreto
 - **Quando** a ação é completada
 - **Então** ambos os registros (entrada e saída) são removidos da listagem
 
+### US-035 — Robustez de Lançamento e Experiência Mobile
+
+Como usuário em dispositivo móvel ou desktop, quero cadastrar transações com todas as categorias disponíveis e interagir com um modal responsivo e adaptável.
+
+#### AC-120 — Responsividade Mobile do Modal de Lançamentos
+- **Dado** que o usuário abre o modal de nova transação em tela móvel
+- **Quando** ele visualiza e preenche o formulário
+- **Então** o modal se ajusta à viewport com altura máxima de 92vh e rolagem vertical interna, permitindo interagir com todos os campos e botões sem corte de interface.
+
+#### AC-121 — Carregamento Completo de Categorias no Card de Lançamento
+- **Dado** que o usuário seleciona a aba Receita ou Despesa no modal
+- **Quando** o seletor de categorias carrega os dados da carteira
+- **Então** ele exibe todas as categorias cadastradas para aquele tipo, sem omissão ou limitação a um único item.
+
+#### AC-122 — Ordenação por Data de Vencimento e Filtro Mensal Padrão
+- **Dado** que o usuário acessa a listagem de transações
+- **Quando** a listagem é carregada ou os filtros são resetados
+- **Então** a ordenação padrão é por data de vencimento (`order_by: 'due_date'`), e o período inicial de consulta filtra automaticamente o mês corrente pelo vencimento (`due_date_from` no 1º dia do mês e `due_date_to` no último dia do mês), com controles para alternar mês ou direção da ordenação (`order_dir`).
+
+
 ## Fora de escopo
 
 - Criação de endpoints de API (backend já pronto).

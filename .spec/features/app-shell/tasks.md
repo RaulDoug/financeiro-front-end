@@ -36,3 +36,19 @@
 - Refs: AC-025, AC-026
 - Arquivos: src/components/layout/WalletSelector.tsx, src/hooks/useWallets.ts
 - Notas: Criar hook e componente Dropdown seletor de Carteira consumindo GET /api/wallet (ASM-007), disparando a invalidação do React Query (queryClient.invalidateQueries) ao alterar (ASM-009).
+
+## T-082 — Configurar Store de Tema e Sincronização [concluida]
+- Refs: US-034, AC-118, AC-119
+- Arquivos: src/stores/theme.store.ts, src/App.tsx
+- Notas: Criar store Zustand com suporte a light, dark e system, persistência no localStorage e listener para matchMedia.
+
+## T-083 — Componente Seletor de Tema na Topbar [concluida]
+- Refs: US-034, AC-118
+- Arquivos: src/components/layout/ThemeToggle.tsx, src/components/layout/Topbar.tsx
+- Notas: Adicionar seletor dropdown com opções Claro, Escuro e Sistema e ícones do Lucide.
+
+## T-084 — Estilos e Classes Dark Mode no Tailwind [concluida]
+- Refs: US-034, AC-119
+- Arquivos: src/index.css, src/layouts/AppLayout.tsx
+- Notas: Configurar custom-variant dark e classes de cor escura para transição suave de tela.
+

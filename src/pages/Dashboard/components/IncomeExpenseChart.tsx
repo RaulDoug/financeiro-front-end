@@ -43,7 +43,7 @@ export const IncomeExpenseChart: React.FC<IncomeExpenseChartProps> = ({
 }) => {
   if (isLoading) {
     return (
-      <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm animate-pulse h-80" />
+      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-5 shadow-sm animate-pulse h-80" />
     );
   }
 
@@ -64,15 +64,15 @@ export const IncomeExpenseChart: React.FC<IncomeExpenseChartProps> = ({
 
   return (
     <div
-      className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm flex flex-col justify-between"
+      className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-5 shadow-sm flex flex-col justify-between"
       data-testid="income-expense-chart"
     >
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-gray-100">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-gray-100 dark:border-slate-800">
         <div className="flex items-center gap-2">
-          <div className="p-1.5 bg-emerald-50 text-emerald-600 rounded-lg">
+          <div className="p-1.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 rounded-lg">
             <BarChart3 className="w-4 h-4" />
           </div>
-          <h3 className="text-base font-semibold text-gray-900">Receitas vs Despesas</h3>
+          <h3 className="text-base font-semibold text-gray-900 dark:text-white">Receitas vs Despesas</h3>
         </div>
 
         {/* Seletor de Ano */}
@@ -81,18 +81,18 @@ export const IncomeExpenseChart: React.FC<IncomeExpenseChartProps> = ({
             type="button"
             aria-label="Ano anterior"
             onClick={() => onYearChange(selectedYear - 1)}
-            className="p-1 hover:bg-gray-100 rounded text-gray-600 cursor-pointer"
+            className="p-1 hover:bg-gray-100 dark:hover:bg-slate-800 rounded text-gray-600 dark:text-slate-400 cursor-pointer"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
-          <span className="text-sm font-semibold text-gray-800" data-testid="selected-year">
+          <span className="text-sm font-semibold text-gray-800 dark:text-slate-200" data-testid="selected-year">
             {selectedYear}
           </span>
           <button
             type="button"
             aria-label="Próximo ano"
             onClick={() => onYearChange(selectedYear + 1)}
-            className="p-1 hover:bg-gray-100 rounded text-gray-600 cursor-pointer"
+            className="p-1 hover:bg-gray-100 dark:hover:bg-slate-800 rounded text-gray-600 dark:text-slate-400 cursor-pointer"
           >
             <ChevronRight className="w-4 h-4" />
           </button>

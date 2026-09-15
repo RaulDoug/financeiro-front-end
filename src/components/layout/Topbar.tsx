@@ -2,6 +2,7 @@ import React from 'react';
 import { Menu } from 'lucide-react';
 import { NotificationsBell } from './NotificationsBell.tsx';
 import { UserMenu } from './UserMenu.tsx';
+import { ThemeToggle } from './ThemeToggle.tsx';
 
 export interface TopbarProps {
   onToggleMobileMenu?: () => void;
@@ -12,39 +13,40 @@ export interface TopbarProps {
 export const Topbar: React.FC<TopbarProps> = ({
   onToggleMobileMenu,
   walletSelectorSlot,
-  overdueAlertsCount = 0,
+  overdueAlertsCount,
 }) => {
   return (
-    <header className="h-16 px-4 md:px-6 flex items-center justify-between gap-4">
-      <div className="flex items-center gap-3">
+    <header className="h-16 px-3 sm:px-4 md:px-6 flex items-center justify-between gap-2 sm:gap-4 max-w-full">
+      <div className="flex items-center gap-1.5 sm:gap-3 min-w-0">
         <button
           type="button"
           onClick={onToggleMobileMenu}
           data-testid="mobile-hamburger-button"
           aria-label="Abrir menu lateral"
-          className="p-2 rounded-xl text-slate-500 hover:bg-slate-100 md:hidden cursor-pointer"
+          className="p-1.5 sm:p-2 rounded-xl text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 md:hidden cursor-pointer shrink-0"
         >
           <Menu className="w-5 h-5" />
         </button>
 
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm">
+        <div className="flex items-center gap-2 shrink-0">
+          <div className="w-8 h-8 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-sm">
             FF
           </div>
-          <span className="font-bold text-lg text-slate-900 tracking-tight hidden sm:block">
+          <span className="font-bold text-lg text-slate-900 dark:text-white tracking-tight hidden md:block">
             FinFlow
           </span>
         </div>
 
         {/* Seletor de Carteira Slot */}
         {walletSelectorSlot && (
-          <div className="ml-2 md:ml-4">{walletSelectorSlot}</div>
+          <div className="min-w-0 max-w-[130px] sm:max-w-none ml-1 sm:ml-2 md:ml-4">{walletSelectorSlot}</div>
         )}
       </div>
 
-      <div className="flex items-center gap-2 sm:gap-3">
+      <div className="flex items-center gap-1 sm:gap-2 md:gap-3 shrink-0">
+        <ThemeToggle />
         <NotificationsBell count={overdueAlertsCount} />
-        <div className="h-5 w-px bg-slate-200 hidden sm:block" />
+        <div className="h-5 w-px bg-slate-200 dark:bg-slate-700 hidden sm:block" />
         <UserMenu />
       </div>
     </header>

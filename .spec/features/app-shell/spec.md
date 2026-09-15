@@ -57,6 +57,20 @@ Como usuário com acesso a múltiplas carteiras, quero poder selecionar qual car
 - **Quando** nenhuma carteira foi selecionada previamente
 - **Então** o sistema deve selecionar automaticamente a primeira carteira disponível e redirecioná-lo.
 
+### US-034 — Alternância de Tema (Claro / Escuro / Sistema)
+
+Como usuário da aplicação, quero escolher entre tema claro, escuro ou seguir a preferência do sistema operacional, para ter maior conforto visual em qualquer ambiente.
+
+#### AC-118 — Alternância de Tema entre Claro, Escuro e Sistema
+- **Dado** que o usuário está navegando pela aplicação
+- **Quando** ele clica no seletor de tema na barra superior (Topbar)
+- **Então** ele pode escolher entre as opções "Claro", "Escuro" e "Sistema", aplicando a paleta correspondente imediatamente.
+
+#### AC-119 — Persistência e Sincronização do Tema
+- **Dado** que o usuário selecionou uma preferência de tema
+- **Quando** a aplicação é recarregada ou a preferência do sistema operacional muda
+- **Então** o tema escolhido é mantido via localStorage e atualizado automaticamente se estiver no modo "Sistema".
+
 ## Fora de escopo
 
 - Criação ou edição de novas carteiras (pertence ao módulo de Configurações).

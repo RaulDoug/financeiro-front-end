@@ -8,12 +8,25 @@ import { TransactionModal } from '../../components/transactions/TransactionModal
 import { TransactionDeleteDialog } from '../../components/transactions/TransactionDeleteDialog.tsx';
 import type { Transaction, TransactionFilters as FiltersType } from '../../types/transaction.ts';
 
+const getInitialMonthRange = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const lastDay = new Date(year, now.getMonth() + 1, 0).getDate();
+
+  return {
+    due_date_from: `${year}-${month}-01`,
+    due_date_to: `${year}-${month}-${String(lastDay).padStart(2, '0')}`,
+  };
+};
+
 export const TransactionsPage: React.FC = () => {
-  const [filters, setFilters] = useState<FiltersType>({
+  const [filters, setFilters] = useState<FiltersType>(() => ({
+    ...getInitialMonthRange(),
     order_by: 'due_date',
-    order_dir: 'DESC',
+    order_dir: 'ASC',
     limit: 20,
-  });
+  }));
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null);
@@ -77,8 +90,8 @@ export const TransactionsPage: React.FC = () => {
       {/* Cabeçalho da Página */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Transações</h1>
-          <p className="text-xs text-gray-500 mt-0.5">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Transações</h1>
+          <p className="text-xs text-gray-500 dark:text-slate-400 mt-0.5">
             Gerencie e acompanhe todas as movimentações financeiras da sua carteira.
           </p>
         </div>

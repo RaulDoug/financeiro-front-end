@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, X } from 'lucide-react';
+import { Search, X, ChevronLeft, ChevronRight, Calendar, ArrowUpDown } from 'lucide-react';
 import type { TransactionFilters as FiltersType, TransactionType, TransactionStatus } from '../../types/transaction.ts';
 
 interface Props {
@@ -9,20 +9,97 @@ interface Props {
 
 export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
   const handleTypeChange = (type?: TransactionType) => {
-    onChange({ ...filters, type, page: 1 });
+    onChange({ ...filters, type, page: 1, order_by: 'due_date' });
   };
 
   const handleStatusChange = (status?: TransactionStatus) => {
-    onChange({ ...filters, status, page: 1 });
+    onChange({ ...filters, status, page: 1, order_by: 'due_date' });
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange({ ...filters, description: e.target.value || undefined, page: 1 });
+    onChange({ ...filters, description: e.target.value || undefined, page: 1, order_by: 'due_date' });
   };
 
   const handleClear = () => {
-    onChange({});
+    onChange({
+      order_by: 'due_date',
+      order_dir: 'ASC',
+    });
   };
+
+  // Referência de mês para navegação baseada no due_date_from
+  const activeDate = filters.due_date_from
+    ? new Date(`${filters.due_date_from}T00:00:00`)
+    : new Date();
+
+  const getMonthBounds = (date: Date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const firstDay = `${year}-${String(month + 1).padStart(2, '0')}-01`;
+    const lastDayNum = new Date(year, month + 1, 0).getDate();
+    const lastDay = `${year}-${String(month + 1).padStart(2, '0')}-${String(lastDayNum).padStart(2, '0')}`;
+    return { firstDay, lastDay };
+  };
+
+  const handlePrevMonth = () => {
+    const prev = new Date(activeDate.getFullYear(), activeDate.getMonth() - 1, 1);
+    const { firstDay, lastDay } = getMonthBounds(prev);
+    onChange({
+      ...filters,
+      due_date_from: firstDay,
+      due_date_to: lastDay,
+      order_by: 'due_date',
+      page: 1,
+    });
+  };
+
+  const handleNextMonth = () => {
+    const next = new Date(activeDate.getFullYear(), activeDate.getMonth() + 1, 1);
+    const { firstDay, lastDay } = getMonthBounds(next);
+    onChange({
+      ...filters,
+      due_date_from: firstDay,
+      due_date_to: lastDay,
+      order_by: 'due_date',
+      page: 1,
+    });
+  };
+
+  const handleCurrentMonth = () => {
+    const now = new Date();
+    const { firstDay, lastDay } = getMonthBounds(now);
+    onChange({
+      ...filters,
+      due_date_from: firstDay,
+      due_date_to: lastDay,
+      order_by: 'due_date',
+      page: 1,
+    });
+  };
+
+  const handleAllDates = () => {
+    onChange({
+      ...filters,
+      due_date_from: undefined,
+      due_date_to: undefined,
+      order_by: 'due_date',
+      page: 1,
+    });
+  };
+
+  const handleToggleOrderDir = () => {
+    const newDir = filters.order_dir === 'DESC' ? 'ASC' : 'DESC';
+    onChange({
+      ...filters,
+      order_by: 'due_date',
+      order_dir: newDir,
+      page: 1,
+    });
+  };
+
+  const formattedMonthLabel = filters.due_date_from
+    ? new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric' }).format(activeDate)
+    : 'Todas as datas';
 
   const hasActiveFilters = Boolean(
     filters.type ||
@@ -32,56 +109,125 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
     filters.due_date_to
   );
 
-  return (
-    <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm space-y-3">
-      <div className="flex flex-col md:flex-row gap-3 items-center justify-between">
-        {/* Barra de busca */}
-        <div className="relative w-full md:w-80">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input
-            type="text"
-            value={filters.description || ''}
-            onChange={handleSearchChange}
-            placeholder="Buscar por descrição..."
-            className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          />
-        </div>
+  const isAscending = (filters.order_dir ?? 'ASC') === 'ASC';
 
-        {/* Datas */}
-        <div className="flex items-center gap-2 w-full md:w-auto">
-          <input
-            type="date"
-            value={filters.due_date_from || ''}
-            onChange={(e) => onChange({ ...filters, due_date_from: e.target.value || undefined, page: 1 })}
-            className="px-3 py-1.5 border border-gray-200 rounded-lg text-xs text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <span className="text-xs text-gray-400">até</span>
-          <input
-            type="date"
-            value={filters.due_date_to || ''}
-            onChange={(e) => onChange({ ...filters, due_date_to: e.target.value || undefined, page: 1 })}
-            className="px-3 py-1.5 border border-gray-200 rounded-lg text-xs text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          {hasActiveFilters && (
+  return (
+    <div className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-gray-100 dark:border-slate-800 shadow-sm space-y-4">
+      {/* Linha superior: Navegação de mês, busca e alternador de ordenação */}
+      <div className="flex flex-col lg:flex-row gap-3 items-start lg:items-center justify-between">
+        {/* Navegador de Mês */}
+        <div className="flex items-center gap-1.5 bg-gray-50 dark:bg-slate-800/70 p-1 rounded-xl border border-gray-200 dark:border-slate-700">
+          <button
+            type="button"
+            onClick={handlePrevMonth}
+            className="p-1.5 rounded-lg text-gray-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 transition shadow-2xs"
+            title="Mês anterior"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+
+          <div className="flex items-center gap-1.5 px-3 py-1">
+            <Calendar className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+            <span className="text-xs font-semibold capitalize text-gray-800 dark:text-slate-200 min-w-[120px] text-center">
+              {formattedMonthLabel}
+            </span>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleNextMonth}
+            className="p-1.5 rounded-lg text-gray-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 transition shadow-2xs"
+            title="Próximo mês"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+
+          <div className="h-4 w-px bg-gray-300 dark:bg-slate-600 mx-1" />
+
+          <button
+            type="button"
+            onClick={handleCurrentMonth}
+            className="px-2 py-1 text-[11px] font-medium text-blue-600 dark:text-blue-400 hover:bg-white dark:hover:bg-slate-700 rounded-lg transition"
+          >
+            Este Mês
+          </button>
+
+          {filters.due_date_from && (
             <button
-              onClick={handleClear}
-              className="flex items-center gap-1 text-xs text-red-500 hover:text-red-700 ml-2 px-2 py-1.5 rounded-lg hover:bg-red-50 transition-colors"
-              title="Limpar filtros"
+              type="button"
+              onClick={handleAllDates}
+              className="px-2 py-1 text-[11px] font-medium text-gray-500 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-700 rounded-lg transition"
             >
-              <X className="w-3.5 h-3.5" />
-              Limpar
+              Todas as datas
             </button>
           )}
         </div>
+
+        {/* Busca e Ordenação */}
+        <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto">
+          {/* Barra de busca */}
+          <div className="relative flex-1 sm:w-64">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input
+              type="text"
+              value={filters.description || ''}
+              onChange={handleSearchChange}
+              placeholder="Buscar por descrição..."
+              className="w-full pl-9 pr-4 py-1.5 border border-gray-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+
+          {/* Botão de Direção da Ordenação por Vencimento */}
+          <button
+            type="button"
+            onClick={handleToggleOrderDir}
+            className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 dark:border-slate-700 dark:bg-slate-800 rounded-lg text-xs font-medium text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition"
+            title="Alternar direção de ordenação por data de vencimento"
+          >
+            <ArrowUpDown className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+            <span>Vencimento: {isAscending ? 'Crescente (↑)' : 'Decrescente (↓)'}</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Linha intermediária: Filtro de datas explícito */}
+      <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-gray-100 dark:border-slate-800 text-xs">
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-xs text-gray-500 dark:text-slate-400 font-medium">Período de Vencimento:</span>
+          <input
+            type="date"
+            value={filters.due_date_from || ''}
+            onChange={(e) => onChange({ ...filters, due_date_from: e.target.value || undefined, page: 1, order_by: 'due_date' })}
+            className="px-2.5 py-1 border border-gray-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <span className="text-gray-400">até</span>
+          <input
+            type="date"
+            value={filters.due_date_to || ''}
+            onChange={(e) => onChange({ ...filters, due_date_to: e.target.value || undefined, page: 1, order_by: 'due_date' })}
+            className="px-2.5 py-1 border border-gray-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {hasActiveFilters && (
+          <button
+            onClick={handleClear}
+            className="flex items-center gap-1 text-xs text-red-500 hover:text-red-700 px-2.5 py-1 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors ml-auto"
+            title="Limpar filtros"
+          >
+            <X className="w-3.5 h-3.5" />
+            Limpar filtros
+          </button>
+        )}
       </div>
 
       {/* Abas / Pílulas de Tipo e Status */}
-      <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-gray-50">
+      <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-gray-100 dark:border-slate-800">
         <div className="flex flex-wrap gap-1.5">
           <button
             onClick={() => handleTypeChange(undefined)}
             className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-              !filters.type ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              !filters.type ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-700'
             }`}
           >
             Todos
@@ -89,7 +235,7 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
           <button
             onClick={() => handleTypeChange('incomings')}
             className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-              filters.type === 'incomings' ? 'bg-emerald-600 text-white' : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
+              filters.type === 'incomings' ? 'bg-emerald-600 text-white' : 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100'
             }`}
           >
             Receitas
@@ -97,7 +243,7 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
           <button
             onClick={() => handleTypeChange('expenses')}
             className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-              filters.type === 'expenses' ? 'bg-rose-600 text-white' : 'bg-rose-50 text-rose-700 hover:bg-rose-100'
+              filters.type === 'expenses' ? 'bg-rose-600 text-white' : 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 hover:bg-rose-100'
             }`}
           >
             Despesas
@@ -105,7 +251,7 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
           <button
             onClick={() => handleTypeChange('transfers')}
             className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-              filters.type === 'transfers' ? 'bg-blue-600 text-white' : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
+              filters.type === 'transfers' ? 'bg-blue-600 text-white' : 'bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 hover:bg-blue-100'
             }`}
           >
             Transferências
@@ -116,7 +262,7 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
           <button
             onClick={() => handleStatusChange(undefined)}
             className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${
-              !filters.status ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              !filters.status ? 'bg-gray-800 dark:bg-slate-700 text-white' : 'bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-700'
             }`}
           >
             Todos Status
@@ -124,7 +270,7 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
           <button
             onClick={() => handleStatusChange('pending')}
             className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${
-              filters.status === 'pending' ? 'bg-amber-600 text-white' : 'bg-amber-50 text-amber-700 hover:bg-amber-100'
+              filters.status === 'pending' ? 'bg-amber-600 text-white' : 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 hover:bg-amber-100'
             }`}
           >
             Pendentes
@@ -132,7 +278,7 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
           <button
             onClick={() => handleStatusChange('completed')}
             className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${
-              filters.status === 'completed' ? 'bg-emerald-600 text-white' : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
+              filters.status === 'completed' ? 'bg-emerald-600 text-white' : 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100'
             }`}
           >
             Concluídos
@@ -140,7 +286,7 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
           <button
             onClick={() => handleStatusChange('expired')}
             className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${
-              filters.status === 'expired' ? 'bg-rose-600 text-white' : 'bg-rose-50 text-rose-700 hover:bg-rose-100'
+              filters.status === 'expired' ? 'bg-rose-600 text-white' : 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 hover:bg-rose-100'
             }`}
           >
             Vencidos
@@ -148,7 +294,7 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
           <button
             onClick={() => handleStatusChange('cancelled')}
             className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${
-              filters.status === 'cancelled' ? 'bg-gray-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              filters.status === 'cancelled' ? 'bg-gray-600 text-white' : 'bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-700'
             }`}
           >
             Cancelados

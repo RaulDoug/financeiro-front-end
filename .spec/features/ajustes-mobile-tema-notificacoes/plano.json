@@ -1,0 +1,127 @@
+{
+  "runId": "Front-End_Financeiro-ajustes-mobile-tema-notificacoes-mu2gsmhj",
+  "feature": "ajustes-mobile-tema-notificacoes",
+  "agent": "antigravity",
+  "modo": "sequencial",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-15 09:23",
+  "branchTrabalho": "spec/ajustes-mobile-tema-notificacoes",
+  "baseDir": ".spec/features/ajustes-mobile-tema-notificacoes",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "logsDir": "../onp-worktrees/Front-End_Financeiro-ajustes-mobile-tema-notificacoes-logs",
+  "ondas": [],
+  "faixas": [],
+  "sequenciais": [
+    {
+      "id": "T-087",
+      "titulo": "Correção do fluxo de dados e badge do Sino de Notificações",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/components/layout/NotificationsBell.tsx",
+        "src/components/layout/Topbar.tsx"
+      ],
+      "refs": [
+        "US-031",
+        "AC-123",
+        "AC-124",
+        "AC-125"
+      ]
+    },
+    {
+      "id": "T-088",
+      "titulo": "Ajuste de cores dos cards da Dashboard e componentes no Tema Escuro",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/Dashboard/components/KpiCards.tsx",
+        "src/pages/Dashboard/components/AccountBalances.tsx",
+        "src/pages/Dashboard/components/CreditCardSummary.tsx",
+        "src/pages/Dashboard/components/RecentTransactions.tsx",
+        "src/pages/Dashboard/components/OverdueAlerts.tsx",
+        "src/pages/Dashboard/components/QuickActions.tsx",
+        "src/index.css"
+      ],
+      "refs": [
+        "US-032",
+        "AC-126"
+      ]
+    },
+    {
+      "id": "T-089",
+      "titulo": "Adaptação da Tabela e Filtros de Transações ao Tema Escuro",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/components/transactions/TransactionTable.tsx",
+        "src/components/transactions/TransactionFilters.tsx",
+        "src/pages/Transactions/index.tsx"
+      ],
+      "refs": [
+        "US-032",
+        "AC-127",
+        "AC-128"
+      ]
+    },
+    {
+      "id": "T-090",
+      "titulo": "Header Mobile Compacto Anti-Quebra e Seletor de Carteira Responsivo",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/components/layout/Topbar.tsx",
+        "src/components/layout/WalletSelector.tsx"
+      ],
+      "refs": [
+        "US-033",
+        "AC-129"
+      ]
+    },
+    {
+      "id": "T-091",
+      "titulo": "Barra de Navegação Inferior Mobile (Bottom Navigation) com Ação Rápida",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/components/layout/MobileNav.tsx",
+        "src/layouts/AppLayout.tsx",
+        "src/components/layout/MoreMenuModal.tsx"
+      ],
+      "refs": [
+        "US-033",
+        "AC-130",
+        "AC-131",
+        "AC-132"
+      ]
+    },
+    {
+      "id": "T-092",
+      "titulo": "Testes Automatizados de Especificação da Feature",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "test/ajustes-mobile-tema-notificacoes.spec.test.js"
+      ],
+      "refs": [
+        "US-031",
+        "US-032",
+        "US-033",
+        "AC-123",
+        "AC-124",
+        "AC-125",
+        "AC-126",
+        "AC-127",
+        "AC-128",
+        "AC-129",
+        "AC-130",
+        "AC-131",
+        "AC-132"
+      ]
+    }
+  ],
+  "concluidas": [],
+  "avisos": []
+}

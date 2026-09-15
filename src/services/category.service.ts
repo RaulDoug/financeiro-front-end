@@ -16,12 +16,18 @@ export interface CategoryResponse {
 
 export const categoryService = {
   async getCategories(type?: 'incomings' | 'expenses'): Promise<CategoryItem[]> {
-    const params = type ? { type } : undefined;
-    const response = await api.get('/categorie', { params });
+    const response = await api.get('/categorie');
     const data = response.data;
-    if (Array.isArray(data)) return data;
-    if (data?.item) return [data.item];
-    return [];
+    let list: CategoryItem[] = [];
+    if (Array.isArray(data)) {
+      list = data;
+    } else if (data?.item) {
+      list = [data.item];
+    }
+    if (type) {
+      return list.filter((item) => item.type === type);
+    }
+    return list;
   },
 
   async createCategory(payload: { name: string; type: 'incomings' | 'expenses' }): Promise<CategoryResponse> {

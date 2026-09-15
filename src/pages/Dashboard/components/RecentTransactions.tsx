@@ -16,7 +16,7 @@ export const RecentTransactions: React.FC<RecentTransactionsProps> = ({
 }) => {
   if (isLoading) {
     return (
-      <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm animate-pulse h-72" />
+      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-5 shadow-sm animate-pulse h-72" />
     );
   }
 
@@ -30,26 +30,26 @@ export const RecentTransactions: React.FC<RecentTransactionsProps> = ({
     .slice(0, 5);
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm" data-testid="recent-transactions">
-      <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+    <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-5 shadow-sm" data-testid="recent-transactions">
+      <div className="flex items-center justify-between pb-3 border-b border-gray-100 dark:border-slate-800">
         <div className="flex items-center gap-2">
-          <div className="p-1.5 bg-gray-100 text-gray-700 rounded-lg">
+          <div className="p-1.5 bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300 rounded-lg">
             <History className="w-4 h-4" />
           </div>
-          <h3 className="text-base font-semibold text-gray-900">Transações Recentes</h3>
+          <h3 className="text-base font-semibold text-gray-900 dark:text-white">Transações Recentes</h3>
         </div>
         <Link
-          to="/transactions"
-          className="text-xs font-semibold text-blue-600 hover:text-blue-750 flex items-center gap-1 transition"
+          to="/transacoes"
+          className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1 transition"
         >
           Ver todas <ArrowRight className="w-3.5 h-3.5" />
         </Link>
       </div>
 
-      <div className="mt-4 divide-y divide-gray-100">
+      <div className="mt-4 divide-y divide-gray-100 dark:divide-slate-800">
         {sorted.length === 0 ? (
           <div className="py-8 text-center" data-testid="empty-recent-transactions">
-            <p className="text-sm font-medium text-gray-500">Nenhuma transação recente</p>
+            <p className="text-sm font-medium text-gray-500 dark:text-slate-400">Nenhuma transação recente</p>
           </div>
         ) : (
           sorted.map((tx) => {
@@ -60,14 +60,14 @@ export const RecentTransactions: React.FC<RecentTransactionsProps> = ({
               <div
                 key={tx.id}
                 data-testid={`recent-tx-${tx.id}`}
-                className="py-3 flex items-center justify-between hover:bg-gray-50 px-2 rounded transition"
+                className="py-3 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-slate-800/60 px-2 rounded transition"
               >
                 <div className="flex flex-col min-w-0 pr-3">
-                  <span className="font-medium text-gray-900 text-sm truncate">{tx.description}</span>
+                  <span className="font-medium text-gray-900 dark:text-slate-200 text-sm truncate">{tx.description}</span>
                   <div className="flex items-center gap-2 mt-0.5">
-                    <span className="text-xs text-gray-500">{formatDate(displayDate)}</span>
+                    <span className="text-xs text-gray-500 dark:text-slate-400">{formatDate(displayDate)}</span>
                     {tx.category_name && (
-                      <span className="text-[11px] px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded">
+                      <span className="text-[11px] px-1.5 py-0.5 bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 rounded">
                         {tx.category_name}
                       </span>
                     )}

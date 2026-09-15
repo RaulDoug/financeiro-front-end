@@ -62,12 +62,12 @@ export const TransactionModal: React.FC<Props> = ({
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-gray-100 my-8"
+        className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-4 sm:p-6 space-y-4 shadow-2xl border border-gray-100 dark:border-slate-800 my-auto max-h-[92vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Cabeçalho */}
-        <div className="flex items-center justify-between pb-2 border-b border-gray-100">
-          <h2 className="text-lg font-bold text-gray-800">
+        <div className="flex items-center justify-between pb-2 border-b border-gray-100 dark:border-slate-800">
+          <h2 className="text-lg font-bold text-gray-800 dark:text-white">
             {initialData ? 'Editar Transação' : 'Nova Transação'}
           </h2>
           <button

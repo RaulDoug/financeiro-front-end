@@ -33,7 +33,7 @@ export const CategoryExpenseChart: React.FC<CategoryExpenseChartProps> = ({
 }) => {
   if (isLoading) {
     return (
-      <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm animate-pulse h-80" />
+      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-5 shadow-sm animate-pulse h-80" />
     );
   }
 
@@ -49,14 +49,14 @@ export const CategoryExpenseChart: React.FC<CategoryExpenseChartProps> = ({
 
   return (
     <div
-      className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm flex flex-col justify-between"
+      className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-5 shadow-sm flex flex-col justify-between"
       data-testid="category-expense-chart"
     >
-      <div className="flex items-center gap-2 pb-3 border-b border-gray-100">
-        <div className="p-1.5 bg-rose-50 text-rose-600 rounded-lg">
+      <div className="flex items-center gap-2 pb-3 border-b border-gray-100 dark:border-slate-800">
+        <div className="p-1.5 bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 rounded-lg">
           <PieChartIcon className="w-4 h-4" />
         </div>
-        <h3 className="text-base font-semibold text-gray-900">Despesas por Categoria</h3>
+        <h3 className="text-base font-semibold text-gray-900 dark:text-white">Despesas por Categoria</h3>
       </div>
 
       <div className="h-72 w-full mt-4">

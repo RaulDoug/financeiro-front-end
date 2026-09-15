@@ -33,7 +33,7 @@ export const useCounterpartyReport = (startDate?: string, endDate?: string) => {
       const response = await transactionService.getTransactions({
         due_date_from: startDate,
         due_date_to: endDate,
-        limit: 500,
+        limit: 100,
       });
       const transactions = response?.rows || [];
       return consolidateCounterparties(transactions);

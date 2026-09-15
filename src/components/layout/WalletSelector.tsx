@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Wallet, ChevronDown, Check } from 'lucide-react';
+import { Wallet, ChevronDown, Check, Plus, X } from 'lucide-react';
 import { useWalletStore, type Wallet as WalletType } from '../../stores/wallet.store.ts';
+import { walletService } from '../../services/wallet.service.ts';
+import { queryClient } from '../../lib/queryClient.ts';
 
 export interface WalletSelectorProps {
   onWalletChange?: (wallet: WalletType) => void;
@@ -20,8 +22,37 @@ const roleBadgeColors: Record<string, string> = {
 
 export const WalletSelector: React.FC<WalletSelectorProps> = ({ onWalletChange }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [newWalletName, setNewWalletName] = useState('');
+  const [isCreating, setIsCreating] = useState(false);
+  const [createError, setCreateError] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const { wallets, currentWallet, currentWalletId, setCurrentWalletId } = useWalletStore();
+  const { wallets, currentWallet, currentWalletId, setCurrentWalletId, addWallet } = useWalletStore();
+
+  const handleCreateWallet = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newWalletName.trim() || newWalletName.trim().length < 2) {
+      setCreateError('O nome da carteira deve ter pelo menos 2 caracteres');
+      return;
+    }
+    setCreateError(null);
+    setIsCreating(true);
+    try {
+      const res = await walletService.registerWallet({ name: newWalletName.trim() });
+      if (res?.wallet) {
+        addWallet(res.wallet);
+        setCurrentWalletId(res.wallet.id);
+        queryClient.invalidateQueries();
+        if (onWalletChange) onWalletChange(res.wallet);
+      }
+      setShowCreateModal(false);
+      setNewWalletName('');
+    } catch (err: any) {
+      setCreateError(err?.response?.data?.message || 'Erro ao criar carteira');
+    } finally {
+      setIsCreating(false);
+    }
+  };
 
   const activeWallet =
     currentWallet ||
@@ -60,30 +91,30 @@ export const WalletSelector: React.FC<WalletSelectorProps> = ({ onWalletChange }
         aria-label="Selecionar carteira"
         aria-expanded={isOpen}
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 transition-colors cursor-pointer text-left shadow-xs"
+        className="flex items-center gap-1.5 sm:gap-2.5 px-2.5 sm:px-3 py-1.5 rounded-full sm:rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/60 transition-colors cursor-pointer text-left shadow-2xs shrink-0 max-w-[130px] sm:max-w-none"
       >
-        <Wallet className="w-4 h-4 text-blue-600 shrink-0" />
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-semibold text-slate-900 truncate max-w-[140px]">
+        <Wallet className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600 dark:text-blue-400 shrink-0" />
+        <div className="flex items-center gap-1.5 min-w-0">
+          <span className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 truncate max-w-[70px] sm:max-w-[140px]">
             {activeWallet?.name || 'Selecione'}
           </span>
           <span
-            className={`text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded border ${
+            className={`text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.2 rounded border hidden sm:inline-block ${
               roleBadgeColors[role] || roleBadgeColors.viewer
             }`}
           >
             {roleLabels[role] || role}
           </span>
         </div>
-        <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+        <ChevronDown className="w-3.5 h-3.5 text-slate-400 shrink-0" />
       </button>
 
       {isOpen && (
         <div
           data-testid="wallet-dropdown-list"
-          className="absolute left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-slate-200 py-2 z-50 animate-in fade-in zoom-in-95 duration-100"
+          className="absolute left-0 mt-2 w-64 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 py-2 z-50 animate-in fade-in zoom-in-95 duration-100"
         >
-          <div className="px-3 py-1.5 text-xs font-medium text-slate-400 border-b border-slate-100 mb-1">
+          <div className="px-3 py-1.5 text-xs font-medium text-slate-400 dark:text-slate-500 border-b border-slate-100 dark:border-slate-800 mb-1">
             Suas Carteiras
           </div>
 
@@ -118,6 +149,78 @@ export const WalletSelector: React.FC<WalletSelectorProps> = ({ onWalletChange }
                 </button>
               );
             })}
+          </div>
+
+          <div className="pt-1.5 mt-1 border-t border-slate-100 dark:border-slate-800 px-1">
+            <button
+              type="button"
+              data-testid="create-wallet-trigger"
+              onClick={() => {
+                setIsOpen(false);
+                setShowCreateModal(true);
+              }}
+              className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 transition-colors cursor-pointer text-left"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              <span>Nova Carteira</span>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {showCreateModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          onClick={() => setShowCreateModal(false)}
+        >
+          <div
+            className="bg-white dark:bg-slate-900 rounded-2xl max-w-sm w-full p-5 space-y-4 shadow-2xl border border-slate-200 dark:border-slate-800 animate-in fade-in zoom-in-95 duration-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">Criar Nova Carteira</h3>
+              <button
+                type="button"
+                onClick={() => setShowCreateModal(false)}
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <form onSubmit={handleCreateWallet} className="space-y-3">
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  Nome da Carteira *
+                </label>
+                <input
+                  type="text"
+                  value={newWalletName}
+                  onChange={(e) => setNewWalletName(e.target.value)}
+                  placeholder="Ex: Pessoal, Empresa, Viagens..."
+                  autoFocus
+                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl text-sm bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                {createError && <p className="text-xs text-rose-500 mt-1">{createError}</p>}
+              </div>
+
+              <div className="flex justify-end gap-2 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowCreateModal(false)}
+                  className="px-3 py-1.5 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  disabled={isCreating}
+                  className="px-4 py-1.5 rounded-xl text-xs font-semibold bg-blue-600 hover:bg-blue-700 text-white transition-colors disabled:opacity-50 cursor-pointer"
+                >
+                  {isCreating ? 'Criando...' : 'Criar Carteira'}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}

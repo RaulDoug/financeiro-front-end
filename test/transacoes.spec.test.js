@@ -235,3 +235,31 @@ test('AC-059: Exclusão de transferência remove ambos registros @spec:AC-059', 
   assert.ok(mutationSource.includes('deleteTransaction'), 'Deve invocar deleteTransaction');
   assert.ok(mutationSource.includes("queryClient.invalidateQueries({ queryKey: ['transactions'] })"), 'Deve invalidar cache e remover registros da lista');
 });
+
+// US-035 — Robustez de Lançamento e Experiência Mobile
+test('AC-120: Responsividade Mobile do Modal de Lançamentos @spec:AC-120', () => {
+  const modalSource = readSource('components/transactions/TransactionModal.tsx');
+  assert.ok(modalSource.includes('max-h-['), 'Modal deve conter limitação de altura para viewport mobile');
+  assert.ok(modalSource.includes('overflow-y-auto'), 'Modal deve permitir rolagem interna em telas menores');
+
+  const filterSource = readSource('components/transactions/TransactionFilters.tsx');
+  assert.ok(filterSource.includes('flex-wrap') || filterSource.includes('md:flex-row'), 'Filtros devem quebrar adequadamente no mobile');
+});
+
+test('AC-121: Carregamento Completo de Categorias no Card de Lançamento @spec:AC-121', () => {
+  const serviceSource = readSource('services/category.service.ts');
+  assert.ok(serviceSource.includes("api.get('/categorie')"), 'Deve consultar rota base de categorias');
+  assert.ok(serviceSource.includes('list.filter') || serviceSource.includes('.filter('), 'Deve filtrar em memória por tipo garantindo exibição de todas as categorias');
+});
+
+test('AC-122: Ordenação por Data de Vencimento e Filtro Mensal Padrão @spec:AC-122', () => {
+  const pageSource = readSource('pages/Transactions/index.tsx');
+  assert.ok(pageSource.includes("order_by: 'due_date'"), 'Página deve inicializar ordenando por due_date');
+  assert.ok(pageSource.includes('due_date_from') && pageSource.includes('due_date_to'), 'Página deve inicializar filtrando o mês por data de vencimento');
+
+  const filtersSource = readSource('components/transactions/TransactionFilters.tsx');
+  assert.ok(filtersSource.includes("order_by: 'due_date'"), 'Filtros devem preservar ordenação por data de vencimento');
+  assert.ok(filtersSource.includes('handlePrevMonth') && filtersSource.includes('handleNextMonth'), 'Deve possuir navegação de meses');
+});
+
+
