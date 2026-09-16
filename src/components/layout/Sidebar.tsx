@@ -38,9 +38,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
       {/* Mobile close header */}
       <div className="flex items-center justify-between p-4 md:hidden border-b border-slate-100 dark:border-slate-800">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm">
-            FF
-          </div>
+          <img
+            src="/logo.png"
+            alt="FinFlow"
+            className="w-8 h-8 rounded-xl object-contain"
+          />
           <span className="font-bold text-slate-900 dark:text-white">FinFlow</span>
         </div>
         <button

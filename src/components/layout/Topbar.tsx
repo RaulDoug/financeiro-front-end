@@ -30,9 +30,11 @@ export const Topbar: React.FC<TopbarProps> = ({
         </button>
 
         <div className="flex items-center gap-2 shrink-0">
-          <div className="w-8 h-8 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-sm">
-            FF
-          </div>
+          <img
+            src="/logo.png"
+            alt="FinFlow"
+            className="w-8 h-8 rounded-xl object-contain"
+          />
           <span className="font-bold text-lg text-slate-900 dark:text-white tracking-tight hidden md:block">
             FinFlow
           </span>
