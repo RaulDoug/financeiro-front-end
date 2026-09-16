@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import {
   X,
   Edit2,
@@ -21,10 +21,12 @@ import { payMethodService } from '../../services/payMethod.service.ts';
 import { bankAccountService } from '../../services/bankAccount.service.ts';
 import { useWalletStore } from '../../stores/wallet.store.ts';
 import { useTransactionMutations } from '../../hooks/useTransactionMutations.ts';
+import { useTransactionModalStore } from '../../stores/transactionModal.store.ts';
 import { formatCurrency } from '../../utils/formatCurrency.ts';
+import type { Transaction } from '../../types/transaction.ts';
 
 export const TransactionDetailsModal: React.FC = () => {
-  const { isOpen, transaction, closeModal, onEditCallback, onDeleteCallback } =
+  const { isOpen, transaction: rawTransaction, closeModal, onEditCallback, onDeleteCallback } =
     useTransactionDetailsModalStore();
 
   const currentWalletId = useWalletStore((state) => state.currentWalletId);
@@ -37,6 +39,24 @@ export const TransactionDetailsModal: React.FC = () => {
   const [paymentError, setPaymentError] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const paymentFormRef = useRef<HTMLDivElement>(null);
+
+  // Consulta detalhada sob demanda caso o item tenha sido aberto via alerta com dados parciais
+  const { data: fullTransactionData } = useQuery({
+    queryKey: ['transaction-detail', rawTransaction?.id],
+    queryFn: () => transactionService.getTransactionById(rawTransaction!.id),
+    enabled: Boolean(currentWalletId && isOpen && rawTransaction?.id),
+    staleTime: 1000 * 30,
+  });
+
+  const transaction: Transaction | null = useMemo(() => {
+    if (!rawTransaction) return null;
+    if (!fullTransactionData) return rawTransaction;
+    return {
+      ...rawTransaction,
+      ...fullTransactionData,
+      status: rawTransaction.status === 'expired' ? 'expired' : (fullTransactionData.status || rawTransaction.status),
+    };
+  }, [rawTransaction, fullTransactionData]);
 
   const { data: bankAccountsData = [] } = useQuery({
     queryKey: ['bank-accounts', currentWalletId],
@@ -60,8 +80,12 @@ export const TransactionDetailsModal: React.FC = () => {
   useEffect(() => {
     if (transaction && isOpen) {
       setPaymentDate(new Date().toISOString().split('T')[0]);
-      setSelectedBankAccountId(transaction.bank_account_id || '');
-      setSelectedPayMethodId(transaction.pay_methods_id || (transaction as any).pay_method_id || '');
+      if (transaction.bank_account_id) {
+        setSelectedBankAccountId(transaction.bank_account_id);
+      }
+      if (transaction.pay_methods_id || (transaction as any).pay_method_id) {
+        setSelectedPayMethodId(transaction.pay_methods_id || (transaction as any).pay_method_id);
+      }
       setShowPaymentForm(false);
       setPaymentError(null);
     }
@@ -106,6 +130,14 @@ export const TransactionDetailsModal: React.FC = () => {
     closeModal();
     if (onEditCallback) {
       onEditCallback(currentTx);
+    } else if (currentTx) {
+      const modalType =
+        currentTx.type === 'incomings'
+          ? 'incomings'
+          : currentTx.type === 'transfers'
+          ? 'transfers'
+          : 'expenses';
+      useTransactionModalStore.getState().openModal(modalType, currentTx);
     }
   };
 
@@ -233,25 +265,30 @@ export const TransactionDetailsModal: React.FC = () => {
                   : 'Despesa'}
               </span>
 
-              {overdueInfo?.isOverdue ? (
+              {transaction.status === 'cancelled' ? (
+                <span className="inline-flex items-center gap-1 bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-400 text-xs font-medium px-2.5 py-1 rounded-full">
+                  <XCircle className="w-3.5 h-3.5" />
+                  Cancelada
+                </span>
+              ) : overdueInfo?.isOverdue ? (
                 <span className="inline-flex items-center gap-1 bg-rose-500 text-white text-xs font-semibold px-2.5 py-1 rounded-full animate-pulse">
                   <AlertCircle className="w-3.5 h-3.5" />
                   Atrasada ({overdueInfo.daysOverdue}d)
+                </span>
+              ) : transaction.status === 'expired' ? (
+                <span className="inline-flex items-center gap-1 bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-800/60 text-xs font-medium px-2.5 py-1 rounded-full">
+                  <AlertCircle className="w-3.5 h-3.5" />
+                  Vencida
                 </span>
               ) : transaction.status === 'completed' ? (
                 <span className="inline-flex items-center gap-1 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 text-xs font-medium px-2.5 py-1 rounded-full">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   Concluída
                 </span>
-              ) : transaction.status === 'pending' ? (
+              ) : (
                 <span className="inline-flex items-center gap-1 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800/60 text-xs font-medium px-2.5 py-1 rounded-full">
                   <Clock className="w-3.5 h-3.5" />
                   Pendente
-                </span>
-              ) : (
-                <span className="inline-flex items-center gap-1 bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-400 text-xs font-medium px-2.5 py-1 rounded-full">
-                  <XCircle className="w-3.5 h-3.5" />
-                  Cancelada
                 </span>
               )}
             </div>

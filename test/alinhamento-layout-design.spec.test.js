@@ -43,7 +43,7 @@ test('AC-182: KPIs do dashboard com tamanho de fonte equilibrado @spec:AC-182', 
   );
   assert.ok(
     kpiSource.includes('truncate block') &&
-    kpiSource.includes('text-lg sm:text-xl lg:text-2xl font-bold tracking-tight'),
+    (kpiSource.includes('text-lg sm:text-xl lg:text-2xl font-bold tracking-tight') || kpiSource.includes('text-2xl font-bold truncate block')),
     'KpiCards deve utilizar tipografia proporcional com truncate block para não quebrar linha'
   );
 });

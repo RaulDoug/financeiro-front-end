@@ -1,20 +1,28 @@
 import React from 'react';
 import { type OverdueAlertItem } from '../../../types/dashboard.ts';
+import { type Transaction, type TransactionType } from '../../../types/transaction.ts';
+import { useTransactionDetailsModalStore } from '../../../stores/transactionDetailsModal.store.ts';
+import { useTransactionModalStore } from '../../../stores/transactionModal.store.ts';
 import { formatCurrency } from '../../../utils/formatCurrency.ts';
 import { formatDate } from '../../../utils/formatDate.ts';
-import { AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { AlertTriangle, CheckCircle2, ChevronRight } from 'lucide-react';
 
 interface OverdueAlertsProps {
   alerts?: OverdueAlertItem[];
   totalOverdue?: number;
   isLoading?: boolean;
+  onSelectAlert?: (item: OverdueAlertItem) => void;
 }
 
 export const OverdueAlerts: React.FC<OverdueAlertsProps> = ({
   alerts = [],
   totalOverdue = 0,
   isLoading,
+  onSelectAlert,
 }) => {
+  const openDetailsModal = useTransactionDetailsModalStore((state) => state.openModal);
+  const openEditModal = useTransactionModalStore((state) => state.openModal);
+
   if (isLoading) {
     return (
       <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-5 shadow-sm animate-pulse h-64" />
@@ -22,6 +30,45 @@ export const OverdueAlerts: React.FC<OverdueAlertsProps> = ({
   }
 
   const hasOverdue = totalOverdue > 0 || alerts.length > 0;
+
+  const handleItemClick = (item: OverdueAlertItem) => {
+    if (onSelectAlert) {
+      onSelectAlert(item);
+      return;
+    }
+
+    const tx: Transaction = {
+      id: item.id,
+      description: item.description,
+      value: String(item.value),
+      type: (item.type as TransactionType) || 'expenses',
+      status: 'expired',
+      due_date: item.due_date,
+      payment_date: null,
+      purchase_date: item.due_date,
+      category_name: null,
+      pay_method_name: '',
+      bank_account_name: '',
+      counterparty_name: null,
+      creator_user_name: '',
+      transfers_id: null,
+      invoice_id: null,
+      current_installment: null,
+      created_at: '',
+    };
+
+    openDetailsModal(tx, {
+      onEdit: (currentTx) => {
+        const modalType =
+          currentTx.type === 'incomings'
+            ? 'incomings'
+            : currentTx.type === 'transfers'
+            ? 'transfers'
+            : 'expenses';
+        openEditModal(modalType, currentTx);
+      },
+    });
+  };
 
   return (
     <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-5 shadow-sm" data-testid="overdue-alerts">
@@ -61,18 +108,32 @@ export const OverdueAlerts: React.FC<OverdueAlertsProps> = ({
             {alerts.map((item) => (
               <div
                 key={item.id}
+                role="button"
+                tabIndex={0}
                 data-testid={`overdue-item-${item.id}`}
-                className="py-2.5 flex items-center justify-between text-sm hover:bg-rose-50/50 dark:hover:bg-rose-950/20 px-1 rounded transition"
+                onClick={() => handleItemClick(item)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleItemClick(item);
+                  }
+                }}
+                className="py-2.5 flex items-center justify-between text-sm hover:bg-rose-50/70 dark:hover:bg-rose-950/30 px-2 rounded-lg transition cursor-pointer group focus:outline-none focus:ring-1 focus:ring-rose-400"
               >
                 <div className="flex flex-col min-w-0 pr-2">
-                  <span className="font-medium text-gray-900 dark:text-slate-200 truncate">{item.description}</span>
+                  <span className="font-medium text-gray-900 dark:text-slate-200 truncate group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
+                    {item.description}
+                  </span>
                   <span className="text-xs text-rose-600 dark:text-rose-400 font-semibold">
                     {item.days_overdue} {item.days_overdue === 1 ? 'dia' : 'dias'} em atraso (Venceu em {formatDate(item.due_date)})
                   </span>
                 </div>
-                <span className="font-bold text-rose-700 dark:text-rose-400 shrink-0">
-                  {formatCurrency(item.value)}
-                </span>
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <span className="font-bold text-rose-700 dark:text-rose-400">
+                    {formatCurrency(item.value)}
+                  </span>
+                  <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors" />
+                </div>
               </div>
             ))}
           </div>
@@ -81,3 +142,4 @@ export const OverdueAlerts: React.FC<OverdueAlertsProps> = ({
     </div>
   );
 };
+

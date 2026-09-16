@@ -73,6 +73,7 @@ export const KpiCards: React.FC<KpiCardsProps> = ({ summary, isLoading }) => {
               </div>
             </div>
             <div className="mt-3 min-w-0">
+              {/* Opção para escala variável: text-[18px] sm:text-xl lg:text-2xl com tracking-tight truncate block */}
               <span className={`text-2xl font-bold truncate block ${card.textColor}`}>
                 {formatCurrency(card.value)}
               </span>

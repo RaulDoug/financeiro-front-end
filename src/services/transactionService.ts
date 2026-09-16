@@ -5,6 +5,7 @@ import type {
   CreateTransactionPayload,
   UpdateTransactionPayload,
   DeleteTransactionPayload,
+  Transaction,
 } from '../types/transaction.ts';
 
 export const transactionService = {
@@ -47,6 +48,13 @@ export const transactionService = {
     return response.data;
   },
 
+  async getTransactionById(id: string): Promise<Transaction | null> {
+    if (!id) return null;
+    const response = await api.get<TransactionListResponse>(`/transaction?id=${encodeURIComponent(id)}`);
+    const rows = response.data?.rows || [];
+    return rows.length > 0 ? rows[0] : null;
+  },
+
   async createTransaction(payload: CreateTransactionPayload): Promise<any> {
     const response = await api.post('/transaction/register', payload);
     return response.data;
@@ -63,21 +71,22 @@ export const transactionService = {
   },
 
   calculateOverdue(dueDate: string | null, status: string): { isOverdue: boolean; daysOverdue: number } | null {
-    if (!dueDate || status !== 'pending') {
+    if (!dueDate || (status !== 'pending' && status !== 'expired')) {
       return null;
     }
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const [year, month, day] = dueDate.split('-').map(Number);
+    const cleanDueDate = dueDate.split('T')[0];
+    const [year, month, day] = cleanDueDate.split('-').map(Number);
     const due = new Date(year, month - 1, day);
     due.setHours(0, 0, 0, 0);
 
     const diffTime = today.getTime() - due.getTime();
     const daysOverdue = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-    if (daysOverdue > 0) {
-      return { isOverdue: true, daysOverdue };
+    if (daysOverdue > 0 || status === 'expired') {
+      return { isOverdue: true, daysOverdue: Math.max(daysOverdue, 0) };
     }
     return null;
   },

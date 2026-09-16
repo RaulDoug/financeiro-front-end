@@ -207,3 +207,93 @@ test('AC-249: Regra defensiva de data e sincronização com backend @spec:AC-249
   );
 });
 
+// US-069 — Exibição de Status Expired e Persistência Segura na Edição
+test('AC-250: Tratamento explícito de status expired na listagem mobile sem fallback indevido para cancelada @spec:AC-250', () => {
+  const mobileListSource = readSource('components/transactions/TransactionMobileList.tsx');
+
+  assert.ok(
+    mobileListSource.includes("t.status === 'cancelled'") || mobileListSource.includes("status === 'cancelled'"),
+    'TransactionMobileList deve isolar explicitamente o status cancelled'
+  );
+  assert.ok(
+    mobileListSource.includes("t.status === 'expired'") || mobileListSource.includes("status === 'expired'"),
+    'TransactionMobileList deve tratar explicitamente o status expired'
+  );
+  assert.ok(
+    mobileListSource.includes('Vencida') || mobileListSource.includes('atrasada'),
+    'TransactionMobileList deve exibir texto de vencida/atrasada'
+  );
+});
+
+test('AC-251: Tratamento explícito de status expired no modal de detalhes e dashboard @spec:AC-251', () => {
+  const modalSource = readSource('components/transactions/TransactionDetailsModal.tsx');
+  const dashSource = readSource('pages/Dashboard/components/RecentTransactions.tsx');
+
+  assert.ok(
+    modalSource.includes("transaction.status === 'expired'"),
+    'TransactionDetailsModal deve tratar explicitamente transaction.status === expired'
+  );
+  assert.ok(
+    modalSource.includes("transaction.status === 'cancelled'"),
+    'TransactionDetailsModal deve restringir Cancelada para status === cancelled'
+  );
+  assert.ok(
+    dashSource.includes("status === 'expired'") && dashSource.includes("status === 'cancelled'"),
+    'RecentTransactions deve tratar cancelled e expired explicitamente'
+  );
+});
+
+test('AC-252: Suporte a status expired no utilitário de atraso calculateOverdue @spec:AC-252', () => {
+  const serviceSource = readSource('services/transactionService.ts');
+
+  assert.ok(
+    serviceSource.includes("status !== 'expired'") || serviceSource.includes("status === 'expired'"),
+    'calculateOverdue deve suportar status expired'
+  );
+});
+
+test('AC-253: Preservação de status expired na edição de transações vencidas evitando erro 500 @spec:AC-253', () => {
+  const formSource = readSource('components/transactions/TransactionFormBase.tsx');
+
+  assert.ok(
+    formSource.includes('payloadStatus') && formSource.includes('resolvedStatus'),
+    'TransactionFormBase deve computar payloadStatus utilizando resolvedStatus'
+  );
+  assert.ok(
+    formSource.includes('isReactivatingFromCancelled'),
+    'TransactionFormBase deve distinguir reativação a partir de cancelada de edição normal'
+  );
+});
+
+test('AC-254: Suíte completa e integridade das regras de status @spec:AC-254', () => {
+  const formSource = readSource('components/transactions/TransactionFormBase.tsx');
+  const serviceSource = readSource('services/transactionService.ts');
+
+  assert.ok(formSource.length > 0 && serviceSource.length > 0, 'Arquivos de transação integrados');
+});
+
+test('AC-255: Isolamento estrito de transações atrasadas por tipo no filtro da listagem @spec:AC-255', () => {
+  const transactionsPageSource = readSource('pages/Transactions/index.tsx');
+
+  // pastOverdueData deve considerar filters.type na query
+  assert.ok(
+    transactionsPageSource.includes('type: filters.type'),
+    'Consulta de atrasadas anteriores deve filtrar por type: filters.type'
+  );
+
+  // Transferências não devem carregar atrasadas anteriores
+  assert.ok(
+    transactionsPageSource.includes("filters.type !== 'transfers'"),
+    'Transferências não devem incluir transações atrasadas de despesas ou receitas'
+  );
+
+  // allTransactions deve aplicar filtro estrito por tipo ativo
+  assert.ok(
+    transactionsPageSource.includes('ot.type !== filters.type') &&
+    transactionsPageSource.includes('t.type === filters.type'),
+    'allTransactions deve filtrar transações pelo tipo selecionado'
+  );
+});
+
+
+

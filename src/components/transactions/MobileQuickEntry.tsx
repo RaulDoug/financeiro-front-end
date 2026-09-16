@@ -22,6 +22,7 @@ import { payMethodService, type PayMethodItem } from '../../services/payMethod.s
 import { counterpartyService, type CounterpartyItem } from '../../services/counterparty.service.ts';
 import { renderLucideIcon } from '../shared/IconPicker.tsx';
 import { detectBankByName } from '../../lib/bankDetector.ts';
+import { resolveTransactionStatus } from '../../utils/transactionStatus.ts';
 import type { TransactionType } from '../../types/transaction.ts';
 
 interface MobileQuickEntryProps {
@@ -234,12 +235,19 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
       }
     }
 
+    const resolvedStatus = resolveTransactionStatus({
+      isCancelled: false,
+      isPaid,
+      dueDate: finalDueDate,
+      todayStr,
+    });
+
     const payload: any = {
       description: description.trim() || defaultDesc,
       value: numericValue,
       type,
       due_date: finalDueDate,
-      status: isPaid ? 'completed' : 'pending',
+      status: resolvedStatus || (isPaid ? 'completed' : 'pending'),
       payment_date: isPaid ? finalPaymentDate : undefined,
     };
 

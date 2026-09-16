@@ -15,7 +15,8 @@ test('AC-210: Atualização imediata na listagem de transações após criação
   const pageSource = readSource('pages/Transactions/index.tsx');
 
   assert.ok(
-    pageSource.includes('refetch,') && pageSource.includes('useTransactions(filters)'),
+    pageSource.includes('refetch,') &&
+      (pageSource.includes('useTransactions(filters)') || pageSource.includes('useTransactions(queryFilters)')),
     'TransactionsPage deve extrair a função refetch do hook useTransactions'
   );
 

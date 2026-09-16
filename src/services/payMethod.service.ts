@@ -99,6 +99,15 @@ export function sanitizeUpdatePayMethodPayload(data: Partial<CreatePayMethodDTO>
     if (!isNaN(closing)) payload.closing_day = closing;
   }
 
+  if (data.last_four_digits !== undefined && data.last_four_digits !== null && String(data.last_four_digits).trim() !== '') {
+    payload.last_four_digits = String(data.last_four_digits).trim();
+  }
+
+  if (data.credit_limit !== undefined && data.credit_limit !== null && String(data.credit_limit).trim() !== '') {
+    const limit = Number(data.credit_limit);
+    if (!isNaN(limit)) payload.credit_limit = limit;
+  }
+
   if (typeof data.icon === 'string' && data.icon.trim().length > 0) {
     payload.icon = data.icon.trim();
   }

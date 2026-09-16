@@ -1,10 +1,10 @@
 {
   "feature": "cancelamento-transacao-filtro",
-  "timestamp": "2026-09-16T14:58:00.000Z",
+  "timestamp": "2026-09-16T15:25:00.000Z",
   "command": "node --test test/cancelamento-transacao-filtro.spec.test.js",
   "reporter": "spec",
   "exitCode": 0,
-  "testsParsed": 10,
+  "testsParsed": 16,
   "results": {
     "AC-240": {
       "status": "pass",
@@ -45,7 +45,30 @@
     "AC-249": {
       "status": "pass",
       "testName": "AC-249: Regra defensiva de data e sincronização com backend @spec:AC-249"
+    },
+    "AC-250": {
+      "status": "pass",
+      "testName": "AC-250: Tratamento explícito de status expired na listagem mobile sem fallback indevido para cancelada @spec:AC-250"
+    },
+    "AC-251": {
+      "status": "pass",
+      "testName": "AC-251: Tratamento explícito de status expired no modal de detalhes e dashboard @spec:AC-251"
+    },
+    "AC-252": {
+      "status": "pass",
+      "testName": "AC-252: Suporte a status expired no utilitário de atraso calculateOverdue @spec:AC-252"
+    },
+    "AC-253": {
+      "status": "pass",
+      "testName": "AC-253: Preservação de status expired na edição de transações vencidas evitando erro 500 @spec:AC-253"
+    },
+    "AC-254": {
+      "status": "pass",
+      "testName": "AC-254: Suíte completa e integridade das regras de status @spec:AC-254"
+    },
+    "AC-255": {
+      "status": "pass",
+      "testName": "AC-255: Isolamento estrito de transações atrasadas por tipo no filtro da listagem @spec:AC-255"
     }
   }
 }
-

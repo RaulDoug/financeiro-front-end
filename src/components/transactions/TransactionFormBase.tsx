@@ -8,7 +8,7 @@ import { useWalletStore } from '../../stores/wallet.store.ts';
 import { CategorySelect } from './CategorySelect.tsx';
 import { InstallmentFields } from './InstallmentFields.tsx';
 import { resolveTransactionStatus } from '../../utils/transactionStatus.ts';
-import type { Transaction, TransactionType } from '../../types/transaction.ts';
+import type { Transaction, TransactionType, TransactionStatus } from '../../types/transaction.ts';
 
 interface Props {
   type: TransactionType;
@@ -122,28 +122,40 @@ export const TransactionFormBase: React.FC<Props> = ({
     }
   }, [initialData, accountsData, payMethodsData, allCategoriesData, counterpartiesData]);
 
-  // Auto-selecionar primeira conta e primeiro método se vazio em novo lançamento (otimização Cafézinho)
+  // Auto-selecionar primeira conta e primeiro método se vazio em novo lançamento ou se initialData não continha FK
   useEffect(() => {
-    if (!initialData && !bankAccountId && accountsData.length > 0) {
+    if (!bankAccountId && accountsData.length > 0) {
       setBankAccountId(accountsData[0].id);
     }
-  }, [initialData, accountsData, bankAccountId]);
+  }, [accountsData, bankAccountId]);
 
   useEffect(() => {
-    if (!initialData && !payMethodId && payMethodsData.length > 0) {
+    if (!payMethodId && payMethodsData.length > 0) {
       setPayMethodId(payMethodsData[0].id);
     }
-  }, [initialData, payMethodsData, payMethodId]);
+  }, [payMethodsData, payMethodId]);
 
   // Auto-selecionar primeira contraparte adequada se disponível
   useEffect(() => {
-    if (!initialData && !counterpartyId && counterpartiesData.length > 0) {
+    if (!counterpartyId && counterpartiesData.length > 0) {
       const match = counterpartiesData.find((cp: CounterpartyItem) =>
         type === 'incomings' ? cp.type === 'payer' : cp.type === 'payee'
       );
       setCounterpartyId(match ? match.id : counterpartiesData[0].id);
     }
-  }, [initialData, counterpartiesData, counterpartyId, type]);
+  }, [counterpartiesData, counterpartyId, type]);
+
+  // Fallback defensivo para categoria se vazia na edição (ex: transações vindas de fontes sumarizadas)
+  useEffect(() => {
+    if (initialData && !categoryId && allCategoriesData.length > 0) {
+      const filtered = allCategoriesData.filter(
+        (c: CategoryItem) => c.type === (type === 'incomings' ? 'incomings' : 'expenses')
+      );
+      if (filtered.length > 0) {
+        setCategoryId(filtered[0].id);
+      }
+    }
+  }, [initialData, categoryId, allCategoriesData, type]);
 
   // AC-050: Checkbox "Já está pago" define payment_date = hoje
   const handleTogglePaid = (checked: boolean) => {
@@ -260,9 +272,29 @@ export const TransactionFormBase: React.FC<Props> = ({
       dueDate,
     });
 
-    // O backend atualiza automaticamente para 'expired' quando due_date < hoje ao receber 'pending'.
-    // Enviar 'expired' diretamente sem alterar due_date causa erro 500 no helper updateTransactionsHelper.js.
-    const payloadStatus = isCancelled ? 'cancelled' : isPaid ? 'completed' : 'pending';
+    // Ao reativar uma transação cancelada com data passada, o backend espera 'pending'
+    // para recalcular internamente para 'expired' (updateTransactionsHelper.js:69-72).
+    // Para transações já vencidas ('expired'), preserva-se o resolvedStatus ('expired') para
+    // não disparar a regra isExpiredToPending do backend que rejeita pending no passado com Erro 500.
+    // Para transações com status 'pending' no banco, preserva-se 'pending' ao editar (se não paga/cancelada),
+    // evitando a regra do backend (!('due_date' in fieldsToUpdate)) que rejeita definir como 'expired' com Erro 500.
+    const isReactivatingFromCancelled = Boolean(
+      initialData && initialData.status === 'cancelled' && !isCancelled
+    );
+
+    const isExistingPending = Boolean(
+      initialData && initialData.status === 'pending' && !isPaid && !isCancelled
+    );
+
+    const payloadStatus: TransactionStatus = isCancelled
+      ? 'cancelled'
+      : isPaid
+      ? 'completed'
+      : isReactivatingFromCancelled && resolvedStatus === 'expired'
+      ? 'pending'
+      : isExistingPending
+      ? 'pending'
+      : resolvedStatus;
 
     const payload: any = {
       description: description.trim(),

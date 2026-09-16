@@ -1,0 +1,31 @@
+{
+  "feature": "baixa-transacao-alertas-vencimento",
+  "timestamp": "2026-09-16T16:14:00.000Z",
+  "command": "node --test test/baixa-transacao-alertas-vencimento.spec.test.js",
+  "reporter": "spec",
+  "exitCode": 0,
+  "testsParsed": 5,
+  "results": {
+    "AC-256": {
+      "status": "pass",
+      "testName": "AC-256: Interatividade e acessibilidade no item de alerta @spec:AC-256"
+    },
+    "AC-257": {
+      "status": "pass",
+      "testName": "AC-257: Integração com useTransactionDetailsModalStore e mapeamento de dados @spec:AC-257"
+    },
+    "AC-258": {
+      "status": "pass",
+      "testName": "AC-258: Disponibilidade do fluxo de baixa no modal de detalhes @spec:AC-258"
+    },
+    "AC-259": {
+      "status": "pass",
+      "testName": "AC-259: Sincronização reativa e recálculo após baixa da transação @spec:AC-259"
+    },
+    "AC-260": {
+      "status": "pass",
+      "testName": "AC-260: Integridade da suíte de testes e montagem global @spec:AC-260"
+    }
+  }
+}
+

@@ -84,11 +84,19 @@ export const TransactionsPage: React.FC = () => {
   const currentWalletId = useWalletStore((state) => state.currentWalletId);
 
   // AC-243 / AC-244: Quando não houver status selecionado ("Todas as transações"), solicitar apenas status ativos (não cancelados)
+  // Quando filtro for 'expired', solicitar tanto 'expired' quanto 'pending' para que transações com vencimento anterior a hoje
+  // que ainda constam como 'pending' no banco apareçam.
   const queryFilters = React.useMemo<FiltersType>(() => {
     if (!filters.status) {
       return {
         ...filters,
         status: ['pending', 'completed', 'expired'],
+      };
+    }
+    if (filters.status === 'expired') {
+      return {
+        ...filters,
+        status: ['expired', 'pending'],
       };
     }
     return filters;
@@ -105,11 +113,12 @@ export const TransactionsPage: React.FC = () => {
 
   // Buscar transações vencidas de períodos anteriores caso haja filtro de data início ativo
   const { data: pastOverdueData, refetch: refetchPastOverdue } = useQuery({
-    queryKey: ['transactions-overdue-past', currentWalletId, filters.due_date_from, filters.status],
+    queryKey: ['transactions-overdue-past', currentWalletId, filters.due_date_from, filters.status, filters.type],
     queryFn: async () => {
       const today = new Date().toISOString().split('T')[0];
       const maxDate = filters.due_date_from && filters.due_date_from < today ? filters.due_date_from : today;
       const res = await transactionService.getTransactions({
+        type: filters.type,
         due_date_to: maxDate,
         order_by: 'due_date',
         order_dir: 'DESC',
@@ -122,7 +131,8 @@ export const TransactionsPage: React.FC = () => {
     enabled: Boolean(
       currentWalletId &&
       filters.due_date_from &&
-      (!filters.status || filters.status === 'pending' || filters.status === 'expired')
+      (!filters.status || filters.status === 'pending' || filters.status === 'expired') &&
+      filters.type !== 'transfers'
     ),
   });
 
@@ -132,12 +142,15 @@ export const TransactionsPage: React.FC = () => {
   const rawTransactions = data?.pages.flatMap((page) => page.rows) || [];
 
   // Combinar transações vencidas de meses anteriores com as transações da página atual
-  // e aplicar filtragem estrita para transações canceladas (AC-243, AC-244)
+  // e aplicar filtragem estrita para transações canceladas (AC-243, AC-244) e tipo de transação ativo
   const allTransactions = React.useMemo(() => {
     const list = [...rawTransactions];
     const existingIds = new Set(list.map((t) => t.id));
-    if (pastOverdueData && pastOverdueData.length > 0) {
+    if (pastOverdueData && pastOverdueData.length > 0 && filters.type !== 'transfers') {
       for (const ot of pastOverdueData) {
+        if (filters.type && ot.type !== filters.type) {
+          continue;
+        }
         if (!existingIds.has(ot.id)) {
           existingIds.add(ot.id);
           list.unshift(ot);
@@ -145,13 +158,43 @@ export const TransactionsPage: React.FC = () => {
       }
     }
 
+    let filteredList = list;
+    if (filters.type) {
+      filteredList = filteredList.filter((t) => {
+        if (filters.type === 'transfers') {
+          return t.type === 'transfers' || t.type === 'transfer_in' || t.type === 'transfer_out';
+        }
+        return t.type === filters.type;
+      });
+    }
+
     // Regra US-067: Transações canceladas aparecem somente quando o filtro 'cancelled' for explicitamente selecionado.
     // Em todas as transações ou outros filtros, não mostra as canceladas.
     if (filters.status === 'cancelled') {
-      return list.filter((t) => t.status === 'cancelled');
+      return filteredList.filter((t) => t.status === 'cancelled');
     }
-    return list.filter((t) => t.status !== 'cancelled');
-  }, [rawTransactions, pastOverdueData, filters.status]);
+
+    // Regra Vencidos / Pendentes:
+    // Se filtro for 'expired', exibir transações cujo status seja 'expired' OU que sejam 'pending' com due_date < today
+    if (filters.status === 'expired') {
+      const today = new Date().toISOString().split('T')[0];
+      return filteredList.filter(
+        (t) =>
+          t.status !== 'cancelled' &&
+          (t.status === 'expired' || (t.status === 'pending' && Boolean(t.due_date && t.due_date < today)))
+      );
+    }
+
+    // Se filtro for 'pending', exibir transações 'pending' que NÃO estejam vencidas (due_date >= today ou sem data)
+    if (filters.status === 'pending') {
+      const today = new Date().toISOString().split('T')[0];
+      return filteredList.filter(
+        (t) => t.status === 'pending' && (!t.due_date || t.due_date >= today)
+      );
+    }
+
+    return filteredList.filter((t) => t.status !== 'cancelled');
+  }, [rawTransactions, pastOverdueData, filters.status, filters.type]);
 
   const handleOpenNew = () => {
     setEditingTransaction(null);

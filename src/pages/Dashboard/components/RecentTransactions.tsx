@@ -5,6 +5,7 @@ import { type Transaction } from '../../../types/transaction.ts';
 import { useTransactionDetailsModalStore } from '../../../stores/transactionDetailsModal.store.ts';
 import { formatCurrency } from '../../../utils/formatCurrency.ts';
 import { formatDate, resolveTransactionDate } from '../../../utils/formatDate.ts';
+import { transactionService } from '../../../services/transactionService.ts';
 import { History, ArrowRight, Tag, ArrowUpRight, ArrowDownLeft, ArrowLeftRight } from 'lucide-react';
 
 interface RecentTransactionsProps {
@@ -57,12 +58,19 @@ export const RecentTransactions: React.FC<RecentTransactionsProps> = ({
   };
 
   const renderStatusBadge = (status: string, dateStr: string) => {
-    const isOverdue =
-      (status === 'pending' || status === 'expired') &&
-      dateStr &&
-      new Date(dateStr) < new Date();
+    if (status === 'cancelled') {
+      return (
+        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+          <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+          Cancelada
+        </span>
+      );
+    }
 
-    if (isOverdue) {
+    const overdueInfo = transactionService.calculateOverdue(dateStr, status);
+    const isOverdue = Boolean(overdueInfo?.isOverdue);
+
+    if (isOverdue || status === 'expired') {
       return (
         <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50">
           <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
@@ -78,18 +86,10 @@ export const RecentTransactions: React.FC<RecentTransactionsProps> = ({
         </span>
       );
     }
-    if (status === 'pending') {
-      return (
-        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-200 dark:border-amber-900/50">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-          Pendente
-        </span>
-      );
-    }
     return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
-        <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
-        Cancelada
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-200 dark:border-amber-900/50">
+        <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+        Pendente
       </span>
     );
   };

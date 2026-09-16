@@ -72,25 +72,30 @@ export const TransactionMobileList: React.FC<TransactionMobileListProps> = ({
                   {formatDate(t.due_date || t.purchase_date)}
                 </span>
 
-                {overdueInfo?.isOverdue ? (
+                {t.status === 'cancelled' ? (
+                  <span className="inline-flex items-center gap-0.5 text-gray-400 font-medium">
+                    <XCircle className="w-3 h-3" />
+                    Cancelada
+                  </span>
+                ) : overdueInfo?.isOverdue ? (
                   <span className="inline-flex items-center gap-0.5 text-rose-600 dark:text-rose-400 font-bold">
                     <AlertCircle className="w-3 h-3" />
-                    {overdueInfo.daysOverdue}d atrasada
+                    {overdueInfo.daysOverdue > 0 ? `${overdueInfo.daysOverdue}d atrasada` : 'Vencida'}
+                  </span>
+                ) : t.status === 'expired' ? (
+                  <span className="inline-flex items-center gap-0.5 text-rose-600 dark:text-rose-400 font-bold">
+                    <AlertCircle className="w-3 h-3" />
+                    Vencida
                   </span>
                 ) : t.status === 'completed' ? (
                   <span className="inline-flex items-center gap-0.5 text-emerald-600 dark:text-emerald-400 font-medium">
                     <CheckCircle2 className="w-3 h-3" />
                     Paga
                   </span>
-                ) : t.status === 'pending' ? (
+                ) : (
                   <span className="inline-flex items-center gap-0.5 text-amber-600 dark:text-amber-400 font-medium">
                     <Clock className="w-3 h-3" />
                     Pendente
-                  </span>
-                ) : (
-                  <span className="inline-flex items-center gap-0.5 text-gray-400 font-medium">
-                    <XCircle className="w-3 h-3" />
-                    Cancelada
                   </span>
                 )}
               </div>

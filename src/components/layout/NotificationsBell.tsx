@@ -5,6 +5,8 @@ import { useQuery } from '@tanstack/react-query';
 import { dashboardService } from '../../services/dashboard.service.ts';
 import { useWalletStore } from '../../stores/wallet.store.ts';
 import { useTransactionDetailsModalStore } from '../../stores/transactionDetailsModal.store.ts';
+import { useTransactionModalStore } from '../../stores/transactionModal.store.ts';
+import { DASHBOARD_QUERY_KEYS } from '../../hooks/useDashboardData.ts';
 import type { OverdueAlertItem } from '../../types/dashboard.ts';
 import type { Transaction } from '../../types/transaction.ts';
 
@@ -25,7 +27,7 @@ export const NotificationsBell: React.FC<NotificationsBellProps> = ({
     (typeof localStorage !== 'undefined' ? localStorage.getItem('active_wallet_id') : null);
 
   const { data: alertsData } = useQuery({
-    queryKey: ['overdue-alerts', currentWalletId],
+    queryKey: DASHBOARD_QUERY_KEYS.overdueAlerts(currentWalletId),
     queryFn: () => dashboardService.getOverdueAlerts(),
     enabled: Boolean(currentWalletId),
   });
@@ -60,9 +62,9 @@ export const NotificationsBell: React.FC<NotificationsBellProps> = ({
       value: String(item.value),
       due_date: item.due_date,
       type: (item.type as any) || 'expenses',
-      status: 'pending',
+      status: 'expired',
       payment_date: null,
-      purchase_date: null,
+      purchase_date: item.due_date || null,
       transfers_id: null,
       invoice_id: null,
       current_installment: null,
@@ -73,7 +75,17 @@ export const NotificationsBell: React.FC<NotificationsBellProps> = ({
       creator_user_name: '',
       created_at: '',
     };
-    useTransactionDetailsModalStore.getState().openModal(tx);
+    useTransactionDetailsModalStore.getState().openModal(tx, {
+      onEdit: (currentTx) => {
+        const modalType =
+          currentTx.type === 'incomings'
+            ? 'incomings'
+            : currentTx.type === 'transfers'
+            ? 'transfers'
+            : 'expenses';
+        useTransactionModalStore.getState().openModal(modalType, currentTx);
+      },
+    });
   };
 
   return (
@@ -97,9 +109,11 @@ export const NotificationsBell: React.FC<NotificationsBellProps> = ({
       </button>
 
       {isOpen && (
+        /* Para voltar à centralização no meio da viewport no mobile, use a classe:
+           "fixed left-1/2 -translate-x-1/2 top-16 mt-1 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:translate-x-0 sm:mt-2 w-72 sm:w-80 max-w-[calc(100vw-2rem)]" */
         <div
           data-testid="notifications-popover"
-          className="fixed right-2 top-16 mt-1 w-72 max-w-[calc(100vw-2rem)] bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 py-3 z-50 animate-in fade-in zoom-in-95 duration-100"
+          className="absolute right-0 top-full mt-2 w-72 sm:w-80 max-w-[calc(100vw-2rem)] bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 py-3 z-50 animate-in fade-in zoom-in-95 duration-100"
         >
           <div className="px-4 pb-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
             <span className="font-bold text-sm text-slate-900 dark:text-white">Notificações</span>

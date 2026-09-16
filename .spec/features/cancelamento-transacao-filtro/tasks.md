@@ -37,3 +37,30 @@
 - Arquivos: test/cancelamento-transacao-filtro.spec.test.js
 - Notas: Suíte completa com 10 testes cobrindo todos os critérios de aceite com execução via node --test.
 
+## T-163 — Suporte a status expired no utilitário de atraso calculateOverdue [concluida]
+- Refs: US-069, AC-252
+- Arquivos: src/services/transactionService.ts
+- Notas: Permitir que calculateOverdue processe tanto status 'pending' quanto 'expired' calculando dias de atraso.
+
+## T-164 — Tratamento explícito de status expired nos cards mobile e modal de detalhes [concluida]
+- Refs: US-069, AC-250, AC-251
+- Arquivos: src/components/transactions/TransactionMobileList.tsx, src/components/transactions/TransactionDetailsModal.tsx, src/pages/Dashboard/components/RecentTransactions.tsx
+- Notas: Eliminar fallback cego para cancelada e renderizar badge de Vencida/Atrasada para status expired.
+
+## T-165 — Preservação de status expired na edição de transações vencidas [concluida]
+- Refs: US-069, AC-253
+- Arquivos: src/components/transactions/TransactionFormBase.tsx
+- Notas: Não forçar status 'pending' no payload de edição de transações vencidas, evitando erro 500 do backend.
+
+## T-166 — Testes automatizados para critérios AC-250 a AC-254 [concluida]
+- Refs: US-069, AC-250, AC-251, AC-252, AC-253, AC-254
+- Arquivos: test/cancelamento-transacao-filtro.spec.test.js, .spec/verification/cancelamento-transacao-filtro.json
+- Notas: Expandir suíte com testes cobrindo AC-250, AC-251, AC-252, AC-253 e AC-254.
+
+## T-167 — Isolamento de transações atrasadas por tipo no filtro da listagem [concluida]
+- Refs: US-069, AC-255
+- Arquivos: src/pages/Transactions/index.tsx, test/cancelamento-transacao-filtro.spec.test.js
+- Notas: Filtrar consulta de transações atrasadas anteriores pelo tipo ativo e isolar despesas de receitas/transferências.
+
+
+

@@ -1,0 +1,31 @@
+{
+  "feature": "sino-notificacoes-baixa-edicao",
+  "timestamp": "2026-09-16T16:29:00.000Z",
+  "command": "node --test test/sino-notificacoes-baixa-edicao.spec.test.js",
+  "reporter": "spec",
+  "exitCode": 0,
+  "testsParsed": 5,
+  "results": {
+    "AC-261": {
+      "status": "pass",
+      "testName": "AC-261: Sincronização reativa de query e invalidação unificada @spec:AC-261"
+    },
+    "AC-262": {
+      "status": "pass",
+      "testName": "AC-262: Registro de callback onEdit no sino de notificações @spec:AC-262"
+    },
+    "AC-263": {
+      "status": "pass",
+      "testName": "AC-263: Fallback defensivo no TransactionDetailsModal para abertura de edição @spec:AC-263"
+    },
+    "AC-264": {
+      "status": "pass",
+      "testName": "AC-264: Mapeamento de status expired e data de vencimento no sino @spec:AC-264"
+    },
+    "AC-265": {
+      "status": "pass",
+      "testName": "AC-265: Prova executável e integridade das stores @spec:AC-265"
+    }
+  }
+}
+
