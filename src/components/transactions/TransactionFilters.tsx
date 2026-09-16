@@ -294,6 +294,8 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
 
         <div className="flex flex-wrap gap-1.5">
           <button
+            type="button"
+            data-testid="filter-status-all"
             onClick={() => handleStatusChange(undefined)}
             className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${
               !filters.status ? 'bg-gray-800 dark:bg-slate-700 text-white' : 'bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-700'
@@ -302,6 +304,8 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
             Todos Status
           </button>
           <button
+            type="button"
+            data-testid="filter-status-pending"
             onClick={() => handleStatusChange('pending')}
             className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${
               filters.status === 'pending' ? 'bg-amber-600 text-white' : 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 hover:bg-amber-100'
@@ -310,6 +314,8 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
             Pendentes
           </button>
           <button
+            type="button"
+            data-testid="filter-status-completed"
             onClick={() => handleStatusChange('completed')}
             className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${
               filters.status === 'completed' ? 'bg-emerald-600 text-white' : 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100'
@@ -318,6 +324,8 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
             Concluídos
           </button>
           <button
+            type="button"
+            data-testid="filter-status-expired"
             onClick={() => handleStatusChange('expired')}
             className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${
               filters.status === 'expired' ? 'bg-rose-600 text-white' : 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 hover:bg-rose-100'
@@ -326,6 +334,8 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
             Vencidos
           </button>
           <button
+            type="button"
+            data-testid="filter-status-cancelled"
             onClick={() => handleStatusChange('cancelled')}
             className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${
               filters.status === 'cancelled' ? 'bg-gray-600 text-white' : 'bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-700'

@@ -41,3 +41,18 @@
 - Refs: US-018, AC-075, AC-076, AC-077
 - Arquivos: src/components/credit-cards/CreditCardModal.tsx, src/components/credit-cards/CreditCardForm.tsx, src/components/credit-cards/CreditCardDeleteDialog.tsx, src/schemas/creditCardSchema.ts
 - Notas: Criar formulário reutilizável para cadastro e edição com react-hook-form + zod validando conta bancária, datas e dígitos. Diálogo de confirmação para exclusão.
+
+## T-134 — Sanitização do payload de criação e atualização em creditCardService [concluida]
+- Refs: US-018, AC-215
+- Arquivos: src/services/api/creditCards.ts
+- Notas: Expurgar propriedade brand de createCreditCard e updateCreditCard para evitar erro 500 no PostgreSQL por coluna inexistente, preservando o mapeamento no campo icon.
+
+## T-135 — Ajuste de identificador display_id, loading e feedback em CreditCardsPage [concluida]
+- Refs: US-018, AC-216, AC-217
+- Arquivos: src/pages/CreditCardsPage.tsx
+- Notas: Utilizar display_id nas mutações de update e delete; repassar isSubmitting para o modal de cartão e exibir alerta visual de erro em caso de rejeição da API.
+
+## T-136 — Testes automatizados dos critérios de aceite AC-215, AC-216 e AC-217 [concluida]
+- Refs: US-018, AC-215, AC-216, AC-217
+- Arquivos: test/cartoes-credito.spec.test.js
+- Notas: Adicionar testes unitários com as anotações @spec:AC-215, @spec:AC-216 e @spec:AC-217 e validar com onp-spec verify cartoes-credito.

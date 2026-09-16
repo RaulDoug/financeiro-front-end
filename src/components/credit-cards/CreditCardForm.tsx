@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { bankAccountService, type BankAccountItem } from '../../services/bankAccount.service.ts';
 import { useWalletStore } from '../../stores/wallet.store.ts';
 import { creditCardSchema } from '../../schemas/creditCardSchema.ts';
+import { normalizeCardColor } from '../../utils/creditCardColors.ts';
 import type { CreditCardItem, CreditCardFormData } from '../../types/creditCard.ts';
 
 interface CreditCardFormProps {
@@ -31,9 +32,22 @@ export const CreditCardForm: React.FC<CreditCardFormProps> = ({
   const [bankAccountId, setBankAccountId] = useState(initialData?.bank_account_id || '');
   const [dueDay, setDueDay] = useState(initialData?.due_day?.toString() || '');
   const [closingDay, setClosingDay] = useState(initialData?.closing_day?.toString() || '');
-  const [lastFourDigits, setLastFourDigits] = useState(initialData?.last_four_digits || '');
+  const [lastFourDigits, setLastFourDigits] = useState(
+    initialData?.last_four_digits ? String(initialData.last_four_digits) : ''
+  );
   const [creditLimit, setCreditLimit] = useState(initialData?.credit_limit?.toString() || '');
-  const [color, setColor] = useState<string>(initialData?.color || 'navy');
+  const [color, setColor] = useState<string>(normalizeCardColor(initialData?.color));
+  const [brand, setBrand] = useState<string>(initialData?.brand || 'Visa');
+
+  const CARD_BRANDS = [
+    { id: 'visa', name: 'Visa' },
+    { id: 'mastercard', name: 'Mastercard' },
+    { id: 'elo', name: 'Elo' },
+    { id: 'amex', name: 'Amex' },
+    { id: 'hipercard', name: 'Hipercard' },
+    { id: 'diners', name: 'Diners' },
+    { id: 'outro', name: 'Outro' },
+  ];
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -45,6 +59,19 @@ export const CreditCardForm: React.FC<CreditCardFormProps> = ({
     },
     enabled: Boolean(currentWalletId),
   });
+
+  useEffect(() => {
+    if (initialData) {
+      setName(initialData.name || '');
+      setBankAccountId(initialData.bank_account_id || '');
+      setDueDay(initialData.due_day?.toString() || '');
+      setClosingDay(initialData.closing_day?.toString() || '');
+      setLastFourDigits(initialData.last_four_digits ? String(initialData.last_four_digits) : '');
+      setCreditLimit(initialData.credit_limit?.toString() || '');
+      setColor(normalizeCardColor(initialData.color));
+      setBrand(initialData.brand || 'Visa');
+    }
+  }, [initialData]);
 
   useEffect(() => {
     if (!bankAccountId && accountsData.length > 0 && !initialData) {
@@ -60,9 +87,11 @@ export const CreditCardForm: React.FC<CreditCardFormProps> = ({
       bank_account_id: bankAccountId,
       due_day: parseInt(dueDay, 10),
       closing_day: parseInt(closingDay, 10),
-      last_four_digits: lastFourDigits.trim(),
+      last_four_digits: String(lastFourDigits || '').trim(),
       credit_limit: parseFloat(creditLimit),
       color: color || 'navy',
+      brand: brand || 'Visa',
+      icon: brand ? brand.toLowerCase() : 'credit-card',
     };
 
     const validation = creditCardSchema.safeParse(rawData);
@@ -216,6 +245,33 @@ export const CreditCardForm: React.FC<CreditCardFormProps> = ({
           {errors.due_day && (
             <p className="text-xs text-rose-500 mt-1">{errors.due_day}</p>
           )}
+        </div>
+      </div>
+
+      {/* Seletor de Bandeira */}
+      <div>
+        <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+          Bandeira do Cartão
+        </label>
+        <div className="grid grid-cols-4 sm:grid-cols-7 gap-2" data-testid="credit-card-brand-picker">
+          {CARD_BRANDS.map((b) => {
+            const isSelected = brand.toLowerCase() === b.id.toLowerCase() || (!brand && b.id === 'visa');
+            return (
+              <button
+                key={b.id}
+                type="button"
+                data-testid={`brand-option-${b.id}`}
+                onClick={() => setBrand(b.name)}
+                className={`flex flex-col items-center justify-center p-2 rounded-xl border text-center transition-all cursor-pointer ${
+                  isSelected
+                    ? 'border-blue-500 bg-blue-50/70 ring-2 ring-blue-500/30 text-blue-700 font-bold'
+                    : 'border-slate-200 hover:border-slate-300 text-slate-700 font-medium'
+                }`}
+              >
+                <span className="text-xs">{b.name}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
 

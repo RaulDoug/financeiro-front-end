@@ -2174,10 +2174,10 @@
       "codigo": "VERIFY_OBSOLETO",
       "feature": "auth",
       "ref": "—",
-      "ocorrencias": 16,
+      "ocorrencias": 25,
       "primeiraVez": "2026-09-14T20:05:10.902Z",
-      "ultimaVez": "2026-09-15T13:21:45.308Z",
-      "gitRev": "8834cd3"
+      "ultimaVez": "2026-09-15T20:53:27.046Z",
+      "gitRev": "5d8c613"
     },
     "TASK_CONCLUIDA_SEM_PROVA::onboarding::T-009": {
       "codigo": "TASK_CONCLUIDA_SEM_PROVA",
@@ -2219,28 +2219,28 @@
       "codigo": "VERIFY_OBSOLETO",
       "feature": "onboarding",
       "ref": "—",
-      "ocorrencias": 15,
+      "ocorrencias": 24,
       "primeiraVez": "2026-09-14T20:38:18.754Z",
-      "ultimaVez": "2026-09-15T13:21:45.308Z",
-      "gitRev": "8834cd3"
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
     },
     "VERIFY_OBSOLETO::app-shell::—": {
       "codigo": "VERIFY_OBSOLETO",
       "feature": "app-shell",
       "ref": "—",
-      "ocorrencias": 12,
+      "ocorrencias": 21,
       "primeiraVez": "2026-09-14T20:52:43.690Z",
-      "ultimaVez": "2026-09-15T13:21:45.307Z",
-      "gitRev": "8834cd3"
+      "ultimaVez": "2026-09-15T20:53:27.046Z",
+      "gitRev": "5d8c613"
     },
     "VERIFY_OBSOLETO::dashboard::—": {
       "codigo": "VERIFY_OBSOLETO",
       "feature": "dashboard",
       "ref": "—",
-      "ocorrencias": 14,
+      "ocorrencias": 23,
       "primeiraVez": "2026-09-14T20:52:43.690Z",
-      "ultimaVez": "2026-09-15T13:21:45.308Z",
-      "gitRev": "8834cd3"
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
     },
     "ARQUIVO_ORFAO::—::src/lib/queryClient.ts": {
       "codigo": "ARQUIVO_ORFAO",
@@ -2273,28 +2273,28 @@
       "codigo": "VERIFY_OBSOLETO",
       "feature": "cartoes-credito",
       "ref": "—",
-      "ocorrencias": 11,
+      "ocorrencias": 20,
       "primeiraVez": "2026-09-14T21:39:05.320Z",
-      "ultimaVez": "2026-09-15T13:12:19.389Z",
-      "gitRev": "8834cd3"
+      "ultimaVez": "2026-09-15T20:53:27.046Z",
+      "gitRev": "5d8c613"
     },
     "VERIFY_OBSOLETO::contas-bancarias::—": {
       "codigo": "VERIFY_OBSOLETO",
       "feature": "contas-bancarias",
       "ref": "—",
-      "ocorrencias": 12,
+      "ocorrencias": 21,
       "primeiraVez": "2026-09-14T21:39:05.320Z",
-      "ultimaVez": "2026-09-15T13:21:45.308Z",
-      "gitRev": "8834cd3"
+      "ultimaVez": "2026-09-15T20:53:27.046Z",
+      "gitRev": "5d8c613"
     },
     "VERIFY_OBSOLETO::transacoes::—": {
       "codigo": "VERIFY_OBSOLETO",
       "feature": "transacoes",
       "ref": "—",
-      "ocorrencias": 12,
+      "ocorrencias": 21,
       "primeiraVez": "2026-09-14T21:39:05.320Z",
-      "ultimaVez": "2026-09-15T13:21:45.308Z",
-      "gitRev": "8834cd3"
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
     },
     "ARQUIVO_ORFAO::—::src/components/credit-cards/CreditCardDeleteDialog.tsx": {
       "codigo": "ARQUIVO_ORFAO",
@@ -2336,19 +2336,19 @@
       "codigo": "VERIFY_OBSOLETO",
       "feature": "configuracoes",
       "ref": "—",
-      "ocorrencias": 11,
+      "ocorrencias": 20,
       "primeiraVez": "2026-09-14T21:44:07.156Z",
-      "ultimaVez": "2026-09-15T13:21:45.308Z",
-      "gitRev": "8834cd3"
+      "ultimaVez": "2026-09-15T20:53:27.046Z",
+      "gitRev": "5d8c613"
     },
     "VERIFY_OBSOLETO::investimentos::—": {
       "codigo": "VERIFY_OBSOLETO",
       "feature": "investimentos",
       "ref": "—",
-      "ocorrencias": 11,
+      "ocorrencias": 20,
       "primeiraVez": "2026-09-14T21:44:07.156Z",
-      "ultimaVez": "2026-09-15T13:21:45.308Z",
-      "gitRev": "8834cd3"
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
     },
     "ARQUIVO_ORFAO::—::src/schemas/investmentSchema.ts": {
       "codigo": "ARQUIVO_ORFAO",
@@ -2372,10 +2372,10 @@
       "codigo": "VERIFY_OBSOLETO",
       "feature": "relatorios",
       "ref": "—",
-      "ocorrencias": 10,
+      "ocorrencias": 19,
       "primeiraVez": "2026-09-14T22:05:56.720Z",
-      "ultimaVez": "2026-09-15T13:21:45.308Z",
-      "gitRev": "8834cd3"
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
     },
     "ID_DUPLICADO::auth::ASM-001": {
       "codigo": "ID_DUPLICADO",
@@ -2669,10 +2669,10 @@
       "codigo": "VERIFY_OBSOLETO",
       "feature": "ajustes-mobile-tema-notificacoes",
       "ref": "—",
-      "ocorrencias": 6,
+      "ocorrencias": 15,
       "primeiraVez": "2026-09-15T11:24:23.143Z",
-      "ultimaVez": "2026-09-15T13:12:19.389Z",
-      "gitRev": "8834cd3"
+      "ultimaVez": "2026-09-15T20:53:27.046Z",
+      "gitRev": "5d8c613"
     },
     "ARQUIVO_INEXISTENTE::melhorias-ux-mobile-desktop::T-095": {
       "codigo": "ARQUIVO_INEXISTENTE",
@@ -2997,6 +2997,1869 @@
       "primeiraVez": "2026-09-15T13:13:32.624Z",
       "ultimaVez": "2026-09-15T13:13:32.624Z",
       "gitRev": "8834cd3"
+    },
+    "VERIFY_OBSOLETO::melhorias-ux-mobile-desktop::—": {
+      "codigo": "VERIFY_OBSOLETO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "—",
+      "ocorrencias": 9,
+      "primeiraVez": "2026-09-15T13:47:58.220Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::correcoes-pos-atualizacao::AC-123": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-123",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.038Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::correcoes-pos-atualizacao::AC-124": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-124",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::correcoes-pos-atualizacao::AC-125": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-125",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::correcoes-pos-atualizacao::AC-126": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-126",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::correcoes-pos-atualizacao::AC-127": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-127",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::correcoes-pos-atualizacao::AC-128": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-128",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::correcoes-pos-atualizacao::AC-129": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-129",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::correcoes-pos-atualizacao::AC-130": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-130",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::correcoes-pos-atualizacao::AC-131": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-131",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::correcoes-pos-atualizacao::AC-132": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-132",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::correcoes-pos-atualizacao::ASM-036": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "ASM-036",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::correcoes-pos-atualizacao::ASM-037": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "ASM-037",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::correcoes-pos-atualizacao::ASM-038": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "ASM-038",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::correcoes-pos-atualizacao::Q-031": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "Q-031",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::US-036": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "US-036",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-133": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-133",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-134": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-134",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-135": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-135",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-136": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-136",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::US-037": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "US-037",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-137": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-137",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-138": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-138",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-139": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-139",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-140": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-140",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::US-038": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "US-038",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-141": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-141",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-142": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-142",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::US-039": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "US-039",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-143": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-143",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-144": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-144",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-145": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-145",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::US-040": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "US-040",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-146": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-146",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-147": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-147",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-148": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-148",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-149": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-149",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::US-041": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "US-041",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-150": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-150",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-151": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-151",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-152": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-152",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-153": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-153",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::US-042": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "US-042",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-154": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-154",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::AC-155": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "AC-155",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::ASM-039": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "ASM-039",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::ASM-040": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "ASM-040",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::ASM-041": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "ASM-041",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::Q-032": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "Q-032",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ID_DUPLICADO::melhorias-ux-mobile-desktop::Q-033": {
+      "codigo": "ID_DUPLICADO",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "Q-033",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::alinhamento-layout-design::T-102": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "T-102",
+      "ocorrencias": 2,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::alinhamento-layout-design::T-105": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "T-105",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-148": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-148",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-149": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-149",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-150": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-150",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-151": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-151",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-152": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-152",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-153": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-153",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-154": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-154",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-155": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-155",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::alinhamento-layout-design::AC-156": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-156",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::alinhamento-layout-design::AC-157": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-157",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::alinhamento-layout-design::AC-158": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-158",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::alinhamento-layout-design::AC-159": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-159",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::alinhamento-layout-design::AC-160": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-160",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::correcoes-pos-atualizacao::T-087": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "T-087",
+      "ocorrencias": 2,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::correcoes-pos-atualizacao::T-088": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "T-088",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::correcoes-pos-atualizacao::T-089": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "T-089",
+      "ocorrencias": 2,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::correcoes-pos-atualizacao::T-092": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "T-092",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::correcoes-pos-atualizacao::AC-123": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-123",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::correcoes-pos-atualizacao::AC-124": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-124",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::correcoes-pos-atualizacao::AC-125": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-125",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::correcoes-pos-atualizacao::AC-126": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-126",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::correcoes-pos-atualizacao::AC-127": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-127",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::correcoes-pos-atualizacao::AC-128": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-128",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::correcoes-pos-atualizacao::AC-129": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-129",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::correcoes-pos-atualizacao::AC-130": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-130",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::correcoes-pos-atualizacao::AC-131": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-131",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::correcoes-pos-atualizacao::AC-132": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-132",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::correcoes-pos-atualizacao::AC-133": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-133",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::correcoes-pos-atualizacao::AC-134": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-134",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::correcoes-pos-atualizacao::AC-135": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-135",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::melhorias-icones-categorias::T-094": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "T-094",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::melhorias-icones-categorias::T-095": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "T-095",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::melhorias-icones-categorias::T-096": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "T-096",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::melhorias-icones-categorias::T-098": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "T-098",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::melhorias-icones-categorias::T-099": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "T-099",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::melhorias-icones-categorias::AC-136": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-136",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::melhorias-icones-categorias::AC-137": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-137",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::melhorias-icones-categorias::AC-138": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-138",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::melhorias-icones-categorias::AC-139": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-139",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::melhorias-icones-categorias::AC-140": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-140",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::melhorias-icones-categorias::AC-141": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-141",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::melhorias-icones-categorias::AC-142": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-142",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::melhorias-icones-categorias::AC-143": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-143",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::melhorias-icones-categorias::AC-144": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-144",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::melhorias-icones-categorias::AC-145": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-145",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::melhorias-icones-categorias::AC-146": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-146",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::melhorias-icones-categorias::AC-147": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-147",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "TASK_CONCLUIDA_SEM_PROVA::melhorias-ux-mobile-desktop::T-093": {
+      "codigo": "TASK_CONCLUIDA_SEM_PROVA",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "T-093",
+      "ocorrencias": 2,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "TASK_CONCLUIDA_SEM_PROVA::melhorias-ux-mobile-desktop::T-094": {
+      "codigo": "TASK_CONCLUIDA_SEM_PROVA",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "T-094",
+      "ocorrencias": 2,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "TASK_CONCLUIDA_SEM_PROVA::melhorias-ux-mobile-desktop::T-095": {
+      "codigo": "TASK_CONCLUIDA_SEM_PROVA",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "T-095",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "TASK_CONCLUIDA_SEM_PROVA::melhorias-ux-mobile-desktop::T-096": {
+      "codigo": "TASK_CONCLUIDA_SEM_PROVA",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "T-096",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "TASK_CONCLUIDA_SEM_PROVA::melhorias-ux-mobile-desktop::T-097": {
+      "codigo": "TASK_CONCLUIDA_SEM_PROVA",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "T-097",
+      "ocorrencias": 2,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "TASK_CONCLUIDA_SEM_PROVA::melhorias-ux-mobile-desktop::T-098": {
+      "codigo": "TASK_CONCLUIDA_SEM_PROVA",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "T-098",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "TASK_CONCLUIDA_SEM_PROVA::melhorias-ux-mobile-desktop::T-099": {
+      "codigo": "TASK_CONCLUIDA_SEM_PROVA",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "T-099",
+      "ocorrencias": 4,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "TASK_CONCLUIDA_SEM_PROVA::melhorias-ux-mobile-desktop::T-100": {
+      "codigo": "TASK_CONCLUIDA_SEM_PROVA",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "T-100",
+      "ocorrencias": 4,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "TASK_CONCLUIDA_SEM_PROVA::melhorias-ux-mobile-desktop::T-101": {
+      "codigo": "TASK_CONCLUIDA_SEM_PROVA",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "T-101",
+      "ocorrencias": 2,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "TASK_CONCLUIDA_SEM_PROVA::melhorias-ux-mobile-desktop::T-102": {
+      "codigo": "TASK_CONCLUIDA_SEM_PROVA",
+      "feature": "melhorias-ux-mobile-desktop",
+      "ref": "T-102",
+      "ocorrencias": 23,
+      "primeiraVez": "2026-09-15T13:52:59.039Z",
+      "ultimaVez": "2026-09-15T13:52:59.039Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::alinhamento-layout-design::T-121": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "T-121",
+      "ocorrencias": 4,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T18:32:59.227Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::alinhamento-layout-design::AC-181": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-181",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::alinhamento-layout-design::AC-182": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-182",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::alinhamento-layout-design::AC-183": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-183",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::alinhamento-layout-design::AC-184": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-184",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::alinhamento-layout-design::AC-185": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-185",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::alinhamento-layout-design::AC-186": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-186",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::alinhamento-layout-design::AC-187": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-187",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::alinhamento-layout-design::AC-188": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-188",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::alinhamento-layout-design::AC-189": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-189",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::alinhamento-layout-design::AC-190": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-190",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::alinhamento-layout-design::AC-191": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-191",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::alinhamento-layout-design::AC-192": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-192",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::alinhamento-layout-design::AC-193": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-193",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::correcoes-pos-atualizacao::T-103": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "T-103",
+      "ocorrencias": 2,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:40:05.406Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::correcoes-pos-atualizacao::T-104": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "T-104",
+      "ocorrencias": 2,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:40:05.406Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::correcoes-pos-atualizacao::AC-156": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-156",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T13:56:39.391Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::correcoes-pos-atualizacao::AC-157": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-157",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T13:56:39.391Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::correcoes-pos-atualizacao::AC-158": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-158",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T13:56:39.391Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::correcoes-pos-atualizacao::AC-159": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-159",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T13:56:39.391Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::correcoes-pos-atualizacao::AC-160": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-160",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T13:56:39.391Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::correcoes-pos-atualizacao::AC-161": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-161",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T13:56:39.391Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::correcoes-pos-atualizacao::AC-162": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-162",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T13:56:39.391Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::correcoes-pos-atualizacao::AC-163": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-163",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T13:56:39.391Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::correcoes-pos-atualizacao::AC-164": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-164",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T13:56:39.391Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::correcoes-pos-atualizacao::AC-165": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-165",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T13:56:39.391Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::correcoes-pos-atualizacao::AC-166": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-166",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T13:56:39.391Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::correcoes-pos-atualizacao::AC-167": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-167",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T13:56:39.391Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::correcoes-pos-atualizacao::AC-168": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "AC-168",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T13:56:39.391Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::melhorias-icones-categorias::T-110": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "T-110",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::melhorias-icones-categorias::T-111": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "T-111",
+      "ocorrencias": 9,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::melhorias-icones-categorias::T-112": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "T-112",
+      "ocorrencias": 9,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::melhorias-icones-categorias::T-114": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "T-114",
+      "ocorrencias": 9,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::melhorias-icones-categorias::T-115": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "T-115",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::melhorias-icones-categorias::AC-169": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-169",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::melhorias-icones-categorias::AC-170": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-170",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::melhorias-icones-categorias::AC-171": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-171",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::melhorias-icones-categorias::AC-172": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-172",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::melhorias-icones-categorias::AC-173": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-173",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::melhorias-icones-categorias::AC-174": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-174",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::melhorias-icones-categorias::AC-175": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-175",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::melhorias-icones-categorias::AC-176": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-176",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::melhorias-icones-categorias::AC-177": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-177",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::melhorias-icones-categorias::AC-178": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-178",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::melhorias-icones-categorias::AC-179": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-179",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_TESTE::melhorias-icones-categorias::AC-180": {
+      "codigo": "AC_SEM_TESTE",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-180",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T13:56:39.391Z",
+      "ultimaVez": "2026-09-15T17:41:14.477Z",
+      "gitRev": "5d8c613"
+    },
+    "VERIFY_FALHOU::melhorias-icones-categorias::AC-179": {
+      "codigo": "VERIFY_FALHOU",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-179",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T18:22:43.076Z",
+      "ultimaVez": "2026-09-15T18:22:43.076Z",
+      "gitRev": "5d8c613"
+    },
+    "VERIFY_FALHOU::melhorias-icones-categorias::AC-180": {
+      "codigo": "VERIFY_FALHOU",
+      "feature": "melhorias-icones-categorias",
+      "ref": "AC-180",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T18:22:43.076Z",
+      "ultimaVez": "2026-09-15T18:22:43.076Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-181": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-181",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T18:32:59.227Z",
+      "ultimaVez": "2026-09-15T18:32:59.227Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-182": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-182",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T18:32:59.227Z",
+      "ultimaVez": "2026-09-15T18:32:59.227Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-183": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-183",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T18:32:59.227Z",
+      "ultimaVez": "2026-09-15T18:32:59.227Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-184": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-184",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T18:32:59.227Z",
+      "ultimaVez": "2026-09-15T18:32:59.227Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-185": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-185",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T18:32:59.227Z",
+      "ultimaVez": "2026-09-15T18:32:59.227Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-186": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-186",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T18:32:59.227Z",
+      "ultimaVez": "2026-09-15T18:32:59.227Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-187": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-187",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T18:32:59.227Z",
+      "ultimaVez": "2026-09-15T18:32:59.227Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-188": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-188",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T18:32:59.227Z",
+      "ultimaVez": "2026-09-15T18:32:59.227Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-189": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-189",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T18:32:59.227Z",
+      "ultimaVez": "2026-09-15T18:32:59.227Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-190": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-190",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T18:32:59.227Z",
+      "ultimaVez": "2026-09-15T18:32:59.227Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-191": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-191",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T18:32:59.227Z",
+      "ultimaVez": "2026-09-15T18:32:59.227Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-192": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-192",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T18:32:59.227Z",
+      "ultimaVez": "2026-09-15T18:32:59.227Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::alinhamento-layout-design::AC-193": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "alinhamento-layout-design",
+      "ref": "AC-193",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T18:32:59.227Z",
+      "ultimaVez": "2026-09-15T18:32:59.227Z",
+      "gitRev": "5d8c613"
+    },
+    "VERIFY_OBSOLETO::correcoes-pos-atualizacao::—": {
+      "codigo": "VERIFY_OBSOLETO",
+      "feature": "correcoes-pos-atualizacao",
+      "ref": "—",
+      "ocorrencias": 4,
+      "primeiraVez": "2026-09-15T18:32:59.227Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "VERIFY_OBSOLETO::melhorias-icones-categorias::—": {
+      "codigo": "VERIFY_OBSOLETO",
+      "feature": "melhorias-icones-categorias",
+      "ref": "—",
+      "ocorrencias": 4,
+      "primeiraVez": "2026-09-15T18:32:59.227Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "VERIFY_OBSOLETO::alinhamento-layout-design::—": {
+      "codigo": "VERIFY_OBSOLETO",
+      "feature": "alinhamento-layout-design",
+      "ref": "—",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:53:27.046Z",
+      "gitRev": "5d8c613"
+    },
+    "TASK_SEM_STATUS::atualizacao-automatica-transacoes::T-126": {
+      "codigo": "TASK_SEM_STATUS",
+      "feature": "atualizacao-automatica-transacoes",
+      "ref": "T-126",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:20:00.629Z",
+      "gitRev": "5d8c613"
+    },
+    "TASK_SEM_STATUS::atualizacao-automatica-transacoes::T-127": {
+      "codigo": "TASK_SEM_STATUS",
+      "feature": "atualizacao-automatica-transacoes",
+      "ref": "T-127",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:20:00.629Z",
+      "gitRev": "5d8c613"
+    },
+    "TASK_SEM_STATUS::atualizacao-automatica-transacoes::T-128": {
+      "codigo": "TASK_SEM_STATUS",
+      "feature": "atualizacao-automatica-transacoes",
+      "ref": "T-128",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:20:00.629Z",
+      "gitRev": "5d8c613"
+    },
+    "TASK_SEM_STATUS::atualizacao-automatica-transacoes::T-129": {
+      "codigo": "TASK_SEM_STATUS",
+      "feature": "atualizacao-automatica-transacoes",
+      "ref": "T-129",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:20:00.629Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_INEXISTENTE::atualizacao-automatica-transacoes::T-129": {
+      "codigo": "ARQUIVO_INEXISTENTE",
+      "feature": "atualizacao-automatica-transacoes",
+      "ref": "T-129",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:20:00.629Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::atualizacao-automatica-transacoes::AC-200": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "atualizacao-automatica-transacoes",
+      "ref": "AC-200",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:20:00.629Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::atualizacao-automatica-transacoes::AC-201": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "atualizacao-automatica-transacoes",
+      "ref": "AC-201",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:20:00.629Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::atualizacao-automatica-transacoes::AC-202": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "atualizacao-automatica-transacoes",
+      "ref": "AC-202",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:20:00.629Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::atualizacao-automatica-transacoes::AC-203": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "atualizacao-automatica-transacoes",
+      "ref": "AC-203",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:20:00.629Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::atualizacao-automatica-transacoes::AC-204": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "atualizacao-automatica-transacoes",
+      "ref": "AC-204",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:20:00.629Z",
+      "gitRev": "5d8c613"
+    },
+    "TASK_SEM_STATUS::restauracao-tipografia-cards::T-123": {
+      "codigo": "TASK_SEM_STATUS",
+      "feature": "restauracao-tipografia-cards",
+      "ref": "T-123",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "TASK_SEM_STATUS::restauracao-tipografia-cards::T-124": {
+      "codigo": "TASK_SEM_STATUS",
+      "feature": "restauracao-tipografia-cards",
+      "ref": "T-124",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "TASK_SEM_STATUS::restauracao-tipografia-cards::T-125": {
+      "codigo": "TASK_SEM_STATUS",
+      "feature": "restauracao-tipografia-cards",
+      "ref": "T-125",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::restauracao-tipografia-cards::AC-194": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "restauracao-tipografia-cards",
+      "ref": "AC-194",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::restauracao-tipografia-cards::AC-195": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "restauracao-tipografia-cards",
+      "ref": "AC-195",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::restauracao-tipografia-cards::AC-196": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "restauracao-tipografia-cards",
+      "ref": "AC-196",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::restauracao-tipografia-cards::AC-197": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "restauracao-tipografia-cards",
+      "ref": "AC-197",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::restauracao-tipografia-cards::AC-198": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "restauracao-tipografia-cards",
+      "ref": "AC-198",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::restauracao-tipografia-cards::AC-199": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "restauracao-tipografia-cards",
+      "ref": "AC-199",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "TESTE_ORFAO::—::AC-205": {
+      "codigo": "TESTE_ORFAO",
+      "feature": "—",
+      "ref": "AC-205",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "TESTE_ORFAO::—::AC-206": {
+      "codigo": "TESTE_ORFAO",
+      "feature": "—",
+      "ref": "AC-206",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "TESTE_ORFAO::—::AC-207": {
+      "codigo": "TESTE_ORFAO",
+      "feature": "—",
+      "ref": "AC-207",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "TESTE_ORFAO::—::AC-208": {
+      "codigo": "TESTE_ORFAO",
+      "feature": "—",
+      "ref": "AC-208",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "TESTE_ORFAO::—::AC-209": {
+      "codigo": "TESTE_ORFAO",
+      "feature": "—",
+      "ref": "AC-209",
+      "ocorrencias": 3,
+      "primeiraVez": "2026-09-15T20:20:00.629Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "VERIFY_OBSOLETO::atualizacao-automatica-transacoes::—": {
+      "codigo": "VERIFY_OBSOLETO",
+      "feature": "atualizacao-automatica-transacoes",
+      "ref": "—",
+      "ocorrencias": 2,
+      "primeiraVez": "2026-09-15T20:31:42.002Z",
+      "ultimaVez": "2026-09-15T20:53:27.046Z",
+      "gitRev": "5d8c613"
+    },
+    "TESTE_ORFAO::—::AC-200": {
+      "codigo": "TESTE_ORFAO",
+      "feature": "—",
+      "ref": "AC-200",
+      "ocorrencias": 2,
+      "primeiraVez": "2026-09-15T20:31:42.002Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "TESTE_ORFAO::—::AC-201": {
+      "codigo": "TESTE_ORFAO",
+      "feature": "—",
+      "ref": "AC-201",
+      "ocorrencias": 2,
+      "primeiraVez": "2026-09-15T20:31:42.002Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "TESTE_ORFAO::—::AC-202": {
+      "codigo": "TESTE_ORFAO",
+      "feature": "—",
+      "ref": "AC-202",
+      "ocorrencias": 2,
+      "primeiraVez": "2026-09-15T20:31:42.002Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "TESTE_ORFAO::—::AC-203": {
+      "codigo": "TESTE_ORFAO",
+      "feature": "—",
+      "ref": "AC-203",
+      "ocorrencias": 2,
+      "primeiraVez": "2026-09-15T20:31:42.002Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "TESTE_ORFAO::—::AC-204": {
+      "codigo": "TESTE_ORFAO",
+      "feature": "—",
+      "ref": "AC-204",
+      "ocorrencias": 2,
+      "primeiraVez": "2026-09-15T20:31:42.002Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::correcao-cadastro-pay-method::AC-218": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "correcao-cadastro-pay-method",
+      "ref": "AC-218",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T20:53:27.046Z",
+      "ultimaVez": "2026-09-15T20:53:27.046Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::correcao-cadastro-pay-method::AC-219": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "correcao-cadastro-pay-method",
+      "ref": "AC-219",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T20:53:27.047Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "AC_SEM_PROVA::correcao-cadastro-pay-method::AC-220": {
+      "codigo": "AC_SEM_PROVA",
+      "feature": "correcao-cadastro-pay-method",
+      "ref": "AC-220",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T20:53:27.047Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
+    },
+    "ARQUIVO_ORFAO::—::src/utils/creditCardColors.ts": {
+      "codigo": "ARQUIVO_ORFAO",
+      "feature": "—",
+      "ref": "src/utils/creditCardColors.ts",
+      "ocorrencias": 1,
+      "primeiraVez": "2026-09-15T20:53:27.047Z",
+      "ultimaVez": "2026-09-15T20:53:27.047Z",
+      "gitRev": "5d8c613"
     }
   }
 }

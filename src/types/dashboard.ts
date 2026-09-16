@@ -88,11 +88,13 @@ export interface OverdueAlertsReport {
   };
 }
 
+import type { TransactionType } from './transaction.ts';
+
 export interface RecentTransactionItem {
   id: string;
   description: string;
   value: number;
-  type: 'incomings' | 'expenses' | 'transfers';
+  type: TransactionType;
   status: 'completed' | 'pending' | 'expired' | 'cancelled';
   date: string;
   category_name?: string;

@@ -1,0 +1,51 @@
+{
+  "feature": "cancelamento-transacao-filtro",
+  "timestamp": "2026-09-16T14:58:00.000Z",
+  "command": "node --test test/cancelamento-transacao-filtro.spec.test.js",
+  "reporter": "spec",
+  "exitCode": 0,
+  "testsParsed": 10,
+  "results": {
+    "AC-240": {
+      "status": "pass",
+      "testName": "AC-240: Opção visual de cancelamento no formulário de edição @spec:AC-240"
+    },
+    "AC-241": {
+      "status": "pass",
+      "testName": "AC-241: Mútua exclusão entre status cancelado e status pago @spec:AC-241"
+    },
+    "AC-242": {
+      "status": "pass",
+      "testName": "AC-242: Envio correto do payload na atualização com status cancelled @spec:AC-242"
+    },
+    "AC-243": {
+      "status": "pass",
+      "testName": "AC-243: Ocultação de canceladas na listagem de todas as transações @spec:AC-243"
+    },
+    "AC-244": {
+      "status": "pass",
+      "testName": "AC-244: Exibição restrita de canceladas no filtro de status Cancelados @spec:AC-244"
+    },
+    "AC-245": {
+      "status": "pass",
+      "testName": "AC-245: Função resolveTransactionStatus calcula status correto baseado em cancelamento, pagamento e vencimento @spec:AC-245"
+    },
+    "AC-246": {
+      "status": "pass",
+      "testName": "AC-246: Preservação de IDs de chave estrangeira ao carregar transação na edição @spec:AC-246"
+    },
+    "AC-247": {
+      "status": "pass",
+      "testName": "AC-247: Feedback visual de reativação com data-testid e projeção de status @spec:AC-247"
+    },
+    "AC-248": {
+      "status": "pass",
+      "testName": "AC-248: Integração de resolveTransactionStatus no handleSubmit garantindo persistência do status correto @spec:AC-248"
+    },
+    "AC-249": {
+      "status": "pass",
+      "testName": "AC-249: Regra defensiva de data e sincronização com backend @spec:AC-249"
+    }
+  }
+}
+

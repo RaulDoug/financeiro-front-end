@@ -14,16 +14,24 @@ export const CounterpartiesSettings: React.FC = () => {
   const [selectedCounterparty, setSelectedCounterparty] = useState<CounterpartyItem | null>(null);
   const [feedbackMessage, setFeedbackMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
 
-  const counts = useMemo(() => {
-    return {
-      all: counterparties.length,
-      payer: counterparties.filter((c) => c.type === 'payer').length,
-      payee: counterparties.filter((c) => c.type === 'payee').length,
-    };
+  // Ocultar contrapartes do sistema como "Transferências" para impedir exclusão acidental (AC-233)
+  const userCounterparties = useMemo(() => {
+    return counterparties.filter(
+      (c) =>
+        c.name.toLowerCase() !== 'transferências' && c.name.toLowerCase() !== 'transferencias'
+    );
   }, [counterparties]);
 
+  const counts = useMemo(() => {
+    return {
+      all: userCounterparties.length,
+      payer: userCounterparties.filter((c) => c.type === 'payer').length,
+      payee: userCounterparties.filter((c) => c.type === 'payee').length,
+    };
+  }, [userCounterparties]);
+
   const filteredCounterparties = useMemo(() => {
-    return counterparties
+    return userCounterparties
       .filter((cp) => {
         if (activeTab === 'payer') return cp.type === 'payer';
         if (activeTab === 'payee') return cp.type === 'payee';
@@ -32,7 +40,7 @@ export const CounterpartiesSettings: React.FC = () => {
       .filter((cp) =>
         cp.name.toLowerCase().includes(searchQuery.toLowerCase().trim())
       );
-  }, [counterparties, activeTab, searchQuery]);
+  }, [userCounterparties, activeTab, searchQuery]);
 
   const handleOpenCreate = () => {
     setSelectedCounterparty(null);

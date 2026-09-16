@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import {
   BarChart,
   Bar,
@@ -41,6 +41,60 @@ export const IncomeExpenseChart: React.FC<IncomeExpenseChartProps> = ({
   onYearChange,
   isLoading,
 }) => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth() + 1; // 1 a 12
+  const isCurrentYear = selectedYear === currentYear;
+
+  // Centralização automática no mês vigente quando for o ano corrente
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container || isLoading) return;
+
+    const timer = setTimeout(() => {
+      if (!container) return;
+      if (isCurrentYear) {
+        const monthIndex = currentMonth - 1; // 0 a 11
+        const totalMonths = 12;
+        const monthWidth = container.scrollWidth / totalMonths;
+        const monthCenter = monthWidth * monthIndex + monthWidth / 2;
+        const targetScrollLeft = monthCenter - container.clientWidth / 2;
+
+        container.scrollTo({
+          left: Math.max(0, targetScrollLeft),
+          behavior: 'smooth',
+        });
+      } else {
+        container.scrollTo({
+          left: 0,
+          behavior: 'smooth',
+        });
+      }
+    }, 120);
+
+    return () => clearTimeout(timer);
+  }, [selectedYear, isCurrentYear, currentMonth, isLoading]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const container = scrollContainerRef.current;
+      if (!container || !isCurrentYear) return;
+      const monthIndex = currentMonth - 1;
+      const monthWidth = container.scrollWidth / 12;
+      const monthCenter = monthWidth * monthIndex + monthWidth / 2;
+      const targetScrollLeft = monthCenter - container.clientWidth / 2;
+      container.scrollTo({
+        left: Math.max(0, targetScrollLeft),
+        behavior: 'auto',
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isCurrentYear, currentMonth]);
+
   if (isLoading) {
     return (
       <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-5 shadow-sm animate-pulse h-80" />
@@ -100,6 +154,7 @@ export const IncomeExpenseChart: React.FC<IncomeExpenseChartProps> = ({
       </div>
 
       <div
+        ref={scrollContainerRef}
         className="h-72 w-full mt-4 overflow-x-auto pb-2 scrollbar-thin outline-none focus:outline-none"
         data-testid="income-expense-chart-scroll-container"
       >
@@ -120,10 +175,43 @@ export const IncomeExpenseChart: React.FC<IncomeExpenseChartProps> = ({
                 data={formattedChartData}
                 barGap={3}
                 barCategoryGap="18%"
-                margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
+                margin={{ top: 10, right: 10, left: -20, bottom: 6 }}
               >
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                <XAxis dataKey="monthLabel" tick={{ fontSize: 12, fill: '#64748b' }} axisLine={false} tickLine={false} />
+                <XAxis
+                  dataKey="monthLabel"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={(props: any) => {
+                    const { x, y, payload } = props;
+                    const isCurrent = isCurrentYear && payload?.value === MONTH_NAMES[currentMonth - 1];
+                    return (
+                      <g transform={`translate(${x},${y})`}>
+                        <text
+                          x={0}
+                          y={0}
+                          dy={12}
+                          textAnchor="middle"
+                          fill={isCurrent ? '#059669' : '#64748b'}
+                          fontWeight={isCurrent ? 700 : 400}
+                          fontSize={isCurrent ? 13 : 12}
+                          data-testid={isCurrent ? 'current-month-tick' : undefined}
+                        >
+                          {payload?.value}
+                        </text>
+                        {isCurrent && (
+                          <circle
+                            cx={0}
+                            cy={20}
+                            r={2.5}
+                            fill="#10b981"
+                            data-testid="current-month-indicator"
+                          />
+                        )}
+                      </g>
+                    );
+                  }}
+                />
                 <YAxis
                   tick={{ fontSize: 11, fill: '#64748b' }}
                   axisLine={false}

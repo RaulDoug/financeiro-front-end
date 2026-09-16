@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Topbar } from '../components/layout/Topbar.tsx';
 import { Sidebar } from '../components/layout/Sidebar.tsx';
 import { WalletSelector } from '../components/layout/WalletSelector.tsx';
 import { MobileNav } from '../components/layout/MobileNav.tsx';
 import { TransactionDetailsModal } from '../components/transactions/TransactionDetailsModal.tsx';
+import { GlobalTransactionModal } from '../components/transactions/GlobalTransactionModal.tsx';
+import { useTransactionModalStore } from '../stores/transactionModal.store.ts';
 
 export interface NavItem {
   label: string;
@@ -33,6 +35,12 @@ export interface AppLayoutProps {
 
 export const AppLayout: React.FC<AppLayoutProps> = ({ topbar, sidebar, children }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const closeModal = useTransactionModalStore((state) => state.closeModal);
+
+  useEffect(() => {
+    closeModal();
+  }, [location.pathname, closeModal]);
 
   return (
     <div className="min-h-screen bg-[#faf8ff] dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col transition-colors duration-200">
@@ -75,6 +83,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ topbar, sidebar, children 
 
       {/* Mobile Bottom Navigation */}
       <MobileNav />
+
+      {/* Modal Global de Lançamento de Transação */}
+      <GlobalTransactionModal />
 
       {/* Modal Global de Detalhes da Transação */}
       <TransactionDetailsModal />

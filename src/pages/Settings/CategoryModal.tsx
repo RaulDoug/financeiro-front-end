@@ -2,11 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
 import { categorySchema } from '../../schemas/settingsSchemas.ts';
 import type { CategoryItem } from '../../services/category.service.ts';
+import { IconPicker } from '../../components/shared/IconPicker.tsx';
 
 interface CategoryModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: { name: string; type: 'incomings' | 'expenses' }) => Promise<void>;
+  onSubmit: (data: {
+    name: string;
+    type: 'incomings' | 'expenses';
+    icon?: string;
+    color?: string;
+  }) => Promise<void>;
   category?: CategoryItem | null;
   isLoading?: boolean;
 }
@@ -20,15 +26,21 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
 }) => {
   const [name, setName] = useState('');
   const [type, setType] = useState<'incomings' | 'expenses'>('expenses');
+  const [icon, setIcon] = useState('smile');
+  const [color, setColor] = useState('#3b82f6');
   const [errors, setErrors] = useState<{ name?: string; type?: string }>({});
 
   useEffect(() => {
     if (category) {
       setName(category.name);
       setType(category.type);
+      setIcon(category.icon || 'smile');
+      setColor(category.color || '#3b82f6');
     } else {
       setName('');
       setType('expenses');
+      setIcon('smile');
+      setColor('#3b82f6');
     }
     setErrors({});
   }, [category, isOpen]);
@@ -49,7 +61,7 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
     }
 
     try {
-      await onSubmit({ name: name.trim(), type });
+      await onSubmit({ name: name.trim(), type, icon, color });
       onClose();
     } catch {
       // error handled by parent or hook
@@ -58,8 +70,8 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4">
-      <div className="bg-white rounded-2xl shadow-xl border border-slate-200 w-full max-w-md overflow-hidden">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+      <div className="bg-white rounded-2xl shadow-xl border border-slate-200 w-full max-w-md max-h-[92vh] flex flex-col overflow-hidden">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 shrink-0">
           <h2 className="text-lg font-semibold text-slate-900">
             {category ? 'Editar Categoria' : 'Nova Categoria'}
           </h2>
@@ -73,7 +85,7 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-6 space-y-4 overflow-y-auto flex-1">
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">
               Nome da Categoria
@@ -123,6 +135,15 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
             {errors.type && (
               <p className="mt-1 text-xs text-rose-500">{errors.type}</p>
             )}
+          </div>
+
+          <div>
+            <IconPicker
+              selectedIcon={icon}
+              selectedColor={color}
+              onSelectIcon={setIcon}
+              onSelectColor={setColor}
+            />
           </div>
 
           <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">

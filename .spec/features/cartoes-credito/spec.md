@@ -71,6 +71,21 @@ Como usuário, quero registrar um novo cartão de crédito informando seus dados
 - **Quando** confirma a exclusão no diálogo de confirmação
 - **Então** o cartão é removido via `DELETE /api/pay-method/delete/:id`, a lista é recarregada e um toast de sucesso é exibido
 
+#### AC-215 — Payload estrito em conformidade com o schema de persistência
+- **Dado** que o usuário preenche o formulário de cadastro de cartão com nome, conta, limite, datas e bandeira
+- **Quando** a requisição POST para `/api/pay-method/register` é disparada
+- **Então** o payload transmitido contém exclusivamente colunas existentes na tabela `pay_methods` (`name`, `credit_card`, `bank_account_id`, `due_day`, `closing_day`, `last_four_digits`, `credit_limit`, `icon`, `color`), mapeando a bandeira estritamente para o campo `icon` e omitindo `brand`.
+
+#### AC-216 — Uso de display_id nas rotas de edição e exclusão de cartões
+- **Dado** que o usuário executa edição ou exclusão de um cartão na interface
+- **Quando** as requisições `PATCH /api/pay-method/update/:id` ou `DELETE /api/pay-method/delete/:id` são chamadas
+- **Então** o parâmetro `:id` enviado na URL corresponde ao `display_id` do cartão (fallback para `id` se inexistente), atendendo ao schema de validação do backend.
+
+#### AC-217 — Estado de carregamento e feedback visual de erro
+- **Dado** que o usuário submete o formulário de cartão
+- **Quando** a requisição estiver em processamento ou ocorrer erro na resposta
+- **Então** o botão de envio exibe indicador de carregamento desabilitado (`isSubmitting`) e eventuais erros da API exibem mensagem de alerta na interface em vez de falha silenciosa.
+
 ## Fora de escopo
 
 - Pagamento da fatura não é tratado aqui (será tratado em outra feature de transações ou faturas).

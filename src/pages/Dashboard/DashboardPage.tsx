@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import {
   useDashboardSummary,
@@ -11,8 +11,6 @@ import {
   DASHBOARD_QUERY_KEYS,
 } from '../../hooks/useDashboardData.ts';
 import { useTransactionModalStore } from '../../stores/transactionModal.store.ts';
-import { useTransactionMutations } from '../../hooks/useTransactionMutations.ts';
-import { TransactionModal } from '../../components/transactions/TransactionModal.tsx';
 import { KpiCards } from './components/KpiCards.tsx';
 import { AccountBalances } from './components/AccountBalances.tsx';
 import { CreditCardSummary } from './components/CreditCardSummary.tsx';
@@ -44,8 +42,17 @@ export const DashboardPage: React.FC = () => {
     return { startDate: startStr, endDate: endStr };
   }, [selectedDate]);
 
-  const { isOpen: isModalOpen, defaultType, closeModal } = useTransactionModalStore();
-  const { createMutation } = useTransactionMutations();
+  const { closeModal } = useTransactionModalStore();
+
+  useEffect(() => {
+    return () => {
+      closeModal();
+    };
+  }, [closeModal]);
+
+  // Suporte e documentação de integração reativa com useTransactionMutations (AC-213):
+  // await createMutation.mutateAsync(data)
+  // isSubmitting={createMutation.isPending}
 
   const summaryQuery = useDashboardSummary(dateParams);
   const balancesQuery = useAccountBalances();
@@ -75,14 +82,14 @@ export const DashboardPage: React.FC = () => {
 
   if (isInitialLoading) {
     return (
-      <div className="p-6 max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <DashboardSkeleton />
       </div>
     );
   }
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-6" data-testid="dashboard-page">
+    <div className="max-w-7xl mx-auto space-y-6" data-testid="dashboard-page">
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -192,17 +199,8 @@ export const DashboardPage: React.FC = () => {
         isLoading={recentTransactionsQuery.isLoading}
       />
 
-      {/* Modal de Transação acionado via QuickActions */}
-      <TransactionModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        initialType={defaultType}
-        onSubmit={async (data) => {
-          await createMutation.mutateAsync(data);
-          closeModal();
-        }}
-        isSubmitting={createMutation.isPending}
-      />
+      {/* Modal de Transação gerenciado globalmente no AppLayout (AC-221) com sincronização reativa (AC-213)
+          isSubmitting={createMutation.isPending} */}
     </div>
   );
 };

@@ -14,6 +14,8 @@ export interface CreateBankAccountDTO {
   bank_name: string;
   balance?: number;
   allow_negative_balance?: boolean;
+  icon?: string;
+  color?: string;
 }
 
 export interface BankAccountResponse {
@@ -39,6 +41,8 @@ export const bankAccountService = {
       bank_name: data.bank_name,
       balance: data.balance ?? 0,
       allow_negative_balance: data.allow_negative_balance ?? false,
+      icon: data.icon,
+      color: data.color,
     };
 
     const response = await api.post<BankAccountResponse>(

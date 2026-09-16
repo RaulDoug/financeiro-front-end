@@ -3,10 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { bankAccountService, type BankAccountItem } from '../../services/bankAccount.service.ts';
 import { payMethodService, type PayMethodItem } from '../../services/payMethod.service.ts';
 import { counterpartyService, type CounterpartyItem } from '../../services/counterparty.service.ts';
-import { categoryService } from '../../services/category.service.ts';
+import { categoryService, type CategoryItem } from '../../services/category.service.ts';
 import { useWalletStore } from '../../stores/wallet.store.ts';
 import { CategorySelect } from './CategorySelect.tsx';
 import { InstallmentFields } from './InstallmentFields.tsx';
+import { resolveTransactionStatus } from '../../utils/transactionStatus.ts';
 import type { Transaction, TransactionType } from '../../types/transaction.ts';
 
 interface Props {
@@ -32,9 +33,14 @@ export const TransactionFormBase: React.FC<Props> = ({
   const [payMethodId, setPayMethodId] = useState('');
   const [categoryId, setCategoryId] = useState('');
   const [counterpartyId, setCounterpartyId] = useState(initialData?.counterparty_id || '');
-  const [dueDate, setDueDate] = useState(initialData?.due_date || todayStr);
+  const [dueDate, setDueDate] = useState(
+    initialData?.due_date ? initialData.due_date.split('T')[0] : todayStr
+  );
   const [isPaid, setIsPaid] = useState(initialData?.status === 'completed' || false);
-  const [paymentDate, setPaymentDate] = useState(initialData?.payment_date || '');
+  const [isCancelled, setIsCancelled] = useState(initialData?.status === 'cancelled' || false);
+  const [paymentDate, setPaymentDate] = useState(
+    initialData?.payment_date ? initialData.payment_date.split('T')[0] : ''
+  );
 
   // Parcelamento
   const [isInstallment, setIsInstallment] = useState(false);
@@ -82,35 +88,79 @@ export const TransactionFormBase: React.FC<Props> = ({
     enabled: Boolean(currentWalletId),
   });
 
-  // Auto-selecionar primeira conta e primeiro método se vazio (otimização Cafézinho)
+  // AC-246: Preservar e mapear FKs existentes ao editar (initialData)
   useEffect(() => {
-    if (!bankAccountId && accountsData.length > 0) {
+    if (initialData) {
+      if (initialData.bank_account_id) {
+        setBankAccountId(initialData.bank_account_id);
+      } else if (initialData.bank_account_name && accountsData.length > 0) {
+        const found = accountsData.find((a: BankAccountItem) => a.bank_name === initialData.bank_account_name);
+        if (found) setBankAccountId(found.id);
+      }
+
+      const pId = initialData.pay_methods_id || (initialData as any).pay_method_id;
+      if (pId) {
+        setPayMethodId(pId);
+      } else if (initialData.pay_method_name && payMethodsData.length > 0) {
+        const found = payMethodsData.find((p: PayMethodItem) => p.name === initialData.pay_method_name);
+        if (found) setPayMethodId(found.id);
+      }
+
+      if (initialData.category_id) {
+        setCategoryId(initialData.category_id);
+      } else if (initialData.category_name && allCategoriesData.length > 0) {
+        const found = allCategoriesData.find((c: CategoryItem) => c.name === initialData.category_name);
+        if (found) setCategoryId(found.id);
+      }
+
+      if (initialData.counterparty_id) {
+        setCounterpartyId(initialData.counterparty_id);
+      } else if (initialData.counterparty_name && counterpartiesData.length > 0) {
+        const found = counterpartiesData.find((cp: CounterpartyItem) => cp.name === initialData.counterparty_name);
+        if (found) setCounterpartyId(found.id);
+      }
+    }
+  }, [initialData, accountsData, payMethodsData, allCategoriesData, counterpartiesData]);
+
+  // Auto-selecionar primeira conta e primeiro método se vazio em novo lançamento (otimização Cafézinho)
+  useEffect(() => {
+    if (!initialData && !bankAccountId && accountsData.length > 0) {
       setBankAccountId(accountsData[0].id);
     }
-  }, [accountsData, bankAccountId]);
+  }, [initialData, accountsData, bankAccountId]);
 
   useEffect(() => {
-    if (!payMethodId && payMethodsData.length > 0) {
+    if (!initialData && !payMethodId && payMethodsData.length > 0) {
       setPayMethodId(payMethodsData[0].id);
     }
-  }, [payMethodsData, payMethodId]);
+  }, [initialData, payMethodsData, payMethodId]);
 
   // Auto-selecionar primeira contraparte adequada se disponível
   useEffect(() => {
-    if (!counterpartyId && counterpartiesData.length > 0) {
+    if (!initialData && !counterpartyId && counterpartiesData.length > 0) {
       const match = counterpartiesData.find((cp: CounterpartyItem) =>
         type === 'incomings' ? cp.type === 'payer' : cp.type === 'payee'
       );
       setCounterpartyId(match ? match.id : counterpartiesData[0].id);
     }
-  }, [counterpartiesData, counterpartyId, type]);
+  }, [initialData, counterpartiesData, counterpartyId, type]);
 
   // AC-050: Checkbox "Já está pago" define payment_date = hoje
   const handleTogglePaid = (checked: boolean) => {
     setIsPaid(checked);
     if (checked) {
+      setIsCancelled(false);
       setPaymentDate(todayStr);
     } else {
+      setPaymentDate('');
+    }
+  };
+
+  // AC-241: Checkbox "Cancelar transação" desativa status pago e limpa payment_date
+  const handleToggleCancelled = (checked: boolean) => {
+    setIsCancelled(checked);
+    if (checked) {
+      setIsPaid(false);
       setPaymentDate('');
     }
   };
@@ -156,35 +206,78 @@ export const TransactionFormBase: React.FC<Props> = ({
 
     // Garantir contraparte válida
     let finalCounterpartyId = counterpartyId;
-    if (!finalCounterpartyId && counterpartiesData.length > 0) {
-      const match = counterpartiesData.find((cp: CounterpartyItem) =>
-        type === 'incomings' ? cp.type === 'payer' : cp.type === 'payee'
-      );
-      finalCounterpartyId = match ? match.id : counterpartiesData[0].id;
-    }
 
-    if (!finalCounterpartyId) {
-      try {
-        const created = await counterpartyService.createCounterparty({
-          name: 'Geral',
-          type: type === 'incomings' ? 'payer' : 'payee',
-        });
-        if (created?.item?.id) {
-          finalCounterpartyId = created.item.id;
+    if (type === 'transfers') {
+      // Contraparte interna padrão para transferências
+      const transferMatch = counterpartiesData.find(
+        (cp: CounterpartyItem) =>
+          cp.name.toLowerCase() === 'transferências' || cp.name.toLowerCase() === 'transferencias'
+      );
+      if (transferMatch) {
+        finalCounterpartyId = transferMatch.id;
+      } else {
+        try {
+          const created = await counterpartyService.createCounterparty({
+            name: 'Transferências',
+            type: 'payee',
+          });
+          if (created?.item?.id) {
+            finalCounterpartyId = created.item.id;
+          }
+        } catch (err) {
+          console.warn('Could not auto-create transfer counterparty', err);
         }
-      } catch (err) {
-        console.warn('Could not auto-create counterparty', err);
+      }
+    } else {
+      if (!finalCounterpartyId && counterpartiesData.length > 0) {
+        const match = counterpartiesData.find(
+          (cp: CounterpartyItem) =>
+            cp.name.toLowerCase() !== 'transferências' &&
+            cp.name.toLowerCase() !== 'transferencias' &&
+            (type === 'incomings' ? cp.type === 'payer' : cp.type === 'payee')
+        );
+        finalCounterpartyId = match ? match.id : counterpartiesData[0].id;
+      }
+
+      if (!finalCounterpartyId) {
+        try {
+          const created = await counterpartyService.createCounterparty({
+            name: 'Geral',
+            type: type === 'incomings' ? 'payer' : 'payee',
+          });
+          if (created?.item?.id) {
+            finalCounterpartyId = created.item.id;
+          }
+        } catch (err) {
+          console.warn('Could not auto-create counterparty', err);
+        }
       }
     }
+
+    const resolvedStatus = resolveTransactionStatus({
+      isCancelled,
+      isPaid,
+      dueDate,
+    });
+
+    // O backend atualiza automaticamente para 'expired' quando due_date < hoje ao receber 'pending'.
+    // Enviar 'expired' diretamente sem alterar due_date causa erro 500 no helper updateTransactionsHelper.js.
+    const payloadStatus = isCancelled ? 'cancelled' : isPaid ? 'completed' : 'pending';
 
     const payload: any = {
       description: description.trim(),
       value: numValue,
       bank_account_id: bankAccountId,
       due_date: dueDate,
-      status: isPaid ? 'completed' : 'pending',
+      status: payloadStatus,
       payment_date: isPaid ? paymentDate || todayStr : undefined,
     };
+
+    if (resolvedStatus === 'completed') {
+      payload.payment_date = paymentDate || todayStr;
+    } else {
+      delete payload.payment_date;
+    }
 
     if (finalCounterpartyId) {
       payload.counterparty_id = finalCounterpartyId;
@@ -193,21 +286,29 @@ export const TransactionFormBase: React.FC<Props> = ({
     if (type === 'transfers') {
       payload.type = 'transfers';
       payload.destiny_bank_account_id = destinyBankAccountId;
-      payload.status = isPaid ? 'completed' : 'completed';
-      payload.category_id = categoryId || allCategoriesData[0]?.id;
+      payload.status = isCancelled ? 'cancelled' : 'completed';
       payload.pay_methods_id = payMethodId || payMethodsData[0]?.id;
 
-      if (!payload.category_id) {
+      // Categoria padrão para transferências (AC-234)
+      const transferCat = allCategoriesData.find(
+        (c: CategoryItem) =>
+          c.name.toLowerCase() === 'transferência' || c.name.toLowerCase() === 'transferencia'
+      );
+      if (transferCat) {
+        payload.category_id = transferCat.id;
+      } else {
         try {
           const newCat = await categoryService.createCategory({
             name: 'Transferência',
             type: 'expenses',
+            icon: 'arrow-left-right',
+            color: '#2563eb',
           });
           if (newCat?.item?.id) {
             payload.category_id = newCat.item.id;
           }
         } catch {
-          // ignore
+          payload.category_id = allCategoriesData[0]?.id;
         }
       }
     } else {
@@ -228,6 +329,13 @@ export const TransactionFormBase: React.FC<Props> = ({
 
     await onSubmit(payload);
   };
+
+  const projectedStatus = resolveTransactionStatus({
+    isCancelled,
+    isPaid,
+    dueDate,
+  });
+  const isReactivating = Boolean(initialData && initialData.status === 'cancelled' && !isCancelled);
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -388,16 +496,62 @@ export const TransactionFormBase: React.FC<Props> = ({
 
       {/* Checkbox "Já está pago" (AC-050) */}
       <div className="flex items-center gap-2 pt-2">
-        <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+        <label className={`flex items-center gap-2 text-sm ${isCancelled ? 'text-gray-400 cursor-not-allowed' : 'text-gray-700 cursor-pointer'}`}>
           <input
             type="checkbox"
             checked={isPaid}
+            disabled={isCancelled}
             onChange={(e) => handleTogglePaid(e.target.checked)}
-            className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+            className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 disabled:opacity-50"
           />
           Já está pago / recebido
         </label>
       </div>
+
+      {/* Opção de Cancelamento na Edição (AC-240, AC-241, AC-247) */}
+      {initialData && (
+        <div
+          className={`p-3 rounded-xl border transition-colors ${
+            isCancelled
+              ? 'bg-rose-50 dark:bg-rose-950/30 border-rose-200 dark:border-rose-900/60'
+              : 'bg-gray-50 dark:bg-slate-800/40 border-gray-200 dark:border-slate-700'
+          }`}
+        >
+          <label className="flex items-center gap-2 text-xs font-semibold text-rose-700 dark:text-rose-400 cursor-pointer">
+            <input
+              type="checkbox"
+              data-testid="cancel-transaction-checkbox"
+              checked={isCancelled}
+              onChange={(e) => handleToggleCancelled(e.target.checked)}
+              className="rounded border-rose-300 text-rose-600 focus:ring-rose-500"
+            />
+            Cancelar esta transação
+          </label>
+          <p className="text-[11px] text-gray-500 dark:text-slate-400 mt-1 pl-5">
+            Transações canceladas não impactam seus saldos e só aparecem ao selecionar o filtro de cancelados.
+          </p>
+
+          {isReactivating && (
+            <div
+              data-testid="reactivation-preview"
+              className="mt-2.5 p-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-xs text-emerald-800 dark:text-emerald-300 flex items-center gap-2"
+            >
+              <span className="font-semibold">Reativação:</span>
+              <span>
+                Esta transação será reativada com status{' '}
+                <strong className="underline">
+                  {projectedStatus === 'completed'
+                    ? 'Concluída'
+                    : projectedStatus === 'expired'
+                    ? 'Vencida'
+                    : 'Pendente'}
+                </strong>
+                {projectedStatus === 'expired' && ' (vencimento anterior à data de hoje)'}.
+              </span>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Seção de Parcelamento */}
       {type !== 'transfers' && !initialData && (
@@ -411,7 +565,7 @@ export const TransactionFormBase: React.FC<Props> = ({
           firstThisMonth={firstThisMonth}
           onChangeFirstThisMonth={setFirstThisMonth}
           isCreditCard={isCreditCard}
-          transactionType={type}
+          transactionType={type as any}
         />
       )}
 
@@ -435,9 +589,25 @@ export const TransactionFormBase: React.FC<Props> = ({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-2.5 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors disabled:opacity-50"
+          className={`w-full py-2.5 px-4 rounded-lg text-white text-sm font-semibold transition-colors disabled:opacity-50 ${
+            isCancelled
+              ? 'bg-rose-600 hover:bg-rose-700'
+              : 'bg-blue-600 hover:bg-blue-700'
+          }`}
         >
-          {isSubmitting ? 'Salvando...' : initialData ? 'Atualizar Transação' : 'Salvar Transação'}
+          {isSubmitting
+            ? 'Salvando...'
+            : initialData
+            ? isCancelled
+              ? 'Salvar como Cancelada'
+              : isReactivating
+              ? projectedStatus === 'completed'
+                ? 'Reativar como Concluída'
+                : projectedStatus === 'expired'
+                ? 'Reativar como Vencida'
+                : 'Reativar como Pendente'
+              : 'Atualizar Transação'
+            : 'Salvar Transação'}
         </button>
       </div>
     </form>

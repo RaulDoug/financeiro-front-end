@@ -65,15 +65,15 @@ export const KpiCards: React.FC<KpiCardsProps> = ({ summary, isLoading }) => {
             className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-5 shadow-sm transition hover:shadow-md"
           >
             <div className="flex items-center justify-between gap-2 min-w-0">
-              <span className="text-xs sm:text-sm font-medium text-gray-500 dark:text-slate-400 truncate" title={card.title}>
+              <span className="text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase tracking-wider truncate" title={card.title}>
                 {card.title}
               </span>
-              <div className={`p-1.5 sm:p-2 rounded-lg border shrink-0 ${card.color}`}>
-                <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
+              <div className={`p-2 rounded-lg border shrink-0 ${card.color}`}>
+                <Icon className="w-5 h-5" />
               </div>
             </div>
-            <div className="mt-3 sm:mt-4 min-w-0">
-              <span className={`text-lg sm:text-xl lg:text-2xl font-bold tracking-tight truncate block ${card.textColor}`}>
+            <div className="mt-3 min-w-0">
+              <span className={`text-2xl font-bold truncate block ${card.textColor}`}>
                 {formatCurrency(card.value)}
               </span>
             </div>

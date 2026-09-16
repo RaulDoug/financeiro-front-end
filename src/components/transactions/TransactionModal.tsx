@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, ArrowUpRight, ArrowDownLeft, ArrowLeftRight, AlertCircle } from 'lucide-react';
 import { TransactionFormBase } from './TransactionFormBase.tsx';
+import { MobileQuickEntry } from './MobileQuickEntry.tsx';
 import type { Transaction, TransactionType } from '../../types/transaction.ts';
 
 interface Props {
@@ -22,6 +23,15 @@ export const TransactionModal: React.FC<Props> = ({
 }) => {
   const [activeTab, setActiveTab] = useState<TransactionType>(initialData?.type || initialType);
   const [errorBanner, setErrorBanner] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  );
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -41,6 +51,19 @@ export const TransactionModal: React.FC<Props> = ({
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
+
+  // Substituir formulário padrão em mobile (< 768px) para criação de novas transações (AC-179, AC-180, Q-037)
+  if (isMobile && !initialData) {
+    return (
+      <MobileQuickEntry
+        isOpen={isOpen}
+        onClose={onClose}
+        initialType={initialType}
+        onSubmit={onSubmit}
+        isSubmitting={isSubmitting}
+      />
+    );
+  }
 
   const handleSubmit = async (data: any) => {
     try {

@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, AlertCircle } from 'lucide-react';
 import { bankAccountSchema } from '../../schemas/bankAccountSchema.ts';
 import type { BankAccountItem, BankAccountFormData } from '../../types/bankAccount.ts';
+import { detectBankByName, BRAZILIAN_BANKS, type BankInfo } from '../../lib/bankDetector.ts';
+import { BankPicker } from '../shared/BankPicker.tsx';
 
 interface AccountFormModalProps {
   isOpen: boolean;
@@ -25,7 +27,58 @@ export const AccountFormModal: React.FC<AccountFormModalProps> = ({
   const [allowNegativeBalance, setAllowNegativeBalance] = useState(
     initialData?.allow_negative_balance ?? false
   );
+  const [selectedBank, setSelectedBank] = useState<BankInfo | null>(() => {
+    if (initialData?.color) {
+      return (
+        BRAZILIAN_BANKS.find(
+          (b) => b.primaryColor === initialData.color || b.icon === initialData.icon
+        ) || null
+      );
+    }
+    return initialData?.bank_name ? detectBankByName(initialData.bank_name) : null;
+  });
+  const [autoDetected, setAutoDetected] = useState<BankInfo | null>(() =>
+    initialData?.bank_name ? detectBankByName(initialData.bank_name) : null
+  );
+  const [hasManualSelection, setHasManualSelection] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    if (initialData) {
+      setBankName(initialData.bank_name || '');
+      setBalance(String(initialData.balance ?? 0));
+      setAllowNegativeBalance(Boolean(initialData.allow_negative_balance));
+      const detected = initialData.bank_name ? detectBankByName(initialData.bank_name) : null;
+      setAutoDetected(detected);
+      const match = initialData.color
+        ? BRAZILIAN_BANKS.find((b) => b.primaryColor === initialData.color)
+        : detected;
+      setSelectedBank(match || detected);
+      setHasManualSelection(Boolean(initialData.color && !detected));
+    } else {
+      setBankName('');
+      setBalance('0');
+      setAllowNegativeBalance(false);
+      setSelectedBank(null);
+      setAutoDetected(null);
+      setHasManualSelection(false);
+    }
+    setErrors({});
+  }, [initialData, isOpen]);
+
+  const handleBankNameChange = (val: string) => {
+    setBankName(val);
+    const detected = detectBankByName(val);
+    setAutoDetected(detected);
+    if (detected && !hasManualSelection) {
+      setSelectedBank(detected);
+    }
+  };
+
+  const handleSelectBank = (bank: BankInfo) => {
+    setSelectedBank(bank);
+    setHasManualSelection(true);
+  };
 
   if (!isOpen) return null;
 
@@ -36,6 +89,8 @@ export const AccountFormModal: React.FC<AccountFormModalProps> = ({
       bank_name: bankName.trim(),
       balance: parseFloat(balance) || 0,
       allow_negative_balance: allowNegativeBalance,
+      icon: selectedBank?.icon || autoDetected?.icon || 'landmark',
+      color: selectedBank?.primaryColor || autoDetected?.primaryColor || '#3b82f6',
     };
 
     const validation = bankAccountSchema.safeParse(rawData);
@@ -59,8 +114,8 @@ export const AccountFormModal: React.FC<AccountFormModalProps> = ({
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 overflow-y-auto backdrop-blur-xs"
       data-testid="account-form-modal"
     >
-      <div className="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200">
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+      <div className="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200 max-h-[92vh] flex flex-col overflow-hidden">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-100 shrink-0">
           <h2 className="text-lg font-bold text-slate-900">
             {initialData ? 'Editar Conta Bancária' : 'Nova Conta Bancária'}
           </h2>
@@ -72,7 +127,7 @@ export const AccountFormModal: React.FC<AccountFormModalProps> = ({
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4" data-testid="bank-account-form">
+        <form onSubmit={handleSubmit} className="space-y-4 overflow-y-auto flex-1" data-testid="bank-account-form">
           {/* Nome do Banco */}
           <div>
             <label className="block text-xs font-semibold text-slate-700 mb-1">
@@ -81,7 +136,7 @@ export const AccountFormModal: React.FC<AccountFormModalProps> = ({
             <input
               type="text"
               value={bankName}
-              onChange={(e) => setBankName(e.target.value)}
+              onChange={(e) => handleBankNameChange(e.target.value)}
               placeholder="Ex: Nubank, Itaú, Santander, Carteira Física..."
               className={`w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 ${
                 errors.bank_name
@@ -95,6 +150,13 @@ export const AccountFormModal: React.FC<AccountFormModalProps> = ({
               </p>
             )}
           </div>
+
+          {/* Auto-detecção e Seleção Manual de Banco (AC-175, AC-176, AC-177) */}
+          <BankPicker
+            selectedBankId={selectedBank?.id}
+            autoDetectedBank={autoDetected}
+            onSelectBank={handleSelectBank}
+          />
 
           {/* Saldo Inicial / Atual */}
           <div>

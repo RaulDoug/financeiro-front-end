@@ -99,7 +99,7 @@ export const NotificationsBell: React.FC<NotificationsBellProps> = ({
       {isOpen && (
         <div
           data-testid="notifications-popover"
-          className="absolute left-1/2 -translate-x-1/2 mt-2 w-80 max-w-[calc(100vw-2rem)] bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 py-3 z-50 animate-in fade-in zoom-in-95 duration-100"
+          className="fixed right-2 top-16 mt-1 w-72 max-w-[calc(100vw-2rem)] bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 py-3 z-50 animate-in fade-in zoom-in-95 duration-100"
         >
           <div className="px-4 pb-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
             <span className="font-bold text-sm text-slate-900 dark:text-white">Notificações</span>

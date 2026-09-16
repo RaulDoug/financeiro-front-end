@@ -14,6 +14,8 @@ export interface CreditCardItem {
   available_limit?: number;
   current_invoice_total?: number;
   color?: string;
+  brand?: string;
+  icon?: string;
   created_at?: string;
 }
 
@@ -47,5 +49,7 @@ export interface CreditCardFormData {
   last_four_digits: string;
   credit_limit: number;
   color?: string;
+  brand?: string;
+  icon?: string;
 }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { type AccountBalanceItem } from '../../../types/dashboard.ts';
 import { formatCurrency } from '../../../utils/formatCurrency.ts';
 import { Landmark } from 'lucide-react';
+import { detectBankByName } from '../../../lib/bankDetector.ts';
 
 interface AccountBalancesProps {
   accounts?: AccountBalanceItem[];
@@ -42,13 +43,21 @@ export const AccountBalances: React.FC<AccountBalancesProps> = ({
         ) : (
           accounts.map((acc) => {
             const isNegative = acc.balance < 0;
+            const detected = detectBankByName(acc.bank_name);
+            const color = (acc as any).color || detected?.primaryColor || '#3b82f6';
             return (
               <div
                 key={acc.id}
                 data-testid={`account-item-${acc.id}`}
                 className="py-2.5 flex items-center justify-between text-sm hover:bg-gray-50 dark:hover:bg-slate-800/60 px-1 rounded transition"
               >
-                <span className="font-medium text-gray-800 dark:text-slate-200 truncate mr-2">{acc.bank_name}</span>
+                <div className="flex items-center gap-2 truncate mr-2">
+                  <span
+                    className="w-2.5 h-2.5 rounded-full shrink-0"
+                    style={{ backgroundColor: color }}
+                  />
+                  <span className="font-medium text-gray-800 dark:text-slate-200 truncate">{acc.bank_name}</span>
+                </div>
                 <span className={`font-semibold shrink-0 ${isNegative ? 'text-rose-600 dark:text-rose-400' : 'text-gray-900 dark:text-white'}`}>
                   {formatCurrency(acc.balance)}
                 </span>

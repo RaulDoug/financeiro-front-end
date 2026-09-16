@@ -21,6 +21,8 @@ export const creditCardSchema = z.object({
     .number({ invalid_type_error: 'Informe o limite de crédito' })
     .positive('O limite deve ser maior que zero'),
   color: z.string().optional(),
+  brand: z.string().optional(),
+  icon: z.string().optional(),
 });
 
 export type CreditCardSchemaType = z.infer<typeof creditCardSchema>;

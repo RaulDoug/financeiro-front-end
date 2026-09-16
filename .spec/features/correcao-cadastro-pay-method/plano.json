@@ -1,0 +1,90 @@
+{
+  "runId": "Front-End_Financeiro-correcao-cadastro-pay-method-mu35fkhm",
+  "feature": "correcao-cadastro-pay-method",
+  "agent": "antigravity",
+  "modo": "paralelo",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-15 20:53",
+  "branchTrabalho": "spec/correcao-cadastro-pay-method",
+  "baseDir": ".spec/features/correcao-cadastro-pay-method",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "logsDir": "../onp-worktrees/Front-End_Financeiro-correcao-cadastro-pay-method-logs",
+  "ondas": [
+    [
+      "faixa-1",
+      "faixa-2",
+      "faixa-3"
+    ]
+  ],
+  "faixas": [
+    {
+      "id": "faixa-1",
+      "branch": "spec/correcao-cadastro-pay-method-faixa-1",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-correcao-cadastro-pay-method-faixa-1",
+      "tarefas": [
+        {
+          "id": "T-137",
+          "titulo": "Sanitização de payload em payMethodService",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/services/payMethod.service.ts"
+          ],
+          "refs": [
+            "US-062",
+            "AC-218",
+            "AC-219"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-2",
+      "branch": "spec/correcao-cadastro-pay-method-faixa-2",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-correcao-cadastro-pay-method-faixa-2",
+      "tarefas": [
+        {
+          "id": "T-138",
+          "titulo": "Ajuste no envio de dados no PayMethodModal",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/pages/Settings/PayMethodModal.tsx"
+          ],
+          "refs": [
+            "US-062",
+            "AC-220"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-3",
+      "branch": "spec/correcao-cadastro-pay-method-faixa-3",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-correcao-cadastro-pay-method-faixa-3",
+      "tarefas": [
+        {
+          "id": "T-139",
+          "titulo": "Testes automatizados dos critérios de aceite AC-218, AC-219 e AC-220",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "test/correcao-cadastro-pay-method.spec.test.js"
+          ],
+          "refs": [
+            "US-062",
+            "AC-218",
+            "AC-219",
+            "AC-220"
+          ]
+        }
+      ]
+    }
+  ],
+  "sequenciais": [],
+  "concluidas": [],
+  "avisos": []
+}

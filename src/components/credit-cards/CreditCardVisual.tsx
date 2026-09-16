@@ -3,6 +3,7 @@ import { CreditCard as CardIcon, Wifi } from 'lucide-react';
 import { LimitBar } from './LimitBar.tsx';
 import { CreditCardMenu } from './CreditCardMenu.tsx';
 import { formatCurrency } from '../../utils/formatCurrency.ts';
+import { normalizeCardColor } from '../../utils/creditCardColors.ts';
 import type { CreditCardItem } from '../../types/creditCard.ts';
 
 interface CreditCardVisualProps {
@@ -32,12 +33,13 @@ export const CreditCardVisual: React.FC<CreditCardVisualProps> = ({
   const used = card.used_credit_limit ?? 0;
   const total = card.credit_limit || 0;
   const available = card.available_limit ?? Math.max(0, total - used);
-  const gradientClass = CARD_GRADIENTS[card.color || 'navy'] || CARD_GRADIENTS.navy;
+  const colorKey = normalizeCardColor(card.color);
+  const gradientClass = CARD_GRADIENTS[colorKey] || CARD_GRADIENTS.navy;
 
   return (
     <div
       data-testid={`credit-card-card-${card.id}`}
-      data-color={card.color || 'navy'}
+      data-color={colorKey}
       onClick={onSelect}
       className={`relative overflow-hidden rounded-2xl p-6 transition-all cursor-pointer ${
         isSelected
@@ -60,6 +62,14 @@ export const CreditCardVisual: React.FC<CreditCardVisualProps> = ({
         </div>
 
         <div className="flex items-center gap-2">
+          {(card.brand || (card.icon && card.icon !== 'credit-card')) && (
+            <span
+              data-testid="credit-card-brand-badge"
+              className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/15 text-white backdrop-blur-xs border border-white/20 shadow-xs"
+            >
+              {card.brand || card.icon}
+            </span>
+          )}
           <Wifi className="w-4 h-4 text-white/50 rotate-90" />
           <CreditCardMenu onEdit={onEdit} onDelete={onDelete} />
         </div>

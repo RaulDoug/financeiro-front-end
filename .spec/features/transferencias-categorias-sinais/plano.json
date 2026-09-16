@@ -1,0 +1,91 @@
+{
+  "runId": "Front-End_Financeiro-transferencias-categorias-sinais-init",
+  "feature": "transferencias-categorias-sinais",
+  "agent": "antigravity",
+  "modo": "sequencial",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-16 10:00",
+  "branchTrabalho": "spec/transferencias-categorias-sinais",
+  "baseDir": ".spec/features/transferencias-categorias-sinais",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "ondas": [
+    [
+      "faixa-1",
+      "faixa-2",
+      "faixa-3"
+    ]
+  ],
+  "faixas": [
+    {
+      "id": "faixa-1",
+      "tarefas": [
+        {
+          "id": "T-151",
+          "titulo": "Expansão dos tipos de transação para suportar transfer_in e transfer_out",
+          "modelo": "gemini-3.8-flash",
+          "esforco": "low",
+          "arquivos": ["src/types/transaction.ts"],
+          "refs": ["US-065", "AC-236"]
+        },
+        {
+          "id": "T-152",
+          "titulo": "Auto-vinculação e criação da categoria padrão Transferência",
+          "modelo": "gemini-3.8-flash",
+          "esforco": "medium",
+          "arquivos": [
+            "src/components/transactions/MobileQuickEntry.tsx",
+            "src/components/transactions/TransactionFormBase.tsx"
+          ],
+          "refs": ["US-065", "AC-234"]
+        }
+      ]
+    },
+    {
+      "id": "faixa-2",
+      "tarefas": [
+        {
+          "id": "T-153",
+          "titulo": "Ocultação da categoria Transferência das listagens e seletores",
+          "modelo": "gemini-3.8-flash",
+          "esforco": "medium",
+          "arquivos": [
+            "src/pages/Settings/CategoriesSettings.tsx",
+            "src/components/transactions/CategorySelect.tsx",
+            "src/components/transactions/MobileQuickEntry.tsx"
+          ],
+          "refs": ["US-065", "AC-235"]
+        },
+        {
+          "id": "T-154",
+          "titulo": "Ajuste da formatação de valores e sinais para transfer_in e transfer_out",
+          "modelo": "gemini-3.8-flash",
+          "esforco": "medium",
+          "arquivos": [
+            "src/components/transactions/TransactionMobileList.tsx",
+            "src/components/transactions/TransactionTable.tsx",
+            "src/components/transactions/TransactionDetailsModal.tsx",
+            "src/pages/Dashboard/components/RecentTransactions.tsx"
+          ],
+          "refs": ["US-065", "AC-236"]
+        }
+      ]
+    },
+    {
+      "id": "faixa-3",
+      "tarefas": [
+        {
+          "id": "T-155",
+          "titulo": "Testes automatizados de especificação AC-234 a AC-236",
+          "modelo": "gemini-3.8-flash",
+          "esforco": "medium",
+          "arquivos": ["test/transferencias-categorias-sinais.spec.test.js"],
+          "refs": ["US-065", "AC-234", "AC-235", "AC-236"]
+        }
+      ]
+    }
+  ]
+}
+

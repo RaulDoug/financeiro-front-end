@@ -28,7 +28,7 @@ export const TransactionMobileList: React.FC<TransactionMobileListProps> = ({
     <div className="divide-y divide-gray-100 dark:divide-slate-800" data-testid="transaction-mobile-list">
       {transactions.map((t) => {
         const overdueInfo = transactionService.calculateOverdue(t.due_date, t.status);
-        const isIncome = t.type === 'incomings';
+        const isIncome = t.type === 'incomings' || t.type === 'transfer_in';
         const isTransfer = t.type === 'transfers';
 
         return (
@@ -41,7 +41,7 @@ export const TransactionMobileList: React.FC<TransactionMobileListProps> = ({
             <div className="min-w-0 flex-1 space-y-1">
               {/* Linha 1: Descrição e Parcela */}
               <div className="flex items-center gap-1.5 min-w-0">
-                <span className="font-semibold text-xs sm:text-sm text-gray-900 dark:text-slate-100 truncate">
+                <span className="font-semibold text-sm text-gray-900 dark:text-slate-100 truncate">
                   {t.description}
                 </span>
                 {t.current_installment && (
@@ -99,7 +99,7 @@ export const TransactionMobileList: React.FC<TransactionMobileListProps> = ({
             {/* Lado Direito: Valor e Seta */}
             <div className="flex items-center gap-1 shrink-0 text-right">
               <span
-                className={`text-xs sm:text-sm font-bold whitespace-nowrap ${
+                className={`text-sm font-bold whitespace-nowrap ${
                   isIncome
                     ? 'text-emerald-600 dark:text-emerald-400'
                     : isTransfer

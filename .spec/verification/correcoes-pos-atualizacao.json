@@ -1,0 +1,77 @@
+{
+  "feature": "correcoes-pos-atualizacao",
+  "timestamp": "2026-09-15T18:48:32.607Z",
+  "gitRev": "5d8c613",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 0,
+  "testsParsed": 183,
+  "results": {
+    "AC-156": {
+      "status": "pass",
+      "testName": "AC-156: Sino centralizado na viewport horizontal @spec:AC-156",
+      "method": "tap"
+    },
+    "AC-157": {
+      "status": "pass",
+      "testName": "AC-157: Botão \"+\" da barra inferior abre modal na tela de transações @spec:AC-157",
+      "method": "tap"
+    },
+    "AC-158": {
+      "status": "pass",
+      "testName": "AC-158: Estado do modal não vaza entre telas @spec:AC-158",
+      "method": "tap"
+    },
+    "AC-159": {
+      "status": "pass",
+      "testName": "AC-159: Botão de pagamento visível em detalhes de transações pendentes @spec:AC-159",
+      "method": "tap"
+    },
+    "AC-160": {
+      "status": "pass",
+      "testName": "AC-160: Botão de pagamento ausente em transações já concluídas @spec:AC-160",
+      "method": "tap"
+    },
+    "AC-161": {
+      "status": "pass",
+      "testName": "AC-161: Formulário de cartão sem corte superior @spec:AC-161",
+      "method": "tap"
+    },
+    "AC-162": {
+      "status": "pass",
+      "testName": "AC-162: Botão de fechar do formulário de cartão funciona @spec:AC-162",
+      "method": "tap"
+    },
+    "AC-163": {
+      "status": "pass",
+      "testName": "AC-163: Formulário de cartão acessível pelas configurações @spec:AC-163",
+      "method": "tap"
+    },
+    "AC-164": {
+      "status": "pass",
+      "testName": "AC-164: Transações vencidas exibidas na listagem @spec:AC-164",
+      "method": "tap"
+    },
+    "AC-165": {
+      "status": "pass",
+      "testName": "AC-165: Transações recentes clicáveis no dashboard @spec:AC-165",
+      "method": "tap"
+    },
+    "AC-166": {
+      "status": "pass",
+      "testName": "AC-166: Layout visual das transações recentes alinhado com a tela de transações @spec:AC-166",
+      "method": "tap"
+    },
+    "AC-167": {
+      "status": "pass",
+      "testName": "AC-167: Cadastro de cartão sem erro 500 @spec:AC-167",
+      "method": "tap"
+    },
+    "AC-168": {
+      "status": "pass",
+      "testName": "AC-168: Payload de cadastro de cartão correto @spec:AC-168",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

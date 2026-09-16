@@ -3,6 +3,7 @@ import { Plus, CreditCard, Banknote, Trash2, Edit2, AlertCircle } from 'lucide-r
 import { usePayMethods, usePayMethodMutations } from '../../hooks/usePayMethods.ts';
 import { PayMethodModal } from './PayMethodModal.tsx';
 import type { PayMethodItem, CreatePayMethodDTO } from '../../services/payMethod.service.ts';
+import { renderLucideIcon } from '../../components/shared/IconPicker.tsx';
 
 export const PayMethodsSettings: React.FC = () => {
   const { data: payMethods = [], isLoading, error: queryError } = usePayMethods();
@@ -130,14 +131,23 @@ export const PayMethodsSettings: React.FC = () => {
               >
                 <div className="flex items-center gap-3.5">
                   <div
-                    className={`p-2.5 rounded-xl ${
-                      pm.credit_card
-                        ? 'bg-blue-50 text-blue-600'
-                        : 'bg-slate-100 text-slate-600'
-                    }`}
+                    data-testid={`pay-method-icon-${pm.id}`}
+                    className="p-2.5 rounded-xl flex items-center justify-center"
+                    style={{
+                      backgroundColor: pm.credit_card
+                        ? '#eff6ff'
+                        : pm.color
+                        ? `${pm.color}20`
+                        : '#f1f5f9',
+                      color: pm.credit_card
+                        ? '#2563eb'
+                        : pm.color || '#475569',
+                    }}
                   >
                     {pm.credit_card ? (
                       <CreditCard className="w-5 h-5" />
+                    ) : pm.icon && renderLucideIcon(pm.icon, 'w-5 h-5') ? (
+                      renderLucideIcon(pm.icon, 'w-5 h-5')
                     ) : (
                       <Banknote className="w-5 h-5" />
                     )}

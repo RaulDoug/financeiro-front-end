@@ -5,6 +5,7 @@ import { fullPayMethodSchema } from '../../schemas/settingsSchemas.ts';
 import { useWalletStore } from '../../stores/wallet.store.ts';
 import { bankAccountService, type BankAccountItem } from '../../services/bankAccount.service.ts';
 import type { PayMethodItem, CreatePayMethodDTO } from '../../services/payMethod.service.ts';
+import { IconPicker } from '../../components/shared/IconPicker.tsx';
 
 interface PayMethodModalProps {
   isOpen: boolean;
@@ -31,6 +32,8 @@ export const PayMethodModal: React.FC<PayMethodModalProps> = ({
   const [lastFourDigits, setLastFourDigits] = useState('');
   const [dueDay, setDueDay] = useState('');
   const [closingDay, setClosingDay] = useState('');
+  const [icon, setIcon] = useState('wallet');
+  const [color, setColor] = useState('#3b82f6');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const isEditing = Boolean(payMethod);
@@ -53,6 +56,8 @@ export const PayMethodModal: React.FC<PayMethodModalProps> = ({
       setClosingDay(payMethod.closing_day ? String(payMethod.closing_day) : '');
       setLastFourDigits(payMethod.last_four_digits || '');
       setCreditLimit(payMethod.credit_limit ? String(payMethod.credit_limit) : '');
+      setIcon(payMethod.icon || 'wallet');
+      setColor(payMethod.color || '#3b82f6');
     } else {
       setName('');
       setIsCreditCard(false);
@@ -62,6 +67,8 @@ export const PayMethodModal: React.FC<PayMethodModalProps> = ({
       setClosingDay('');
       setLastFourDigits('');
       setCreditLimit('');
+      setIcon('wallet');
+      setColor('#3b82f6');
     }
     setErrors({});
   }, [payMethod, isOpen, accountsData]);
@@ -79,6 +86,8 @@ export const PayMethodModal: React.FC<PayMethodModalProps> = ({
       closing_day: isCreditCard && closingDay ? parseInt(closingDay, 10) : undefined,
       last_four_digits: isCreditCard ? lastFourDigits.trim() : undefined,
       credit_limit: isCreditCard && creditLimit ? parseFloat(creditLimit) : undefined,
+      icon: isCreditCard ? undefined : icon,
+      color: isCreditCard ? undefined : color,
     };
 
     const result = fullPayMethodSchema.safeParse(rawData);
@@ -93,8 +102,20 @@ export const PayMethodModal: React.FC<PayMethodModalProps> = ({
       return;
     }
 
+    const submissionData: CreatePayMethodDTO = {
+      name: rawData.name,
+      credit_card: rawData.credit_card,
+      bank_account_id: rawData.bank_account_id || undefined,
+      due_day: rawData.due_day,
+      closing_day: rawData.closing_day,
+      last_four_digits: rawData.last_four_digits,
+      credit_limit: rawData.credit_limit,
+      icon: isCreditCard ? (icon || 'credit-card') : icon,
+      color: color || '#3b82f6',
+    };
+
     try {
-      await onSubmit(rawData as CreatePayMethodDTO);
+      await onSubmit(submissionData);
       onClose();
     } catch {
       // error handled by parent
@@ -102,9 +123,14 @@ export const PayMethodModal: React.FC<PayMethodModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4 overflow-y-auto">
-      <div className="bg-white rounded-2xl shadow-xl border border-slate-200 w-full max-w-lg overflow-hidden my-8">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div className="bg-white rounded-2xl shadow-xl border border-slate-200 w-full max-w-lg flex flex-col max-h-[92vh] overflow-hidden">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 shrink-0 bg-white">
           <h2 className="text-lg font-semibold text-slate-900">
             {isEditing ? 'Editar Forma de Pagamento' : 'Nova Forma de Pagamento'}
           </h2>
@@ -118,7 +144,8 @@ export const PayMethodModal: React.FC<PayMethodModalProps> = ({
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-4" data-testid="pay-method-form">
+        <div className="overflow-y-auto flex-1">
+          <form onSubmit={handleSubmit} className="p-6 space-y-4" data-testid="pay-method-form">
           {/* Nome do Método */}
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">
@@ -230,6 +257,15 @@ export const PayMethodModal: React.FC<PayMethodModalProps> = ({
                 {errors.bank_account_id && (
                   <p className="mt-1 text-xs text-rose-500">{errors.bank_account_id}</p>
                 )}
+              </div>
+
+              <div>
+                <IconPicker
+                  selectedIcon={icon}
+                  selectedColor={color}
+                  onSelectIcon={setIcon}
+                  onSelectColor={setColor}
+                />
               </div>
             </div>
           )}
@@ -368,6 +404,7 @@ export const PayMethodModal: React.FC<PayMethodModalProps> = ({
             </button>
           </div>
         </form>
+        </div>
       </div>
     </div>
   );

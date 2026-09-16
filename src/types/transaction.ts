@@ -1,4 +1,4 @@
-export type TransactionType = 'incomings' | 'expenses' | 'transfers';
+export type TransactionType = 'incomings' | 'expenses' | 'transfers' | 'transfer_in' | 'transfer_out';
 
 export type TransactionStatus = 'pending' | 'completed' | 'cancelled' | 'expired';
 

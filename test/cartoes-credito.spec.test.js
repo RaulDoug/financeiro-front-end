@@ -29,6 +29,7 @@ test('AC-069: Listagem dos cartões @spec:AC-069', () => {
   assert.ok(visualSource.includes('card.closing_day'), 'Deve exibir dia de fechamento');
   assert.ok(visualSource.includes('card.credit_limit') || visualSource.includes('total'), 'Deve exibir limite total');
   assert.ok(visualSource.includes('used'), 'Deve exibir limite utilizado');
+  assert.ok(visualSource.includes('normalizeCardColor'), 'CreditCardVisual deve normalizar a cor do cartão');
 });
 
 test('AC-070: Indicador de limite saudável (Verde) @spec:AC-070', () => {
@@ -170,4 +171,33 @@ test('AC-078: Exclusão do cartão via menu do card @spec:AC-078', () => {
 
   const serviceSource = readSource('services/api/creditCards.ts');
   assert.ok(serviceSource.includes('/pay-method/delete/${id}'), 'Deve disparar DELETE na rota de delete');
+});
+
+test('AC-215: Payload estrito em conformidade com o schema de persistência @spec:AC-215', () => {
+  const serviceSource = readSource('services/api/creditCards.ts');
+
+  // Não deve enviar campo 'brand:' no payload de createCreditCard nem no updateCreditCard
+  assert.ok(!serviceSource.includes('brand: data.brand'), 'createCreditCard não deve incluir brand no payload enviado ao banco');
+  assert.ok(!serviceSource.includes('payload.brand ='), 'updateCreditCard não deve incluir brand no payload');
+
+  // A bandeira deve ser mapeada para icon
+  assert.ok(serviceSource.includes('data.brand ? data.brand.toLowerCase() :'), 'A bandeira deve ser convertida em icon minúsculo');
+  assert.ok(serviceSource.includes("api.post('/pay-method/register', payload)"), 'Deve submeter payload sanitizado');
+});
+
+test('AC-216: Uso de display_id nas rotas de edição e exclusão de cartões @spec:AC-216', () => {
+  const pageSource = readSource('pages/CreditCardsPage.tsx');
+
+  // Ao atualizar e excluir, deve enviar display_id com fallback para id
+  assert.ok(pageSource.includes('editingCard.display_id ?? editingCard.id'), 'Update deve priorizar display_id');
+  assert.ok(pageSource.includes('deletingCard.display_id ?? deletingCard.id'), 'Delete deve priorizar display_id');
+});
+
+test('AC-217: Estado de carregamento e feedback visual de erro @spec:AC-217', () => {
+  const pageSource = readSource('pages/CreditCardsPage.tsx');
+
+  // Deve possuir banner de erro com testid acessível e fechar ao dispensar
+  assert.ok(pageSource.includes('data-testid="credit-card-error-banner"'), 'Deve renderizar banner de feedback de erro');
+  assert.ok(pageSource.includes('errorFeedback'), 'Deve manter estado de feedback de erro');
+  assert.ok(pageSource.includes('isSubmitting={createMutation.isPending || updateMutation.isPending}'), 'Deve repassar isSubmitting');
 });

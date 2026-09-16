@@ -8,6 +8,8 @@ export const bankAccountSchema = z.object({
     .number({ invalid_type_error: 'Informe um valor válido para o saldo' })
     .default(0),
   allow_negative_balance: z.boolean().default(false),
+  icon: z.string().optional(),
+  color: z.string().optional(),
 });
 
 export type BankAccountSchemaType = z.infer<typeof bankAccountSchema>;

@@ -115,7 +115,7 @@ export const TransactionTable: React.FC<Props> = ({
           <tbody className="divide-y divide-gray-50 dark:divide-slate-800/60">
             {transactions.map((t) => {
               const overdueInfo = transactionService.calculateOverdue(t.due_date, t.status);
-              const isIncome = t.type === 'incomings';
+              const isIncome = t.type === 'incomings' || t.type === 'transfer_in';
               const isTransfer = t.type === 'transfers';
 
               return (

@@ -1,0 +1,83 @@
+{
+  "runId": "Front-End_Financeiro-lancamento-mobile-agil-init",
+  "feature": "lancamento-mobile-agil",
+  "agent": "antigravity",
+  "modo": "sequencial",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-16 08:07",
+  "branchTrabalho": "spec/lancamento-mobile-agil",
+  "baseDir": ".spec/features/lancamento-mobile-agil",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "ondas": [
+    [
+      "faixa-1",
+      "faixa-2",
+      "faixa-3"
+    ]
+  ],
+  "faixas": [
+    {
+      "id": "faixa-1",
+      "tarefas": [
+        {
+          "id": "T-143",
+          "titulo": "Fechamento por backdrop e remoção do teclado virtual customizado",
+          "modelo": "gemini-3.8-flash",
+          "esforco": "medium",
+          "arquivos": [
+            "src/components/transactions/MobileQuickEntry.tsx"
+          ],
+          "refs": [
+            "US-064",
+            "AC-224",
+            "AC-225"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-2",
+      "tarefas": [
+        {
+          "id": "T-144",
+          "titulo": "Seletores estruturados de Descrição, Conta, Categoria, Método de Pagamento e Switch Pago",
+          "modelo": "gemini-3.8-flash",
+          "esforco": "medium",
+          "arquivos": [
+            "src/components/transactions/MobileQuickEntry.tsx"
+          ],
+          "refs": [
+            "US-064",
+            "AC-226",
+            "AC-227"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-3",
+      "tarefas": [
+        {
+          "id": "T-145",
+          "titulo": "Testes automatizados de especificação AC-224 a AC-227",
+          "modelo": "gemini-3.8-flash",
+          "esforco": "medium",
+          "arquivos": [
+            "test/lancamento-mobile-agil.spec.test.js"
+          ],
+          "refs": [
+            "US-064",
+            "AC-224",
+            "AC-225",
+            "AC-226",
+            "AC-227"
+          ]
+        }
+      ]
+    }
+  ]
+}
+

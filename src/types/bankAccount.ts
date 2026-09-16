@@ -5,6 +5,8 @@ export interface BankAccountItem {
   bank_name: string;
   balance: number | string;
   allow_negative_balance: boolean;
+  icon?: string;
+  color?: string;
   created_at?: string;
 }
 
@@ -12,5 +14,7 @@ export interface BankAccountFormData {
   bank_name: string;
   balance?: number;
   allow_negative_balance?: boolean;
+  icon?: string;
+  color?: string;
 }
 

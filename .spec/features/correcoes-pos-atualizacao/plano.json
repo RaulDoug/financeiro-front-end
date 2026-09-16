@@ -1,0 +1,165 @@
+{
+  "runId": "Front-End_Financeiro-correcoes-pos-atualizacao-mu2qjjab",
+  "feature": "correcoes-pos-atualizacao",
+  "agent": "antigravity",
+  "modo": "paralelo",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-15 13:56",
+  "branchTrabalho": "spec/correcoes-pos-atualizacao",
+  "baseDir": ".spec/features/correcoes-pos-atualizacao",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "logsDir": "../onp-worktrees/Front-End_Financeiro-correcoes-pos-atualizacao-logs",
+  "ondas": [
+    [
+      "faixa-1",
+      "faixa-2",
+      "faixa-3"
+    ],
+    [
+      "faixa-4"
+    ]
+  ],
+  "faixas": [
+    {
+      "id": "faixa-1",
+      "branch": "spec/correcoes-pos-atualizacao-faixa-1",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-correcoes-pos-atualizacao-faixa-1",
+      "tarefas": [
+        {
+          "id": "T-103",
+          "titulo": "Centralizar sino de notificação na viewport",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/components/layout/Header.tsx",
+            "src/components/layout/NotificationsBell.tsx"
+          ],
+          "refs": [
+            "US-043",
+            "AC-156"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-2",
+      "branch": "spec/correcoes-pos-atualizacao-faixa-2",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-correcoes-pos-atualizacao-faixa-2",
+      "tarefas": [
+        {
+          "id": "T-104",
+          "titulo": "Corrigir abertura do modal de transação na tela de Transações",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/pages/Transactions/index.tsx",
+            "src/stores/transactionModal.store.ts",
+            "src/components/layout/BottomNav.tsx"
+          ],
+          "refs": [
+            "US-044",
+            "AC-157",
+            "AC-158"
+          ]
+        },
+        {
+          "id": "T-107",
+          "titulo": "Corrigir exibição de transações vencidas na listagem",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/pages/Transactions/index.tsx",
+            "src/components/transactions/TransactionFilters.tsx",
+            "src/hooks/useTransactions.ts"
+          ],
+          "refs": [
+            "US-047",
+            "AC-164"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-3",
+      "branch": "spec/correcoes-pos-atualizacao-faixa-3",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-correcoes-pos-atualizacao-faixa-3",
+      "tarefas": [
+        {
+          "id": "T-105",
+          "titulo": "Adicionar botão de pagamento nos detalhes de transação",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/components/transactions/TransactionDetailsModal.tsx",
+            "src/hooks/useTransactionMutations.ts"
+          ],
+          "refs": [
+            "US-045",
+            "AC-159",
+            "AC-160"
+          ]
+        },
+        {
+          "id": "T-108",
+          "titulo": "Tornar transações recentes do dashboard clicáveis com layout correto",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/pages/Dashboard/components/RecentTransactions.tsx",
+            "src/components/transactions/TransactionDetailsModal.tsx"
+          ],
+          "refs": [
+            "US-048",
+            "AC-165",
+            "AC-166"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-4",
+      "branch": "spec/correcoes-pos-atualizacao-faixa-4",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-correcoes-pos-atualizacao-faixa-4",
+      "tarefas": [
+        {
+          "id": "T-106",
+          "titulo": "Corrigir corte e fechamento do formulário de cadastro de cartão",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/components/credit-cards/CreditCardModal.tsx",
+            "src/components/credit-cards/CreditCardForm.tsx"
+          ],
+          "refs": [
+            "US-046",
+            "AC-161",
+            "AC-162",
+            "AC-163"
+          ]
+        },
+        {
+          "id": "T-109",
+          "titulo": "Corrigir erro 500 no cadastro de cartão de crédito",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/services/api/creditCards.ts",
+            "src/components/credit-cards/CreditCardForm.tsx",
+            "src/schemas/creditCardSchema.ts"
+          ],
+          "refs": [
+            "US-049",
+            "AC-167",
+            "AC-168"
+          ]
+        }
+      ]
+    }
+  ],
+  "sequenciais": [],
+  "concluidas": [],
+  "avisos": []
+}

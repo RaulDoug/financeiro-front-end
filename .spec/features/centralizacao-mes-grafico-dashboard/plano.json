@@ -1,0 +1,32 @@
+{
+  "feature": "centralizacao-mes-grafico-dashboard",
+  "status": "implementada",
+  "historias": [
+    {
+      "id": "US-066",
+      "titulo": "Foco e Centralização Automática no Mês Atual no Gráfico do Dashboard",
+      "criterios": ["AC-237", "AC-238", "AC-239"]
+    }
+  ],
+  "tarefas": [
+    {
+      "id": "T-156",
+      "titulo": "Implementação da ref de scroll e centralização automática no mês vigente",
+      "status": "concluida",
+      "criterios": ["AC-237", "AC-239"]
+    },
+    {
+      "id": "T-157",
+      "titulo": "Customização do tick do eixo X com destaque visual no mês atual",
+      "status": "concluida",
+      "criterios": ["AC-238"]
+    },
+    {
+      "id": "T-158",
+      "titulo": "Testes automatizados de especificação AC-237 a AC-239",
+      "status": "concluida",
+      "criterios": ["AC-237", "AC-238", "AC-239"]
+    }
+  ]
+}
+

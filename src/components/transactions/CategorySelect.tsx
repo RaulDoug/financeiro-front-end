@@ -3,8 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 import { categoryService, type CategoryItem } from '../../services/category.service.ts';
 import { useWalletStore } from '../../stores/wallet.store.ts';
 
+import type { TransactionType } from '../../types/transaction.ts';
+
 interface Props {
-  type: 'incomings' | 'expenses';
+  type: TransactionType | string;
   value?: string;
   onChange: (value: string) => void;
   error?: string;
@@ -19,11 +21,17 @@ export const CategorySelect: React.FC<Props> = ({ type, value, onChange, error }
     enabled: Boolean(currentWalletId),
   });
 
+  const filteredCategories = categories.filter(
+    (c) =>
+      !c.name.toLowerCase().startsWith('transferência') &&
+      !c.name.toLowerCase().startsWith('transferencia')
+  );
+
   React.useEffect(() => {
-    if (!value && categories.length > 0) {
-      onChange(categories[0].id);
+    if (!value && filteredCategories.length > 0) {
+      onChange(filteredCategories[0].id);
     }
-  }, [categories, value, onChange]);
+  }, [filteredCategories, value, onChange]);
 
   return (
     <div>
@@ -35,7 +43,7 @@ export const CategorySelect: React.FC<Props> = ({ type, value, onChange, error }
         className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         <option value="">{isLoading ? 'Carregando categorias...' : 'Selecione uma categoria'}</option>
-        {categories.map((c) => (
+        {filteredCategories.map((c) => (
           <option key={c.id} value={c.id}>
             {c.name}
           </option>

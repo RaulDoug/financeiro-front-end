@@ -1,11 +1,11 @@
 {
   "feature": "cartoes-credito",
-  "timestamp": "2026-09-15T13:20:39.657Z",
-  "gitRev": "8834cd3",
+  "timestamp": "2026-09-15T20:41:58.941Z",
+  "gitRev": "5d8c613",
   "command": "node --test --test-reporter=tap",
   "reporter": "tap",
-  "exitCode": 0,
-  "testsParsed": 145,
+  "exitCode": 1,
+  "testsParsed": 213,
   "results": {
     "AC-069": {
       "status": "pass",
@@ -55,6 +55,21 @@
     "AC-078": {
       "status": "pass",
       "testName": "AC-078: Exclusão do cartão via menu do card @spec:AC-078",
+      "method": "tap"
+    },
+    "AC-215": {
+      "status": "pass",
+      "testName": "AC-215: Payload estrito em conformidade com o schema de persistência @spec:AC-215",
+      "method": "tap"
+    },
+    "AC-216": {
+      "status": "pass",
+      "testName": "AC-216: Uso de display_id nas rotas de edição e exclusão de cartões @spec:AC-216",
+      "method": "tap"
+    },
+    "AC-217": {
+      "status": "pass",
+      "testName": "AC-217: Estado de carregamento e feedback visual de erro @spec:AC-217",
       "method": "tap"
     }
   },

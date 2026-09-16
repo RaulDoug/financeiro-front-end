@@ -27,6 +27,8 @@ export const payMethodSchema = z.object({
   closing_day: z.number().optional(),
   last_four_digits: z.string().optional(),
   credit_limit: z.number().optional(),
+  icon: z.string().optional(),
+  color: z.string().optional(),
 });
 
 export const fullPayMethodSchema = payMethodSchema.superRefine((data, ctx) => {

@@ -1,0 +1,72 @@
+{
+  "feature": "melhorias-icones-categorias",
+  "timestamp": "2026-09-15T18:48:33.805Z",
+  "gitRev": "5d8c613",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 0,
+  "testsParsed": 183,
+  "results": {
+    "AC-169": {
+      "status": "pass",
+      "testName": "AC-169: Seletor de ícone no formulário de categoria @spec:AC-169",
+      "method": "tap"
+    },
+    "AC-170": {
+      "status": "pass",
+      "testName": "AC-170: Ícone exibido na listagem de categorias @spec:AC-170",
+      "method": "tap"
+    },
+    "AC-171": {
+      "status": "pass",
+      "testName": "AC-171: Seletor de ícone no formulário de forma de pagamento @spec:AC-171",
+      "method": "tap"
+    },
+    "AC-172": {
+      "status": "pass",
+      "testName": "AC-172: Ícone exibido nos seletores e listagens de formas de pagamento @spec:AC-172",
+      "method": "tap"
+    },
+    "AC-173": {
+      "status": "pass",
+      "testName": "AC-173: Seletor de bandeira no formulário de cartão @spec:AC-173",
+      "method": "tap"
+    },
+    "AC-174": {
+      "status": "pass",
+      "testName": "AC-174: Bandeira exibida no card visual do cartão @spec:AC-174",
+      "method": "tap"
+    },
+    "AC-175": {
+      "status": "pass",
+      "testName": "AC-175: Auto-detecção de banco pelo nome da conta @spec:AC-175",
+      "method": "tap"
+    },
+    "AC-176": {
+      "status": "pass",
+      "testName": "AC-176: Visualização prévia do banco auto-detectado @spec:AC-176",
+      "method": "tap"
+    },
+    "AC-177": {
+      "status": "pass",
+      "testName": "AC-177: Seleção manual de banco/ícone para contas bancárias @spec:AC-177",
+      "method": "tap"
+    },
+    "AC-178": {
+      "status": "pass",
+      "testName": "AC-178: Ícone e cores do banco exibidos na conta @spec:AC-178",
+      "method": "tap"
+    },
+    "AC-179": {
+      "status": "pass",
+      "testName": "AC-179: Layout mobile de lançamento seguindo padrão \"Ágil\" @spec:AC-179",
+      "method": "tap"
+    },
+    "AC-180": {
+      "status": "pass",
+      "testName": "AC-180: Acessibilidade dos campos no layout mobile ágil @spec:AC-180",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

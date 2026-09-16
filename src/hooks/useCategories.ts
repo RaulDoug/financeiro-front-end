@@ -20,14 +20,19 @@ export const useCategoryMutations = () => {
   };
 
   const createMutation = useMutation({
-    mutationFn: (data: { name: string; type: 'incomings' | 'expenses' }) =>
+    mutationFn: (data: { name: string; type: 'incomings' | 'expenses'; icon?: string; color?: string }) =>
       categoryService.createCategory(data),
     onSuccess: invalidate,
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }: { id: number | string; data: { name?: string; type?: 'incomings' | 'expenses' } }) =>
-      categoryService.updateCategory(id, data),
+    mutationFn: ({
+      id,
+      data,
+    }: {
+      id: number | string;
+      data: { name?: string; type?: 'incomings' | 'expenses'; icon?: string; color?: string };
+    }) => categoryService.updateCategory(id, data),
     onSuccess: invalidate,
   });
 

@@ -9,9 +9,20 @@ import type {
 export const useTransactionMutations = () => {
   const queryClient = useQueryClient();
 
-  const invalidate = () => {
-    queryClient.invalidateQueries({ queryKey: ['transactions'] });
-    queryClient.invalidateQueries({ queryKey: ['dashboard'] });
+  const invalidate = async () => {
+    await Promise.all([
+      queryClient.invalidateQueries({ queryKey: ['transactions'] }),
+      queryClient.invalidateQueries({ queryKey: ['transactions-overdue-past'] }),
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] }),
+      queryClient.invalidateQueries({ queryKey: ['bank-accounts'] }),
+      queryClient.invalidateQueries({ queryKey: ['credit-cards'] }),
+      queryClient.invalidateQueries({ queryKey: ['credit-card-summary'] }),
+      queryClient.invalidateQueries({ queryKey: ['reports'] }),
+      queryClient.refetchQueries({ queryKey: ['transactions'], type: 'active' }),
+      queryClient.refetchQueries({ queryKey: ['transactions-overdue-past'], type: 'active' }),
+      queryClient.refetchQueries({ queryKey: ['dashboard'], type: 'active' }),
+      queryClient.refetchQueries({ queryKey: ['bank-accounts'], type: 'active' }),
+    ]);
   };
 
   const createMutation = useMutation({

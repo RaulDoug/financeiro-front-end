@@ -1,0 +1,170 @@
+{
+  "runId": "Front-End_Financeiro-melhorias-icones-categorias-mu2qjjeo",
+  "feature": "melhorias-icones-categorias",
+  "agent": "antigravity",
+  "modo": "paralelo",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-15 13:56",
+  "branchTrabalho": "spec/melhorias-icones-categorias",
+  "baseDir": ".spec/features/melhorias-icones-categorias",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "logsDir": "../onp-worktrees/Front-End_Financeiro-melhorias-icones-categorias-logs",
+  "ondas": [
+    [
+      "faixa-1",
+      "faixa-2",
+      "faixa-3"
+    ],
+    [
+      "faixa-4",
+      "faixa-5",
+      "faixa-6"
+    ]
+  ],
+  "faixas": [
+    {
+      "id": "faixa-1",
+      "branch": "spec/melhorias-icones-categorias-faixa-1",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-melhorias-icones-categorias-faixa-1",
+      "tarefas": [
+        {
+          "id": "T-110",
+          "titulo": "Componente seletor de ícones reutilizável",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/components/shared/IconPicker.tsx"
+          ],
+          "refs": [
+            "US-050",
+            "US-051",
+            "AC-169",
+            "AC-171"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-2",
+      "branch": "spec/melhorias-icones-categorias-faixa-2",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-melhorias-icones-categorias-faixa-2",
+      "tarefas": [
+        {
+          "id": "T-111",
+          "titulo": "Seleção de ícone em categorias",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/components/settings/CategoryForm.tsx",
+            "src/components/settings/CategoryList.tsx",
+            "src/types/category.ts"
+          ],
+          "refs": [
+            "US-050",
+            "AC-169",
+            "AC-170"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-3",
+      "branch": "spec/melhorias-icones-categorias-faixa-3",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-melhorias-icones-categorias-faixa-3",
+      "tarefas": [
+        {
+          "id": "T-112",
+          "titulo": "Seleção de ícone em formas de pagamento",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/components/settings/PayMethodForm.tsx",
+            "src/components/settings/PayMethodList.tsx",
+            "src/types/payMethod.ts"
+          ],
+          "refs": [
+            "US-051",
+            "AC-171",
+            "AC-172"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-4",
+      "branch": "spec/melhorias-icones-categorias-faixa-4",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-melhorias-icones-categorias-faixa-4",
+      "tarefas": [
+        {
+          "id": "T-113",
+          "titulo": "Seleção de bandeira para cartões de crédito",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/components/credit-cards/CreditCardForm.tsx",
+            "src/components/credit-cards/CreditCardVisual.tsx",
+            "src/types/creditCard.ts"
+          ],
+          "refs": [
+            "US-052",
+            "AC-173",
+            "AC-174"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-5",
+      "branch": "spec/melhorias-icones-categorias-faixa-5",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-melhorias-icones-categorias-faixa-5",
+      "tarefas": [
+        {
+          "id": "T-114",
+          "titulo": "Auto-detecção de banco por nome de conta bancária",
+          "modelo": "claude-sonnet-5",
+          "esforco": "high",
+          "arquivos": [
+            "src/lib/bankDetector.ts",
+            "src/components/settings/BankAccountForm.tsx",
+            "src/components/shared/BankPicker.tsx"
+          ],
+          "refs": [
+            "US-053",
+            "AC-175",
+            "AC-176",
+            "AC-177",
+            "AC-178"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-6",
+      "branch": "spec/melhorias-icones-categorias-faixa-6",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-melhorias-icones-categorias-faixa-6",
+      "tarefas": [
+        {
+          "id": "T-115",
+          "titulo": "Layout mobile ágil para lançamento de transação",
+          "modelo": "claude-sonnet-5",
+          "esforco": "high",
+          "arquivos": [
+            "src/components/transactions/TransactionModal.tsx",
+            "src/components/transactions/MobileQuickEntry.tsx"
+          ],
+          "refs": [
+            "US-054",
+            "AC-179",
+            "AC-180"
+          ]
+        }
+      ]
+    }
+  ],
+  "sequenciais": [],
+  "concluidas": [],
+  "avisos": []
+}

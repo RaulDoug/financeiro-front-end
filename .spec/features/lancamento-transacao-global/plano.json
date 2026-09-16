@@ -1,0 +1,85 @@
+{
+  "runId": "Front-End_Financeiro-lancamento-transacao-global-init",
+  "feature": "lancamento-transacao-global",
+  "agent": "antigravity",
+  "modo": "sequencial",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-15 18:15",
+  "branchTrabalho": "spec/lancamento-transacao-global",
+  "baseDir": ".spec/features/lancamento-transacao-global",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "ondas": [
+    [
+      "faixa-1",
+      "faixa-2",
+      "faixa-3"
+    ]
+  ],
+  "faixas": [
+    {
+      "id": "faixa-1",
+      "tarefas": [
+        {
+          "id": "T-140",
+          "titulo": "Centralização e montagem do TransactionModal no AppLayout",
+          "modelo": "gemini-3.8-flash",
+          "esforco": "medium",
+          "arquivos": [
+            "src/layouts/AppLayout.tsx",
+            "src/components/transactions/GlobalTransactionModal.tsx"
+          ],
+          "refs": [
+            "US-063",
+            "AC-221",
+            "AC-222"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-2",
+      "tarefas": [
+        {
+          "id": "T-141",
+          "titulo": "Saneamento de instâncias locais e ciclo de vida de rota",
+          "modelo": "gemini-3.8-flash",
+          "esforco": "medium",
+          "arquivos": [
+            "src/pages/Dashboard/DashboardPage.tsx",
+            "src/pages/Transactions/index.tsx",
+            "src/layouts/AppLayout.tsx"
+          ],
+          "refs": [
+            "US-063",
+            "AC-221",
+            "AC-223"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-3",
+      "tarefas": [
+        {
+          "id": "T-142",
+          "titulo": "Testes automatizados dos critérios de aceite AC-221, AC-222 e AC-223",
+          "modelo": "gemini-3.8-flash",
+          "esforco": "medium",
+          "arquivos": [
+            "test/lancamento-transacao-global.spec.test.js"
+          ],
+          "refs": [
+            "US-063",
+            "AC-221",
+            "AC-222",
+            "AC-223"
+          ]
+        }
+      ]
+    }
+  ]
+}
+

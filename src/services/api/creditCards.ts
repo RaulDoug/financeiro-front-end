@@ -1,4 +1,5 @@
 import { api } from '../../lib/axios.ts';
+import { normalizeCardColor, COLOR_HEX_MAP } from '../../utils/creditCardColors.ts';
 import type {
   CreditCardItem,
   CreditCardSummaryWithTransactions,
@@ -14,7 +15,16 @@ export const creditCardService = {
       ? response.data
       : response.data?.items || (response.data?.item ? [response.data.item] : []);
 
-    return items.filter((item: any) => Boolean(item.credit_card));
+    return items
+      .filter((item: any) => Boolean(item.credit_card))
+      .map((item: any) => ({
+        ...item,
+        color: normalizeCardColor(item.color),
+        last_four_digits: item.last_four_digits !== undefined && item.last_four_digits !== null
+          ? String(item.last_four_digits).padStart(4, '0')
+          : '',
+        brand: item.brand || (item.icon && item.icon !== 'credit-card' ? item.icon : undefined),
+      }));
   },
 
   async getCreditCardSummary(params: {
@@ -33,20 +43,48 @@ export const creditCardService = {
   },
 
   async createCreditCard(data: CreditCardFormData): Promise<any> {
+    const colorKey = normalizeCardColor(data.color);
+    const colorHex = COLOR_HEX_MAP[colorKey] || '#1e3a8a';
+
     const payload = {
-      ...data,
+      name: data.name.trim(),
       credit_card: true,
+      bank_account_id: data.bank_account_id,
+      due_day: Number(data.due_day),
+      closing_day: Number(data.closing_day),
+      last_four_digits: String(data.last_four_digits).trim(),
+      credit_limit: Number(data.credit_limit),
+      icon: (data as any).icon || (data.brand ? data.brand.toLowerCase() : 'credit-card'),
+      color: colorHex,
     };
+
     const response = await api.post('/pay-method/register', payload);
     return response.data;
   },
 
-  async updateCreditCard(id: string, data: Partial<CreditCardFormData>): Promise<any> {
-    const response = await api.patch(`/pay-method/update/${id}`, data);
+  async updateCreditCard(id: string | number, data: Partial<CreditCardFormData>): Promise<any> {
+    const payload: Record<string, any> = {};
+    if (data.name !== undefined) payload.name = data.name.trim();
+    if (data.bank_account_id !== undefined) payload.bank_account_id = data.bank_account_id;
+    if (data.due_day !== undefined) payload.due_day = Number(data.due_day);
+    if (data.closing_day !== undefined) payload.closing_day = Number(data.closing_day);
+    if (data.credit_limit !== undefined) payload.credit_limit = Number(data.credit_limit);
+    if (data.last_four_digits !== undefined) payload.last_four_digits = String(data.last_four_digits).trim();
+    if ((data as any).icon !== undefined) {
+      payload.icon = (data as any).icon;
+    } else if (data.brand !== undefined) {
+      payload.icon = data.brand.toLowerCase();
+    }
+    if (data.color !== undefined) {
+      const colorKey = normalizeCardColor(data.color);
+      payload.color = COLOR_HEX_MAP[colorKey] || data.color;
+    }
+
+    const response = await api.patch(`/pay-method/update/${id}`, payload);
     return response.data;
   },
 
-  async deleteCreditCard(id: string): Promise<any> {
+  async deleteCreditCard(id: string | number): Promise<any> {
     const response = await api.delete(`/pay-method/delete/${id}`);
     return response.data;
   },

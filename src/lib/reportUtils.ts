@@ -39,7 +39,7 @@ export function consolidateCounterparties(
       count: 0,
     };
 
-    if (tx.type === 'incomings') {
+    if (tx.type === 'incomings' || tx.type === 'transfer_in') {
       current.totalIncome += amount;
     } else {
       current.totalExpense += amount;

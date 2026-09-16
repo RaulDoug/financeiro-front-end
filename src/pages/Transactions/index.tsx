@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Plus } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
 import { useTransactions } from '../../hooks/useTransactions.ts';
 import { useTransactionMutations } from '../../hooks/useTransactionMutations.ts';
+import { transactionService } from '../../services/transactionService.ts';
+import { useWalletStore } from '../../stores/wallet.store.ts';
 import { TransactionFilters } from '../../components/transactions/TransactionFilters.tsx';
 import { TransactionTable } from '../../components/transactions/TransactionTable.tsx';
 import { TransactionModal } from '../../components/transactions/TransactionModal.tsx';
 import { TransactionDeleteDialog } from '../../components/transactions/TransactionDeleteDialog.tsx';
+import { useTransactionModalStore } from '../../stores/transactionModal.store.ts';
 import type { Transaction, TransactionFilters as FiltersType } from '../../types/transaction.ts';
 
 const getInitialMonthRange = () => {
@@ -59,17 +63,95 @@ export const TransactionsPage: React.FC = () => {
   const [deletingTransaction, setDeletingTransaction] = useState<Transaction | null>(null);
 
   const {
+    isOpen: isGlobalModalOpen,
+    closeModal: closeGlobalModal,
+  } = useTransactionModalStore();
+
+  useEffect(() => {
+    if (isGlobalModalOpen) {
+      setEditingTransaction(null);
+      setIsModalOpen(true);
+      closeGlobalModal();
+    }
+  }, [isGlobalModalOpen, closeGlobalModal]);
+
+  useEffect(() => {
+    return () => {
+      closeGlobalModal();
+    };
+  }, [closeGlobalModal]);
+
+  const currentWalletId = useWalletStore((state) => state.currentWalletId);
+
+  // AC-243 / AC-244: Quando não houver status selecionado ("Todas as transações"), solicitar apenas status ativos (não cancelados)
+  const queryFilters = React.useMemo<FiltersType>(() => {
+    if (!filters.status) {
+      return {
+        ...filters,
+        status: ['pending', 'completed', 'expired'],
+      };
+    }
+    return filters;
+  }, [filters]);
+
+  const {
     data,
     isLoading,
     hasNextPage,
     isFetchingNextPage,
     fetchNextPage,
-  } = useTransactions(filters);
+    refetch,
+  } = useTransactions(queryFilters);
+
+  // Buscar transações vencidas de períodos anteriores caso haja filtro de data início ativo
+  const { data: pastOverdueData, refetch: refetchPastOverdue } = useQuery({
+    queryKey: ['transactions-overdue-past', currentWalletId, filters.due_date_from, filters.status],
+    queryFn: async () => {
+      const today = new Date().toISOString().split('T')[0];
+      const maxDate = filters.due_date_from && filters.due_date_from < today ? filters.due_date_from : today;
+      const res = await transactionService.getTransactions({
+        due_date_to: maxDate,
+        order_by: 'due_date',
+        order_dir: 'DESC',
+        limit: 50,
+      });
+      return (res.rows || []).filter(
+        (t) => t.status === 'expired' || (t.status === 'pending' && Boolean(t.due_date && t.due_date < today))
+      );
+    },
+    enabled: Boolean(
+      currentWalletId &&
+      filters.due_date_from &&
+      (!filters.status || filters.status === 'pending' || filters.status === 'expired')
+    ),
+  });
 
   const { createMutation, updateMutation, deleteMutation } = useTransactionMutations();
 
   // Achatar as páginas da rolagem infinita
-  const allTransactions = data?.pages.flatMap((page) => page.rows) || [];
+  const rawTransactions = data?.pages.flatMap((page) => page.rows) || [];
+
+  // Combinar transações vencidas de meses anteriores com as transações da página atual
+  // e aplicar filtragem estrita para transações canceladas (AC-243, AC-244)
+  const allTransactions = React.useMemo(() => {
+    const list = [...rawTransactions];
+    const existingIds = new Set(list.map((t) => t.id));
+    if (pastOverdueData && pastOverdueData.length > 0) {
+      for (const ot of pastOverdueData) {
+        if (!existingIds.has(ot.id)) {
+          existingIds.add(ot.id);
+          list.unshift(ot);
+        }
+      }
+    }
+
+    // Regra US-067: Transações canceladas aparecem somente quando o filtro 'cancelled' for explicitamente selecionado.
+    // Em todas as transações ou outros filtros, não mostra as canceladas.
+    if (filters.status === 'cancelled') {
+      return list.filter((t) => t.status === 'cancelled');
+    }
+    return list.filter((t) => t.status !== 'cancelled');
+  }, [rawTransactions, pastOverdueData, filters.status]);
 
   const handleOpenNew = () => {
     setEditingTransaction(null);
@@ -94,6 +176,7 @@ export const TransactionsPage: React.FC = () => {
     } else {
       await createMutation.mutateAsync(formData);
     }
+    await Promise.all([refetch(), refetchPastOverdue()]);
     setIsModalOpen(false);
     setEditingTransaction(null);
   };
@@ -105,6 +188,7 @@ export const TransactionsPage: React.FC = () => {
         id: deletingTransaction.id,
         payload,
       });
+      await Promise.all([refetch(), refetchPastOverdue()]);
       setDeletingTransaction(null);
     } catch (error) {
       console.error('Erro ao excluir transação:', error);
@@ -112,7 +196,7 @@ export const TransactionsPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto px-4 py-6">
+    <div className="space-y-6 max-w-7xl mx-auto">
       {/* Cabeçalho da Página */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>

@@ -1,0 +1,169 @@
+{
+  "runId": "Front-End_Financeiro-alinhamento-layout-design-mu2qjjip",
+  "feature": "alinhamento-layout-design",
+  "agent": "antigravity",
+  "modo": "paralelo",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-15 13:56",
+  "branchTrabalho": "spec/alinhamento-layout-design",
+  "baseDir": ".spec/features/alinhamento-layout-design",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "logsDir": "../onp-worktrees/Front-End_Financeiro-alinhamento-layout-design-logs",
+  "ondas": [
+    [
+      "faixa-1",
+      "faixa-2",
+      "faixa-3"
+    ]
+  ],
+  "faixas": [
+    {
+      "id": "faixa-1",
+      "branch": "spec/alinhamento-layout-design-faixa-1",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-alinhamento-layout-design-faixa-1",
+      "tarefas": [
+        {
+          "id": "T-116",
+          "titulo": "Auditoria visual comparativa de todos os layouts",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/pages/Dashboard/DashboardPage.tsx",
+            "src/pages/Transactions/index.tsx",
+            "src/pages/CreditCardsPage.tsx",
+            "src/pages/Reports/index.tsx",
+            "src/pages/Settings/index.tsx"
+          ],
+          "refs": [
+            "US-057",
+            "AC-187",
+            "AC-188",
+            "AC-189",
+            "AC-190",
+            "AC-191",
+            "AC-192",
+            "AC-193"
+          ]
+        },
+        {
+          "id": "T-117",
+          "titulo": "Ajuste de layout do dashboard",
+          "modelo": "claude-sonnet-5",
+          "esforco": "high",
+          "arquivos": [
+            "src/pages/Dashboard/DashboardPage.tsx",
+            "src/pages/Dashboard/components/KpiCards.tsx",
+            "src/pages/Dashboard/components/AccountBalances.tsx",
+            "src/pages/Dashboard/components/RecentTransactions.tsx",
+            "src/pages/Dashboard/components/QuickActions.tsx"
+          ],
+          "refs": [
+            "US-055",
+            "AC-181",
+            "AC-182",
+            "AC-183"
+          ]
+        },
+        {
+          "id": "T-119",
+          "titulo": "Ajuste de layout da tela de transações (web)",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/pages/Transactions/index.tsx",
+            "src/components/transactions/TransactionTable.tsx",
+            "src/components/transactions/TransactionFilters.tsx"
+          ],
+          "refs": [
+            "US-057",
+            "AC-187"
+          ]
+        },
+        {
+          "id": "T-120",
+          "titulo": "Ajuste de layout da tela de cartões de crédito",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/pages/CreditCardsPage.tsx",
+            "src/components/credit-cards/CreditCardVisual.tsx",
+            "src/components/credit-cards/InvoiceSummary.tsx"
+          ],
+          "refs": [
+            "US-057",
+            "AC-188"
+          ]
+        },
+        {
+          "id": "T-121",
+          "titulo": "Ajuste de layout das telas de configurações",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/pages/Settings/index.tsx",
+            "src/pages/Settings/CategoriesSettings.tsx",
+            "src/pages/Settings/PayMethodsSettings.tsx",
+            "src/pages/Settings/CounterpartiesSettings.tsx",
+            "src/pages/Settings/BankAccountsSettings.tsx"
+          ],
+          "refs": [
+            "US-057",
+            "AC-189",
+            "AC-190",
+            "AC-191",
+            "AC-192"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-2",
+      "branch": "spec/alinhamento-layout-design-faixa-2",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-alinhamento-layout-design-faixa-2",
+      "tarefas": [
+        {
+          "id": "T-118",
+          "titulo": "Ajuste de layout do relatório DRE",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/pages/Reports/AnnualReport.tsx",
+            "src/pages/Reports/AnnualChart.tsx"
+          ],
+          "refs": [
+            "US-056",
+            "AC-184",
+            "AC-185",
+            "AC-186"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-3",
+      "branch": "spec/alinhamento-layout-design-faixa-3",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-alinhamento-layout-design-faixa-3",
+      "tarefas": [
+        {
+          "id": "T-122",
+          "titulo": "Ajuste de layout da tela de investimentos",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/pages/Investments/index.tsx"
+          ],
+          "refs": [
+            "US-057",
+            "AC-193"
+          ]
+        }
+      ]
+    }
+  ],
+  "sequenciais": [],
+  "concluidas": [],
+  "avisos": []
+}

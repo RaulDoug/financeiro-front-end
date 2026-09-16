@@ -1,0 +1,77 @@
+{
+  "feature": "alinhamento-layout-design",
+  "timestamp": "2026-09-15T18:48:35.032Z",
+  "gitRev": "5d8c613",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 0,
+  "testsParsed": 183,
+  "results": {
+    "AC-181": {
+      "status": "pass",
+      "testName": "AC-181: Layout geral do dashboard conforme referência @spec:AC-181",
+      "method": "tap"
+    },
+    "AC-182": {
+      "status": "pass",
+      "testName": "AC-182: KPIs do dashboard com tamanho de fonte equilibrado @spec:AC-182",
+      "method": "tap"
+    },
+    "AC-183": {
+      "status": "pass",
+      "testName": "AC-183: Seção de saldos de contas alinhada à referência @spec:AC-183",
+      "method": "tap"
+    },
+    "AC-184": {
+      "status": "pass",
+      "testName": "AC-184: Layout da tela DRE conforme referência @spec:AC-184",
+      "method": "tap"
+    },
+    "AC-185": {
+      "status": "pass",
+      "testName": "AC-185: Tabela DRE com colunas e badges corretos @spec:AC-185",
+      "method": "tap"
+    },
+    "AC-186": {
+      "status": "pass",
+      "testName": "AC-186: Gráfico DRE com estilo alinhado à referência @spec:AC-186",
+      "method": "tap"
+    },
+    "AC-187": {
+      "status": "pass",
+      "testName": "AC-187: Tela de Transações (Web) alinhada à referência @spec:AC-187",
+      "method": "tap"
+    },
+    "AC-188": {
+      "status": "pass",
+      "testName": "AC-188: Tela de Cartões de Crédito (Web) alinhada à referência @spec:AC-188",
+      "method": "tap"
+    },
+    "AC-189": {
+      "status": "pass",
+      "testName": "AC-189: Tela de Contas Bancárias (Web) alinhada à referência @spec:AC-189",
+      "method": "tap"
+    },
+    "AC-190": {
+      "status": "pass",
+      "testName": "AC-190: Tela de Categorias/Configurações (Web) alinhada à referência @spec:AC-190",
+      "method": "tap"
+    },
+    "AC-191": {
+      "status": "pass",
+      "testName": "AC-191: Tela de Métodos de Pagamento (Web) alinhada à referência @spec:AC-191",
+      "method": "tap"
+    },
+    "AC-192": {
+      "status": "pass",
+      "testName": "AC-192: Tela de Contrapartes (Web) alinhada à referência @spec:AC-192",
+      "method": "tap"
+    },
+    "AC-193": {
+      "status": "pass",
+      "testName": "AC-193: Tela de Investimentos (Web) alinhada à referência @spec:AC-193",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

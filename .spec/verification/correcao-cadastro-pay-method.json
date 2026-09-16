@@ -1,0 +1,27 @@
+{
+  "feature": "correcao-cadastro-pay-method",
+  "timestamp": "2026-09-15T21:02:46.578Z",
+  "gitRev": "5d8c613",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 1,
+  "testsParsed": 216,
+  "results": {
+    "AC-218": {
+      "status": "pass",
+      "testName": "AC-218: Sanitização estrita no payload de cadastro de método de pagamento @spec:AC-218",
+      "method": "tap"
+    },
+    "AC-219": {
+      "status": "pass",
+      "testName": "AC-219: Sanitização estrita no payload de atualização de método de pagamento @spec:AC-219",
+      "method": "tap"
+    },
+    "AC-220": {
+      "status": "pass",
+      "testName": "AC-220: Envio limpo e feedback no modal de método de pagamento @spec:AC-220",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

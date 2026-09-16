@@ -3,6 +3,7 @@ import { Plus, Search, Trash2, Edit2, AlertCircle } from 'lucide-react';
 import { useCategories, useCategoryMutations } from '../../hooks/useCategories.ts';
 import { CategoryModal } from './CategoryModal.tsx';
 import type { CategoryItem } from '../../services/category.service.ts';
+import { renderLucideIcon } from '../../components/shared/IconPicker.tsx';
 
 export const CategoriesSettings: React.FC = () => {
   const { data: categories = [], isLoading, error: queryError } = useCategories();
@@ -14,16 +15,25 @@ export const CategoriesSettings: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<CategoryItem | null>(null);
   const [feedbackMessage, setFeedbackMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
 
-  const counts = useMemo(() => {
-    return {
-      all: categories.length,
-      incomings: categories.filter((c) => c.type === 'incomings').length,
-      expenses: categories.filter((c) => c.type === 'expenses').length,
-    };
+  // Ocultar categorias do sistema como "Transferência" para impedir exclusão acidental (AC-235)
+  const userCategories = useMemo(() => {
+    return categories.filter(
+      (c) =>
+        !c.name.toLowerCase().startsWith('transferência') &&
+        !c.name.toLowerCase().startsWith('transferencia')
+    );
   }, [categories]);
 
+  const counts = useMemo(() => {
+    return {
+      all: userCategories.length,
+      incomings: userCategories.filter((c) => c.type === 'incomings').length,
+      expenses: userCategories.filter((c) => c.type === 'expenses').length,
+    };
+  }, [userCategories]);
+
   const filteredCategories = useMemo(() => {
-    return categories
+    return userCategories
       .filter((category) => {
         if (activeTab === 'incomings') return category.type === 'incomings';
         if (activeTab === 'expenses') return category.type === 'expenses';
@@ -32,7 +42,7 @@ export const CategoriesSettings: React.FC = () => {
       .filter((category) =>
         category.name.toLowerCase().includes(searchQuery.toLowerCase().trim())
       );
-  }, [categories, activeTab, searchQuery]);
+  }, [userCategories, activeTab, searchQuery]);
 
   const handleOpenCreate = () => {
     setSelectedCategory(null);
@@ -44,7 +54,12 @@ export const CategoriesSettings: React.FC = () => {
     setModalOpen(true);
   };
 
-  const handleSave = async (data: { name: string; type: 'incomings' | 'expenses' }) => {
+  const handleSave = async (data: {
+    name: string;
+    type: 'incomings' | 'expenses';
+    icon?: string;
+    color?: string;
+  }) => {
     try {
       if (selectedCategory) {
         const idToUpdate = selectedCategory.display_id ?? selectedCategory.id;
@@ -213,6 +228,18 @@ export const CategoriesSettings: React.FC = () => {
                 className="flex items-center justify-between px-5 py-3.5 hover:bg-slate-50/60 transition-colors"
               >
                 <div className="flex items-center gap-3">
+                  {cat.icon && (
+                    <span
+                      data-testid={`category-icon-${cat.id}`}
+                      className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+                      style={{
+                        backgroundColor: cat.color ? `${cat.color}20` : '#f1f5f9',
+                        color: cat.color || '#3b82f6',
+                      }}
+                    >
+                      {renderLucideIcon(cat.icon, 'w-3.5 h-3.5')}
+                    </span>
+                  )}
                   <span
                     className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                       cat.type === 'incomings'

@@ -1,0 +1,119 @@
+{
+  "runId": "Front-End_Financeiro-atualizacao-automatica-transacoes-mu349fse",
+  "feature": "atualizacao-automatica-transacoes",
+  "agent": "antigravity",
+  "modo": "paralelo",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-15 20:20",
+  "branchTrabalho": "spec/atualizacao-automatica-transacoes",
+  "baseDir": ".spec/features/atualizacao-automatica-transacoes",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "logsDir": "../onp-worktrees/Front-End_Financeiro-atualizacao-automatica-transacoes-logs",
+  "ondas": [
+    [
+      "faixa-1",
+      "faixa-2",
+      "faixa-3"
+    ],
+    [
+      "faixa-4"
+    ]
+  ],
+  "faixas": [
+    {
+      "id": "faixa-1",
+      "branch": "spec/atualizacao-automatica-transacoes-faixa-1",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-atualizacao-automatica-transacoes-faixa-1",
+      "tarefas": [
+        {
+          "id": "T-130",
+          "titulo": "Orquestração de invalidação e refetch no hook useTransactionMutations",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/hooks/useTransactionMutations.ts"
+          ],
+          "refs": [
+            "US-061",
+            "AC-211",
+            "AC-214"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-2",
+      "branch": "spec/atualizacao-automatica-transacoes-faixa-2",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-atualizacao-automatica-transacoes-faixa-2",
+      "tarefas": [
+        {
+          "id": "T-131",
+          "titulo": "Sincronização síncrona na submissão do modal em TransactionsPage",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/pages/Transactions/index.tsx"
+          ],
+          "refs": [
+            "US-061",
+            "AC-210",
+            "AC-214"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-3",
+      "branch": "spec/atualizacao-automatica-transacoes-faixa-3",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-atualizacao-automatica-transacoes-faixa-3",
+      "tarefas": [
+        {
+          "id": "T-132",
+          "titulo": "Sincronização nos modais de Detalhes da Transação e Dashboard",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/components/transactions/TransactionDetailsModal.tsx",
+            "src/pages/Dashboard/DashboardPage.tsx"
+          ],
+          "refs": [
+            "US-061",
+            "AC-212",
+            "AC-213",
+            "AC-214"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-4",
+      "branch": "spec/atualizacao-automatica-transacoes-faixa-4",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-atualizacao-automatica-transacoes-faixa-4",
+      "tarefas": [
+        {
+          "id": "T-133",
+          "titulo": "Testes automatizados da especificação de atualização automática",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "test/atualizacao-automatica-transacoes.spec.test.js"
+          ],
+          "refs": [
+            "US-061",
+            "AC-210",
+            "AC-211",
+            "AC-212",
+            "AC-213",
+            "AC-214"
+          ]
+        }
+      ]
+    }
+  ],
+  "sequenciais": [],
+  "concluidas": [],
+  "avisos": []
+}

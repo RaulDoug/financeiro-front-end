@@ -16,49 +16,76 @@ export const CreditCardsPage: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingCard, setEditingCard] = useState<CreditCardItem | null>(null);
   const [deletingCard, setDeletingCard] = useState<CreditCardItem | null>(null);
+  const [errorFeedback, setErrorFeedback] = useState<string | null>(null);
 
   const activeCard =
     cards.find((c) => c.id === selectedCardId) || (cards.length > 0 ? cards[0] : null);
 
   const handleOpenNew = () => {
+    setErrorFeedback(null);
     setEditingCard(null);
     setIsModalOpen(true);
   };
 
   const handleOpenEdit = (card: CreditCardItem) => {
+    setErrorFeedback(null);
     setEditingCard(card);
     setIsModalOpen(true);
   };
 
   const handleSubmit = async (data: CreditCardFormData) => {
     try {
+      setErrorFeedback(null);
       if (editingCard) {
-        await updateMutation.mutateAsync({ id: editingCard.id, data });
+        const idToUpdate = (editingCard.display_id ?? editingCard.id) as any;
+        await updateMutation.mutateAsync({ id: idToUpdate, data });
       } else {
         await createMutation.mutateAsync(data);
       }
       setIsModalOpen(false);
       setEditingCard(null);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erro ao salvar cartão:', error);
+      const msg = error?.response?.data?.message || error?.message || 'Erro ao salvar cartão de crédito.';
+      setErrorFeedback(msg);
     }
   };
 
   const handleDeleteConfirm = async () => {
     if (!deletingCard) return;
     try {
-      await deleteMutation.mutateAsync(deletingCard.id);
+      setErrorFeedback(null);
+      const idToDelete = (deletingCard.display_id ?? deletingCard.id) as any;
+      await deleteMutation.mutateAsync(idToDelete);
       if (selectedCardId === deletingCard.id) {
         setSelectedCardId(null);
       }
       setDeletingCard(null);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erro ao excluir cartão:', error);
+      const msg = error?.response?.data?.message || error?.message || 'Erro ao excluir cartão de crédito.';
+      setErrorFeedback(msg);
     }
   };
 
   return (
     <div className="space-y-8 max-w-7xl mx-auto" data-testid="credit-cards-page">
+      {errorFeedback && (
+        <div
+          data-testid="credit-card-error-banner"
+          className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-sm flex items-center justify-between"
+        >
+          <span>{errorFeedback}</span>
+          <button
+            type="button"
+            onClick={() => setErrorFeedback(null)}
+            className="text-rose-500 hover:text-rose-700 text-xs font-semibold cursor-pointer ml-4"
+          >
+            Fechar
+          </button>
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>

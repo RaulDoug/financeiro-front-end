@@ -2,6 +2,8 @@ import React from 'react';
 import { Building2, Edit2, Trash2, AlertCircle } from 'lucide-react';
 import { formatCurrency } from '../../utils/formatCurrency.ts';
 import type { BankAccountItem } from '../../types/bankAccount.ts';
+import { detectBankByName } from '../../lib/bankDetector.ts';
+import { renderLucideIcon } from '../shared/IconPicker.tsx';
 
 interface AccountCardProps {
   account: BankAccountItem;
@@ -14,6 +16,10 @@ export const AccountCard: React.FC<AccountCardProps> = ({ account, onEdit, onDel
     typeof account.balance === 'string' ? parseFloat(account.balance) : Number(account.balance ?? 0);
   const isNegative = numericBalance < 0;
 
+  const detected = !account.color ? detectBankByName(account.bank_name) : null;
+  const effectiveColor = account.color || detected?.primaryColor;
+  const effectiveIcon = account.icon || detected?.icon;
+
   return (
     <div
       data-testid={`bank-account-card-${account.id}`}
@@ -21,8 +27,19 @@ export const AccountCard: React.FC<AccountCardProps> = ({ account, onEdit, onDel
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm shrink-0">
-            <Building2 className="w-5 h-5" />
+          <div
+            data-testid={`bank-icon-${account.id}`}
+            className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shrink-0 shadow-2xs"
+            style={{
+              backgroundColor: effectiveColor ? `${effectiveColor}20` : '#eff6ff',
+              color: effectiveColor || '#2563eb',
+            }}
+          >
+            {effectiveIcon && renderLucideIcon(effectiveIcon, 'w-5 h-5') ? (
+              renderLucideIcon(effectiveIcon, 'w-5 h-5')
+            ) : (
+              <Building2 className="w-5 h-5" />
+            )}
           </div>
           <div>
             <h4 className="font-bold text-base text-slate-900 leading-tight">{account.bank_name}</h4>
