@@ -22,11 +22,13 @@ export default async function handler(request) {
   const headers = new Headers(request.headers);
   headers.delete('host');
 
+  const hasBody = !['GET', 'HEAD'].includes(request.method);
+  const body = hasBody ? await request.arrayBuffer() : undefined;
+
   return fetch(targetUrl, {
     method: request.method,
     headers,
-    body: ['GET', 'HEAD'].includes(request.method) ? undefined : request.body,
-    duplex: 'half',
+    body,
   });
 }
 
