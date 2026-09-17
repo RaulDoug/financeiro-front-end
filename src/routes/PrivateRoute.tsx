@@ -11,8 +11,23 @@ interface PrivateRouteProps {
 export const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const location = useLocation();
+
+  // Redireciona imediatamente se não autenticado — antes de qualquer hook de dados
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  return <AuthenticatedRoute location={location}>{children}</AuthenticatedRoute>;
+};
+
+// Componente interno: só monta hooks de dados após confirmar autenticação
+const AuthenticatedRoute: React.FC<{ location: ReturnType<typeof useLocation>; children?: React.ReactNode }> = ({
+  location,
+  children,
+}) => {
   const { isLoading, shouldRedirect, redirectPath } = useOnboardingCheck(location.pathname);
   const { wallets, currentWalletId, setCurrentWalletId } = useWalletStore();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   useEffect(() => {
     if (isAuthenticated && wallets.length > 0 && !currentWalletId) {
@@ -22,10 +37,6 @@ export const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
       }
     }
   }, [isAuthenticated, wallets, currentWalletId, setCurrentWalletId]);
-
-  if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
 
   if (isLoading) {
     return (
