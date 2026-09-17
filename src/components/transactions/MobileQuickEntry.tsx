@@ -64,6 +64,9 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
   const touchStartY = useRef(0);
 
   const handleTouchStart = (e: React.TouchEvent) => {
+    if ((e.target as HTMLElement)?.closest('button, a, input, select, textarea')) {
+      return;
+    }
     touchStartY.current = e.touches[0].clientY;
     setIsDragging(true);
   };
@@ -80,13 +83,61 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
   };
 
   const handleTouchEnd = () => {
+    if (!isDragging) return;
     setIsDragging(false);
     if (dragY > 90) {
+      setDragY(0);
       onClose();
     } else {
       setDragY(0);
     }
   };
+
+  // Suporte a mouse para testes no desktop / DevTools
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement)?.closest('button, a, input, select, textarea')) {
+      return;
+    }
+    touchStartY.current = e.clientY;
+    setIsDragging(true);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    const deltaY = e.clientY - touchStartY.current;
+    if (deltaY > 0) {
+      setDragY(deltaY);
+    } else {
+      setDragY(0);
+    }
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    if (dragY > 90) {
+      setDragY(0);
+      onClose();
+    } else {
+      setDragY(0);
+    }
+  };
+
+  useEffect(() => {
+    if (!isDragging) return;
+    const handleGlobalMouseUp = () => {
+      setIsDragging(false);
+      setDragY((curr) => {
+        if (curr > 90) {
+          onClose();
+          return 0;
+        }
+        return 0;
+      });
+    };
+    window.addEventListener('mouseup', handleGlobalMouseUp);
+    return () => window.removeEventListener('mouseup', handleGlobalMouseUp);
+  }, [isDragging, onClose]);
 
   // Sub-pickers compatibilidade retroativa
   const [activePicker, setActivePicker] = useState<string | null>(null);
@@ -399,7 +450,7 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
           isClosing ? 'animate-drawer-out' : isDragging || dragY > 0 ? '' : 'animate-drawer-in'
         }`}
         style={{
-          transform: dragY > 0 ? `translateY(${dragY}px)` : undefined,
+          transform: isClosing ? undefined : dragY > 0 ? `translateY(${dragY}px)` : undefined,
           transition: isDragging ? 'none' : 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
         onClick={(e) => e.stopPropagation()}
@@ -412,6 +463,9 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
         >
           <div className="w-10 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700"></div>
         </div>
@@ -422,8 +476,11 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
         >
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2.5 pointer-events-none">
             <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-blue-600 dark:text-blue-400 shrink-0">
               <Zap className="w-4 h-4" />
             </div>
@@ -439,7 +496,16 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
 
           <button
             type="button"
-            onClick={onClose}
+            onClick={(e) => {
+              e.stopPropagation();
+              onClose();
+            }}
+            onTouchStart={(e) => e.stopPropagation()}
+            onTouchEnd={(e) => {
+              e.stopPropagation();
+              onClose();
+            }}
+            onMouseDown={(e) => e.stopPropagation()}
             aria-label="Fechar"
             id="close-drawer"
             className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-slate-600 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer"

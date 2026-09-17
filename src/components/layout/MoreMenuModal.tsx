@@ -20,6 +20,9 @@ export const MoreMenuModal: React.FC<MoreMenuModalProps> = ({ isOpen, onClose })
   const touchStartY = useRef(0);
 
   const handleTouchStart = (e: React.TouchEvent) => {
+    if ((e.target as HTMLElement)?.closest('button, a')) {
+      return;
+    }
     touchStartY.current = e.touches[0].clientY;
     setIsDragging(true);
   };
@@ -36,13 +39,60 @@ export const MoreMenuModal: React.FC<MoreMenuModalProps> = ({ isOpen, onClose })
   };
 
   const handleTouchEnd = () => {
+    if (!isDragging) return;
     setIsDragging(false);
     if (dragY > 90) {
+      setDragY(0);
       triggerClose();
     } else {
       setDragY(0);
     }
   };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement)?.closest('button, a')) {
+      return;
+    }
+    touchStartY.current = e.clientY;
+    setIsDragging(true);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    const deltaY = e.clientY - touchStartY.current;
+    if (deltaY > 0) {
+      setDragY(deltaY);
+    } else {
+      setDragY(0);
+    }
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    if (dragY > 90) {
+      setDragY(0);
+      triggerClose();
+    } else {
+      setDragY(0);
+    }
+  };
+
+  useEffect(() => {
+    if (!isDragging) return;
+    const handleGlobalMouseUp = () => {
+      setIsDragging(false);
+      setDragY((curr) => {
+        if (curr > 90) {
+          triggerClose();
+          return 0;
+        }
+        return 0;
+      });
+    };
+    window.addEventListener('mouseup', handleGlobalMouseUp);
+    return () => window.removeEventListener('mouseup', handleGlobalMouseUp);
+  }, [isDragging, triggerClose]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -83,7 +133,7 @@ export const MoreMenuModal: React.FC<MoreMenuModalProps> = ({ isOpen, onClose })
           isClosing ? 'animate-drawer-out' : isDragging || dragY > 0 ? '' : 'animate-drawer-in'
         }`}
         style={{
-          transform: dragY > 0 ? `translateY(${dragY}px)` : undefined,
+          transform: isClosing ? undefined : dragY > 0 ? `translateY(${dragY}px)` : undefined,
           transition: isDragging ? 'none' : 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
@@ -94,6 +144,9 @@ export const MoreMenuModal: React.FC<MoreMenuModalProps> = ({ isOpen, onClose })
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
         >
           <div className="w-10 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700"></div>
         </div>
@@ -103,11 +156,23 @@ export const MoreMenuModal: React.FC<MoreMenuModalProps> = ({ isOpen, onClose })
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
         >
-          <h3 className="text-base font-bold text-slate-900 dark:text-white">Mais opções</h3>
+          <h3 className="text-base font-bold text-slate-900 dark:text-white pointer-events-none">Mais opções</h3>
           <button
             type="button"
-            onClick={triggerClose}
+            onClick={(e) => {
+              e.stopPropagation();
+              triggerClose();
+            }}
+            onTouchStart={(e) => e.stopPropagation()}
+            onTouchEnd={(e) => {
+              e.stopPropagation();
+              triggerClose();
+            }}
+            onMouseDown={(e) => e.stopPropagation()}
             aria-label="Fechar menu"
             className="p-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
           >
@@ -122,7 +187,8 @@ export const MoreMenuModal: React.FC<MoreMenuModalProps> = ({ isOpen, onClose })
               <NavLink
                 key={item.href}
                 to={item.href}
-                onClick={triggerClose}
+                onClick={() => triggerClose()}
+                onTouchStart={(e) => e.stopPropagation()}
                 className={({ isActive }) =>
                   `flex flex-col items-center justify-center p-3 rounded-2xl border transition-all text-center ${
                     isActive

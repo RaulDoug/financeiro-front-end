@@ -23,43 +23,51 @@ export function useModalTransition({
 }: UseModalTransitionOptions): UseModalTransitionResult {
   const [isRendered, setIsRendered] = useState(isOpen);
   const [isClosing, setIsClosing] = useState(false);
+  const prevIsOpenRef = useRef(isOpen);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
 
-  const clearTimer = () => {
+  const clearTimer = useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
     }
-  };
+  }, []);
 
   useEffect(() => {
-    if (isOpen) {
+    const wasOpen = prevIsOpenRef.current;
+    prevIsOpenRef.current = isOpen;
+
+    if (!wasOpen && isOpen) {
+      // Abertura recente (passou de false para true)
       clearTimer();
       setIsRendered(true);
       setIsClosing(false);
-    } else if (isRendered && !isClosing) {
-      // Caso isOpen seja alterado externamente para false
-      setIsClosing(true);
+    } else if (wasOpen && !isOpen) {
+      // Fechamento disparado externamente (mudança de prop isOpen de true para false)
       clearTimer();
+      setIsClosing(true);
       timeoutRef.current = setTimeout(() => {
         setIsRendered(false);
         setIsClosing(false);
       }, duration);
     }
-
-    return clearTimer;
-  }, [isOpen, duration, isRendered, isClosing]);
+  }, [isOpen, duration, clearTimer]);
 
   const triggerClose = useCallback(() => {
-    if (isClosing) return;
-    setIsClosing(true);
     clearTimer();
+    setIsClosing(true);
     timeoutRef.current = setTimeout(() => {
       setIsRendered(false);
       setIsClosing(false);
-      onClose?.();
+      onCloseRef.current?.();
     }, duration);
-  }, [duration, isClosing, onClose]);
+  }, [duration, clearTimer]);
+
+  useEffect(() => {
+    return clearTimer;
+  }, [clearTimer]);
 
   return {
     isRendered,

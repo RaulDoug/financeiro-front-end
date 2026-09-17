@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AlertTriangle, X } from 'lucide-react';
 import { useModalTransition } from '../../hooks/useModalTransition.ts';
 import type { BankAccountItem } from '../../types/bankAccount.ts';
@@ -25,6 +25,16 @@ export const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({
     duration: 150,
     onClose,
   });
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') triggerClose();
+    };
+    if (isRendered) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isRendered, triggerClose]);
 
   if (!isRendered || !account) return null;
 
@@ -84,7 +94,8 @@ export const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({
           <button
             type="button"
             data-testid="cancel-delete-button"
-            onClick={onClose}
+            onClick={triggerClose}
+            /* onClick={onClose} */
             disabled={isDeleting}
             className="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
           >

@@ -1,7 +1,7 @@
 {
   "feature": "animacoes-e-arraste-modais",
-  "timestamp": "2026-09-17T11:59:49.820Z",
-  "gitRev": "418091a",
+  "timestamp": "2026-09-17T12:41:20.348Z",
+  "gitRev": "d75d123",
   "command": "node --test --test-reporter=tap",
   "reporter": "tap",
   "exitCode": 1,
