@@ -10,11 +10,11 @@ export interface SettingsNavItem {
 }
 
 export const settingsNavItems: SettingsNavItem[] = [
-  { id: 'general', label: 'Geral (Carteira)', href: '/settings/general', icon: Wallet },
   { id: 'categories', label: 'Categorias', href: '/settings/categories', icon: Tag },
   { id: 'counterparties', label: 'Contrapartes', href: '/settings/counterparties', icon: Users2 },
   { id: 'pay-methods', label: 'Métodos de Pagamento', href: '/settings/pay-methods', icon: CreditCard },
   { id: 'members', label: 'Membros', href: '/settings/members', icon: Users },
+  { id: 'general', label: 'Geral (Carteira)', href: '/settings/general', icon: Wallet },
 ];
 
 export const SettingsSidebar: React.FC = () => {

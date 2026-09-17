@@ -54,14 +54,14 @@ export const AppRoutes: React.FC = () => {
 
             {/* Configurações */}
             <Route path="/settings" element={<SettingsLayout />}>
-              <Route index element={<Navigate to="/settings/general" replace />} />
+              <Route index element={<Navigate to="/settings/categories" replace />} />
               <Route path="general" element={<WalletSettings />} />
               <Route path="categories" element={<CategoriesSettings />} />
               <Route path="counterparties" element={<CounterpartiesSettings />} />
               <Route path="pay-methods" element={<PayMethodsSettings />} />
               <Route path="members" element={<MembersSettings />} />
             </Route>
-            <Route path="/configuracoes" element={<Navigate to="/settings/general" replace />} />
+            <Route path="/configuracoes" element={<Navigate to="/settings/categories" replace />} />
             <Route path="/configuracoes/*" element={<Navigate to="/settings" replace />} />
           </Route>
           <Route path="/onboarding" element={<OnboardingPage />} />

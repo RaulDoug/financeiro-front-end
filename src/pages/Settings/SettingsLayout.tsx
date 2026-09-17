@@ -1,8 +1,10 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { SettingsSidebar } from './SettingsSidebar.tsx';
 
 export const SettingsLayout: React.FC = () => {
+  const location = useLocation();
+
   return (
     <div className="space-y-6 max-w-6xl mx-auto">
       <div>
@@ -20,7 +22,9 @@ export const SettingsLayout: React.FC = () => {
 
         {/* Content Area */}
         <div className="flex-1 w-full min-w-0">
-          <Outlet />
+          <div key={location.pathname} className="animate-view-fade-in">
+            <Outlet />
+          </div>
         </div>
       </div>
     </div>
