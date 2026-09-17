@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node -e \"const fs = require('fs'); if (process.env.BACKEND_URL) { let f = fs.readFileSync('vercel.json', 'utf8'); f = f.replace('BACKEND_URL_PLACEHOLDER', process.env.BACKEND_URL); fs.writeFileSync('vercel.json', f); }\"",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node --test"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",

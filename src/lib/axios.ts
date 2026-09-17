@@ -2,8 +2,10 @@ import axios from 'axios';
 import { useAuthStore } from '../stores/auth.store.ts';
 import { useWalletStore } from '../stores/wallet.store.ts';
 
+const isDev = typeof import.meta !== 'undefined' && Boolean(import.meta.env?.DEV);
+
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? 'http://localhost:3000/api' : '/api'),
+  baseURL: isDev ? 'http://localhost:3000/api' : '/api',
   headers: {
     'Content-Type': 'application/json',
   },
