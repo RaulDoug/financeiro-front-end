@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Bell, AlertCircle, CheckCircle2, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Bell, AlertCircle, CheckCircle2, ArrowRight, Mail } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { dashboardService } from '../../services/dashboard.service.ts';
+import { walletInviteService, INVITE_QUERY_KEYS } from '../../services/walletInvite.service.ts';
 import { useWalletStore } from '../../stores/wallet.store.ts';
 import { useTransactionDetailsModalStore } from '../../stores/transactionDetailsModal.store.ts';
 import { useTransactionModalStore } from '../../stores/transactionModal.store.ts';
@@ -21,6 +22,7 @@ export const NotificationsBell: React.FC<NotificationsBellProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
   const storeWalletId = useWalletStore((state) => state.currentWalletId);
   const currentWalletId =
     storeWalletId ||
@@ -30,13 +32,25 @@ export const NotificationsBell: React.FC<NotificationsBellProps> = ({
     queryKey: DASHBOARD_QUERY_KEYS.overdueAlerts(currentWalletId),
     queryFn: () => dashboardService.getOverdueAlerts(),
     enabled: Boolean(currentWalletId),
+    refetchInterval: 15000,
+    refetchIntervalInBackground: false,
   });
 
-  const queryCount =
-    alertsData?.overdueAlerts?.items?.length ??
-    alertsData?.overdueAlerts?.total_overdue;
+  const { data: pendingInvites = [] } = useQuery({
+    queryKey: INVITE_QUERY_KEYS.pending(),
+    queryFn: () => walletInviteService.getPendingInvites(),
+    refetchInterval: 15000,
+    refetchIntervalInBackground: false,
+  });
 
-  const count = externalCount !== undefined ? externalCount : (queryCount ?? 0);
+  const queryOverdueCount =
+    alertsData?.overdueAlerts?.items?.length ??
+    alertsData?.overdueAlerts?.total_overdue ??
+    0;
+  const queryInvitesCount = pendingInvites.length;
+  const defaultTotalCount = queryOverdueCount + queryInvitesCount;
+
+  const count = externalCount !== undefined ? externalCount : defaultTotalCount;
   const overdueList: OverdueAlertItem[] = alertsData?.overdueAlerts?.items || [];
 
   useEffect(() => {
@@ -129,30 +143,70 @@ export const NotificationsBell: React.FC<NotificationsBellProps> = ({
               <div className="py-6 text-center space-y-1">
                 <CheckCircle2 className="w-8 h-8 text-emerald-500 mx-auto" />
                 <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">Tudo em dia!</p>
-                <p className="text-[11px] text-slate-400">Nenhum pagamento em atraso nesta carteira.</p>
+                <p className="text-[11px] text-slate-400">Nenhum pagamento em atraso ou convite pendente.</p>
               </div>
             ) : (
-              overdueList.map((item) => (
-                <div
-                  key={item.id}
-                  data-testid={`overdue-item-${item.id}`}
-                  onClick={() => handleSelectOverdueItem(item)}
-                  className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 text-xs flex items-start gap-2.5 cursor-pointer hover:bg-slate-100/80 dark:hover:bg-slate-800 transition-colors"
-                >
-                  <AlertCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
-                  <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-slate-800 dark:text-slate-200 truncate">{item.description}</p>
-                    <p className="text-[11px] text-slate-400 mt-0.5">
-                      Venceu há {item.days_overdue} {item.days_overdue === 1 ? 'dia' : 'dias'} • {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(item.value) || 0)}
-                    </p>
+              <>
+                {pendingInvites.map((invite) => (
+                  <div
+                    key={invite.id}
+                    data-testid={`invite-item-${invite.id}`}
+                    onClick={() => {
+                      setIsOpen(false);
+                      navigate('/settings/members');
+                    }}
+                    className="p-2.5 rounded-xl bg-blue-50/80 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/50 text-xs flex items-start gap-2.5 cursor-pointer hover:bg-blue-100/80 dark:hover:bg-blue-900/60 transition-colors"
+                  >
+                    <div className="w-6 h-6 rounded-lg bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300 flex items-center justify-center shrink-0 mt-0.5">
+                      <Mail className="w-3.5 h-3.5" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-1">
+                        <p className="font-semibold text-slate-800 dark:text-slate-100 truncate">
+                          Convite de Carteira
+                        </p>
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200">
+                          {invite.role === 'editor' ? 'Editor' : 'Visualizador'}
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                        Você recebeu um convite. Clique para aceitar.
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))
+                ))}
+
+                {overdueList.map((item) => (
+                  <div
+                    key={item.id}
+                    data-testid={`overdue-item-${item.id}`}
+                    onClick={() => handleSelectOverdueItem(item)}
+                    className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 text-xs flex items-start gap-2.5 cursor-pointer hover:bg-slate-100/80 dark:hover:bg-slate-800 transition-colors"
+                  >
+                    <AlertCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
+                    <div className="flex-1 min-w-0">
+                      <p className="font-semibold text-slate-800 dark:text-slate-200 truncate">{item.description}</p>
+                      <p className="text-[11px] text-slate-400 mt-0.5">
+                        Venceu há {item.days_overdue} {item.days_overdue === 1 ? 'dia' : 'dias'} • {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(item.value) || 0)}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </>
             )}
           </div>
 
-          <div className="pt-2 px-3 border-t border-slate-100 dark:border-slate-800">
-            {/* to="/transacoes" */}
+          <div className="pt-2 px-3 border-t border-slate-100 dark:border-slate-800 space-y-1">
+            {pendingInvites.length > 0 && (
+              <Link
+                to="/settings/members"
+                data-testid="link-view-invites"
+                onClick={() => setIsOpen(false)}
+                className="w-full flex items-center justify-center gap-1.5 py-1 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline"
+              >
+                Gerenciar convites de carteira <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            )}
             <Link
               to="/transactions?status=expired"
               data-testid="link-view-overdue"

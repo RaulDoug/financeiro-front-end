@@ -63,6 +63,9 @@ export const AppRoutes: React.FC = () => {
             </Route>
             <Route path="/configuracoes" element={<Navigate to="/settings/categories" replace />} />
             <Route path="/configuracoes/*" element={<Navigate to="/settings" replace />} />
+            <Route path="/convites" element={<Navigate to="/settings/members" replace />} />
+            <Route path="/invites" element={<Navigate to="/settings/members" replace />} />
+            <Route path="/membros" element={<Navigate to="/settings/members" replace />} />
           </Route>
           <Route path="/onboarding" element={<OnboardingPage />} />
         </Route>

@@ -29,7 +29,9 @@ export const TransactionDetailsModal: React.FC = () => {
   const { isOpen, transaction: rawTransaction, closeModal, onEditCallback, onDeleteCallback } =
     useTransactionDetailsModalStore();
 
+  const currentWallet = useWalletStore((state) => state.currentWallet);
   const currentWalletId = useWalletStore((state) => state.currentWalletId);
+  const isViewer = currentWallet?.role === 'viewer';
   const { updateMutation } = useTransactionMutations();
 
   const [showPaymentForm, setShowPaymentForm] = useState(false);
@@ -126,6 +128,7 @@ export const TransactionDetailsModal: React.FC = () => {
   };
 
   const handleEdit = () => {
+    if (isViewer) return;
     const currentTx = transaction;
     closeModal();
     if (onEditCallback) {
@@ -142,6 +145,7 @@ export const TransactionDetailsModal: React.FC = () => {
   };
 
   const handleDelete = () => {
+    if (isViewer) return;
     const currentTx = transaction;
     closeModal();
     if (onDeleteCallback) {
@@ -150,6 +154,7 @@ export const TransactionDetailsModal: React.FC = () => {
   };
 
   const handleTogglePaymentForm = () => {
+    if (isViewer) return;
     const nextState = !showPaymentForm;
     setShowPaymentForm(nextState);
     if (nextState) {
@@ -160,7 +165,7 @@ export const TransactionDetailsModal: React.FC = () => {
   };
 
   const handleConfirmPayment = async () => {
-    if (!transaction) return;
+    if (isViewer || !transaction) return;
     if (!selectedBankAccountId) {
       setPaymentError('Selecione uma conta bancária para efetivar o pagamento.');
       return;
@@ -373,7 +378,7 @@ export const TransactionDetailsModal: React.FC = () => {
           </div>
 
           {/* Mini-Formulário para Efetuar Pagamento (AC-159 / AC-205..AC-209) */}
-          {showPaymentForm && transaction.status !== 'completed' && (
+          {showPaymentForm && !isViewer && transaction.status !== 'completed' && (
             <div
               ref={paymentFormRef}
               className="p-4 bg-emerald-50/80 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/80 rounded-xl space-y-3 animate-in fade-in slide-in-from-top-2 duration-200"
@@ -474,7 +479,7 @@ export const TransactionDetailsModal: React.FC = () => {
         {/* Footer com Ações de Edição, Exclusão e Pagamento */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 px-4 sm:px-5 py-3.5 bg-gray-50 dark:bg-slate-800/60 border-t border-gray-100 dark:border-slate-800">
           {/* Botão de Pagamento Mobile (Largura total no topo quando pendente) */}
-          {transaction.status !== 'completed' && (
+          {!isViewer && transaction.status !== 'completed' && (
             <button
               type="button"
               onClick={handleTogglePaymentForm}
@@ -487,19 +492,21 @@ export const TransactionDetailsModal: React.FC = () => {
           )}
 
           {/* Linha de Ações: Excluir à esquerda, Fechar e Editar (+ Pagamento desktop) à direita */}
-          <div className="flex items-center justify-between w-full">
-            <button
-              type="button"
-              onClick={handleDelete}
-              data-testid="btn-details-delete"
-              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-rose-600 hover:text-rose-700 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-xl transition cursor-pointer whitespace-nowrap"
-            >
-              <Trash2 className="w-4 h-4 shrink-0" />
-              Excluir
-            </button>
+          <div className={`flex items-center ${isViewer ? 'justify-end' : 'justify-between'} w-full`}>
+            {!isViewer && (
+              <button
+                type="button"
+                onClick={handleDelete}
+                data-testid="btn-details-delete"
+                className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-rose-600 hover:text-rose-700 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-xl transition cursor-pointer whitespace-nowrap"
+              >
+                <Trash2 className="w-4 h-4 shrink-0" />
+                Excluir
+              </button>
+            )}
 
             <div className="flex items-center gap-2">
-              {transaction.status !== 'completed' && (
+              {!isViewer && transaction.status !== 'completed' && (
                 <button
                   type="button"
                   onClick={handleTogglePaymentForm}
@@ -516,15 +523,17 @@ export const TransactionDetailsModal: React.FC = () => {
               >
                 Fechar
               </button>
-              <button
-                type="button"
-                onClick={handleEdit}
-                data-testid="btn-details-edit"
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition shadow-2xs cursor-pointer whitespace-nowrap"
-              >
-                <Edit2 className="w-3.5 h-3.5 shrink-0" />
-                Editar
-              </button>
+              {!isViewer && (
+                <button
+                  type="button"
+                  onClick={handleEdit}
+                  data-testid="btn-details-edit"
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition shadow-2xs cursor-pointer whitespace-nowrap"
+                >
+                  <Edit2 className="w-3.5 h-3.5 shrink-0" />
+                  Editar
+                </button>
+              )}
             </div>
           </div>
         </div>

@@ -3,7 +3,9 @@ import { useAuthStore } from '../stores/auth.store.ts';
 import { useWalletStore } from '../stores/wallet.store.ts';
 
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? 'http://localhost:3000/api' : '/api'),
+  baseURL:
+    (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE_URL) ||
+    (typeof import.meta !== 'undefined' && import.meta.env?.DEV ? 'http://localhost:3000/api' : '/api'),
   headers: {
     'Content-Type': 'application/json',
   },

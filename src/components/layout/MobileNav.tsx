@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { LayoutDashboard, ArrowLeftRight, CreditCard, Grid, Plus } from 'lucide-react';
 import { useTransactionModalStore } from '../../stores/transactionModal.store.ts';
+import { useWalletStore } from '../../stores/wallet.store.ts';
 import { MoreMenuModal } from './MoreMenuModal.tsx';
 
 export const MobileNav: React.FC = () => {
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const location = useLocation();
   const openModal = useTransactionModalStore((state) => state.openModal);
+  const currentWallet = useWalletStore((state) => state.currentWallet);
+  const isViewer = currentWallet?.role === 'viewer';
 
   const navItems = [
     { label: 'Início', href: '/dashboard', icon: LayoutDashboard, testId: 'mobile-nav-dashboard' },
@@ -60,17 +63,19 @@ export const MobileNav: React.FC = () => {
           </NavLink>
 
           {/* Item Central: Botão Flutuante de Nova Transação */}
-          <div className="relative -top-5 flex justify-center items-center w-14 shrink-0">
-            <button
-              type="button"
-              onClick={() => openModal()}
-              data-testid="mobile-nav-quick-add"
-              aria-label="Nova Transação"
-              className="w-13 h-13 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/35 flex items-center justify-center active:scale-95 transition-transform cursor-pointer ring-4 ring-[#faf8ff] dark:ring-slate-950"
-            >
-              <Plus className="w-6 h-6 stroke-[2.5]" />
-            </button>
-          </div>
+          {!isViewer && (
+            <div className="relative -top-5 flex justify-center items-center w-14 shrink-0">
+              <button
+                type="button"
+                onClick={() => openModal()}
+                data-testid="mobile-nav-quick-add"
+                aria-label="Nova Transação"
+                className="w-13 h-13 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/35 flex items-center justify-center active:scale-95 transition-transform cursor-pointer ring-4 ring-[#faf8ff] dark:ring-slate-950"
+              >
+                <Plus className="w-6 h-6 stroke-[2.5]" />
+              </button>
+            </div>
+          )}
 
           {/* Item 3: Cartões */}
           <NavLink

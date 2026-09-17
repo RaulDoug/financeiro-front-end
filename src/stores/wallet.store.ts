@@ -97,7 +97,11 @@ export const useWalletStore = create<WalletState>()(
         useAuthStore.getState().setActiveWalletId(id);
         set({
           currentWalletId: id,
-          currentWallet: wallet || (id ? ({ id, name: '' } as Wallet) : null),
+          currentWallet: wallet
+            ? { ...wallet, role: wallet.role || 'owner' }
+            : id
+            ? ({ id, name: '', role: 'owner' } as Wallet)
+            : null,
         });
 
         if (previousId !== id) {
@@ -109,7 +113,10 @@ export const useWalletStore = create<WalletState>()(
         set({ isLoading: true, error: null });
         try {
           const response = await api.get('/wallet');
-          const list: Wallet[] = response.data?.walletsList || [];
+          const list: Wallet[] = (response.data?.walletsList || []).map((w: Wallet) => ({
+            ...w,
+            role: w.role || 'owner',
+          }));
           get().setWallets(list);
           set({ isLoading: false, hasCheckedWallets: true });
           return list;
@@ -121,12 +128,16 @@ export const useWalletStore = create<WalletState>()(
       },
 
       addWallet: (wallet: Wallet) => {
+        const walletWithOwner: Wallet = {
+          ...wallet,
+          role: wallet.role || 'owner',
+        };
         const currentWallets = get().wallets;
-        const updated = [...currentWallets, wallet];
+        const updated = [...currentWallets, walletWithOwner];
         useAuthStore.getState().setActiveWalletId(wallet.id);
         set({
           wallets: updated,
-          currentWallet: wallet,
+          currentWallet: walletWithOwner,
           currentWalletId: wallet.id,
           hasCheckedWallets: true,
         });

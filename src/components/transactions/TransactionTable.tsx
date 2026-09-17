@@ -48,10 +48,11 @@ export const TransactionTable: React.FC<Props> = ({
     };
   }, [hasNextPage, isFetchingNextPage, onFetchNextPage]);
 
+  const canEdit = Boolean(onEdit || onDelete);
   const openDetailsModal = useTransactionDetailsModalStore((state) => state.openModal);
 
   const handleSelectTransaction = (t: Transaction) => {
-    openDetailsModal(t, { onEdit, onDelete });
+    openDetailsModal(t, canEdit ? { onEdit, onDelete } : {});
   };
 
   const formatCurrency = (val: string | number) => {
@@ -109,7 +110,7 @@ export const TransactionTable: React.FC<Props> = ({
               <th className="px-4 py-3">Conta / Cartão</th>
               <th className="px-4 py-3 text-right">Valor</th>
               <th className="px-4 py-3 text-center">Status</th>
-              <th className="px-4 py-3 text-right">Ações</th>
+              {canEdit && <th className="px-4 py-3 text-right">Ações</th>}
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50 dark:divide-slate-800/60">
@@ -209,34 +210,36 @@ export const TransactionTable: React.FC<Props> = ({
                   </td>
 
                   {/* Ações */}
-                  <td className="px-4 py-3 text-right whitespace-nowrap">
-                    <div className="flex items-center justify-end gap-1">
-                      {onEdit && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onEdit(t);
-                          }}
-                          className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-slate-800 dark:hover:text-blue-400 rounded-md transition-colors"
-                          title="Editar"
-                        >
-                          <Edit2 className="w-4 h-4" />
-                        </button>
-                      )}
-                      {onDelete && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onDelete(t);
-                          }}
-                          className="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-slate-800 dark:hover:text-rose-400 rounded-md transition-colors"
-                          title="Excluir"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      )}
-                    </div>
-                  </td>
+                  {canEdit && (
+                    <td className="px-4 py-3 text-right whitespace-nowrap">
+                      <div className="flex items-center justify-end gap-1">
+                        {onEdit && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onEdit(t);
+                            }}
+                            className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-slate-800 dark:hover:text-blue-400 rounded-md transition-colors"
+                            title="Editar"
+                          >
+                            <Edit2 className="w-4 h-4" />
+                          </button>
+                        )}
+                        {onDelete && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onDelete(t);
+                            }}
+                            className="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-slate-800 dark:hover:text-rose-400 rounded-md transition-colors"
+                            title="Excluir"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        )}
+                      </div>
+                    </td>
+                  )}
                 </tr>
               );
             })}

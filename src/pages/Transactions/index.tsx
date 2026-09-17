@@ -67,21 +67,27 @@ export const TransactionsPage: React.FC = () => {
     closeModal: closeGlobalModal,
   } = useTransactionModalStore();
 
+  const currentWallet = useWalletStore((state) => state.currentWallet);
+  const currentWalletId = useWalletStore((state) => state.currentWalletId);
+  const isViewer = currentWallet?.role === 'viewer';
+
   useEffect(() => {
     if (isGlobalModalOpen) {
+      if (isViewer) {
+        closeGlobalModal();
+        return;
+      }
       setEditingTransaction(null);
       setIsModalOpen(true);
       closeGlobalModal();
     }
-  }, [isGlobalModalOpen, closeGlobalModal]);
+  }, [isGlobalModalOpen, closeGlobalModal, isViewer]);
 
   useEffect(() => {
     return () => {
       closeGlobalModal();
     };
   }, [closeGlobalModal]);
-
-  const currentWalletId = useWalletStore((state) => state.currentWalletId);
 
   // AC-243 / AC-244: Quando não houver status selecionado ("Todas as transações"), solicitar apenas status ativos (não cancelados)
   // Quando filtro for 'expired', solicitar tanto 'expired' quanto 'pending' para que transações com vencimento anterior a hoje
@@ -197,20 +203,24 @@ export const TransactionsPage: React.FC = () => {
   }, [rawTransactions, pastOverdueData, filters.status, filters.type]);
 
   const handleOpenNew = () => {
+    if (isViewer) return;
     setEditingTransaction(null);
     setIsModalOpen(true);
   };
 
   const handleEdit = (transaction: Transaction) => {
+    if (isViewer) return;
     setEditingTransaction(transaction);
     setIsModalOpen(true);
   };
 
   const handleDelete = (transaction: Transaction) => {
+    if (isViewer) return;
     setDeletingTransaction(transaction);
   };
 
   const handleModalSubmit = async (formData: any) => {
+    if (isViewer) return;
     if (editingTransaction) {
       await updateMutation.mutateAsync({
         id: editingTransaction.id,
@@ -225,7 +235,7 @@ export const TransactionsPage: React.FC = () => {
   };
 
   const handleConfirmDelete = async (payload: { all_installments?: boolean; redistribute?: boolean }) => {
-    if (!deletingTransaction) return;
+    if (isViewer || !deletingTransaction) return;
     try {
       await deleteMutation.mutateAsync({
         id: deletingTransaction.id,
@@ -249,13 +259,15 @@ export const TransactionsPage: React.FC = () => {
           </p>
         </div>
 
-        <button
-          onClick={handleOpenNew}
-          className="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold shadow-sm transition-colors cursor-pointer"
-        >
-          <Plus className="w-4 h-4" />
-          Nova Transação
-        </button>
+        {!isViewer && (
+          <button
+            onClick={handleOpenNew}
+            className="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold shadow-sm transition-colors cursor-pointer"
+          >
+            <Plus className="w-4 h-4" />
+            Nova Transação
+          </button>
+        )}
       </div>
 
       {/* Filtros */}
@@ -268,8 +280,8 @@ export const TransactionsPage: React.FC = () => {
         hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
         onFetchNextPage={fetchNextPage}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
+        onEdit={isViewer ? undefined : handleEdit}
+        onDelete={isViewer ? undefined : handleDelete}
       />
 
       {/* Modal de Criação / Edição */}
