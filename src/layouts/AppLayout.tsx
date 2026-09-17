@@ -77,7 +77,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ topbar, sidebar, children 
           data-testid="app-content"
           className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 pb-24 md:pb-8"
         >
-          {children || <Outlet />}
+          <div key={location.pathname} className="animate-view-fade-in w-full h-full">
+            {children || <Outlet />}
+          </div>
         </main>
       </div>
 

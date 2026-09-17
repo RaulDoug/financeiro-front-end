@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   X,
   Calendar,
@@ -28,6 +28,7 @@ import type { TransactionType } from '../../types/transaction.ts';
 interface MobileQuickEntryProps {
   isOpen: boolean;
   onClose: () => void;
+  isClosing?: boolean;
   initialType?: TransactionType;
   onSubmit: (data: any) => Promise<void> | void;
   isSubmitting?: boolean;
@@ -36,6 +37,7 @@ interface MobileQuickEntryProps {
 export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
   isOpen,
   onClose,
+  isClosing = false,
   initialType = 'expenses',
   onSubmit,
   isSubmitting = false,
@@ -55,6 +57,36 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
   const [counterpartyId, setCounterpartyId] = useState('');
   const [isPaid, setIsPaid] = useState(true);
   const [errorBanner, setErrorBanner] = useState<string | null>(null);
+
+  // Estados e manipuladores para drag-to-dismiss (arraste vertical descendente)
+  const [dragY, setDragY] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const touchStartY = useRef(0);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartY.current = e.touches[0].clientY;
+    setIsDragging(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    const currentY = e.touches[0].clientY;
+    const deltaY = currentY - touchStartY.current;
+    if (deltaY > 0) {
+      setDragY(deltaY);
+    } else {
+      setDragY(0);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    if (dragY > 90) {
+      onClose();
+    } else {
+      setDragY(0);
+    }
+  };
 
   // Sub-pickers compatibilidade retroativa
   const [activePicker, setActivePicker] = useState<string | null>(null);
@@ -353,22 +385,44 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex flex-col justify-end bg-black/60 backdrop-blur-xs md:hidden"
+      className={`fixed inset-0 z-50 flex flex-col justify-end bg-black/60 backdrop-blur-xs md:hidden ${
+        isClosing ? 'animate-backdrop-out' : 'animate-backdrop-in'
+      }`}
+      style={{
+        opacity: dragY > 0 ? Math.max(0, 1 - dragY / 300) : undefined,
+      }}
       data-testid="mobile-quick-entry-container"
       onClick={onClose}
     >
       <div
-        className="bg-white dark:bg-slate-900 rounded-t-3xl border-t border-slate-200 dark:border-slate-800 p-4 pb-6 space-y-3 max-h-[94vh] flex flex-col animate-in slide-in-from-bottom duration-200 overflow-y-auto"
+        className={`bg-white dark:bg-slate-900 rounded-t-3xl border-t border-slate-200 dark:border-slate-800 p-4 pb-6 space-y-3 max-h-[94vh] flex flex-col overflow-y-auto ${
+          isClosing ? 'animate-drawer-out' : isDragging || dragY > 0 ? '' : 'animate-drawer-in'
+        }`}
+        style={{
+          transform: dragY > 0 ? `translateY(${dragY}px)` : undefined,
+          transition: isDragging ? 'none' : 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+        }}
         onClick={(e) => e.stopPropagation()}
         data-testid="mobile-quick-entry-card"
       >
         {/* Handle superior de arraste */}
-        <div className="w-full flex justify-center pb-1 cursor-grab" id="drawer-handle">
-          <div className="w-10 h-1 rounded-full bg-slate-300 dark:bg-slate-700"></div>
+        <div
+          className="w-full flex justify-center pb-1 pt-1 cursor-grab touch-none select-none active:cursor-grabbing"
+          id="drawer-handle"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div className="w-10 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700"></div>
         </div>
 
         {/* Header com Ícone Raio, Título e Botão Fechar */}
-        <div className="flex items-center justify-between">
+        <div
+          className="flex items-center justify-between touch-none select-none"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-blue-600 dark:text-blue-400 shrink-0">
               <Zap className="w-4 h-4" />

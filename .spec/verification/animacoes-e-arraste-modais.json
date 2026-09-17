@@ -1,0 +1,52 @@
+{
+  "feature": "animacoes-e-arraste-modais",
+  "timestamp": "2026-09-17T11:59:49.820Z",
+  "gitRev": "418091a",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 1,
+  "testsParsed": 189,
+  "results": {
+    "AC-266": {
+      "status": "pass",
+      "testName": "AC-266: Detecção de toque e arraste descendente no topo da gaveta @spec:AC-266",
+      "method": "tap"
+    },
+    "AC-267": {
+      "status": "pass",
+      "testName": "AC-267: Deslocamento visual em tempo real e atenuação de opacidade @spec:AC-267",
+      "method": "tap"
+    },
+    "AC-268": {
+      "status": "pass",
+      "testName": "AC-268: Limiar de fechamento e restauração com mola elástica @spec:AC-268",
+      "method": "tap"
+    },
+    "AC-269": {
+      "status": "pass",
+      "testName": "AC-269: Animações nativas de Slide para gavetas inferiores (Bottom Sheets) @spec:AC-269",
+      "method": "tap"
+    },
+    "AC-270": {
+      "status": "pass",
+      "testName": "AC-270: Animações de Escala e Fade para diálogos centrais e popups @spec:AC-270",
+      "method": "tap"
+    },
+    "AC-271": {
+      "status": "pass",
+      "testName": "AC-271: Hook gerenciador de ciclo de vida de desmonte seguro (useModalTransition) @spec:AC-271",
+      "method": "tap"
+    },
+    "AC-272": {
+      "status": "pass",
+      "testName": "AC-272: Abertura e fechamento com animação na gaveta de Mais Opções @spec:AC-272",
+      "method": "tap"
+    },
+    "AC-273": {
+      "status": "pass",
+      "testName": "AC-273: Transição sutil de visualização de conteúdo (Viewport Fade) @spec:AC-273",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

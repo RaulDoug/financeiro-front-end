@@ -1,5 +1,6 @@
 import React from 'react';
 import { AlertTriangle, X } from 'lucide-react';
+import { useModalTransition } from '../../hooks/useModalTransition.ts';
 import type { BankAccountItem } from '../../types/bankAccount.ts';
 
 interface DeleteConfirmModalProps {
@@ -19,14 +20,28 @@ export const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({
   isDeleting = false,
   errorMessage = null,
 }) => {
-  if (!isOpen || !account) return null;
+  const { isRendered, isClosing, triggerClose } = useModalTransition({
+    isOpen: isOpen && Boolean(account),
+    duration: 150,
+    onClose,
+  });
+
+  if (!isRendered || !account) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs"
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs ${
+        isClosing ? 'animate-backdrop-out' : 'animate-backdrop-in'
+      }`}
       data-testid="delete-confirm-modal"
+      onClick={triggerClose}
     >
-      <div className="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200">
+      <div
+        className={`bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-slate-800 ${
+          isClosing ? 'animate-modal-out' : 'animate-modal-in'
+        }`}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 text-rose-600 font-semibold text-base">
             <AlertTriangle className="w-5 h-5" />
@@ -36,7 +51,7 @@ export const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({
             type="button"
             aria-label="Fechar"
             data-testid="cancel-delete-x-button"
-            onClick={onClose}
+            onClick={triggerClose}
             className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100"
           >
             <X className="w-5 h-5" />

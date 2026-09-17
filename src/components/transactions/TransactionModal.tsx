@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { X, ArrowUpRight, ArrowDownLeft, ArrowLeftRight, AlertCircle } from 'lucide-react';
 import { TransactionFormBase } from './TransactionFormBase.tsx';
 import { MobileQuickEntry } from './MobileQuickEntry.tsx';
+import { useModalTransition } from '../../hooks/useModalTransition.ts';
 import type { Transaction, TransactionType } from '../../types/transaction.ts';
 
 interface Props {
@@ -27,6 +28,12 @@ export const TransactionModal: React.FC<Props> = ({
     typeof window !== 'undefined' ? window.innerWidth < 768 : false
   );
 
+  const { isRendered, isClosing, triggerClose } = useModalTransition({
+    isOpen,
+    duration: 200,
+    onClose,
+  });
+
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleResize);
@@ -42,22 +49,23 @@ export const TransactionModal: React.FC<Props> = ({
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') triggerClose();
     };
-    if (isOpen) {
+    if (isRendered) {
       window.addEventListener('keydown', handleKeyDown);
       return () => window.removeEventListener('keydown', handleKeyDown);
     }
-  }, [isOpen, onClose]);
+  }, [isRendered, triggerClose]);
 
-  if (!isOpen) return null;
+  if (!isRendered) return null;
 
   // Substituir formulário padrão em mobile (< 768px) para criação de novas transações (AC-179, AC-180, Q-037)
   if (isMobile && !initialData) {
     return (
       <MobileQuickEntry
         isOpen={isOpen}
-        onClose={onClose}
+        isClosing={isClosing}
+        onClose={triggerClose}
         initialType={initialType}
         onSubmit={onSubmit}
         isSubmitting={isSubmitting}
@@ -81,11 +89,15 @@ export const TransactionModal: React.FC<Props> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 overflow-y-auto"
-      onClick={onClose}
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overflow-y-auto ${
+        isClosing ? 'animate-backdrop-out' : 'animate-backdrop-in'
+      }`}
+      onClick={triggerClose}
     >
       <div
-        className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-4 sm:p-6 space-y-4 shadow-2xl border border-gray-100 dark:border-slate-800 my-auto max-h-[92vh] overflow-y-auto"
+        className={`bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-4 sm:p-6 space-y-4 shadow-2xl border border-gray-100 dark:border-slate-800 my-auto max-h-[92vh] overflow-y-auto ${
+          isClosing ? 'animate-modal-out' : 'animate-modal-in'
+        }`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Cabeçalho */}
@@ -94,7 +106,7 @@ export const TransactionModal: React.FC<Props> = ({
             {initialData ? 'Editar Transação' : 'Nova Transação'}
           </h2>
           <button
-            onClick={onClose}
+            onClick={triggerClose}
             className="p-1 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
           >
             <X className="w-5 h-5" />
