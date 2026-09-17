@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { AlertTriangle, X, Trash2 } from 'lucide-react';
+import { useModalTransition } from '../../hooks/useModalTransition.ts';
 
 interface WalletDeleteAlertProps {
   isOpen: boolean;
@@ -16,10 +18,33 @@ export const WalletDeleteAlert: React.FC<WalletDeleteAlertProps> = ({
   onConfirmDelete,
   isLoading = false,
 }) => {
+  const { isRendered, isClosing, triggerClose } = useModalTransition({
+    isOpen,
+    duration: 200,
+    onClose,
+  });
+
   const [typedName, setTypedName] = useState('');
   const [error, setError] = useState<string | null>(null);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') triggerClose();
+    };
+    if (isRendered) {
+      window.addEventListener('keydown', handleKeyDown);
+      return () => window.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [isRendered, triggerClose]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      setTypedName('');
+      setError(null);
+    }
+  }, [isOpen]);
+
+  if (!isRendered) return null;
 
   const isMatching = typedName.trim() === walletName.trim();
 
@@ -31,15 +56,26 @@ export const WalletDeleteAlert: React.FC<WalletDeleteAlertProps> = ({
 
     try {
       await onConfirmDelete();
-      onClose();
+      triggerClose();
     } catch (err: any) {
       setError(err?.response?.data?.message || err.message || 'Erro ao excluir carteira.');
     }
   };
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4">
-      <div className="bg-white rounded-2xl shadow-xl border border-rose-100 w-full max-w-md overflow-hidden">
+  const modalContent = (
+    <div
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overflow-y-auto no-scrollbar ${
+        isClosing ? 'animate-backdrop-out' : 'animate-backdrop-in'
+      }`}
+      onClick={triggerClose}
+      data-testid="wallet-delete-alert"
+    >
+      <div
+        className={`bg-white rounded-2xl shadow-xl border border-rose-100 w-full max-w-md overflow-hidden ${
+          isClosing ? 'animate-modal-out' : 'animate-modal-in'
+        }`}
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-rose-100 bg-rose-50/50">
           <div className="flex items-center gap-2.5 text-rose-600">
@@ -48,7 +84,7 @@ export const WalletDeleteAlert: React.FC<WalletDeleteAlertProps> = ({
           </div>
           <button
             type="button"
-            onClick={onClose}
+            onClick={triggerClose}
             aria-label="Fechar"
             className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-white cursor-pointer transition-colors"
           >
@@ -87,7 +123,7 @@ export const WalletDeleteAlert: React.FC<WalletDeleteAlertProps> = ({
           <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
             <button
               type="button"
-              onClick={onClose}
+              onClick={triggerClose}
               className="px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
             >
               Cancelar
@@ -106,5 +142,9 @@ export const WalletDeleteAlert: React.FC<WalletDeleteAlertProps> = ({
       </div>
     </div>
   );
+
+  return typeof document !== 'undefined'
+    ? createPortal(modalContent, document.body)
+    : modalContent;
 };
 

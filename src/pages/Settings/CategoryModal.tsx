@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { categorySchema } from '../../schemas/settingsSchemas.ts';
 import type { CategoryItem } from '../../services/category.service.ts';
 import { IconPicker } from '../../components/shared/IconPicker.tsx';
+import { useModalTransition } from '../../hooks/useModalTransition.ts';
 
 interface CategoryModalProps {
   isOpen: boolean;
@@ -24,6 +26,12 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
   category,
   isLoading = false,
 }) => {
+  const { isRendered, isClosing, triggerClose } = useModalTransition({
+    isOpen,
+    duration: 200,
+    onClose,
+  });
+
   const [name, setName] = useState('');
   const [type, setType] = useState<'incomings' | 'expenses'>('expenses');
   const [icon, setIcon] = useState('smile');
@@ -45,7 +53,17 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
     setErrors({});
   }, [category, isOpen]);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') triggerClose();
+    };
+    if (isRendered) {
+      window.addEventListener('keydown', handleKeyDown);
+      return () => window.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [isRendered, triggerClose]);
+
+  if (!isRendered) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,22 +80,33 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
 
     try {
       await onSubmit({ name: name.trim(), type, icon, color });
-      onClose();
+      triggerClose();
     } catch {
       // error handled by parent or hook
     }
   };
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4">
-      <div className="bg-white rounded-2xl shadow-xl border border-slate-200 w-full max-w-md max-h-[92vh] flex flex-col overflow-hidden">
+  const modalContent = (
+    <div
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overflow-y-auto no-scrollbar ${
+        isClosing ? 'animate-backdrop-out' : 'animate-backdrop-in'
+      }`}
+      onClick={triggerClose}
+      data-testid="category-modal"
+    >
+      <div
+        className={`bg-white rounded-2xl shadow-xl border border-slate-200 w-full max-w-md max-h-[92vh] flex flex-col overflow-hidden ${
+          isClosing ? 'animate-modal-out' : 'animate-modal-in'
+        }`}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 shrink-0">
           <h2 className="text-lg font-semibold text-slate-900">
             {category ? 'Editar Categoria' : 'Nova Categoria'}
           </h2>
           <button
             type="button"
-            onClick={onClose}
+            onClick={triggerClose}
             aria-label="Fechar"
             className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 cursor-pointer transition-colors"
           >
@@ -149,7 +178,7 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
           <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
             <button
               type="button"
-              onClick={onClose}
+              onClick={triggerClose}
               className="px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
             >
               Cancelar
@@ -166,5 +195,9 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
       </div>
     </div>
   );
+
+  return typeof document !== 'undefined'
+    ? createPortal(modalContent, document.body)
+    : modalContent;
 };
 

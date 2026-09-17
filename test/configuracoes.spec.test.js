@@ -156,3 +156,27 @@ test('AC-117: Navegação das Configurações @spec:AC-117', () => {
   const pmSource = readSource('pages/Settings/PayMethodsSettings.tsx');
   assert.ok(pmSource.includes('display_id'), 'Deve utilizar display_id nos métodos de pagamento');
 });
+
+test('AC-289: Backdrop escuro cobrindo 100% da tela e centralização de viewport via Portal em Configurações @spec:AC-289', () => {
+  const catModal = readSource('pages/Settings/CategoryModal.tsx');
+  const cpModal = readSource('pages/Settings/CounterpartyModal.tsx');
+  const pmModal = readSource('pages/Settings/PayMethodModal.tsx');
+  const walletModal = readSource('pages/Settings/WalletDeleteAlert.tsx');
+
+  assert.ok(
+    catModal.includes('createPortal') && catModal.includes('document.body'),
+    'CategoryModal deve renderizar via createPortal no document.body'
+  );
+  assert.ok(
+    cpModal.includes('createPortal') && cpModal.includes('document.body'),
+    'CounterpartyModal deve renderizar via createPortal no document.body'
+  );
+  assert.ok(
+    pmModal.includes('createPortal') && pmModal.includes('document.body'),
+    'PayMethodModal deve renderizar via createPortal no document.body'
+  );
+  assert.ok(
+    walletModal.includes('createPortal') && walletModal.includes('document.body'),
+    'WalletDeleteAlert deve renderizar via createPortal no document.body'
+  );
+});
