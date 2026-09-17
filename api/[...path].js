@@ -4,7 +4,11 @@ export const config = {
 
 export default async function handler(request) {
   const backendUrl = process.env.BACKEND_URL;
+
+  console.log('[proxy] method:', request.method, '| path:', new URL(request.url).pathname);
+
   if (!backendUrl) {
+    console.error('[proxy] BACKEND_URL não definida');
     return new Response(
       JSON.stringify({ error: 'BACKEND_URL não configurada no ambiente da Vercel.' }),
       {
@@ -19,6 +23,8 @@ export default async function handler(request) {
   const base = backendUrl.replace(/\/$/, '').replace(/\/api$/, '');
   const targetUrl = `${base}/api${targetPath}${url.search}`;
 
+  console.log('[proxy] -> targetUrl:', targetUrl);
+
   const headers = new Headers(request.headers);
   headers.delete('host');
 
@@ -31,4 +37,5 @@ export default async function handler(request) {
     body,
   });
 }
+
 
