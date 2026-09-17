@@ -1,0 +1,60 @@
+{
+  "feature": "ajustes-modais-cartoes-transacoes",
+  "versao": "1.0.0",
+  "status": "em-implementacao",
+  "historias": [
+    {
+      "id": "US-076",
+      "titulo": "Layout Mobile em Bottom Sheet e Gesto de Arraste no Lançamento de Cartão",
+      "criterios": ["AC-279", "AC-280"]
+    },
+    {
+      "id": "US-077",
+      "titulo": "Backdrop de Tela Inteira e Centralização Viewport para Modais via Portal",
+      "criterios": ["AC-281", "AC-282"]
+    },
+    {
+      "id": "US-078",
+      "titulo": "Remoção da Barra Lateral de Rolagem no Lançamento de Transação Desktop",
+      "criterios": ["AC-283"]
+    }
+  ],
+  "tarefas": [
+    {
+      "id": "T-182",
+      "titulo": "Definição de utilitários no-scrollbar e normalização de viewFadeIn em index.css",
+      "status": "concluida",
+      "arquivos": ["src/index.css"],
+      "criterios": ["AC-281", "AC-283"]
+    },
+    {
+      "id": "T-183",
+      "titulo": "Transformação do CreditCardModal em Bottom Sheet mobile com arraste e Portal",
+      "status": "concluida",
+      "arquivos": ["src/components/credit-cards/CreditCardModal.tsx"],
+      "criterios": ["AC-279", "AC-280", "AC-281", "AC-282"]
+    },
+    {
+      "id": "T-184",
+      "titulo": "Ancoragem via Portal e animação suave em CreditCardDeleteDialog",
+      "status": "concluida",
+      "arquivos": ["src/components/credit-cards/CreditCardDeleteDialog.tsx"],
+      "criterios": ["AC-281"]
+    },
+    {
+      "id": "T-185",
+      "titulo": "Portal e remoção de barra de rolagem lateral no TransactionModal",
+      "status": "concluida",
+      "arquivos": ["src/components/transactions/TransactionModal.tsx"],
+      "criterios": ["AC-281", "AC-283"]
+    },
+    {
+      "id": "T-186",
+      "titulo": "Suíte de testes automatizados de especificação para AC-279 a AC-283",
+      "status": "concluida",
+      "arquivos": ["test/ajustes-modais-cartoes-transacoes.spec.test.js"],
+      "criterios": ["AC-279", "AC-280", "AC-281", "AC-282", "AC-283"]
+    }
+  ]
+}
+

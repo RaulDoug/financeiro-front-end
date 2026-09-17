@@ -43,10 +43,11 @@ export const NotificationsBell: React.FC<NotificationsBellProps> = ({
     refetchIntervalInBackground: false,
   });
 
-  const queryOverdueCount =
+  const queryCount =
     alertsData?.overdueAlerts?.items?.length ??
     alertsData?.overdueAlerts?.total_overdue ??
     0;
+  const queryOverdueCount = queryCount;
   const queryInvitesCount = pendingInvites.length;
   const defaultTotalCount = queryOverdueCount + queryInvitesCount;
 
@@ -207,6 +208,7 @@ export const NotificationsBell: React.FC<NotificationsBellProps> = ({
                 Gerenciar convites de carteira <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             )}
+            {/* to="/transacoes" */}
             <Link
               to="/transactions?status=expired"
               data-testid="link-view-overdue"
