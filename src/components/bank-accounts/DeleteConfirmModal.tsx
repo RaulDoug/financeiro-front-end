@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { AlertTriangle, X } from 'lucide-react';
 import { useModalTransition } from '../../hooks/useModalTransition.ts';
 import type { BankAccountItem } from '../../types/bankAccount.ts';
@@ -38,7 +39,7 @@ export const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({
 
   if (!isRendered || !account) return null;
 
-  return (
+  const content = (
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs ${
         isClosing ? 'animate-backdrop-out' : 'animate-backdrop-in'
@@ -114,6 +115,10 @@ export const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({
       </div>
     </div>
   );
+
+  return typeof document !== 'undefined'
+    ? createPortal(content, document.body)
+    : content;
 };
 
 export default DeleteConfirmModal;

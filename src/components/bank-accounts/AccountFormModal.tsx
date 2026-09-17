@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X, AlertCircle } from 'lucide-react';
 import { bankAccountSchema } from '../../schemas/bankAccountSchema.ts';
 import type { BankAccountItem, BankAccountFormData } from '../../types/bankAccount.ts';
 import { detectBankByName, BRAZILIAN_BANKS, type BankInfo } from '../../lib/bankDetector.ts';
 import { BankPicker } from '../shared/BankPicker.tsx';
+import { useModalTransition } from '../../hooks/useModalTransition.ts';
 
 interface AccountFormModalProps {
   isOpen: boolean;
@@ -20,6 +22,12 @@ export const AccountFormModal: React.FC<AccountFormModalProps> = ({
   onSubmit,
   isSubmitting = false,
 }) => {
+  const { isRendered, isClosing, triggerClose } = useModalTransition({
+    isOpen,
+    duration: 200,
+    onClose,
+  });
+
   const [bankName, setBankName] = useState(initialData?.bank_name || '');
   const [balance, setBalance] = useState(
     initialData ? String(initialData.balance ?? 0) : '0'
@@ -66,6 +74,16 @@ export const AccountFormModal: React.FC<AccountFormModalProps> = ({
     setErrors({});
   }, [initialData, isOpen]);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') triggerClose();
+    };
+    if (isRendered) {
+      window.addEventListener('keydown', handleKeyDown);
+      return () => window.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [isRendered, triggerClose]);
+
   const handleBankNameChange = (val: string) => {
     setBankName(val);
     const detected = detectBankByName(val);
@@ -80,14 +98,15 @@ export const AccountFormModal: React.FC<AccountFormModalProps> = ({
     setHasManualSelection(true);
   };
 
-  if (!isOpen) return null;
+  if (!isRendered) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const parsedBalance = parseFloat(String(balance).replace(',', '.'));
     const rawData = {
       bank_name: bankName.trim(),
-      balance: parseFloat(balance) || 0,
+      balance: isNaN(parsedBalance) ? 0 : parsedBalance,
       allow_negative_balance: allowNegativeBalance,
       icon: selectedBank?.icon || autoDetected?.icon || 'landmark',
       color: selectedBank?.primaryColor || autoDetected?.primaryColor || '#3b82f6',
@@ -109,19 +128,28 @@ export const AccountFormModal: React.FC<AccountFormModalProps> = ({
     onSubmit(validation.data);
   };
 
-  return (
+  const modalContent = (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 overflow-y-auto backdrop-blur-xs"
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overflow-y-auto no-scrollbar ${
+        isClosing ? 'animate-backdrop-out' : 'animate-backdrop-in'
+      }`}
       data-testid="account-form-modal"
+      onClick={triggerClose}
     >
-      <div className="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200 max-h-[92vh] flex flex-col overflow-hidden">
+      <div
+        className={`bg-white rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200 max-h-[92vh] flex flex-col overflow-hidden ${
+          isClosing ? 'animate-modal-out' : 'animate-modal-in'
+        }`}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex items-center justify-between pb-3 border-b border-slate-100 shrink-0">
           <h2 className="text-lg font-bold text-slate-900">
             {initialData ? 'Editar Conta Bancária' : 'Nova Conta Bancária'}
           </h2>
           <button
-            onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100"
+            type="button"
+            onClick={triggerClose}
+            className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -220,6 +248,10 @@ export const AccountFormModal: React.FC<AccountFormModalProps> = ({
       </div>
     </div>
   );
+
+  return typeof document !== 'undefined'
+    ? createPortal(modalContent, document.body)
+    : modalContent;
 };
 
 export default AccountFormModal;

@@ -90,6 +90,9 @@ test('AC-086: Editar conta existente e ajuste de saldo @spec:AC-086', () => {
 
   const serviceSource = readSource('services/bankAccount.service.ts');
   assert.ok(serviceSource.includes('/bank-account/update/${id}'), 'Deve disparar PATCH para atualizar conta');
+
+  const pageSource = readSource('pages/BankAccountsPage.tsx');
+  assert.ok(pageSource.includes('editingAccount.display_id ?? editingAccount.id'), 'Update deve priorizar display_id');
 });
 
 test('AC-087: Excluir conta com confirmação e tratamento de vínculos @spec:AC-087', () => {
@@ -100,6 +103,7 @@ test('AC-087: Excluir conta com confirmação e tratamento de vínculos @spec:AC
 
   const pageSource = readSource('pages/BankAccountsPage.tsx');
   assert.ok(pageSource.includes('deleteMutation.mutateAsync'), 'Página deve disparar mutação de exclusão');
+  assert.ok(pageSource.includes('deletingAccount.display_id ?? deletingAccount.id'), 'Delete deve priorizar display_id');
   assert.ok(pageSource.includes('setDeleteError'), 'Página deve capturar erro de transações vinculadas');
 });
 
@@ -110,4 +114,22 @@ test('AC-088: Cancelamento da exclusão @spec:AC-088', () => {
 
   const pageSource = readSource('pages/BankAccountsPage.tsx');
   assert.ok(pageSource.includes('setDeletingAccount(null)'), 'Ao cancelar deve fechar o modal mantendo conta na lista');
+});
+
+test('AC-288: Backdrop escuro cobrindo 100% da tela e centralização de viewport via Portal em Contas Bancárias @spec:AC-288', () => {
+  const accountModal = readSource('components/bank-accounts/AccountFormModal.tsx');
+  const deleteModal = readSource('components/bank-accounts/DeleteConfirmModal.tsx');
+
+  assert.ok(
+    accountModal.includes('createPortal') && accountModal.includes('document.body'),
+    'AccountFormModal deve renderizar via createPortal no document.body'
+  );
+  assert.ok(
+    deleteModal.includes('createPortal') && deleteModal.includes('document.body'),
+    'DeleteConfirmModal deve renderizar via createPortal no document.body'
+  );
+  assert.ok(
+    accountModal.includes('useModalTransition'),
+    'AccountFormModal deve utilizar useModalTransition para transições suaves'
+  );
 });

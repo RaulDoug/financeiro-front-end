@@ -17,6 +17,7 @@ export const BankAccountsPage: React.FC = () => {
   const [editingAccount, setEditingAccount] = useState<BankAccountItem | null>(null);
   const [deletingAccount, setDeletingAccount] = useState<BankAccountItem | null>(null);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [errorFeedback, setErrorFeedback] = useState<string | null>(null);
 
   // Total acumulado
   const calculatedTotal = accounts.reduce((acc, curr) => {
@@ -27,11 +28,13 @@ export const BankAccountsPage: React.FC = () => {
   const totalBalances = reportData?.totalBalances ?? calculatedTotal;
 
   const handleOpenNew = () => {
+    setErrorFeedback(null);
     setEditingAccount(null);
     setIsFormOpen(true);
   };
 
   const handleOpenEdit = (account: BankAccountItem) => {
+    setErrorFeedback(null);
     setEditingAccount(account);
     setIsFormOpen(true);
   };
@@ -43,15 +46,23 @@ export const BankAccountsPage: React.FC = () => {
 
   const handleSubmit = async (data: BankAccountFormData) => {
     try {
+      setErrorFeedback(null);
       if (editingAccount) {
-        await updateMutation.mutateAsync({ id: editingAccount.id, data });
+        const idToUpdate = (editingAccount.display_id ?? editingAccount.id) as any;
+        await updateMutation.mutateAsync({ id: idToUpdate, data });
       } else {
         await createMutation.mutateAsync(data);
       }
       setIsFormOpen(false);
       setEditingAccount(null);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erro ao salvar conta bancária:', error);
+      const msg =
+        error?.response?.data?.message ||
+        error?.response?.data?.errors?.[0]?.message ||
+        error?.message ||
+        'Erro ao salvar conta bancária.';
+      setErrorFeedback(msg);
     }
   };
 
@@ -59,7 +70,8 @@ export const BankAccountsPage: React.FC = () => {
     if (!deletingAccount) return;
     setDeleteError(null);
     try {
-      await deleteMutation.mutateAsync(deletingAccount.id);
+      const idToDelete = (deletingAccount.display_id ?? deletingAccount.id) as any;
+      await deleteMutation.mutateAsync(idToDelete);
       setDeletingAccount(null);
     } catch (error: any) {
       const msg =
@@ -71,6 +83,21 @@ export const BankAccountsPage: React.FC = () => {
 
   return (
     <div className="space-y-8 max-w-7xl mx-auto" data-testid="bank-accounts-page">
+      {errorFeedback && (
+        <div
+          data-testid="bank-account-error-banner"
+          className="p-4 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl flex items-center justify-between text-sm"
+        >
+          <span>{errorFeedback}</span>
+          <button
+            type="button"
+            onClick={() => setErrorFeedback(null)}
+            className="text-rose-500 hover:text-rose-700 font-bold ml-4 cursor-pointer"
+          >
+            ×
+          </button>
+        </div>
+      )}
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
