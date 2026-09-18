@@ -176,12 +176,30 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
     enabled: Boolean(currentWalletId && isOpen),
   });
 
+  const selectedPayMethod = payMethodsData.find((p: PayMethodItem) => p.id === payMethodId);
+  const isCreditCard = Boolean(selectedPayMethod?.credit_card);
+
   // Auto-seleções padrão
   useEffect(() => {
     if (!bankAccountId && accountsData.length > 0) {
       setBankAccountId(accountsData[0].id);
     }
   }, [accountsData, bankAccountId]);
+
+  // AC-313: Vincular e bloquear conta bancária quando o método de pagamento for cartão de crédito
+  useEffect(() => {
+    if (isCreditCard && selectedPayMethod?.bank_account_id) {
+      setBankAccountId(selectedPayMethod.bank_account_id);
+    }
+  }, [isCreditCard, selectedPayMethod?.bank_account_id]);
+
+  const handlePayMethodChange = (newPayMethodId: string) => {
+    setPayMethodId(newPayMethodId);
+    const pm = payMethodsData.find((p: PayMethodItem) => p.id === newPayMethodId);
+    if (pm?.credit_card && pm.bank_account_id) {
+      setBankAccountId(pm.bank_account_id);
+    }
+  };
 
   useEffect(() => {
     if (!destinyBankAccountId && accountsData.length > 1) {
@@ -211,6 +229,9 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
   useEffect(() => {
     if (!payMethodId && payMethodsData.length > 0) {
       setPayMethodId(payMethodsData[0].id);
+      if (payMethodsData[0].credit_card && payMethodsData[0].bank_account_id) {
+        setBankAccountId(payMethodsData[0].bank_account_id);
+      }
     }
   }, [payMethodsData, payMethodId]);
 
@@ -368,7 +389,11 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
 
       payload.category_id = transferCategoryId || categories[0]?.id;
     } else {
-      payload.bank_account_id = bankAccountId || accountsData[0]?.id;
+      const finalBankAccountId =
+        isCreditCard && selectedPayMethod?.bank_account_id
+          ? selectedPayMethod.bank_account_id
+          : bankAccountId || accountsData[0]?.id;
+      payload.bank_account_id = finalBankAccountId;
       payload.category_id = categoryId || categories[0]?.id;
       payload.pay_methods_id = payMethodId || payMethodsData[0]?.id;
     }
@@ -391,7 +416,6 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
   const selectedCategory = categories.find((c: CategoryItem) => c.id === categoryId);
   const selectedAccount = accountsData.find((a: BankAccountItem) => a.id === bankAccountId);
   const selectedDestinyAccount = accountsData.find((a: BankAccountItem) => a.id === destinyBankAccountId);
-  const selectedPayMethod = payMethodsData.find((p: PayMethodItem) => p.id === payMethodId);
   const selectedCounterparty = counterpartiesData.find((cp: CounterpartyItem) => cp.id === counterpartyId);
 
   const detectedBank = selectedAccount ? detectBankByName(selectedAccount.bank_name) : null;
@@ -704,10 +728,17 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
             <div className="flex flex-col gap-1 relative">
               <label className="text-[11px] font-medium text-slate-500 dark:text-slate-400 ml-1">
                 {type === 'incomings' ? 'Conta de Entrada' : 'Conta de Saída'}
+                {isCreditCard && (
+                  <span className="ml-1 text-[10px] text-amber-600 dark:text-amber-400 font-normal">
+                    (Vinculada ao cartão)
+                  </span>
+                )}
               </label>
               <div
                 data-testid="chip-account"
-                className="flex items-center justify-between bg-slate-100 dark:bg-slate-800 rounded-xl px-3 h-11 border border-slate-200 dark:border-slate-700 relative overflow-hidden"
+                className={`flex items-center justify-between bg-slate-100 dark:bg-slate-800 rounded-xl px-3 h-11 border border-slate-200 dark:border-slate-700 relative overflow-hidden ${
+                  isCreditCard ? 'opacity-70 bg-slate-200/60 dark:bg-slate-800/40 cursor-not-allowed' : ''
+                }`}
               >
                 <div className="flex items-center gap-2 min-w-0 pr-1">
                   <span
@@ -718,11 +749,14 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
                     {selectedAccount?.bank_name || 'Conta'}
                   </span>
                 </div>
-                <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
+                {!isCreditCard && <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />}
                 <select
                   value={bankAccountId}
+                  disabled={isCreditCard}
                   onChange={(e) => setBankAccountId(e.target.value)}
-                  className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
+                  className={`absolute inset-0 opacity-0 w-full h-full ${
+                    isCreditCard ? 'cursor-not-allowed pointer-events-none' : 'cursor-pointer'
+                  }`}
                   data-testid="select-quick-account"
                 >
                   {accountsData.map((acc: BankAccountItem) => (
@@ -798,7 +832,7 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
               <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
               <select
                 value={payMethodId}
-                onChange={(e) => setPayMethodId(e.target.value)}
+                onChange={(e) => handlePayMethodChange(e.target.value)}
                 className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
                 data-testid="select-quick-pay-method"
               >
@@ -838,7 +872,7 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
                 <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
                 <select
                   value={payMethodId}
-                  onChange={(e) => setPayMethodId(e.target.value)}
+                  onChange={(e) => handlePayMethodChange(e.target.value)}
                   className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
                   data-testid="select-quick-pay-method"
                 >

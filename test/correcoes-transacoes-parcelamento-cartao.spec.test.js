@@ -184,6 +184,25 @@ test('AC-313: Conta bancária vinculada e bloqueada para edição quando o méto
     formSource.includes('(Vinculada ao cartão)'),
     'Deve exibir aviso de que a conta bancária está vinculada ao cartão'
   );
+
+  // 5. MobileQuickEntry também deve vincular e desabilitar o select de conta bancária para cartão
+  const mobileSource = readSource('components/transactions/MobileQuickEntry.tsx');
+  assert.ok(
+    mobileSource.includes('disabled={isCreditCard}'),
+    'MobileQuickEntry select-quick-account deve conter disabled={isCreditCard}'
+  );
+  assert.ok(
+    mobileSource.includes('if (isCreditCard && selectedPayMethod?.bank_account_id) {'),
+    'MobileQuickEntry deve verificar conta do cartão'
+  );
+  assert.ok(
+    mobileSource.includes('setBankAccountId(selectedPayMethod.bank_account_id);'),
+    'MobileQuickEntry deve definir bankAccountId para a conta do cartão'
+  );
+  assert.ok(
+    mobileSource.includes('(Vinculada ao cartão)'),
+    'MobileQuickEntry deve exibir aviso visual de conta vinculada ao cartão'
+  );
 });
 
 test('AC-314: Prova executável automatizada e integridade da especificação @spec:AC-314', () => {
