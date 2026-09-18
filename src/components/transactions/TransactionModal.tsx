@@ -65,11 +65,13 @@ export const TransactionModal: React.FC<Props> = ({
       setErrorBanner(null);
       await onSubmit(data);
     } catch (err: any) {
+      const is500 = err?.response?.status === 500 || err?.statusCode === 500;
       const msg =
         err?.response?.data?.message ||
         err?.response?.data?.error ||
-        err?.message ||
-        'Não foi possível salvar a transação. Verifique os dados.';
+        (is500
+          ? 'Não foi possível atualizar a transação devido a um erro no servidor. Tente novamente.'
+          : err?.message || 'Não foi possível salvar a transação. Verifique os dados.');
       setErrorBanner(msg);
     }
   };

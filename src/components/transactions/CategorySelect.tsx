@@ -10,9 +10,10 @@ interface Props {
   value?: string;
   onChange: (value: string) => void;
   error?: string;
+  isEditing?: boolean;
 }
 
-export const CategorySelect: React.FC<Props> = ({ type, value, onChange, error }) => {
+export const CategorySelect: React.FC<Props> = ({ type, value, onChange, error, isEditing = false }) => {
   const currentWalletId = useWalletStore((state) => state.currentWalletId);
 
   const { data: categories = [], isLoading } = useQuery<CategoryItem[]>({
@@ -28,10 +29,10 @@ export const CategorySelect: React.FC<Props> = ({ type, value, onChange, error }
   );
 
   React.useEffect(() => {
-    if (!value && filteredCategories.length > 0) {
+    if (!isEditing && !value && filteredCategories.length > 0) {
       onChange(filteredCategories[0].id);
     }
-  }, [filteredCategories, value, onChange]);
+  }, [filteredCategories, value, onChange, isEditing]);
 
   return (
     <div>

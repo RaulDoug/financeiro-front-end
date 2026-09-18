@@ -11,6 +11,10 @@ export const GlobalTransactionModal: React.FC = () => {
 
   const handleSubmit = async (data: any) => {
     if (initialData?.id) {
+      if (Object.keys(data).length === 0) {
+        closeModal();
+        return;
+      }
       await updateMutation.mutateAsync({
         id: initialData.id,
         payload: data,

@@ -222,6 +222,11 @@ export const TransactionsPage: React.FC = () => {
   const handleModalSubmit = async (formData: any) => {
     if (isViewer) return;
     if (editingTransaction) {
+      if (Object.keys(formData).length === 0) {
+        setIsModalOpen(false);
+        setEditingTransaction(null);
+        return;
+      }
       await updateMutation.mutateAsync({
         id: editingTransaction.id,
         payload: formData,

@@ -8,7 +8,10 @@ import { useWalletStore } from '../../stores/wallet.store.ts';
 import { CategorySelect } from './CategorySelect.tsx';
 import { InstallmentFields } from './InstallmentFields.tsx';
 import { resolveTransactionStatus } from '../../utils/transactionStatus.ts';
+import { buildUpdateTransactionDiff, type DiffContext } from '../../utils/transactionDiff.ts';
 import type { Transaction, TransactionType, TransactionStatus } from '../../types/transaction.ts';
+
+export { buildUpdateTransactionDiff, type DiffContext };
 
 interface Props {
   type: TransactionType;
@@ -28,10 +31,12 @@ export const TransactionFormBase: React.FC<Props> = ({
 
   const [description, setDescription] = useState(initialData?.description || '');
   const [value, setValue] = useState(initialData?.value ? parseFloat(initialData.value) : '');
-  const [bankAccountId, setBankAccountId] = useState('');
+  const [bankAccountId, setBankAccountId] = useState(initialData?.bank_account_id || '');
   const [destinyBankAccountId, setDestinyBankAccountId] = useState('');
-  const [payMethodId, setPayMethodId] = useState('');
-  const [categoryId, setCategoryId] = useState('');
+  const [payMethodId, setPayMethodId] = useState(
+    initialData?.pay_methods_id || (initialData as any)?.pay_method_id || ''
+  );
+  const [categoryId, setCategoryId] = useState(initialData?.category_id || '');
   const [counterpartyId, setCounterpartyId] = useState(initialData?.counterparty_id || '');
   const [dueDate, setDueDate] = useState(
     initialData?.due_date ? initialData.due_date.split('T')[0] : todayStr
@@ -88,7 +93,7 @@ export const TransactionFormBase: React.FC<Props> = ({
     enabled: Boolean(currentWalletId),
   });
 
-  // AC-246: Preservar e mapear FKs existentes ao editar (initialData)
+  // AC-246 / AC-284: Preservar e mapear FKs existentes ao editar (initialData)
   useEffect(() => {
     if (initialData) {
       if (initialData.bank_account_id) {
@@ -122,28 +127,28 @@ export const TransactionFormBase: React.FC<Props> = ({
     }
   }, [initialData, accountsData, payMethodsData, allCategoriesData, counterpartiesData]);
 
-  // Auto-selecionar primeira conta e primeiro método se vazio em novo lançamento ou se initialData não continha FK
+  // Auto-selecionar primeira conta e primeiro método se vazio em novo lançamento (não sobrescrever edição - AC-284)
   useEffect(() => {
-    if (!bankAccountId && accountsData.length > 0) {
+    if (!initialData && !bankAccountId && accountsData.length > 0) {
       setBankAccountId(accountsData[0].id);
     }
-  }, [accountsData, bankAccountId]);
+  }, [accountsData, bankAccountId, initialData]);
 
   useEffect(() => {
-    if (!payMethodId && payMethodsData.length > 0) {
+    if (!initialData && !payMethodId && payMethodsData.length > 0) {
       setPayMethodId(payMethodsData[0].id);
     }
-  }, [payMethodsData, payMethodId]);
+  }, [payMethodsData, payMethodId, initialData]);
 
-  // Auto-selecionar primeira contraparte adequada se disponível
+  // Auto-selecionar primeira contraparte adequada se disponível em novo lançamento
   useEffect(() => {
-    if (!counterpartyId && counterpartiesData.length > 0) {
+    if (!initialData && !counterpartyId && counterpartiesData.length > 0) {
       const match = counterpartiesData.find((cp: CounterpartyItem) =>
         type === 'incomings' ? cp.type === 'payer' : cp.type === 'payee'
       );
       setCounterpartyId(match ? match.id : counterpartiesData[0].id);
     }
-  }, [counterpartiesData, counterpartyId, type]);
+  }, [counterpartiesData, counterpartyId, type, initialData]);
 
   // Fallback defensivo para categoria se vazia na edição (ex: transações vindas de fontes sumarizadas)
   useEffect(() => {
@@ -359,6 +364,25 @@ export const TransactionFormBase: React.FC<Props> = ({
       payload.all_installments = true;
     }
 
+    // AC-286: Na edição, enviar no PATCH exclusivamente os campos alterados (diff)
+    if (initialData) {
+      const diffPayload = buildUpdateTransactionDiff(initialData, payload, {
+        accountsData,
+        payMethodsData,
+        allCategoriesData,
+        counterpartiesData,
+      });
+
+      if (Object.keys(diffPayload).length === 0) {
+        // Nenhuma alteração realizada pelo usuário
+        await onSubmit({});
+        return;
+      }
+
+      await onSubmit(diffPayload);
+      return;
+    }
+
     await onSubmit(payload);
   };
 
@@ -485,6 +509,7 @@ export const TransactionFormBase: React.FC<Props> = ({
             value={categoryId}
             onChange={setCategoryId}
             error={errors.categoryId}
+            isEditing={Boolean(initialData)}
           />
 
           {/* Conta Bancária */}
