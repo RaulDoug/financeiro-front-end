@@ -37,6 +37,10 @@ export interface PaginationMeta {
 export interface TransactionListResponse {
   rows: Transaction[];
   pagination: PaginationMeta;
+  totals?: {
+    incomings: number;
+    expenses: number;
+  };
 }
 
 export interface TransactionFilters {

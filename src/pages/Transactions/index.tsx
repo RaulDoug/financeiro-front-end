@@ -7,6 +7,7 @@ import { useTransactionMutations } from '../../hooks/useTransactionMutations.ts'
 import { transactionService } from '../../services/transactionService.ts';
 import { useWalletStore } from '../../stores/wallet.store.ts';
 import { TransactionFilters } from '../../components/transactions/TransactionFilters.tsx';
+import { TransactionSummaryCards } from '../../components/transactions/TransactionSummaryCards.tsx';
 import { TransactionTable } from '../../components/transactions/TransactionTable.tsx';
 import { TransactionModal } from '../../components/transactions/TransactionModal.tsx';
 import { TransactionDeleteDialog } from '../../components/transactions/TransactionDeleteDialog.tsx';
@@ -208,6 +209,34 @@ export const TransactionsPage: React.FC = () => {
     return filteredList.filter((t) => t.status !== 'cancelled');
   }, [rawTransactions, pastOverdueData, filters.status, filters.type]);
 
+  // US-083 / AC-300: Totais dinâmicos conforme filtros aplicados
+  const { incomingsTotal, expensesTotal } = React.useMemo(() => {
+    const backendTotals = data?.pages?.[0]?.totals;
+    if (
+      backendTotals &&
+      typeof backendTotals.incomings === 'number' &&
+      typeof backendTotals.expenses === 'number'
+    ) {
+      return {
+        incomingsTotal: backendTotals.incomings,
+        expensesTotal: backendTotals.expenses,
+      };
+    }
+    // Fallback defensivo em memória caso backend ainda não tenha retornado totals
+    let inc = 0;
+    let exp = 0;
+    for (const t of allTransactions) {
+      if (t.status === 'cancelled' && filters.status !== 'cancelled') continue;
+      const val = Number(t.value) || 0;
+      if (t.type === 'incomings') inc += val;
+      else if (t.type === 'expenses') exp += val;
+    }
+    return {
+      incomingsTotal: inc,
+      expensesTotal: exp,
+    };
+  }, [data?.pages, allTransactions, filters.status]);
+
   const handleOpenNew = () => {
     if (isViewer) return;
     setEditingTransaction(null);
@@ -287,6 +316,13 @@ export const TransactionsPage: React.FC = () => {
 
       {/* Filtros */}
       <TransactionFilters filters={filters} onChange={setFilters} />
+
+      {/* Cards de Total de Entradas e Saídas (AC-301) */}
+      <TransactionSummaryCards
+        incomings={incomingsTotal}
+        expenses={expensesTotal}
+        isLoading={isLoading}
+      />
 
       {/* Tabela de Lançamentos com Infinite Scroll */}
       <TransactionTable
