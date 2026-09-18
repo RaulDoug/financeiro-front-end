@@ -93,19 +93,25 @@ export const TransactionsPage: React.FC = () => {
   // Quando filtro for 'expired', solicitar tanto 'expired' quanto 'pending' para que transações com vencimento anterior a hoje
   // que ainda constam como 'pending' no banco apareçam.
   const queryFilters = React.useMemo<FiltersType>(() => {
+    let q: FiltersType = { ...filters };
+
+    // Se o filtro for 'transfers', enviar os tipos reais suportados pelo schema da API ('transfer_in' e 'transfer_out')
+    if (filters.type === 'transfers') {
+      q.type = ['transfer_in', 'transfer_out'];
+    }
+
     if (!filters.status) {
-      return {
-        ...filters,
+      q = {
+        ...q,
         status: ['pending', 'completed', 'expired'],
       };
-    }
-    if (filters.status === 'expired') {
-      return {
-        ...filters,
+    } else if (filters.status === 'expired') {
+      q = {
+        ...q,
         status: ['expired', 'pending'],
       };
     }
-    return filters;
+    return q;
   }, [filters]);
 
   const {
