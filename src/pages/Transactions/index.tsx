@@ -219,12 +219,16 @@ export const TransactionsPage: React.FC = () => {
     setDeletingTransaction(transaction);
   };
 
+  const closeEditWithoutChanges = () => {
+    setIsModalOpen(false);
+    setEditingTransaction(null);
+  };
+
   const handleModalSubmit = async (formData: any) => {
     if (isViewer) return;
     if (editingTransaction) {
       if (Object.keys(formData).length === 0) {
-        setIsModalOpen(false);
-        setEditingTransaction(null);
+        closeEditWithoutChanges();
         return;
       }
       await updateMutation.mutateAsync({

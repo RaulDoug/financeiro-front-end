@@ -89,13 +89,13 @@ export const TransactionModal: React.FC<Props> = ({
       />
     ) : (
       <div
-        className={`fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overflow-y-auto no-scrollbar ${
+        className={`fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overflow-y-auto overscroll-contain no-scrollbar ${
           isClosing ? 'animate-backdrop-out' : 'animate-backdrop-in'
         }`}
         onClick={triggerClose}
       >
         <div
-          className={`bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-4 sm:p-6 space-y-4 shadow-2xl border border-gray-100 dark:border-slate-800 my-auto max-h-[92vh] overflow-y-auto no-scrollbar ${
+          className={`bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-4 sm:p-6 space-y-4 shadow-2xl border border-gray-100 dark:border-slate-800 my-auto max-h-[92vh] overflow-y-auto overscroll-contain no-scrollbar ${
             isClosing ? 'animate-modal-out' : 'animate-modal-in'
           }`}
           onClick={(e) => e.stopPropagation()}

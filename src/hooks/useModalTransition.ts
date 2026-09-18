@@ -12,9 +12,13 @@ export interface UseModalTransitionResult {
   triggerClose: () => void;
 }
 
+let activeModalsCount = 0;
+let originalOverflow = '';
+let originalPaddingRight = '';
+
 /**
- * Hook para gerenciar o ciclo de vida de renderização e animação de desmonte de modais e drawers.
- * Mantém o componente montado durante a execução da animação de saída (exit animation).
+ * Hook para gerenciar o ciclo de vida de renderização, animação de desmonte e bloqueio de rolagem
+ * de fundo de modais e gavetas (AC-271, AC-296).
  */
 export function useModalTransition({
   isOpen,
@@ -68,6 +72,32 @@ export function useModalTransition({
   useEffect(() => {
     return clearTimer;
   }, [clearTimer]);
+
+  // Bloqueio de rolagem do body enquanto o modal estiver aberto no desktop/mobile (AC-296)
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') return;
+
+    if (isRendered) {
+      if (activeModalsCount === 0) {
+        originalOverflow = document.body.style.overflow;
+        originalPaddingRight = document.body.style.paddingRight;
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+        if (scrollbarWidth > 0) {
+          document.body.style.paddingRight = `${scrollbarWidth}px`;
+        }
+        document.body.style.overflow = 'hidden';
+      }
+      activeModalsCount++;
+
+      return () => {
+        activeModalsCount = Math.max(0, activeModalsCount - 1);
+        if (activeModalsCount === 0) {
+          document.body.style.overflow = originalOverflow;
+          document.body.style.paddingRight = originalPaddingRight;
+        }
+      };
+    }
+  }, [isRendered]);
 
   return {
     isRendered,

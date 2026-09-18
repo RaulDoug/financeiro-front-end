@@ -22,12 +22,20 @@ import { bankAccountService } from '../../services/bankAccount.service.ts';
 import { useWalletStore } from '../../stores/wallet.store.ts';
 import { useTransactionMutations } from '../../hooks/useTransactionMutations.ts';
 import { useTransactionModalStore } from '../../stores/transactionModal.store.ts';
+import { useModalTransition } from '../../hooks/useModalTransition.ts';
 import { formatCurrency } from '../../utils/formatCurrency.ts';
 import type { Transaction } from '../../types/transaction.ts';
 
 export const TransactionDetailsModal: React.FC = () => {
   const { isOpen, transaction: rawTransaction, closeModal, onEditCallback, onDeleteCallback } =
     useTransactionDetailsModalStore();
+
+  const isModalActive = Boolean(isOpen && rawTransaction);
+  const { isRendered, isClosing, triggerClose } = useModalTransition({
+    isOpen: isModalActive,
+    duration: 200,
+    onClose: closeModal,
+  });
 
   const currentWallet = useWalletStore((state) => state.currentWallet);
   const currentWalletId = useWalletStore((state) => state.currentWalletId);
@@ -107,7 +115,17 @@ export const TransactionDetailsModal: React.FC = () => {
     }
   }, [payMethodsData, selectedPayMethodId]);
 
-  if (!isOpen || !transaction) return null;
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') triggerClose();
+    };
+    if (isRendered) {
+      window.addEventListener('keydown', handleKeyDown);
+      return () => window.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [isRendered, triggerClose]);
+
+  if (!isRendered || !transaction) return null;
 
   const overdueInfo = transactionService.calculateOverdue(transaction.due_date, transaction.status);
   const isIncome = transaction.type === 'incomings' || transaction.type === 'transfer_in';
@@ -194,10 +212,18 @@ export const TransactionDetailsModal: React.FC = () => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200"
+      className={`fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overscroll-contain ${
+        isClosing ? 'animate-backdrop-out' : 'animate-backdrop-in'
+      }`}
       data-testid="transaction-details-modal"
+      onClick={triggerClose}
     >
-      <div className="bg-white dark:bg-slate-900 w-full max-w-lg rounded-2xl shadow-xl border border-gray-200 dark:border-slate-800 overflow-hidden flex flex-col max-h-[90vh]">
+      <div
+        className={`bg-white dark:bg-slate-900 w-full max-w-lg rounded-2xl shadow-xl border border-gray-200 dark:border-slate-800 overflow-hidden flex flex-col max-h-[90vh] overscroll-contain ${
+          isClosing ? 'animate-modal-out' : 'animate-modal-in'
+        }`}
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 dark:border-slate-800">
           <div className="flex items-center gap-2">
@@ -219,7 +245,7 @@ export const TransactionDetailsModal: React.FC = () => {
           </div>
           <button
             type="button"
-            onClick={closeModal}
+            onClick={triggerClose}
             aria-label="Fechar"
             className="p-1.5 text-gray-400 hover:text-gray-600 dark:hover:text-slate-200 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition cursor-pointer"
           >
@@ -518,7 +544,7 @@ export const TransactionDetailsModal: React.FC = () => {
               )}
               <button
                 type="button"
-                onClick={closeModal}
+                onClick={triggerClose}
                 className="px-3.5 py-2 text-xs font-medium text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-xl transition cursor-pointer whitespace-nowrap"
               >
                 Fechar
