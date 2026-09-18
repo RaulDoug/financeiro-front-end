@@ -271,3 +271,32 @@ test('AC-233: Ocultação de contraparte em transferências e contraparte intern
   );
 });
 
+// US-064 — Lançamento Ágil Mobile Sem Teclado Virtual e com Seletores Estruturados
+test('AC-237: Suporte a opção de parcelamento e recorrência no layout mobile @spec:AC-237', () => {
+  const quickEntrySource = readSource('components/transactions/MobileQuickEntry.tsx');
+
+  // Deve importar InstallmentFields
+  assert.ok(
+    quickEntrySource.includes("import { InstallmentFields } from './InstallmentFields.tsx';"),
+    'MobileQuickEntry deve importar InstallmentFields'
+  );
+
+  // Deve instanciar o componente InstallmentFields para tipos diferentes de transfers
+  assert.ok(
+    quickEntrySource.includes('<InstallmentFields') &&
+    quickEntrySource.includes('isInstallment={isInstallment}') &&
+    quickEntrySource.includes('isRecurrent={isRecurrent}') &&
+    quickEntrySource.includes('installmentsNumber={installmentsNumber}'),
+    'MobileQuickEntry deve renderizar InstallmentFields repassando os estados de parcelamento'
+  );
+
+  // Deve repassar parâmetros de parcelamento no payload quando isInstallment for true
+  assert.ok(
+    quickEntrySource.includes('payload.installments_number = installmentsNumber;') &&
+    quickEntrySource.includes('payload.due_day = dueDay;') &&
+    quickEntrySource.includes('payload.first_this_month = firstThisMonth;'),
+    'MobileQuickEntry deve incluir installments_number, due_day e first_this_month no payload'
+  );
+});
+
+

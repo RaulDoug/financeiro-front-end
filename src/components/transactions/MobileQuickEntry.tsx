@@ -24,6 +24,7 @@ import { renderLucideIcon } from '../shared/IconPicker.tsx';
 import { detectBankByName } from '../../lib/bankDetector.ts';
 import { resolveTransactionStatus } from '../../utils/transactionStatus.ts';
 import type { TransactionType } from '../../types/transaction.ts';
+import { InstallmentFields } from './InstallmentFields.tsx';
 
 interface MobileQuickEntryProps {
   isOpen: boolean;
@@ -57,6 +58,13 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
   const [counterpartyId, setCounterpartyId] = useState('');
   const [isPaid, setIsPaid] = useState(true);
   const [errorBanner, setErrorBanner] = useState<string | null>(null);
+
+  // Parcelamento e Recorrência
+  const [isInstallment, setIsInstallment] = useState(false);
+  const [isRecurrent, setIsRecurrent] = useState(false);
+  const [installmentsNumber, setInstallmentsNumber] = useState(2);
+  const [dueDay, setDueDay] = useState(10);
+  const [firstThisMonth, setFirstThisMonth] = useState(true);
 
   // Estados e manipuladores para drag-to-dismiss (arraste vertical descendente)
   const [dragY, setDragY] = useState(0);
@@ -261,6 +269,11 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
   useEffect(() => {
     if (isOpen) {
       setErrorBanner(null);
+      setIsInstallment(false);
+      setIsRecurrent(false);
+      setInstallmentsNumber(2);
+      setDueDay(10);
+      setFirstThisMonth(true);
     }
   }, [isOpen]);
 
@@ -282,6 +295,12 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
   const handleSave = async () => {
     if (numericValue <= 0) return;
     setErrorBanner(null);
+
+    // AC-055: Bloqueio de cartão como receita recorrente ou parcelada
+    if (isCreditCard && type === 'incomings' && isInstallment) {
+      setErrorBanner('Não é possível usar cartão de crédito como forma de entrada recorrente ou parcelada.');
+      return;
+    }
 
     const defaultDesc =
       type === 'expenses' ? 'Despesa' : type === 'incomings' ? 'Receita' : 'Transferência';
@@ -396,12 +415,31 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
       payload.bank_account_id = finalBankAccountId;
       payload.category_id = categoryId || categories[0]?.id;
       payload.pay_methods_id = payMethodId || payMethodsData[0]?.id;
+
+      if (isInstallment) {
+        payload.installments_number = installmentsNumber;
+        payload.due_day = dueDay;
+        payload.first_this_month = firstThisMonth;
+
+        if (isRecurrent) {
+          payload.is_recurrent = true;
+        } else if (!isCreditCard) {
+          // Dividir valor em parcelas para métodos que não são cartão
+          payload.value = Number((numericValue / installmentsNumber).toFixed(2));
+          payload.is_recurrent = true;
+        }
+      }
     }
 
     try {
       await onSubmit(payload);
       setValueCents(0);
       setDescription('');
+      setIsInstallment(false);
+      setIsRecurrent(false);
+      setInstallmentsNumber(2);
+      setDueDay(10);
+      setFirstThisMonth(true);
       onClose();
     } catch (err: any) {
       const msg =
@@ -1025,6 +1063,24 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
             <span className="w-5 h-5 rounded-full bg-white shadow-xs"></span>
           </button>
         </div>
+
+        {/* Seção de Parcelamento / Recorrência */}
+        {type !== 'transfers' && (
+          <InstallmentFields
+            isInstallment={isInstallment}
+            onToggleInstallment={setIsInstallment}
+            isRecurrent={isRecurrent}
+            onChangeIsRecurrent={setIsRecurrent}
+            installmentsNumber={installmentsNumber}
+            onChangeInstallmentsNumber={setInstallmentsNumber}
+            dueDay={dueDay}
+            onChangeDueDay={setDueDay}
+            firstThisMonth={firstThisMonth}
+            onChangeFirstThisMonth={setFirstThisMonth}
+            isCreditCard={isCreditCard}
+            transactionType={type as any}
+          />
+        )}
 
         {/* Botão Confirmar Lançamento (Salvar) - Padding vertical ampliado (AC-227, AC-231) */}
         <button
