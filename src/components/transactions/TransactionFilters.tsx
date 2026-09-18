@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Search, X, ChevronLeft, ChevronRight, Calendar, ArrowUpDown, SlidersHorizontal } from 'lucide-react';
 import type { TransactionFilters as FiltersType, TransactionType, TransactionStatus } from '../../types/transaction.ts';
 import { TransactionAdvancedFiltersModal } from './TransactionAdvancedFiltersModal.tsx';
@@ -9,6 +9,7 @@ interface Props {
 }
 
 export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
+  const advancedFiltersContainerRef = useRef<HTMLDivElement>(null);
   const handleTypeChange = (type?: TransactionType) => {
     onChange({ ...filters, type, page: 1, order_by: 'due_date' });
   };
@@ -194,22 +195,45 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
             />
           </div>
 
-          {/* Botão de Filtros Avançados */}
-          <button
-            type="button"
-            onClick={() => setIsAdvancedFiltersOpen(true)}
-            data-testid="btn-advanced-filters"
-            className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 dark:border-slate-700 dark:bg-slate-800 rounded-lg text-xs font-medium text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition cursor-pointer"
-            title="Abrir filtros avançados"
-          >
-            <SlidersHorizontal className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-            <span>Filtros</span>
-            {activeAdvancedCount > 0 && (
-              <span className="w-4 h-4 rounded-full bg-blue-600 text-white text-[10px] flex items-center justify-center font-bold">
-                {activeAdvancedCount}
-              </span>
-            )}
-          </button>
+          {/* Botão de Filtros Avançados com Popover Desktop / Modal Mobile */}
+          <div className="relative" ref={advancedFiltersContainerRef}>
+            <button
+              type="button"
+              onClick={() => setIsAdvancedFiltersOpen((prev) => !prev)}
+              data-testid="btn-advanced-filters"
+              aria-expanded={isAdvancedFiltersOpen}
+              className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 dark:border-slate-700 dark:bg-slate-800 rounded-lg text-xs font-medium text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition cursor-pointer"
+              title="Abrir filtros avançados"
+            >
+              <SlidersHorizontal className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+              <span>Filtros</span>
+              {activeAdvancedCount > 0 && (
+                <span className="w-4 h-4 rounded-full bg-blue-600 text-white text-[10px] flex items-center justify-center font-bold">
+                  {activeAdvancedCount}
+                </span>
+              )}
+            </button>
+
+            {/* Modal / Popover de Filtros Avançados */}
+            <TransactionAdvancedFiltersModal
+              isOpen={isAdvancedFiltersOpen}
+              onClose={() => setIsAdvancedFiltersOpen(false)}
+              filters={filters}
+              onApply={(newFilters) => onChange({ ...filters, ...newFilters })}
+              onReset={() =>
+                onChange({
+                  ...filters,
+                  category_id: undefined,
+                  pay_methods_id: undefined,
+                  bank_account_id: undefined,
+                  status: undefined,
+                  type: undefined,
+                  page: 1,
+                })
+              }
+              containerRef={advancedFiltersContainerRef}
+            />
+          </div>
 
           {/* Botão de Direção da Ordenação por Vencimento */}
           <button
@@ -345,25 +369,7 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
           </button>
         </div>
       </div>
-
-      {/* Modal de Filtros Avançados */}
-      <TransactionAdvancedFiltersModal
-        isOpen={isAdvancedFiltersOpen}
-        onClose={() => setIsAdvancedFiltersOpen(false)}
-        filters={filters}
-        onApply={(newFilters) => onChange({ ...filters, ...newFilters })}
-        onReset={() =>
-          onChange({
-            ...filters,
-            category_id: undefined,
-            pay_methods_id: undefined,
-            bank_account_id: undefined,
-            status: undefined,
-            type: undefined,
-            page: 1,
-          })
-        }
-      />
     </div>
   );
 };
+

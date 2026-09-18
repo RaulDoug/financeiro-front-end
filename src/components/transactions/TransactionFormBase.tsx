@@ -413,11 +413,11 @@ export const TransactionFormBase: React.FC<Props> = ({
       {type === 'transfers' ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">Conta de Origem *</label>
+            <label className="block text-xs font-semibold text-gray-700 dark:text-slate-300 mb-1">Conta de Origem *</label>
             <select
               value={bankAccountId}
               onChange={(e) => setBankAccountId(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-slate-700 rounded-lg text-sm bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100"
             >
               <option value="">Selecione a origem</option>
               {accountsData.map((a: BankAccountItem) => (
@@ -430,11 +430,11 @@ export const TransactionFormBase: React.FC<Props> = ({
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">Conta de Destino *</label>
+            <label className="block text-xs font-semibold text-gray-700 dark:text-slate-300 mb-1">Conta de Destino *</label>
             <select
               value={destinyBankAccountId}
               onChange={(e) => setDestinyBankAccountId(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-slate-700 rounded-lg text-sm bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100"
             >
               <option value="">Selecione o destino</option>
               {accountsData.map((a: BankAccountItem) => (
@@ -446,6 +446,35 @@ export const TransactionFormBase: React.FC<Props> = ({
             {errors.destinyBankAccountId && (
               <p className="text-xs text-rose-500 mt-1">{errors.destinyBankAccountId}</p>
             )}
+          </div>
+
+          <div>
+            <label className="block text-xs font-semibold text-gray-700 dark:text-slate-300 mb-1">Data da Transferência *</label>
+            <input
+              type="date"
+              value={dueDate}
+              onChange={(e) => setDueDate(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-200 dark:border-slate-700 rounded-lg text-sm bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 focus:ring-blue-500"
+              data-testid="input-transfer-due-date"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-semibold text-gray-700 dark:text-slate-300 mb-1">Data de Efetivação</label>
+            <input
+              type="date"
+              value={paymentDate || dueDate || todayStr}
+              onChange={(e) => {
+                const val = e.target.value;
+                setPaymentDate(val);
+                if (val) {
+                  setIsPaid(true);
+                  setIsCancelled(false);
+                }
+              }}
+              className="w-full px-3 py-2 border border-gray-200 dark:border-slate-700 rounded-lg text-sm bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 focus:ring-blue-500"
+              data-testid="input-transfer-payment-date"
+            />
           </div>
         </div>
       ) : (
@@ -502,6 +531,27 @@ export const TransactionFormBase: React.FC<Props> = ({
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
               className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-blue-500"
+            />
+          </div>
+
+          {/* Data de Pagamento / Recebimento */}
+          <div>
+            <label className="block text-xs font-semibold text-gray-700 dark:text-slate-300 mb-1">
+              {type === 'incomings' ? 'Data de Recebimento' : 'Data de Pagamento'}
+            </label>
+            <input
+              type="date"
+              value={paymentDate}
+              onChange={(e) => {
+                const val = e.target.value;
+                setPaymentDate(val);
+                if (val) {
+                  setIsPaid(true);
+                  setIsCancelled(false);
+                }
+              }}
+              data-testid="input-payment-date"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-slate-700 rounded-lg text-sm bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 focus:ring-blue-500"
             />
           </div>
 
