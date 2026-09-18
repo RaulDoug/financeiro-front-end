@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AlertTriangle, X } from 'lucide-react';
 import { formatInstallment } from '../../utils/formatInstallment.ts';
 import type { Transaction } from '../../types/transaction.ts';
@@ -21,19 +21,19 @@ export const TransactionDeleteDialog: React.FC<Props> = ({
   const [allInstallments, setAllInstallments] = useState(false);
   const [redistribute, setRedistribute] = useState(false);
 
+  useEffect(() => {
+    if (isOpen) {
+      setAllInstallments(false);
+      setRedistribute(false);
+    }
+  }, [isOpen]);
+
   if (!isOpen || !transaction) return null;
 
   const isInstallment = Boolean(transaction.current_installment);
   const formattedInstallment = formatInstallment(transaction.current_installment, transaction.total_installments) ?? transaction.current_installment;
   const isTransfer = transaction.type === 'transfers';
   const isCompleted = transaction.status === 'completed';
-
-  React.useEffect(() => {
-    if (isOpen) {
-      setAllInstallments(false);
-      setRedistribute(false);
-    }
-  }, [isOpen]);
 
   const handleConfirm = () => {
     onConfirm({
