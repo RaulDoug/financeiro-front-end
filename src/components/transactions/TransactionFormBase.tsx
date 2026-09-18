@@ -140,15 +140,34 @@ export const TransactionFormBase: React.FC<Props> = ({
     }
   }, [payMethodsData, payMethodId, initialData]);
 
-  // Auto-selecionar primeira contraparte adequada se disponível em novo lançamento
+  // Contrapartes filtradas pelo tipo (AC-294)
+  const filteredCounterparties = counterpartiesData
+    .filter(
+      (cp: CounterpartyItem) =>
+        cp.name.toLowerCase() !== 'transferências' && cp.name.toLowerCase() !== 'transferencias'
+    )
+    .filter((cp: CounterpartyItem) =>
+      type === 'incomings' ? cp.type === 'payer' : cp.type === 'payee'
+    );
+
+  // Preservar contraparte existente na edição caso seja legado defensivo (AC-295)
+  const displayCounterparties =
+    initialData?.counterparty_id &&
+    !filteredCounterparties.some((cp: CounterpartyItem) => cp.id === initialData.counterparty_id)
+      ? [
+          ...filteredCounterparties,
+          ...counterpartiesData.filter((cp: CounterpartyItem) => cp.id === initialData.counterparty_id),
+        ]
+      : filteredCounterparties;
+
+  // Auto-selecionar primeira contraparte adequada se disponível em novo lançamento (AC-284, AC-295)
   useEffect(() => {
     if (!initialData && !counterpartyId && counterpartiesData.length > 0) {
-      const match = counterpartiesData.find((cp: CounterpartyItem) =>
-        type === 'incomings' ? cp.type === 'payer' : cp.type === 'payee'
-      );
-      setCounterpartyId(match ? match.id : counterpartiesData[0].id);
+      if (filteredCounterparties.length > 0) {
+        setCounterpartyId(filteredCounterparties[0].id);
+      }
     }
-  }, [counterpartiesData, counterpartyId, type, initialData]);
+  }, [counterpartiesData, filteredCounterparties, counterpartyId, initialData]);
 
   // Fallback defensivo para categoria se vazia na edição (ex: transações vindas de fontes sumarizadas)
   useEffect(() => {
@@ -246,14 +265,8 @@ export const TransactionFormBase: React.FC<Props> = ({
         }
       }
     } else {
-      if (!finalCounterpartyId && counterpartiesData.length > 0) {
-        const match = counterpartiesData.find(
-          (cp: CounterpartyItem) =>
-            cp.name.toLowerCase() !== 'transferências' &&
-            cp.name.toLowerCase() !== 'transferencias' &&
-            (type === 'incomings' ? cp.type === 'payer' : cp.type === 'payee')
-        );
-        finalCounterpartyId = match ? match.id : counterpartiesData[0].id;
+      if (!finalCounterpartyId && filteredCounterparties.length > 0) {
+        finalCounterpartyId = filteredCounterparties[0].id;
       }
 
       if (!finalCounterpartyId) {
@@ -582,16 +595,17 @@ export const TransactionFormBase: React.FC<Props> = ({
 
           {/* Contraparte / Favorecido */}
           <div className="sm:col-span-2">
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
+            <label className="block text-xs font-semibold text-gray-700 dark:text-slate-300 mb-1">
               {type === 'incomings' ? 'Pagador / Origem' : 'Beneficiário / Destino'}
             </label>
             <select
               value={counterpartyId}
               onChange={(e) => setCounterpartyId(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-blue-500"
+              data-testid="select-counterparty"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-slate-700 rounded-lg text-sm bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 focus:ring-blue-500"
             >
               <option value="">Selecione a contraparte (ou Geral)</option>
-              {counterpartiesData.map((cp: CounterpartyItem) => (
+              {displayCounterparties.map((cp: CounterpartyItem) => (
                 <option key={cp.id} value={cp.id}>
                   {cp.name}
                 </option>
