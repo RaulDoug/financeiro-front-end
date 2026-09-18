@@ -9,6 +9,8 @@ interface KpiCardsProps {
 }
 
 export const KpiCards: React.FC<KpiCardsProps> = ({ summary, isLoading }) => {
+  const isNegativeForecast = (summary?.monthForecast ?? 0) < 0;
+
   const cards = [
     {
       id: 'totalBalance',
@@ -39,8 +41,12 @@ export const KpiCards: React.FC<KpiCardsProps> = ({ summary, isLoading }) => {
       title: 'Sobra Projetada',
       value: summary?.monthForecast ?? 0,
       icon: Sparkles,
-      color: 'text-indigo-600 bg-indigo-50 border-indigo-100 dark:bg-indigo-950/40 dark:border-indigo-900/50 dark:text-indigo-400',
-      textColor: 'text-indigo-700 dark:text-indigo-400',
+      color: isNegativeForecast
+        ? 'text-rose-600 bg-rose-50 border-rose-100 dark:bg-rose-950/40 dark:border-rose-900/50 dark:text-rose-400'
+        : 'text-indigo-600 bg-indigo-50 border-indigo-100 dark:bg-indigo-950/40 dark:border-indigo-900/50 dark:text-indigo-400',
+      textColor: isNegativeForecast
+        ? 'text-rose-700 dark:text-rose-400'
+        : 'text-indigo-700 dark:text-indigo-400',
     },
   ];
 

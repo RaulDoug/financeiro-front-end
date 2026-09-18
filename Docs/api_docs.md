@@ -1262,14 +1262,14 @@ Resumo financeiro da carteira: entradas, saídas, pendências e projeção do m�
 }
 ```
 
-| Campo               | Descrição                                                   |
-| ------------------- | ----------------------------------------------------------- |
-| `completedIncomes`  | Total de entradas pagas no período                          |
-| `completedExpenses` | Total de despesas pagas no período                          |
-| `pendingIncomes`    | Total de entradas pendentes no período                      |
-| `pendingExpenses`   | Total de despesas pendentes no período                      |
-| `totalBalance`      | Saldo total somado de todas as contas                       |
-| `monthForecast`     | Projeção: `totalBalance + pendingIncomes - pendingExpenses` |
+| Campo               | Descrição                                                                                                   |
+| ------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `completedIncomes`  | Total de entradas pagas no período                                                                          |
+| `completedExpenses` | Total de despesas pagas no período                                                                          |
+| `pendingIncomes`    | Total de entradas pendentes no período                                                                      |
+| `pendingExpenses`   | Total de despesas pendentes no período                                                                      |
+| `totalBalance`      | Saldo total somado de todas as contas                                                                       |
+| `monthForecast`     | Projeção de Sobra: `(completedIncomes + pendingIncomes) - (completedExpenses + pendingExpenses)` no período |
 
 ---
 

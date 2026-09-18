@@ -278,8 +278,8 @@ Sem filtros, usa o mês corrente automaticamente.
 | Pendente a Pagar   | `pendingExpenses` | Saídas `pending` no mês   |
 
 > **Lógica do `monthForecast`:**  
-> `totalBalance + pendingIncomes - pendingExpenses`  
-> O back-end calcula usando o mês corrente, independente dos filtros de `startDate`/`endDate`.
+> `(completedIncomes + pendingIncomes) - (completedExpenses + pendingExpenses)`  
+> Calculado com base no período selecionado (`startDate`/`endDate`), considerando todas as entradas e saídas (realizadas e futuras/pendentes) do mês.
 
 ### 5.2 Linha 2 — Gráficos Principais
 
