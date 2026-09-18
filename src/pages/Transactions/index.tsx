@@ -126,13 +126,23 @@ export const TransactionsPage: React.FC = () => {
 
   // Buscar transações vencidas de períodos anteriores caso haja filtro de data início ativo
   const { data: pastOverdueData, refetch: refetchPastOverdue } = useQuery({
-    queryKey: ['transactions-overdue-past', currentWalletId, filters.due_date_from, filters.status, filters.type],
+    queryKey: [
+      'transactions-overdue-past',
+      currentWalletId,
+      filters.due_date_from,
+      filters.status,
+      filters.type,
+      filters.value_min,
+      filters.value_max,
+    ],
     queryFn: async () => {
       const today = new Date().toISOString().split('T')[0];
       const maxDate = filters.due_date_from && filters.due_date_from < today ? filters.due_date_from : today;
       const res = await transactionService.getTransactions({
         type: filters.type,
         due_date_to: maxDate,
+        value_min: filters.value_min,
+        value_max: filters.value_max,
         order_by: 'due_date',
         order_dir: 'DESC',
         limit: 50,

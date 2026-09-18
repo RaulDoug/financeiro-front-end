@@ -42,6 +42,13 @@ export const TransactionAdvancedFiltersModal: React.FC<TransactionAdvancedFilter
   const [selectedType, setSelectedType] = useState<string>(
     typeof filters.type === 'string' ? filters.type : ''
   );
+  const [valueMin, setValueMin] = useState<string>(
+    filters.value_min !== undefined ? String(filters.value_min) : ''
+  );
+  const [valueMax, setValueMax] = useState<string>(
+    filters.value_max !== undefined ? String(filters.value_max) : ''
+  );
+  const [valueError, setValueError] = useState<string>('');
 
   const [isMobile, setIsMobile] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
@@ -67,6 +74,9 @@ export const TransactionAdvancedFiltersModal: React.FC<TransactionAdvancedFilter
       setSelectedBankAccount(typeof filters.bank_account_id === 'string' ? filters.bank_account_id : '');
       setSelectedStatus(typeof filters.status === 'string' ? filters.status : '');
       setSelectedType(typeof filters.type === 'string' ? filters.type : '');
+      setValueMin(filters.value_min !== undefined ? String(filters.value_min) : '');
+      setValueMax(filters.value_max !== undefined ? String(filters.value_max) : '');
+      setValueError('');
     }
   }, [isOpen, filters]);
 
@@ -103,12 +113,33 @@ export const TransactionAdvancedFiltersModal: React.FC<TransactionAdvancedFilter
   if (!isOpen) return null;
 
   const handleApply = () => {
+    const min = valueMin.trim() !== '' ? Number(valueMin) : undefined;
+    const max = valueMax.trim() !== '' ? Number(valueMax) : undefined;
+
+    if (min !== undefined && (isNaN(min) || min < 0)) {
+      setValueError('O valor mínimo deve ser maior ou igual a zero');
+      return;
+    }
+
+    if (max !== undefined && (isNaN(max) || max < 0)) {
+      setValueError('O valor máximo deve ser maior ou igual a zero');
+      return;
+    }
+
+    if (min !== undefined && max !== undefined && min > max) {
+      setValueError('O valor mínimo não pode ser maior que o valor máximo');
+      return;
+    }
+
+    setValueError('');
     onApply({
       category_id: selectedCategory || undefined,
       pay_methods_id: selectedPayMethod || undefined,
       bank_account_id: selectedBankAccount || undefined,
       status: (selectedStatus as TransactionStatus) || undefined,
       type: (selectedType as TransactionType) || undefined,
+      value_min: min,
+      value_max: max,
       page: 1,
     });
     onClose();
@@ -120,6 +151,9 @@ export const TransactionAdvancedFiltersModal: React.FC<TransactionAdvancedFilter
     setSelectedBankAccount('');
     setSelectedStatus('');
     setSelectedType('');
+    setValueMin('');
+    setValueMax('');
+    setValueError('');
     onReset();
     onClose();
   };
@@ -185,6 +219,48 @@ export const TransactionAdvancedFiltersModal: React.FC<TransactionAdvancedFilter
             </option>
           ))}
         </select>
+      </div>
+
+      {/* Faixa de Valor */}
+      <div>
+        <label className="block text-xs font-semibold text-gray-700 dark:text-slate-300 mb-1.5">
+          Faixa de Valor (R$)
+        </label>
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <input
+              type="number"
+              step="0.01"
+              min="0"
+              placeholder="Mínimo (ex: 50)"
+              value={valueMin}
+              onChange={(e) => {
+                setValueMin(e.target.value);
+                if (valueError) setValueError('');
+              }}
+              data-testid="filter-value-min-input"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-800 dark:text-slate-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div>
+            <input
+              type="number"
+              step="0.01"
+              min="0"
+              placeholder="Máximo (ex: 500)"
+              value={valueMax}
+              onChange={(e) => {
+                setValueMax(e.target.value);
+                if (valueError) setValueError('');
+              }}
+              data-testid="filter-value-max-input"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-800 dark:text-slate-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+        {valueError && (
+          <p className="mt-1 text-[11px] text-red-500 font-medium">{valueError}</p>
+        )}
       </div>
 
       {/* Status */}

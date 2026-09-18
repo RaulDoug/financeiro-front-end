@@ -108,16 +108,23 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
     filters.status ||
     filters.description ||
     filters.due_date_from ||
-    filters.due_date_to
+    filters.due_date_to ||
+    filters.category_id ||
+    filters.pay_methods_id ||
+    filters.bank_account_id ||
+    filters.value_min !== undefined ||
+    filters.value_max !== undefined
   );
 
   const isAscending = (filters.order_dir ?? 'ASC') === 'ASC';
   const [isAdvancedFiltersOpen, setIsAdvancedFiltersOpen] = useState(false);
 
+  const hasValueFilter = filters.value_min !== undefined || filters.value_max !== undefined;
   const activeAdvancedCount = [
     filters.category_id,
     filters.pay_methods_id,
     filters.bank_account_id,
+    hasValueFilter,
   ].filter(Boolean).length;
 
   return (
@@ -228,6 +235,8 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
                   bank_account_id: undefined,
                   status: undefined,
                   type: undefined,
+                  value_min: undefined,
+                  value_max: undefined,
                   page: 1,
                 })
               }
