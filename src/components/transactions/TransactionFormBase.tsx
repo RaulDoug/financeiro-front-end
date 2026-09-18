@@ -8,6 +8,7 @@ import { useWalletStore } from '../../stores/wallet.store.ts';
 import { CategorySelect } from './CategorySelect.tsx';
 import { InstallmentFields } from './InstallmentFields.tsx';
 import { resolveTransactionStatus } from '../../utils/transactionStatus.ts';
+import { formatInstallment } from '../../utils/formatInstallment.ts';
 import { buildUpdateTransactionDiff, type DiffContext } from '../../utils/transactionDiff.ts';
 import type { Transaction, TransactionType, TransactionStatus } from '../../types/transaction.ts';
 
@@ -49,6 +50,7 @@ export const TransactionFormBase: React.FC<Props> = ({
 
   // Parcelamento
   const [isInstallment, setIsInstallment] = useState(false);
+  const [isRecurrent, setIsRecurrent] = useState(false);
   const [installmentsNumber, setInstallmentsNumber] = useState(2);
   const [dueDay, setDueDay] = useState(10);
   const [firstThisMonth, setFirstThisMonth] = useState(true);
@@ -203,6 +205,21 @@ export const TransactionFormBase: React.FC<Props> = ({
 
   const selectedPayMethod = payMethodsData.find((p: PayMethodItem) => p.id === payMethodId);
   const isCreditCard = Boolean(selectedPayMethod?.credit_card);
+
+  // AC-TRX-07 / AC-TRX-08: Quando método for cartão de crédito, vincular automaticamente a conta do cartão
+  useEffect(() => {
+    if (isCreditCard && selectedPayMethod?.bank_account_id) {
+      setBankAccountId(selectedPayMethod.bank_account_id);
+    }
+  }, [isCreditCard, selectedPayMethod?.bank_account_id]);
+
+  const handlePayMethodChange = (newPayMethodId: string) => {
+    setPayMethodId(newPayMethodId);
+    const pm = payMethodsData.find((p: PayMethodItem) => p.id === newPayMethodId);
+    if (pm?.credit_card && pm.bank_account_id) {
+      setBankAccountId(pm.bank_account_id);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -366,10 +383,22 @@ export const TransactionFormBase: React.FC<Props> = ({
       payload.pay_methods_id = payMethodId;
       payload.category_id = categoryId;
 
+      if (isCreditCard && selectedPayMethod?.bank_account_id) {
+        payload.bank_account_id = selectedPayMethod.bank_account_id;
+      }
+
       if (isInstallment) {
         payload.installments_number = installmentsNumber;
         payload.due_day = dueDay;
         payload.first_this_month = firstThisMonth;
+
+        if (isRecurrent) {
+          payload.is_recurrent = true;
+        } else if (!isCreditCard) {
+          // Dividir valor em parcelas para métodos que não são cartão
+          payload.value = Number((numValue / installmentsNumber).toFixed(2));
+          payload.is_recurrent = true;
+        }
       }
     }
 
@@ -527,11 +556,21 @@ export const TransactionFormBase: React.FC<Props> = ({
 
           {/* Conta Bancária */}
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">Conta Bancária *</label>
+            <label className="block text-xs font-semibold text-gray-700 dark:text-slate-300 mb-1">
+              Conta Bancária *
+              {isCreditCard && (
+                <span className="ml-1.5 text-[10px] font-normal text-amber-600 dark:text-amber-400">
+                  (Vinculada ao cartão)
+                </span>
+              )}
+            </label>
             <select
               value={bankAccountId}
+              disabled={isCreditCard}
               onChange={(e) => setBankAccountId(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-blue-500"
+              className={`w-full px-3 py-2 border border-gray-200 dark:border-slate-700 rounded-lg text-sm bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 focus:ring-blue-500 ${
+                isCreditCard ? 'bg-gray-100 dark:bg-slate-900/50 cursor-not-allowed opacity-80' : ''
+              }`}
             >
               <option value="">Selecione a conta</option>
               {accountsData.map((a: BankAccountItem) => (
@@ -545,11 +584,11 @@ export const TransactionFormBase: React.FC<Props> = ({
 
           {/* Método de Pagamento */}
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">Forma de Pagamento *</label>
+            <label className="block text-xs font-semibold text-gray-700 dark:text-slate-300 mb-1">Forma de Pagamento *</label>
             <select
               value={payMethodId}
-              onChange={(e) => setPayMethodId(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-blue-500"
+              onChange={(e) => handlePayMethodChange(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-200 dark:border-slate-700 rounded-lg text-sm bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 focus:ring-blue-500"
             >
               <option value="">Selecione a forma</option>
               {payMethodsData.map((p: PayMethodItem) => (
@@ -679,6 +718,8 @@ export const TransactionFormBase: React.FC<Props> = ({
         <InstallmentFields
           isInstallment={isInstallment}
           onToggleInstallment={setIsInstallment}
+          isRecurrent={isRecurrent}
+          onChangeIsRecurrent={setIsRecurrent}
           installmentsNumber={installmentsNumber}
           onChangeInstallmentsNumber={setInstallmentsNumber}
           dueDay={dueDay}
@@ -700,7 +741,7 @@ export const TransactionFormBase: React.FC<Props> = ({
               onChange={(e) => setApplyToAllInstallments(e.target.checked)}
               className="rounded border-blue-300 text-blue-600 focus:ring-blue-500"
             />
-            Aplicar alterações a todas as parcelas desta série ({initialData.current_installment})
+            Aplicar alterações a todas as parcelas desta série ({formatInstallment(initialData.current_installment, initialData.total_installments) ?? initialData.current_installment})
           </label>
         </div>
       )}

@@ -23,6 +23,7 @@ import { useWalletStore } from '../../stores/wallet.store.ts';
 import { useTransactionMutations } from '../../hooks/useTransactionMutations.ts';
 import { useTransactionModalStore } from '../../stores/transactionModal.store.ts';
 import { useModalTransition } from '../../hooks/useModalTransition.ts';
+import { formatInstallment } from '../../utils/formatInstallment.ts';
 import { formatCurrency } from '../../utils/formatCurrency.ts';
 import type { Transaction } from '../../types/transaction.ts';
 
@@ -334,7 +335,7 @@ export const TransactionDetailsModal: React.FC = () => {
               </span>
               {transaction.current_installment && (
                 <span className="bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 text-xs font-semibold px-2 py-0.5 rounded-full border border-blue-100 dark:border-blue-900/50">
-                  Parcela {transaction.current_installment}
+                  Parcela {formatInstallment(transaction.current_installment, transaction.total_installments) ?? transaction.current_installment}
                 </span>
               )}
             </div>

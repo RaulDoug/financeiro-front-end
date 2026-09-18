@@ -3,6 +3,7 @@ import { Edit2, Trash2, Clock, CheckCircle2, AlertCircle, XCircle } from 'lucide
 import { transactionService } from '../../services/transactionService.ts';
 import { useTransactionDetailsModalStore } from '../../stores/transactionDetailsModal.store.ts';
 import { TransactionMobileList } from './TransactionMobileList.tsx';
+import { formatInstallment } from '../../utils/formatInstallment.ts';
 import type { Transaction } from '../../types/transaction.ts';
 
 interface Props {
@@ -131,7 +132,8 @@ export const TransactionTable: React.FC<Props> = ({
                       <span className="font-medium text-gray-800 dark:text-slate-200">{t.description}</span>
                       {t.current_installment && (
                         <span className="bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 text-[11px] font-semibold px-2 py-0.5 rounded-full border border-blue-100 dark:border-blue-900/50">
-                          {t.current_installment}
+                          {formatInstallment(t.current_installment, t.total_installments) ?? t.current_installment}
+                          {/* compat: {t.current_installment} */}
                         </span>
                       )}
                     </div>

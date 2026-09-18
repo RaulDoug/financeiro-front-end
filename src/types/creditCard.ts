@@ -29,6 +29,9 @@ export interface CreditCardTransaction {
   category_name?: string | null;
   pay_method_name?: string;
   bank_account_name?: string;
+  current_installment?: number | string | null;
+  total_installments?: number | string | null;
+  installments_group_id?: string | null;
 }
 
 export interface CreditCardSummaryWithTransactions {

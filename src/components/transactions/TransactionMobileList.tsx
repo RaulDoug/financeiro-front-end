@@ -2,6 +2,7 @@ import React from 'react';
 import { Calendar, Clock, CheckCircle2, AlertCircle, XCircle, ChevronRight } from 'lucide-react';
 import { transactionService } from '../../services/transactionService.ts';
 import { formatCurrency } from '../../utils/formatCurrency.ts';
+import { formatInstallment } from '../../utils/formatInstallment.ts';
 import type { Transaction } from '../../types/transaction.ts';
 
 interface TransactionMobileListProps {
@@ -46,7 +47,7 @@ export const TransactionMobileList: React.FC<TransactionMobileListProps> = ({
                 </span>
                 {t.current_installment && (
                   <span className="bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 text-[10px] font-bold px-1.5 py-0.5 rounded shrink-0">
-                    {t.current_installment}
+                    {formatInstallment(t.current_installment, t.total_installments) ?? t.current_installment}
                   </span>
                 )}
               </div>

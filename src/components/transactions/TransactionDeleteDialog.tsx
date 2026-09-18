@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AlertTriangle, X } from 'lucide-react';
+import { formatInstallment } from '../../utils/formatInstallment.ts';
 import type { Transaction } from '../../types/transaction.ts';
 
 interface Props {
@@ -23,13 +24,21 @@ export const TransactionDeleteDialog: React.FC<Props> = ({
   if (!isOpen || !transaction) return null;
 
   const isInstallment = Boolean(transaction.current_installment);
+  const formattedInstallment = formatInstallment(transaction.current_installment, transaction.total_installments) ?? transaction.current_installment;
   const isTransfer = transaction.type === 'transfers';
   const isCompleted = transaction.status === 'completed';
+
+  React.useEffect(() => {
+    if (isOpen) {
+      setAllInstallments(false);
+      setRedistribute(false);
+    }
+  }, [isOpen]);
 
   const handleConfirm = () => {
     onConfirm({
       all_installments: allInstallments,
-      redistribute: redistribute,
+      redistribute: !allInstallments ? redistribute : false,
     });
   };
 
@@ -67,7 +76,7 @@ export const TransactionDeleteDialog: React.FC<Props> = ({
         {/* Escolha para parcelamento (Q-014) */}
         {isInstallment && (
           <div className="space-y-2 p-3 bg-gray-50 border border-gray-200 rounded-lg">
-            <p className="text-xs font-semibold text-gray-700">Esta compra é parcelada ({transaction.current_installment}):</p>
+            <p className="text-xs font-semibold text-gray-700">Esta compra é parcelada ({formattedInstallment}):</p>
             <label className="flex items-center gap-2 text-xs text-gray-700 cursor-pointer">
               <input
                 type="radio"
@@ -76,19 +85,9 @@ export const TransactionDeleteDialog: React.FC<Props> = ({
                 onChange={() => setAllInstallments(false)}
                 className="text-blue-600 focus:ring-blue-500"
               />
-              Excluir apenas esta parcela ({transaction.current_installment})
+              Excluir apenas esta parcela ({formattedInstallment})
             </label>
-            <label className="flex items-center gap-2 text-xs text-gray-700 cursor-pointer">
-              <input
-                type="radio"
-                name="deleteOption"
-                checked={allInstallments}
-                onChange={() => setAllInstallments(true)}
-                className="text-blue-600 focus:ring-blue-500"
-              />
-              Excluir todas as parcelas da série
-            </label>
-            {allInstallments && (
+            {!allInstallments && (
               <label className="flex items-center gap-2 text-xs text-gray-600 cursor-pointer pt-1 pl-4">
                 <input
                   type="checkbox"
@@ -99,6 +98,19 @@ export const TransactionDeleteDialog: React.FC<Props> = ({
                 Redistribuir saldo entre parcelas restantes
               </label>
             )}
+            <label className="flex items-center gap-2 text-xs text-gray-700 cursor-pointer">
+              <input
+                type="radio"
+                name="deleteOption"
+                checked={allInstallments}
+                onChange={() => {
+                  setAllInstallments(true);
+                  setRedistribute(false);
+                }}
+                className="text-blue-600 focus:ring-blue-500"
+              />
+              Excluir todas as parcelas da série
+            </label>
           </div>
         )}
 

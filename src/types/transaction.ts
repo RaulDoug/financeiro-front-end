@@ -13,7 +13,9 @@ export interface Transaction {
   purchase_date: string | null;
   transfers_id: string | null;
   invoice_id: string | null;
-  current_installment: string | null;
+  current_installment: string | number | null;
+  total_installments?: number | string | null;
+  installments_group_id?: string | null;
   bank_account_name: string;
   bank_account_id?: string;
   category_name: string | null;
@@ -80,6 +82,7 @@ export interface CreateTransactionPayload {
   payment_date?: string;
   purchase_date?: string;
   destiny_bank_account_id?: string;
+  is_recurrent?: boolean;
   installments_number?: number;
   due_day?: number;
   first_this_month?: boolean;
