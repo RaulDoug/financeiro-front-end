@@ -25,7 +25,7 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
   const handleClear = () => {
     onChange({
       order_by: 'due_date',
-      order_dir: 'ASC',
+      order_dir: 'DESC',
     });
   };
 
@@ -116,7 +116,7 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
     filters.value_max !== undefined
   );
 
-  const isAscending = (filters.order_dir ?? 'ASC') === 'ASC';
+  const isAscending = filters.order_dir === 'ASC';
   const [isAdvancedFiltersOpen, setIsAdvancedFiltersOpen] = useState(false);
 
   const hasValueFilter = filters.value_min !== undefined || filters.value_max !== undefined;

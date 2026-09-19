@@ -35,14 +35,14 @@ export const TransactionsPage: React.FC = () => {
       return {
         status: statusParam,
         order_by: 'due_date',
-        order_dir: 'ASC',
+        order_dir: 'DESC',
         limit: 20,
       };
     }
     return {
       ...getInitialMonthRange(),
       order_by: 'due_date',
-      order_dir: 'ASC',
+      order_dir: 'DESC',
       limit: 20,
     };
   });
