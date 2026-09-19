@@ -90,7 +90,7 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
   };
 
   const handleToggleOrderDir = () => {
-    const newDir = filters.order_dir === 'DESC' ? 'ASC' : 'DESC';
+    const newDir = filters.order_dir === 'DESC' ? 'DESC' : 'ASC';
     onChange({
       ...filters,
       order_by: 'due_date',
