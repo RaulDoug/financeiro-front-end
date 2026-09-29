@@ -18,6 +18,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
   const openModal = useTransactionDetailsModalStore((state) => state.openModal);
 
   const handleSelectTransaction = (tx: CreditCardTransaction) => {
+    const isCompleted = tx.status === 'completed';
     const transaction: Transaction = {
       id: tx.id,
       description: tx.description,
@@ -26,7 +27,9 @@ export const TransactionList: React.FC<TransactionListProps> = ({
       status: (tx.status as any) || 'pending',
       due_date: tx.due_date || null,
       purchase_date: tx.purchase_date || tx.due_date || null,
-      payment_date: null,
+      payment_date: tx.payment_date || (isCompleted ? tx.due_date : null),
+      bank_account_id: tx.bank_account_id || null,
+      pay_methods_id: tx.pay_methods_id || null,
       transfers_id: null,
       invoice_id: null,
       current_installment: tx.current_installment ? String(tx.current_installment) : null,
@@ -78,6 +81,14 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                     data-testid={`tx-installment-${tx.id}`}
                   >
                     {installmentText}
+                  </span>
+                )}
+                {tx.status === 'completed' && (
+                  <span
+                    className="bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold px-1.5 py-0.5 rounded shrink-0 border border-emerald-100 dark:border-emerald-900/50"
+                    data-testid={`tx-status-${tx.id}`}
+                  >
+                    Paga
                   </span>
                 )}
               </div>

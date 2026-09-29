@@ -14,7 +14,7 @@ import {
   XCircle,
   FileText,
 } from 'lucide-react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useTransactionDetailsModalStore } from '../../stores/transactionDetailsModal.store.ts';
 import { transactionService } from '../../services/transactionService.ts';
 import { payMethodService } from '../../services/payMethod.service.ts';
@@ -28,6 +28,7 @@ import { formatCurrency } from '../../utils/formatCurrency.ts';
 import type { Transaction } from '../../types/transaction.ts';
 
 export const TransactionDetailsModal: React.FC = () => {
+  const queryClient = useQueryClient();
   const { isOpen, transaction: rawTransaction, closeModal, onEditCallback, onDeleteCallback } =
     useTransactionDetailsModalStore();
 
@@ -51,12 +52,12 @@ export const TransactionDetailsModal: React.FC = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const paymentFormRef = useRef<HTMLDivElement>(null);
 
-  // Consulta detalhada sob demanda caso o item tenha sido aberto via alerta com dados parciais
+  // Consulta detalhada sob demanda com staleTime 0 para garantir sincronização instantânea
   const { data: fullTransactionData } = useQuery({
     queryKey: ['transaction-detail', rawTransaction?.id],
     queryFn: () => transactionService.getTransactionById(rawTransaction!.id),
     enabled: Boolean(currentWalletId && isOpen && rawTransaction?.id),
-    staleTime: 1000 * 30,
+    staleTime: 0,
   });
 
   const transaction: Transaction | null = useMemo(() => {
@@ -201,6 +202,19 @@ export const TransactionDetailsModal: React.FC = () => {
           ...(selectedPayMethodId ? { pay_methods_id: selectedPayMethodId } : {}),
         },
       });
+      queryClient.setQueryData(['transaction-detail', transaction.id], (old: any) =>
+        old
+          ? {
+              ...old,
+              status: 'completed',
+              payment_date: paymentDate,
+              bank_account_id: selectedBankAccountId,
+              ...(selectedPayMethodId ? { pay_methods_id: selectedPayMethodId } : {}),
+            }
+          : old
+      );
+      queryClient.invalidateQueries({ queryKey: ['transaction-detail', transaction.id] });
+      queryClient.invalidateQueries({ queryKey: ['credit-card-summary'] });
       setShowPaymentForm(false);
       closeModal();
     } catch (err: any) {
@@ -545,7 +559,7 @@ export const TransactionDetailsModal: React.FC = () => {
               )}
               <button
                 type="button"
-                onClick={triggerClose}
+                onClick={triggerClose /* onClick={closeModal} */}
                 className="px-3.5 py-2 text-xs font-medium text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-xl transition cursor-pointer whitespace-nowrap"
               >
                 Fechar

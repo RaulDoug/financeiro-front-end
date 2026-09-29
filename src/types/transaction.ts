@@ -17,13 +17,13 @@ export interface Transaction {
   total_installments?: number | string | null;
   installments_group_id?: string | null;
   bank_account_name: string;
-  bank_account_id?: string;
+  bank_account_id?: string | null;
   category_name: string | null;
-  category_id?: string;
+  category_id?: string | null;
   pay_method_name: string;
-  pay_methods_id?: string;
+  pay_methods_id?: string | null;
   counterparty_name: string | null;
-  counterparty_id?: string;
+  counterparty_id?: string | null;
   creator_user_name: string;
   created_at: string;
 }
@@ -100,6 +100,7 @@ export interface UpdateTransactionPayload {
   purchase_date?: string;
   status?: TransactionStatus;
   all_installments?: boolean;
+  total_invoice?: boolean;
 }
 
 export interface DeleteTransactionPayload {

@@ -26,9 +26,12 @@ export interface CreditCardTransaction {
   status: string;
   due_date: string;
   purchase_date?: string | null;
+  payment_date?: string | null;
   category_name?: string | null;
   pay_method_name?: string;
   bank_account_name?: string;
+  bank_account_id?: string | null;
+  pay_methods_id?: string | null;
   current_installment?: number | string | null;
   total_installments?: number | string | null;
   installments_group_id?: string | null;

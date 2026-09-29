@@ -25,6 +25,7 @@ api.interceptors.request.use((config) => {
 
   if (activeWalletId) {
     config.headers['x-wallet-id'] = activeWalletId;
+    config.headers['x-active-wallet-id'] = activeWalletId;
   }
 
   return config;

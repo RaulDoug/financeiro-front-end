@@ -18,12 +18,15 @@ export const useTransactionMutations = () => {
       queryClient.invalidateQueries({ queryKey: ['bank-accounts'] }),
       queryClient.invalidateQueries({ queryKey: ['credit-cards'] }),
       queryClient.invalidateQueries({ queryKey: ['credit-card-summary'] }),
+      queryClient.invalidateQueries({ queryKey: ['transaction-detail'] }),
       queryClient.invalidateQueries({ queryKey: ['reports'] }),
       queryClient.refetchQueries({ queryKey: ['transactions'], type: 'active' }),
       queryClient.refetchQueries({ queryKey: ['transactions-overdue-past'], type: 'active' }),
       queryClient.refetchQueries({ queryKey: ['dashboard'], type: 'active' }),
       queryClient.refetchQueries({ queryKey: ['overdue-alerts'], type: 'active' }),
       queryClient.refetchQueries({ queryKey: ['bank-accounts'], type: 'active' }),
+      queryClient.refetchQueries({ queryKey: ['credit-card-summary'], type: 'active' }),
+      queryClient.refetchQueries({ queryKey: ['credit-cards'], type: 'active' }),
     ]);
   };
 
