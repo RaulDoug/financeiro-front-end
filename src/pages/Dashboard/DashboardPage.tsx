@@ -26,6 +26,8 @@ import { useFilterStore } from '../../stores/filter.store.ts';
 export const DashboardPage: React.FC = () => {
   const dashboardDate = useFilterStore((state) => state.dashboardDate);
   const setDashboardDate = useFilterStore((state) => state.setDashboardDate);
+  const recentTransactionsMode = useFilterStore((state) => state.recentTransactionsMode);
+  const setRecentTransactionsMode = useFilterStore((state) => state.setRecentTransactionsMode);
 
   const selectedDate = useMemo(() => {
     const d = new Date(dashboardDate);
@@ -69,7 +71,12 @@ export const DashboardPage: React.FC = () => {
   const summaryQuery = useDashboardSummary(dateParams);
   const balancesQuery = useAccountBalances();
   const creditCardsQuery = useCreditCardSummary(dateParams);
-  const recentTransactionsQuery = useRecentTransactions(5);
+  const recentTransactionsQuery = useRecentTransactions({
+    mode: recentTransactionsMode,
+    startDate: dateParams.startDate,
+    endDate: dateParams.endDate,
+    limit: 5,
+  });
   const overdueAlertsQuery = useOverdueAlerts();
   const incomeVsExpenseQuery = useIncomeVsExpense(selectedYear);
   const expenseByCategoryQuery = useExpenseByCategory(dateParams);
@@ -209,6 +216,9 @@ export const DashboardPage: React.FC = () => {
       <RecentTransactions
         transactions={recentTransactionsQuery.data?.recentTransactions}
         isLoading={recentTransactionsQuery.isLoading}
+        mode={recentTransactionsMode}
+        onModeChange={setRecentTransactionsMode}
+        dateParams={dateParams}
       />
 
       {/* Modal de Transação gerenciado globalmente no AppLayout (AC-221) com sincronização reativa (AC-213)

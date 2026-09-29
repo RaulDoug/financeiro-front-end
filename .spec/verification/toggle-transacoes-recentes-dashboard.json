@@ -1,0 +1,32 @@
+{
+  "feature": "toggle-transacoes-recentes-dashboard",
+  "timestamp": "2026-09-29T14:48:00.000Z",
+  "gitRev": "feat/Correcoes-basicas",
+  "command": "node --test test/toggle-transacoes-recentes-dashboard.spec.test.js",
+  "reporter": "tap",
+  "exitCode": 0,
+  "testsParsed": 4,
+  "results": {
+    "AC-338": {
+      "status": "pass",
+      "testName": "AC-338: Visualização padrão filtrada pelo mês atual/selecionado @spec:AC-338",
+      "method": "tap"
+    },
+    "AC-339": {
+      "status": "pass",
+      "testName": "AC-339: Botão toggle com estados \"Mês atual\" e \"Geral\" @spec:AC-339",
+      "method": "tap"
+    },
+    "AC-340": {
+      "status": "pass",
+      "testName": "AC-340: Modo \"Geral\" preservando histórico amplo da carteira @spec:AC-340",
+      "method": "tap"
+    },
+    "AC-341": {
+      "status": "pass",
+      "testName": "AC-341: Navegação contextual em \"Ver todas\" e persistência da preferência @spec:AC-341",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

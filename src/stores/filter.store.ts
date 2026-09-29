@@ -57,12 +57,14 @@ export const isDefaultTransactionFilters = (filters: TransactionFilters): boolea
 export interface FilterState {
   transactionFilters: TransactionFilters;
   dashboardDate: string;
+  recentTransactionsMode: 'month' | 'all';
   setTransactionFilters: (
     updater: TransactionFilters | ((prev: TransactionFilters) => TransactionFilters)
   ) => void;
   resetTransactionFilters: () => TransactionFilters;
   setDashboardDate: (date: Date | string) => void;
   resetDashboardDate: () => void;
+  setRecentTransactionsMode: (mode: 'month' | 'all') => void;
   resetWalletSpecificFilters: () => void;
 }
 
@@ -112,6 +114,12 @@ export const useFilterStore = create<FilterState>()(
 
       resetDashboardDate: () => {
         set({ dashboardDate: new Date().toISOString() });
+      },
+
+      recentTransactionsMode: 'month',
+
+      setRecentTransactionsMode: (mode) => {
+        set({ recentTransactionsMode: mode });
       },
 
       resetWalletSpecificFilters: () => {

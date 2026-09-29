@@ -1,0 +1,116 @@
+{
+  "runId": "Front-End_Financeiro-toggle-transacoes-recentes-dashboard",
+  "feature": "toggle-transacoes-recentes-dashboard",
+  "agent": "antigravity",
+  "modo": "paralelo",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-29 14:35",
+  "branchTrabalho": "spec/toggle-transacoes-recentes-dashboard",
+  "baseDir": ".spec/features/toggle-transacoes-recentes-dashboard",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "logsDir": "../onp-worktrees/Front-End_Financeiro-toggle-transacoes-recentes-dashboard-logs",
+  "ondas": [
+    [
+      "faixa-1",
+      "faixa-2",
+      "faixa-3"
+    ],
+    [
+      "faixa-4"
+    ]
+  ],
+  "faixas": [
+    {
+      "id": "faixa-1",
+      "branch": "spec/toggle-transacoes-recentes-dashboard-faixa-1",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-toggle-transacoes-recentes-dashboard-faixa-1",
+      "tarefas": [
+        {
+          "id": "T-223",
+          "titulo": "Suporte a `mode` e datas no hook `useRecentTransactions` e store de filtros",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/hooks/useDashboardData.ts",
+            "src/stores/filter.store.ts"
+          ],
+          "refs": [
+            "US-095",
+            "AC-338",
+            "AC-340",
+            "AC-341"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-2",
+      "branch": "spec/toggle-transacoes-recentes-dashboard-faixa-2",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-toggle-transacoes-recentes-dashboard-faixa-2",
+      "tarefas": [
+        {
+          "id": "T-224",
+          "titulo": "Implementação do segmented pill toggle no `RecentTransactions.tsx`",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/pages/Dashboard/components/RecentTransactions.tsx"
+          ],
+          "refs": [
+            "US-095",
+            "AC-339",
+            "AC-341"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-3",
+      "branch": "spec/toggle-transacoes-recentes-dashboard-faixa-3",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-toggle-transacoes-recentes-dashboard-faixa-3",
+      "tarefas": [
+        {
+          "id": "T-225",
+          "titulo": "Conexão de estado e parâmetros no `DashboardPage.tsx`",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/pages/Dashboard/DashboardPage.tsx"
+          ],
+          "refs": [
+            "US-095",
+            "AC-338",
+            "AC-339",
+            "AC-340"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-4",
+      "branch": "spec/toggle-transacoes-recentes-dashboard-faixa-4",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-toggle-transacoes-recentes-dashboard-faixa-4",
+      "tarefas": [
+        {
+          "id": "T-226",
+          "titulo": "Testes automatizados de especificação AC-338 a AC-341",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "test/toggle-transacoes-recentes-dashboard.spec.test.js"
+          ],
+          "refs": [
+            "US-095",
+            "AC-338",
+            "AC-339",
+            "AC-340",
+            "AC-341"
+          ]
+        }
+      ]
+    }
+  ]
+}

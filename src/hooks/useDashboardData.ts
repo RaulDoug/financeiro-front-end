@@ -1,6 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { dashboardService } from '../services/dashboard.service.ts';
+import { transactionService } from '../services/transactionService.ts';
 import { useWalletStore } from '../stores/wallet.store.ts';
+import { resolveTransactionDate } from '../utils/formatDate.ts';
+import type { RecentTransactionItem, RecentTransactionsReport } from '../types/dashboard.ts';
 
 export const DASHBOARD_QUERY_KEYS = {
   all: ['dashboard'] as const,
@@ -16,8 +19,11 @@ export const DASHBOARD_QUERY_KEYS = {
     ['dashboard', walletId, 'credit-card-summary', params] as const,
   overdueAlerts: (walletId: string | null) =>
     ['dashboard', walletId, 'overdue-alerts'] as const,
-  recentTransactions: (walletId: string | null, limit?: number) =>
-    ['dashboard', walletId, 'recent-transactions', limit] as const,
+  recentTransactions: (
+    walletId: string | null,
+    limit?: number,
+    options?: { mode?: 'month' | 'all'; startDate?: string; endDate?: string }
+  ) => ['dashboard', walletId, 'recent-transactions', limit, options] as const,
 };
 
 export function useDashboardSummary(params?: { startDate?: string; endDate?: string }) {
@@ -86,13 +92,62 @@ export function useOverdueAlerts() {
   });
 }
 
-export function useRecentTransactions(limit = 5) {
+export interface UseRecentTransactionsOptions {
+  limit?: number;
+  mode?: 'month' | 'all';
+  startDate?: string;
+  endDate?: string;
+}
+
+export function useRecentTransactions(
+  optionsOrLimit: number | UseRecentTransactionsOptions = 5
+) {
   const currentWalletId = useWalletStore((state) => state.currentWalletId);
 
+  const opts: UseRecentTransactionsOptions =
+    typeof optionsOrLimit === 'number'
+      ? { limit: optionsOrLimit, mode: 'month' }
+      : { limit: 5, mode: 'month', ...optionsOrLimit };
+
+  const { limit = 5, mode = 'month', startDate, endDate } = opts;
+
   return useQuery({
-    queryKey: DASHBOARD_QUERY_KEYS.recentTransactions(currentWalletId, limit),
-    queryFn: () => dashboardService.getRecentTransactions(limit),
+    queryKey: DASHBOARD_QUERY_KEYS.recentTransactions(currentWalletId, limit, {
+      mode,
+      startDate,
+      endDate,
+    }),
+    queryFn: async (): Promise<RecentTransactionsReport> => {
+      if (mode === 'month' && startDate && endDate) {
+        const res = await transactionService.getTransactions({
+          due_date_from: startDate,
+          due_date_to: endDate,
+          limit: Math.max(20, limit),
+          order_by: 'due_date',
+          order_dir: 'DESC',
+          status: ['pending', 'completed', 'expired'],
+        });
+
+        const recentTransactions: RecentTransactionItem[] = (res.rows || [])
+          .slice(0, limit)
+          .map((tx) => ({
+            id: tx.id,
+            description: tx.description,
+            value: Number(tx.value),
+            type: tx.type,
+            status: tx.status as RecentTransactionItem['status'],
+            date: resolveTransactionDate(tx) || tx.due_date || '',
+            category_name: tx.category_name || undefined,
+            pay_method_name: tx.pay_method_name || undefined,
+          }));
+
+        return { recentTransactions };
+      }
+
+      return dashboardService.getRecentTransactions(limit);
+    },
     enabled: !!currentWalletId,
     staleTime: 1000 * 60 * 1,
   });
 }
+
