@@ -1,0 +1,37 @@
+{
+  "feature": "persistencia-filtros-navegacao",
+  "timestamp": "2026-09-29T13:42:18.322Z",
+  "gitRev": "4cc49fd",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 1,
+  "testsParsed": 333,
+  "results": {
+    "AC-325": {
+      "status": "pass",
+      "testName": "AC-325: Botão Limpar Filtros restaura mês atual e zera filtros secundários @spec:AC-325",
+      "method": "tap"
+    },
+    "AC-326": {
+      "status": "pass",
+      "testName": "AC-326: Visibilidade condicional do botão Limpar Filtros @spec:AC-326",
+      "method": "tap"
+    },
+    "AC-327": {
+      "status": "pass",
+      "testName": "AC-327: Armazenamento e restauração dos filtros e pesquisa de Transações @spec:AC-327",
+      "method": "tap"
+    },
+    "AC-328": {
+      "status": "pass",
+      "testName": "AC-328: Armazenamento e restauração do período selecionado no Dashboard @spec:AC-328",
+      "method": "tap"
+    },
+    "AC-329": {
+      "status": "pass",
+      "testName": "AC-329: Precedência de query params na URL e redefinição ao trocar de carteira @spec:AC-329",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

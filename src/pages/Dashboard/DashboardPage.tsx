@@ -21,9 +21,21 @@ import { IncomeExpenseChart } from './components/IncomeExpenseChart.tsx';
 import { CategoryExpenseChart } from './components/CategoryExpenseChart.tsx';
 import { DashboardSkeleton } from './DashboardSkeleton.tsx';
 import { RefreshCw, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useFilterStore } from '../../stores/filter.store.ts';
 
 export const DashboardPage: React.FC = () => {
-  const [selectedDate, setSelectedDate] = useState<Date>(() => new Date());
+  const dashboardDate = useFilterStore((state) => state.dashboardDate);
+  const setDashboardDate = useFilterStore((state) => state.setDashboardDate);
+
+  const selectedDate = useMemo(() => {
+    const d = new Date(dashboardDate);
+    return isNaN(d.getTime()) ? new Date() : d;
+  }, [dashboardDate]);
+
+  const setSelectedDate = (d: Date) => {
+    setDashboardDate(d.toISOString());
+  };
+
   const [isRefreshing, setIsRefreshing] = useState(false);
   const queryClient = useQueryClient();
 

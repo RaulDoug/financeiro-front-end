@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Search, X, ChevronLeft, ChevronRight, Calendar, ArrowUpDown, SlidersHorizontal } from 'lucide-react';
 import type { TransactionFilters as FiltersType, TransactionType, TransactionStatus } from '../../types/transaction.ts';
 import { TransactionAdvancedFiltersModal } from './TransactionAdvancedFiltersModal.tsx';
+import { getDefaultMonthRange, getDefaultTransactionFilters } from '../../stores/filter.store.ts';
 
 interface Props {
   filters: FiltersType;
@@ -43,7 +44,9 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
   };
 
   const handleClear = () => {
+    const defaults = getDefaultTransactionFilters();
     onChange({
+      ...defaults,
       order_by: currentOrderBy,
       order_dir: currentOrderDir,
     });
@@ -137,18 +140,23 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
     Array.isArray(filters.bank_account_id) ? filters.bank_account_id.length > 0 : filters.bank_account_id
   );
   const hasValueFilter = filters.value_min !== undefined || filters.value_max !== undefined;
+  const defaultBounds = getDefaultMonthRange();
+
+  const isDefaultDateRange =
+    filters.due_date_from === defaultBounds.due_date_from &&
+    filters.due_date_to === defaultBounds.due_date_to;
 
   const hasActiveFilters = Boolean(
     filters.type ||
     filters.status ||
     filters.description ||
-    filters.due_date_from ||
-    filters.due_date_to ||
+    !isDefaultDateRange ||
     hasCategoryFilter ||
     hasPayMethodFilter ||
     hasBankAccountFilter ||
     hasValueFilter
   );
+
 
   const isAscending = currentOrderDir === 'ASC';
   const currentOrderLabel = columnLabels[currentOrderBy] || 'Vencimento';

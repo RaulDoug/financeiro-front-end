@@ -12,40 +12,13 @@ import { TransactionTable } from '../../components/transactions/TransactionTable
 import { TransactionModal } from '../../components/transactions/TransactionModal.tsx';
 import { TransactionDeleteDialog } from '../../components/transactions/TransactionDeleteDialog.tsx';
 import { useTransactionModalStore } from '../../stores/transactionModal.store.ts';
+import { useFilterStore } from '../../stores/filter.store.ts';
 import type { Transaction, TransactionFilters as FiltersType } from '../../types/transaction.ts';
-
-const getInitialMonthRange = () => {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const lastDay = new Date(year, now.getMonth() + 1, 0).getDate();
-
-  return {
-    due_date_from: `${year}-${month}-01`,
-    due_date_to: `${year}-${month}-${String(lastDay).padStart(2, '0')}`,
-  };
-};
 
 export const TransactionsPage: React.FC = () => {
   const [searchParams] = useSearchParams();
-  const statusParam = searchParams.get('status') as FiltersType['status'];
-
-  const [filters, setFilters] = useState<FiltersType>(() => {
-    if (statusParam) {
-      return {
-        status: statusParam,
-        order_by: 'due_date',
-        order_dir: 'DESC',
-        limit: 20,
-      };
-    }
-    return {
-      ...getInitialMonthRange(),
-      order_by: 'due_date',
-      order_dir: 'DESC',
-      limit: 20,
-    };
-  });
+  const filters = useFilterStore((state) => state.transactionFilters);
+  const setFilters = useFilterStore((state) => state.setTransactionFilters);
 
   useEffect(() => {
     const status = searchParams.get('status') as FiltersType['status'];
@@ -57,7 +30,8 @@ export const TransactionsPage: React.FC = () => {
         due_date_to: undefined,
       }));
     }
-  }, [searchParams]);
+  }, [searchParams, setFilters]);
+
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null);
