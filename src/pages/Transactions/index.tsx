@@ -22,13 +22,29 @@ export const TransactionsPage: React.FC = () => {
 
   useEffect(() => {
     const status = searchParams.get('status') as FiltersType['status'];
-    if (status) {
-      setFilters((prev) => ({
-        ...prev,
-        status,
-        due_date_from: undefined,
-        due_date_to: undefined,
-      }));
+    const categoryId = searchParams.get('category_id');
+    const dueDateFrom = searchParams.get('due_date_from');
+    const dueDateTo = searchParams.get('due_date_to');
+
+    if (status || categoryId || dueDateFrom || dueDateTo) {
+      setFilters((prev) => {
+        const next = { ...prev, page: 1 };
+        if (status) {
+          next.status = status;
+          if (!dueDateFrom) next.due_date_from = undefined;
+          if (!dueDateTo) next.due_date_to = undefined;
+        }
+        if (categoryId) {
+          next.category_id = [categoryId];
+        }
+        if (dueDateFrom) {
+          next.due_date_from = dueDateFrom;
+        }
+        if (dueDateTo) {
+          next.due_date_to = dueDateTo;
+        }
+        return next;
+      });
     }
   }, [searchParams, setFilters]);
 

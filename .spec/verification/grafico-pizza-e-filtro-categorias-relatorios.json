@@ -1,0 +1,32 @@
+{
+  "feature": "grafico-pizza-e-filtro-categorias-relatorios",
+  "timestamp": "2026-09-29T14:17:40.000Z",
+  "gitRev": "a4abf26",
+  "command": "node --test test/grafico-pizza-e-filtro-categorias-relatorios.spec.test.js",
+  "reporter": "tap",
+  "exitCode": 0,
+  "testsParsed": 4,
+  "results": {
+    "AC-334": {
+      "status": "pass",
+      "testName": "AC-334: Remoção do Legend SVG e introdução de Legenda Customizada Contida @spec:AC-334",
+      "method": "tap"
+    },
+    "AC-335": {
+      "status": "pass",
+      "testName": "AC-335: Alinhamento visual e suporte a dark mode com o padrão do Dashboard @spec:AC-335",
+      "method": "tap"
+    },
+    "AC-336": {
+      "status": "pass",
+      "testName": "AC-336: Clique na categoria detalhada redireciona para transações com filtro aplicado @spec:AC-336",
+      "method": "tap"
+    },
+    "AC-337": {
+      "status": "pass",
+      "testName": "AC-337: Preservação de período do relatório e sincronização de query params @spec:AC-337",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

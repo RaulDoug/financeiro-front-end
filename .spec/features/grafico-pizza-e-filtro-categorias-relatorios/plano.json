@@ -1,0 +1,116 @@
+{
+  "runId": "Front-End_Financeiro-grafico-pizza-e-filtro-categorias-relatorios",
+  "feature": "grafico-pizza-e-filtro-categorias-relatorios",
+  "agent": "antigravity",
+  "modo": "paralelo",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-29 14:15",
+  "branchTrabalho": "spec/grafico-pizza-e-filtro-categorias-relatorios",
+  "baseDir": ".spec/features/grafico-pizza-e-filtro-categorias-relatorios",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "logsDir": "../onp-worktrees/Front-End_Financeiro-grafico-pizza-e-filtro-categorias-relatorios-logs",
+  "ondas": [
+    [
+      "faixa-1",
+      "faixa-2",
+      "faixa-3"
+    ],
+    [
+      "faixa-4"
+    ]
+  ],
+  "faixas": [
+    {
+      "id": "faixa-1",
+      "branch": "spec/grafico-pizza-e-filtro-categorias-relatorios-faixa-1",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-grafico-pizza-e-filtro-categorias-relatorios-faixa-1",
+      "tarefas": [
+        {
+          "id": "T-219",
+          "titulo": "Harmonização visual e contenção de layout do `CategoryChart` de Relatórios",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/pages/Reports/CategoryChart.tsx"
+          ],
+          "refs": [
+            "US-093",
+            "AC-334",
+            "AC-335"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-2",
+      "branch": "spec/grafico-pizza-e-filtro-categorias-relatorios-faixa-2",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-grafico-pizza-e-filtro-categorias-relatorios-faixa-2",
+      "tarefas": [
+        {
+          "id": "T-220",
+          "titulo": "Ação de clique e navegação com filtro no Detalhamento de Categorias",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/pages/Reports/CategoryReport.tsx"
+          ],
+          "refs": [
+            "US-094",
+            "AC-336",
+            "AC-337"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-3",
+      "branch": "spec/grafico-pizza-e-filtro-categorias-relatorios-faixa-3",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-grafico-pizza-e-filtro-categorias-relatorios-faixa-3",
+      "tarefas": [
+        {
+          "id": "T-221",
+          "titulo": "Suporte a filtros de categoria e datas via URL no `TransactionsPage`",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/pages/Transactions/index.tsx"
+          ],
+          "refs": [
+            "US-094",
+            "AC-337"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-4",
+      "branch": "spec/grafico-pizza-e-filtro-categorias-relatorios-faixa-4",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-grafico-pizza-e-filtro-categorias-relatorios-faixa-4",
+      "tarefas": [
+        {
+          "id": "T-222",
+          "titulo": "Testes automatizados de especificação AC-334 a AC-337",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "test/grafico-pizza-e-filtro-categorias-relatorios.spec.test.js"
+          ],
+          "refs": [
+            "US-093",
+            "US-094",
+            "AC-334",
+            "AC-335",
+            "AC-336",
+            "AC-337"
+          ]
+        }
+      ]
+    }
+  ],
+  "sequenciais": [],
+  "concluidas": [],
+  "avisos": []
+}
