@@ -5,6 +5,7 @@ export interface DashboardSummary {
   pendingExpenses: number;
   totalBalance: number;
   monthForecast: number;
+  monthForecastFinal?: number;
 }
 
 export interface AccountBalanceItem {
