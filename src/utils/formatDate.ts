@@ -19,10 +19,10 @@ export function formatDate(dateString: string | null | undefined): string {
 }
 
 export function resolveTransactionDate(tx: {
-  date?: string;
-  payment_date?: string;
-  purchase_date?: string;
-  due_date?: string;
+  date?: string | null;
+  payment_date?: string | null;
+  purchase_date?: string | null;
+  due_date?: string | null;
 }): string {
   return tx.payment_date || tx.purchase_date || tx.due_date || tx.date || '';
 }
