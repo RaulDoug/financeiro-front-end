@@ -1,0 +1,49 @@
+{
+  "runId": "Front-End_Financeiro-correcoes-basicas-mumoikw1",
+  "feature": "correcoes-basicas",
+  "agent": "antigravity",
+  "modo": "sequencial",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-29 12:55",
+  "branchTrabalho": "spec/correcoes-basicas",
+  "baseDir": ".spec/features/correcoes-basicas",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "logsDir": "../onp-worktrees/Front-End_Financeiro-correcoes-basicas-logs",
+  "ondas": [],
+  "faixas": [],
+  "sequenciais": [
+    {
+      "id": "T-206",
+      "titulo": "Trocar ordem dos campos no MobileQuickEntry",
+      "modelo": "claude-sonnet-5",
+      "esforco": "low",
+      "arquivos": [
+        "src/components/transactions/MobileQuickEntry.tsx"
+      ],
+      "refs": [
+        "US-086",
+        "AC-318",
+        "AC-319"
+      ]
+    },
+    {
+      "id": "T-207",
+      "titulo": "Testes automatizados de especificação AC-318 e AC-319",
+      "modelo": "claude-sonnet-5",
+      "esforco": "low",
+      "arquivos": [
+        "test/correcoes-basicas.spec.test.js"
+      ],
+      "refs": [
+        "US-086",
+        "AC-318",
+        "AC-319"
+      ]
+    }
+  ],
+  "concluidas": [],
+  "avisos": []
+}

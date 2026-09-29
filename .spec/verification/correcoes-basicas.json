@@ -1,0 +1,22 @@
+{
+  "feature": "correcoes-basicas",
+  "timestamp": "2026-09-29T13:00:21.019Z",
+  "gitRev": "75c5adc",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 1,
+  "testsParsed": 323,
+  "results": {
+    "AC-318": {
+      "status": "pass",
+      "testName": "AC-318: Troca de posição entre Forma de Pagamento e Conta de Saída/Entrada no lançamento de receitas e despesas mobile @spec:AC-318",
+      "method": "tap"
+    },
+    "AC-319": {
+      "status": "pass",
+      "testName": "AC-319: Preservação da disposição dos campos no lançamento de transferências @spec:AC-319",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

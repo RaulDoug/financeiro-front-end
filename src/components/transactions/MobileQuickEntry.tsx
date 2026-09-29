@@ -689,10 +689,10 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
           </div>
         </div>
 
-        {/* Grid de Conta e Categoria (ou Origem e Destino) (AC-226) */}
+        {/* Grid de Seletores - Linha 1 */}
         {type === 'transfers' ? (
           <div className="grid grid-cols-2 gap-2">
-            {/* Conta de Origem */}
+            {/* Origem */}
             <div className="flex flex-col gap-1 relative">
               <label className="text-[11px] font-medium text-slate-500 dark:text-slate-400 ml-1">
                 Conta de Origem
@@ -762,44 +762,39 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-2">
-            {/* Conta */}
+            {/* Forma de Pagamento */}
             <div className="flex flex-col gap-1 relative">
-              <label className="text-[11px] font-medium text-slate-500 dark:text-slate-400 ml-1">
-                {type === 'incomings' ? 'Conta de Entrada' : 'Conta de Saída'}
-                {isCreditCard && (
-                  <span className="ml-1 text-[10px] text-amber-600 dark:text-amber-400 font-normal">
-                    (Vinculada ao cartão)
-                  </span>
-                )}
+              <label className="text-[11px] font-medium text-slate-500 dark:text-slate-400 ml-1 truncate">
+                Forma de Pagamento
               </label>
               <div
-                data-testid="chip-account"
-                className={`flex items-center justify-between bg-slate-100 dark:bg-slate-800 rounded-xl px-3 h-11 border border-slate-200 dark:border-slate-700 relative overflow-hidden ${
-                  isCreditCard ? 'opacity-70 bg-slate-200/60 dark:bg-slate-800/40 cursor-not-allowed' : ''
-                }`}
+                data-testid="chip-pay-method"
+                className="flex items-center justify-between bg-slate-100 dark:bg-slate-800 rounded-xl px-3 h-11 border border-slate-200 dark:border-slate-700 relative overflow-hidden"
               >
                 <div className="flex items-center gap-2 min-w-0 pr-1">
-                  <span
-                    className="w-3 h-3 rounded-full shrink-0"
-                    style={{ backgroundColor: selectedAccountColor }}
-                  />
+                  <div className="text-blue-500 shrink-0">
+                    {selectedPayMethod?.credit_card ? (
+                      <CreditCard className="w-3.5 h-3.5" />
+                    ) : (
+                      renderLucideIcon(selectedPayMethod?.icon, 'w-3.5 h-3.5') || (
+                        <Wallet className="w-3.5 h-3.5" />
+                      )
+                    )}
+                  </div>
                   <span className="text-xs font-semibold text-slate-900 dark:text-white truncate">
-                    {selectedAccount?.bank_name || 'Conta'}
+                    {selectedPayMethod?.name || 'Pagamento'}
                   </span>
                 </div>
-                {!isCreditCard && <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />}
+                <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
                 <select
-                  value={bankAccountId}
-                  disabled={isCreditCard}
-                  onChange={(e) => setBankAccountId(e.target.value)}
-                  className={`absolute inset-0 opacity-0 w-full h-full ${
-                    isCreditCard ? 'cursor-not-allowed pointer-events-none' : 'cursor-pointer'
-                  }`}
-                  data-testid="select-quick-account"
+                  value={payMethodId}
+                  onChange={(e) => handlePayMethodChange(e.target.value)}
+                  className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
+                  data-testid="select-quick-pay-method"
                 >
-                  {accountsData.map((acc: BankAccountItem) => (
-                    <option key={acc.id} value={acc.id}>
-                      {acc.bank_name}
+                  {payMethodsData.map((pm: PayMethodItem) => (
+                    <option key={pm.id} value={pm.id}>
+                      {pm.name}
                     </option>
                   ))}
                 </select>
@@ -884,39 +879,44 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-2">
-            {/* Forma de Pagamento */}
+            {/* Conta */}
             <div className="flex flex-col gap-1 relative">
-              <label className="text-[11px] font-medium text-slate-500 dark:text-slate-400 ml-1 truncate">
-                Forma de Pagamento
+              <label className="text-[11px] font-medium text-slate-500 dark:text-slate-400 ml-1">
+                {type === 'incomings' ? 'Conta de Entrada' : 'Conta de Saída'}
+                {isCreditCard && (
+                  <span className="ml-1 text-[10px] text-amber-600 dark:text-amber-400 font-normal">
+                    (Vinculada ao cartão)
+                  </span>
+                )}
               </label>
               <div
-                data-testid="chip-pay-method"
-                className="flex items-center justify-between bg-slate-100 dark:bg-slate-800 rounded-xl px-3 h-11 border border-slate-200 dark:border-slate-700 relative overflow-hidden"
+                data-testid="chip-account"
+                className={`flex items-center justify-between bg-slate-100 dark:bg-slate-800 rounded-xl px-3 h-11 border border-slate-200 dark:border-slate-700 relative overflow-hidden ${
+                  isCreditCard ? 'opacity-70 bg-slate-200/60 dark:bg-slate-800/40 cursor-not-allowed' : ''
+                }`}
               >
                 <div className="flex items-center gap-2 min-w-0 pr-1">
-                  <div className="text-blue-500 shrink-0">
-                    {selectedPayMethod?.credit_card ? (
-                      <CreditCard className="w-3.5 h-3.5" />
-                    ) : (
-                      renderLucideIcon(selectedPayMethod?.icon, 'w-3.5 h-3.5') || (
-                        <Wallet className="w-3.5 h-3.5" />
-                      )
-                    )}
-                  </div>
+                  <span
+                    className="w-3 h-3 rounded-full shrink-0"
+                    style={{ backgroundColor: selectedAccountColor }}
+                  />
                   <span className="text-xs font-semibold text-slate-900 dark:text-white truncate">
-                    {selectedPayMethod?.name || 'Pagamento'}
+                    {selectedAccount?.bank_name || 'Conta'}
                   </span>
                 </div>
-                <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
+                {!isCreditCard && <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />}
                 <select
-                  value={payMethodId}
-                  onChange={(e) => handlePayMethodChange(e.target.value)}
-                  className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
-                  data-testid="select-quick-pay-method"
+                  value={bankAccountId}
+                  disabled={isCreditCard}
+                  onChange={(e) => setBankAccountId(e.target.value)}
+                  className={`absolute inset-0 opacity-0 w-full h-full ${
+                    isCreditCard ? 'cursor-not-allowed pointer-events-none' : 'cursor-pointer'
+                  }`}
+                  data-testid="select-quick-account"
                 >
-                  {payMethodsData.map((pm: PayMethodItem) => (
-                    <option key={pm.id} value={pm.id}>
-                      {pm.name}
+                  {accountsData.map((acc: BankAccountItem) => (
+                    <option key={acc.id} value={acc.id}>
+                      {acc.bank_name}
                     </option>
                   ))}
                 </select>
