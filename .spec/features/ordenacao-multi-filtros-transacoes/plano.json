@@ -1,0 +1,72 @@
+{
+  "runId": "Front-End_Financeiro-ordenacao-multi-filtros-transacoes-mump2kvn",
+  "feature": "ordenacao-multi-filtros-transacoes",
+  "agent": "antigravity",
+  "modo": "sequencial",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-29 13:10",
+  "branchTrabalho": "spec/ordenacao-multi-filtros-transacoes",
+  "baseDir": ".spec/features/ordenacao-multi-filtros-transacoes",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "logsDir": "../onp-worktrees/Front-End_Financeiro-ordenacao-multi-filtros-transacoes-logs",
+  "ondas": [],
+  "faixas": [],
+  "sequenciais": [
+    {
+      "id": "T-208",
+      "titulo": "Componente MultiSelect e integração nos Filtros Avançados",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/components/common/MultiSelect.tsx",
+        "src/components/transactions/TransactionAdvancedFiltersModal.tsx",
+        "src/pages/Transactions/index.tsx"
+      ],
+      "refs": [
+        "US-088",
+        "AC-322",
+        "AC-323",
+        "AC-324"
+      ]
+    },
+    {
+      "id": "T-209",
+      "titulo": "Ordenação dinâmica pelas colunas da tabela e barra de filtros",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/components/transactions/TransactionTable.tsx",
+        "src/components/transactions/TransactionFilters.tsx",
+        "src/pages/Transactions/index.tsx"
+      ],
+      "refs": [
+        "US-087",
+        "AC-320",
+        "AC-321"
+      ]
+    },
+    {
+      "id": "T-210",
+      "titulo": "Testes automatizados de especificação AC-320 a AC-324",
+      "modelo": "claude-sonnet-5",
+      "esforco": "low",
+      "arquivos": [
+        "test/ordenacao-multi-filtros-transacoes.spec.test.js"
+      ],
+      "refs": [
+        "US-087",
+        "US-088",
+        "AC-320",
+        "AC-321",
+        "AC-322",
+        "AC-323",
+        "AC-324"
+      ]
+    }
+  ],
+  "concluidas": [],
+  "avisos": []
+}

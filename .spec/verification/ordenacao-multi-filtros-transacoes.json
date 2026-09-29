@@ -1,0 +1,37 @@
+{
+  "feature": "ordenacao-multi-filtros-transacoes",
+  "timestamp": "2026-09-29T13:18:06.415Z",
+  "gitRev": "41bff22",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 1,
+  "testsParsed": 328,
+  "results": {
+    "AC-320": {
+      "status": "pass",
+      "testName": "AC-320: Cabeçalhos interativos e alternância de ordenação na tabela desktop @spec:AC-320",
+      "method": "tap"
+    },
+    "AC-321": {
+      "status": "pass",
+      "testName": "AC-321: Preservação e sincronização da ordenação na barra de filtros @spec:AC-321",
+      "method": "tap"
+    },
+    "AC-322": {
+      "status": "pass",
+      "testName": "AC-322: Interface de multi-seleção de categorias com contagem e chips @spec:AC-322",
+      "method": "tap"
+    },
+    "AC-323": {
+      "status": "pass",
+      "testName": "AC-323: Consulta e filtragem na API com múltiplos identificadores @spec:AC-323",
+      "method": "tap"
+    },
+    "AC-324": {
+      "status": "pass",
+      "testName": "AC-324: Limpeza e restauração completa dos filtros múltiplos @spec:AC-324",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

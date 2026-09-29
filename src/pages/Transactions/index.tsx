@@ -134,12 +134,18 @@ export const TransactionsPage: React.FC = () => {
       filters.type,
       filters.value_min,
       filters.value_max,
+      filters.category_id,
+      filters.pay_methods_id,
+      filters.bank_account_id,
     ],
     queryFn: async () => {
       const today = new Date().toISOString().split('T')[0];
       const maxDate = filters.due_date_from && filters.due_date_from < today ? filters.due_date_from : today;
       const res = await transactionService.getTransactions({
         type: filters.type,
+        category_id: filters.category_id,
+        pay_methods_id: filters.pay_methods_id,
+        bank_account_id: filters.bank_account_id,
         due_date_to: maxDate,
         value_min: filters.value_min,
         value_max: filters.value_max,
@@ -247,6 +253,26 @@ export const TransactionsPage: React.FC = () => {
     };
   }, [data?.pages, allTransactions, filters.status]);
 
+  const handleSort = (column: string) => {
+    setFilters((prev) => {
+      const isSame = prev.order_by === column;
+      const nextDir: 'ASC' | 'DESC' = isSame
+        ? prev.order_dir === 'ASC'
+          ? 'DESC'
+          : 'ASC'
+        : column === 'due_date' || column === 'purchase_date' || column === 'payment_date' || column === 'value'
+        ? 'DESC'
+        : 'ASC';
+
+      return {
+        ...prev,
+        order_by: column,
+        order_dir: nextDir,
+        page: 1,
+      };
+    });
+  };
+
   const handleOpenNew = () => {
     if (isViewer) return;
     setEditingTransaction(null);
@@ -334,7 +360,7 @@ export const TransactionsPage: React.FC = () => {
         isLoading={isLoading}
       />
 
-      {/* Tabela de Lançamentos com Infinite Scroll */}
+      {/* Tabela de Lançamentos com Infinite Scroll e Ordenação Dinâmica */}
       <TransactionTable
         transactions={allTransactions}
         isLoading={isLoading}
@@ -343,6 +369,9 @@ export const TransactionsPage: React.FC = () => {
         onFetchNextPage={fetchNextPage}
         onEdit={isViewer ? undefined : handleEdit}
         onDelete={isViewer ? undefined : handleDelete}
+        orderBy={filters.order_by}
+        orderDir={filters.order_dir}
+        onSort={handleSort}
       />
 
       {/* Modal de Criação / Edição */}

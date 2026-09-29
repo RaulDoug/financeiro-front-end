@@ -8,24 +8,44 @@ interface Props {
   onChange: (filters: FiltersType) => void;
 }
 
+const columnLabels: Record<string, string> = {
+  due_date: 'Vencimento',
+  purchase_date: 'Compra',
+  payment_date: 'Pagamento',
+  description: 'Descrição',
+  value: 'Valor',
+  status: 'Status',
+  bank_account_name: 'Conta / Cartão',
+  category_name: 'Categoria',
+};
+
 export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
   const advancedFiltersContainerRef = useRef<HTMLDivElement>(null);
+  const currentOrderBy = filters.order_by || 'due_date';
+  const currentOrderDir = filters.order_dir || 'DESC';
+
   const handleTypeChange = (type?: TransactionType) => {
-    onChange({ ...filters, type, page: 1, order_by: 'due_date' });
+    onChange({ ...filters, type, page: 1, order_by: currentOrderBy, order_dir: currentOrderDir });
   };
 
   const handleStatusChange = (status?: TransactionStatus) => {
-    onChange({ ...filters, status, page: 1, order_by: 'due_date' });
+    onChange({ ...filters, status, page: 1, order_by: currentOrderBy, order_dir: currentOrderDir });
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange({ ...filters, description: e.target.value || undefined, page: 1, order_by: 'due_date' });
+    onChange({
+      ...filters,
+      description: e.target.value || undefined,
+      page: 1,
+      order_by: currentOrderBy,
+      order_dir: currentOrderDir,
+    });
   };
 
   const handleClear = () => {
     onChange({
-      order_by: 'due_date',
-      order_dir: 'DESC',
+      order_by: currentOrderBy,
+      order_dir: currentOrderDir,
     });
   };
 
@@ -50,7 +70,8 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
       ...filters,
       due_date_from: firstDay,
       due_date_to: lastDay,
-      order_by: 'due_date',
+      order_by: currentOrderBy,
+      order_dir: currentOrderDir,
       page: 1,
     });
   };
@@ -62,7 +83,8 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
       ...filters,
       due_date_from: firstDay,
       due_date_to: lastDay,
-      order_by: 'due_date',
+      order_by: currentOrderBy,
+      order_dir: currentOrderDir,
       page: 1,
     });
   };
@@ -74,7 +96,8 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
       ...filters,
       due_date_from: firstDay,
       due_date_to: lastDay,
-      order_by: 'due_date',
+      order_by: currentOrderBy,
+      order_dir: currentOrderDir,
       page: 1,
     });
   };
@@ -84,16 +107,17 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
       ...filters,
       due_date_from: undefined,
       due_date_to: undefined,
-      order_by: 'due_date',
+      order_by: currentOrderBy,
+      order_dir: currentOrderDir,
       page: 1,
     });
   };
 
   const handleToggleOrderDir = () => {
-    const newDir = filters.order_dir === 'DESC' ? 'ASC' : 'DESC';
+    const newDir = currentOrderDir === 'DESC' ? 'ASC' : 'DESC';
     onChange({
       ...filters,
-      order_by: 'due_date',
+      order_by: currentOrderBy,
       order_dir: newDir,
       page: 1,
     });
@@ -103,27 +127,37 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
     ? new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric' }).format(activeDate)
     : 'Todas as datas';
 
+  const hasCategoryFilter = Boolean(
+    Array.isArray(filters.category_id) ? filters.category_id.length > 0 : filters.category_id
+  );
+  const hasPayMethodFilter = Boolean(
+    Array.isArray(filters.pay_methods_id) ? filters.pay_methods_id.length > 0 : filters.pay_methods_id
+  );
+  const hasBankAccountFilter = Boolean(
+    Array.isArray(filters.bank_account_id) ? filters.bank_account_id.length > 0 : filters.bank_account_id
+  );
+  const hasValueFilter = filters.value_min !== undefined || filters.value_max !== undefined;
+
   const hasActiveFilters = Boolean(
     filters.type ||
     filters.status ||
     filters.description ||
     filters.due_date_from ||
     filters.due_date_to ||
-    filters.category_id ||
-    filters.pay_methods_id ||
-    filters.bank_account_id ||
-    filters.value_min !== undefined ||
-    filters.value_max !== undefined
+    hasCategoryFilter ||
+    hasPayMethodFilter ||
+    hasBankAccountFilter ||
+    hasValueFilter
   );
 
-  const isAscending = filters.order_dir === 'ASC';
+  const isAscending = currentOrderDir === 'ASC';
+  const currentOrderLabel = columnLabels[currentOrderBy] || 'Vencimento';
   const [isAdvancedFiltersOpen, setIsAdvancedFiltersOpen] = useState(false);
 
-  const hasValueFilter = filters.value_min !== undefined || filters.value_max !== undefined;
   const activeAdvancedCount = [
-    filters.category_id,
-    filters.pay_methods_id,
-    filters.bank_account_id,
+    hasCategoryFilter,
+    hasPayMethodFilter,
+    hasBankAccountFilter,
     hasValueFilter,
   ].filter(Boolean).length;
 
@@ -244,15 +278,15 @@ export const TransactionFilters: React.FC<Props> = ({ filters, onChange }) => {
             />
           </div>
 
-          {/* Botão de Direção da Ordenação por Vencimento */}
+          {/* Botão de Direção da Ordenação Ativa */}
           <button
             type="button"
             onClick={handleToggleOrderDir}
             className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 dark:border-slate-700 dark:bg-slate-800 rounded-lg text-xs font-medium text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition cursor-pointer"
-            title="Alternar direção de ordenação por data de vencimento"
+            title={`Alternar direção de ordenação por ${currentOrderLabel.toLowerCase()}`}
           >
             <ArrowUpDown className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-            <span>Vencimento: {isAscending ? 'Crescente (↑)' : 'Decrescente (↓)'}</span>
+            <span>{currentOrderLabel}: {isAscending ? 'Crescente (↑)' : 'Decrescente (↓)'}</span>
           </button>
         </div>
       </div>

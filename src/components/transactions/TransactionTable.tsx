@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Edit2, Trash2, Clock, CheckCircle2, AlertCircle, XCircle } from 'lucide-react';
+import { Edit2, Trash2, Clock, CheckCircle2, AlertCircle, XCircle, ArrowUp, ArrowDown, ArrowUpDown } from 'lucide-react';
 import { transactionService } from '../../services/transactionService.ts';
 import { useTransactionDetailsModalStore } from '../../stores/transactionDetailsModal.store.ts';
 import { TransactionMobileList } from './TransactionMobileList.tsx';
@@ -14,6 +14,9 @@ interface Props {
   onFetchNextPage?: () => void;
   onEdit?: (transaction: Transaction) => void;
   onDelete?: (transaction: Transaction) => void;
+  orderBy?: string;
+  orderDir?: 'ASC' | 'DESC';
+  onSort?: (column: string) => void;
 }
 
 export const TransactionTable: React.FC<Props> = ({
@@ -24,6 +27,9 @@ export const TransactionTable: React.FC<Props> = ({
   onFetchNextPage,
   onEdit,
   onDelete,
+  orderBy,
+  orderDir,
+  onSort,
 }) => {
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
@@ -89,6 +95,46 @@ export const TransactionTable: React.FC<Props> = ({
     );
   }
 
+  const renderSortableHeader = (column: string, label: string, align: 'left' | 'center' | 'right' = 'left') => {
+    if (!onSort) {
+      return (
+        <th className={`px-4 py-3 ${align === 'right' ? 'text-right' : align === 'center' ? 'text-center' : 'text-left'}`}>
+          {label}
+        </th>
+      );
+    }
+
+    const isActive = orderBy === column;
+    const isAsc = orderDir === 'ASC';
+
+    return (
+      <th
+        className={`px-4 py-3 ${align === 'right' ? 'text-right' : align === 'center' ? 'text-center' : 'text-left'}`}
+      >
+        <button
+          type="button"
+          onClick={() => onSort(column)}
+          data-testid={`sort-header-${column}`}
+          className={`inline-flex items-center gap-1.5 uppercase font-semibold text-xs tracking-wider transition hover:text-gray-900 dark:hover:text-white cursor-pointer select-none ${
+            isActive ? 'text-blue-600 dark:text-blue-400 font-bold' : 'text-gray-500 dark:text-slate-400'
+          }`}
+          title={`Ordenar por ${label}`}
+        >
+          <span>{label}</span>
+          {isActive ? (
+            isAsc ? (
+              <ArrowUp className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
+            ) : (
+              <ArrowDown className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
+            )
+          ) : (
+            <ArrowUpDown className="w-3 h-3 text-gray-400 opacity-40 hover:opacity-100 shrink-0" />
+          )}
+        </button>
+      </th>
+    );
+  };
+
   return (
     <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-800 shadow-sm overflow-hidden">
       {/* Visualização Mobile: Cards compactos verticais */}
@@ -104,13 +150,13 @@ export const TransactionTable: React.FC<Props> = ({
         <table className="w-full text-left text-sm">
           <thead className="bg-gray-50 dark:bg-slate-800/80 border-b border-gray-100 dark:border-slate-800 text-xs uppercase text-gray-400 dark:text-slate-400 font-semibold">
             <tr>
-              <th className="px-4 py-3">Descrição</th>
-              <th className="px-4 py-3">Compra</th>
-              <th className="px-4 py-3">Vencimento</th>
-              <th className="px-4 py-3">Pagamento</th>
-              <th className="px-4 py-3">Conta / Cartão</th>
-              <th className="px-4 py-3 text-right">Valor</th>
-              <th className="px-4 py-3 text-center">Status</th>
+              {renderSortableHeader('description', 'Descrição')}
+              {renderSortableHeader('purchase_date', 'Compra')}
+              {renderSortableHeader('due_date', 'Vencimento')}
+              {renderSortableHeader('payment_date', 'Pagamento')}
+              {renderSortableHeader('bank_account_name', 'Conta / Cartão')}
+              {renderSortableHeader('value', 'Valor', 'right')}
+              {renderSortableHeader('status', 'Status', 'center')}
               {canEdit && <th className="px-4 py-3 text-right">Ações</th>}
             </tr>
           </thead>

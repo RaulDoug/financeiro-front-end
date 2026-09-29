@@ -4,7 +4,13 @@ import { X, Filter, RotateCcw, Check } from 'lucide-react';
 import { useCategories } from '../../hooks/useCategories.ts';
 import { usePayMethods } from '../../hooks/usePayMethods.ts';
 import { useBankAccounts } from '../../hooks/useBankAccounts.ts';
+import { MultiSelect } from '../common/MultiSelect.tsx';
 import type { TransactionFilters, TransactionStatus, TransactionType } from '../../types/transaction.ts';
+
+const normalizeArray = (val: string | string[] | undefined): string[] => {
+  if (!val) return [];
+  return Array.isArray(val) ? val : [val];
+};
 
 interface TransactionAdvancedFiltersModalProps {
   isOpen: boolean;
@@ -27,14 +33,14 @@ export const TransactionAdvancedFiltersModal: React.FC<TransactionAdvancedFilter
   const { data: payMethods = [] } = usePayMethods();
   const { data: bankAccounts = [] } = useBankAccounts();
 
-  const [selectedCategory, setSelectedCategory] = useState<string>(
-    typeof filters.category_id === 'string' ? filters.category_id : ''
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(() =>
+    normalizeArray(filters.category_id)
   );
-  const [selectedPayMethod, setSelectedPayMethod] = useState<string>(
-    typeof filters.pay_methods_id === 'string' ? filters.pay_methods_id : ''
+  const [selectedPayMethods, setSelectedPayMethods] = useState<string[]>(() =>
+    normalizeArray(filters.pay_methods_id)
   );
-  const [selectedBankAccount, setSelectedBankAccount] = useState<string>(
-    typeof filters.bank_account_id === 'string' ? filters.bank_account_id : ''
+  const [selectedBankAccounts, setSelectedBankAccounts] = useState<string[]>(() =>
+    normalizeArray(filters.bank_account_id)
   );
   const [selectedStatus, setSelectedStatus] = useState<string>(
     typeof filters.status === 'string' ? filters.status : ''
@@ -69,9 +75,9 @@ export const TransactionAdvancedFiltersModal: React.FC<TransactionAdvancedFilter
 
   useEffect(() => {
     if (isOpen) {
-      setSelectedCategory(typeof filters.category_id === 'string' ? filters.category_id : '');
-      setSelectedPayMethod(typeof filters.pay_methods_id === 'string' ? filters.pay_methods_id : '');
-      setSelectedBankAccount(typeof filters.bank_account_id === 'string' ? filters.bank_account_id : '');
+      setSelectedCategories(normalizeArray(filters.category_id));
+      setSelectedPayMethods(normalizeArray(filters.pay_methods_id));
+      setSelectedBankAccounts(normalizeArray(filters.bank_account_id));
       setSelectedStatus(typeof filters.status === 'string' ? filters.status : '');
       setSelectedType(typeof filters.type === 'string' ? filters.type : '');
       setValueMin(filters.value_min !== undefined ? String(filters.value_min) : '');
@@ -133,9 +139,9 @@ export const TransactionAdvancedFiltersModal: React.FC<TransactionAdvancedFilter
 
     setValueError('');
     onApply({
-      category_id: selectedCategory || undefined,
-      pay_methods_id: selectedPayMethod || undefined,
-      bank_account_id: selectedBankAccount || undefined,
+      category_id: selectedCategories.length > 0 ? selectedCategories : undefined,
+      pay_methods_id: selectedPayMethods.length > 0 ? selectedPayMethods : undefined,
+      bank_account_id: selectedBankAccounts.length > 0 ? selectedBankAccounts : undefined,
       status: (selectedStatus as TransactionStatus) || undefined,
       type: (selectedType as TransactionType) || undefined,
       value_min: min,
@@ -146,9 +152,9 @@ export const TransactionAdvancedFiltersModal: React.FC<TransactionAdvancedFilter
   };
 
   const handleClear = () => {
-    setSelectedCategory('');
-    setSelectedPayMethod('');
-    setSelectedBankAccount('');
+    setSelectedCategories([]);
+    setSelectedPayMethods([]);
+    setSelectedBankAccounts([]);
     setSelectedStatus('');
     setSelectedType('');
     setValueMin('');
@@ -162,64 +168,34 @@ export const TransactionAdvancedFiltersModal: React.FC<TransactionAdvancedFilter
   const renderFilterFields = () => (
     <div className="p-4 sm:p-5 space-y-3 sm:space-y-4 overflow-y-auto">
       {/* Categoria */}
-      <div>
-        <label className="block text-xs font-semibold text-gray-700 dark:text-slate-300 mb-1.5">
-          Categoria
-        </label>
-        <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-          data-testid="filter-category-select"
-          className="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="">Todas as Categorias</option>
-          {categories.map((c) => (
-            <option key={c.id} value={c.id}>
-              {c.name}
-            </option>
-          ))}
-        </select>
-      </div>
+      <MultiSelect
+        label="Categoria"
+        placeholder="Todas as Categorias"
+        testId="filter-category-select"
+        options={categories.map((c) => ({ value: c.id, label: c.name }))}
+        selectedValues={selectedCategories}
+        onChange={setSelectedCategories}
+      />
 
       {/* Método de Pagamento */}
-      <div>
-        <label className="block text-xs font-semibold text-gray-700 dark:text-slate-300 mb-1.5">
-          Método de Pagamento
-        </label>
-        <select
-          value={selectedPayMethod}
-          onChange={(e) => setSelectedPayMethod(e.target.value)}
-          data-testid="filter-pay-method-select"
-          className="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="">Todos os Métodos</option>
-          {payMethods.map((m) => (
-            <option key={m.id} value={String(m.id)}>
-              {m.name}
-            </option>
-          ))}
-        </select>
-      </div>
+      <MultiSelect
+        label="Método de Pagamento"
+        placeholder="Todos os Métodos"
+        testId="filter-pay-method-select"
+        options={payMethods.map((m) => ({ value: String(m.id), label: m.name }))}
+        selectedValues={selectedPayMethods}
+        onChange={setSelectedPayMethods}
+      />
 
       {/* Conta Bancária */}
-      <div>
-        <label className="block text-xs font-semibold text-gray-700 dark:text-slate-300 mb-1.5">
-          Conta Bancária
-        </label>
-        <select
-          value={selectedBankAccount}
-          onChange={(e) => setSelectedBankAccount(e.target.value)}
-          data-testid="filter-bank-account-select"
-          className="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="">Todas as Contas</option>
-          {bankAccounts.map((a) => (
-            <option key={a.id} value={a.id}>
-              {a.bank_name}
-            </option>
-          ))}
-        </select>
-      </div>
+      <MultiSelect
+        label="Conta Bancária"
+        placeholder="Todas as Contas"
+        testId="filter-bank-account-select"
+        options={bankAccounts.map((a) => ({ value: a.id, label: a.bank_name }))}
+        selectedValues={selectedBankAccounts}
+        onChange={setSelectedBankAccounts}
+      />
 
       {/* Faixa de Valor */}
       <div>
