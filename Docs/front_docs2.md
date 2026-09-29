@@ -257,18 +257,20 @@ Sem filtros, usa o mês corrente automaticamente.
   "pendingIncomes": 1200.00,
   "pendingExpenses": 650.00,
   "totalBalance": 8500.00,
-  "monthForecast": 9050.00
+  "monthForecast": 3750.00,
+  "monthForecastFinal": 9050.00
 }
 ```
 
 **Mapeamento para os cards:**
 
-| Card                   | Campo da API        | Cor sugerida | Ícone |
-| ---------------------- | ------------------- | ------------ | ----- |
-| Saldo Total            | `totalBalance`      | Azul         | 🏦     |
-| Entradas Realizadas    | `completedIncomes`  | Verde        | ↑     |
-| Saídas Realizadas      | `completedExpenses` | Vermelho     | ↓     |
-| Sobra Projetada do Mês | `monthForecast`     | Azul/Roxo    | 📊     |
+| Card                             | Campo da API         | Cor sugerida | Ícone |
+| -------------------------------- | -------------------- | ------------ | ----- |
+| Saldo Total                      | `totalBalance`       | Azul         | 🏦     |
+| Entradas Realizadas              | `completedIncomes`   | Verde        | ↑     |
+| Saídas Realizadas                | `completedExpenses`  | Vermelho     | ↓     |
+| Sobra do Mês (Fluxo Operacional) | `monthForecast`      | Azul/Roxo    | 📊     |
+| Saldo Final Projetado (Em Conta) | `monthForecastFinal` | Roxo/Verde   | 💰     |
 
 **Cards secundários (opcionais, exibir se houver espaço):**
 
@@ -277,9 +279,11 @@ Sem filtros, usa o mês corrente automaticamente.
 | Pendente a Receber | `pendingIncomes`  | Entradas `pending` no mês |
 | Pendente a Pagar   | `pendingExpenses` | Saídas `pending` no mês   |
 
-> **Lógica do `monthForecast`:**  
-> `(completedIncomes + pendingIncomes) - (completedExpenses + pendingExpenses)`  
-> Calculado com base no período selecionado (`startDate`/`endDate`), considerando todas as entradas e saídas (realizadas e futuras/pendentes) do mês.
+> **Lógica dos Indicadores de Previsão:**  
+> - **`monthForecast` (Sobra Operacional do Mês):** `(completedIncomes + pendingIncomes) - (completedExpenses + pendingExpenses)`. Considera unicamente as movimentações (receitas e despesas) do período selecionado, sem misturar com saldos anteriores.  
+> - **`monthForecastFinal` (Saldo Final Projetado em Conta):** `totalBalance + pendingIncomes - pendingExpenses`. Considera o saldo atual acumulado em todas as contas e projeta quanto restará em conta após a quitação das pendências.  
+>  
+> **💡 Dica de UI/UX para o Front-End:** Pode ser implementado com um seletor/toggle no card de projeção (ex: *"Apenas transações deste mês"* vs *"Considerando saldo em conta"*) ou exibindo o Saldo Final Projetado como destaque principal e a Sobra Operacional do Mês como subtítulo.
 
 ### 5.2 Linha 2 — Gráficos Principais
 
@@ -470,11 +474,15 @@ O coração operacional do sistema.
   "pay_method_name": "PIX",
   "counterparty_name": "Supermercado Extra",
   "creator_user_name": "João Silva",
-  "created_at": "2024-08-01T00:00:00.000Z"
+  "created_at": "2024-08-01T00:00:00.000Z",
+  "bank_account_id": "uuid",
+  "category_id": "uuid",
+  "pay_methods_id": "uuid",
+  "counterparty_id": "uuid"
 }
 ```
 
-> **Importante:** O GET de transações retorna **nomes resolvidos via JOIN** (não UUIDs). São eles: `bank_account_name`, `category_name`, `pay_method_name`, `counterparty_name`, `creator_user_name`.
+> **Importante:** O GET de transações retorna tanto os UUIDs das chaves estrangeiras (`bank_account_id`, `category_id`, `pay_methods_id`, `counterparty_id`) quanto os nomes resolvidos via JOIN (`bank_account_name`, `category_name`, `pay_method_name`, `counterparty_name`, `creator_user_name`).
 
 ### 6.2 Filtros da Tela
 

@@ -911,7 +911,11 @@ GET /api/transaction?page=1&limit=20
       "pay_method_name": "PIX",
       "counterparty_name": "Supermercado Extra",
       "creator_user_name": "João Silva",
-      "created_at": "2024-08-01T00:00:00.000Z"
+      "created_at": "2024-08-01T00:00:00.000Z",
+      "bank_account_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "category_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "pay_methods_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "counterparty_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
     }
   ],
   "pagination": {
@@ -924,8 +928,8 @@ GET /api/transaction?page=1&limit=20
 }
 ```
 
-> [!IMPORTANT]
-> O GET de transações retorna campos de **JOIN** (nomes resolvidos) em vez de UUIDs. Isso é diferente dos outros módulos. Se precisar dos IDs originais das FKs, use os outros endpoints de listagem.
+> [!NOTE]
+> O GET de transações retorna tanto os UUIDs das chaves estrangeiras (`bank_account_id`, `category_id`, `pay_methods_id`, `counterparty_id`) quanto os nomes resolvidos via JOIN (`bank_account_name`, `category_name`, `pay_method_name`, `counterparty_name`, `creator_user_name`).
 
 **Resposta `200` — sem resultados:**
 ```json
@@ -1101,13 +1105,15 @@ Cria uma transação. Regras variam conforme o tipo.
 ```
 
 **Erros de negócio:**
-| Status | Situação                                                 |
-| ------ | -------------------------------------------------------- |
-| `400`  | Conta de destino ausente em transferência                |
-| `400`  | Conta origem = conta destino na transferência            |
-| `400`  | `due_date` ausente em despesa sem cartão                 |
-| `422`  | Saldo insuficiente (conta que não permite negativo)      |
-| `422`  | Cartão de crédito usado como forma de entrada recorrente |
+| Status | Situação                                                                                                     |
+| ------ | ------------------------------------------------------------------------------------------------------------ |
+| `400`  | Conta bancária, categoria, método de pagamento ou contraparte não encontrada ou não pertence a esta carteira |
+| `400`  | Campos obrigatórios de FKs não preenchidos                                                                   |
+| `400`  | Conta de destino ausente em transferência                                                                    |
+| `400`  | Conta origem = conta destino na transferência                                                                |
+| `400`  | `due_date` ausente em despesa sem cartão                                                                     |
+| `422`  | Saldo insuficiente (conta que não permite negativo)                                                          |
+| `422`  | Cartão de crédito usado como forma de entrada recorrente                                                     |
 
 ---
 
@@ -1134,6 +1140,13 @@ Atualiza uma transação. `:id` = UUID da transação.
 
 > [!WARNING]
 > Não é possível mudar a forma de pagamento de cartão de crédito para outra.
+
+**Erros de negócio:**
+| Status | Situação / Mensagem                                                                                                |
+| ------ | ------------------------------------------------------------------------------------------------------------------ |
+| `400`  | Conta bancária sem saldo suficiente para realizar a transação                                                      |
+| `400`  | Não é possível definir uma data de pagamento junto com status cancelled                                            |
+| `400`  | Conta bancária, categoria, método de pagamento ou contraparte alterada não encontrada ou pertence a outra carteira |
 
 ---
 
@@ -1258,18 +1271,20 @@ Resumo financeiro da carteira: entradas, saídas, pendências e projeção do m�
   "pendingIncomes": 1200.00,
   "pendingExpenses": 650.00,
   "totalBalance": 8500.00,
-  "monthForecast": 9050.00
+  "monthForecast": 3750.00,
+  "monthForecastFinal": 9050.00
 }
 ```
 
-| Campo               | Descrição                                                                                                   |
-| ------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `completedIncomes`  | Total de entradas pagas no período                                                                          |
-| `completedExpenses` | Total de despesas pagas no período                                                                          |
-| `pendingIncomes`    | Total de entradas pendentes no período                                                                      |
-| `pendingExpenses`   | Total de despesas pendentes no período                                                                      |
-| `totalBalance`      | Saldo total somado de todas as contas                                                                       |
-| `monthForecast`     | Projeção de Sobra: `(completedIncomes + pendingIncomes) - (completedExpenses + pendingExpenses)` no período |
+| Campo                | Descrição                                                                                                                    |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `completedIncomes`   | Total de entradas pagas no período                                                                                           |
+| `completedExpenses`  | Total de despesas pagas no período                                                                                           |
+| `pendingIncomes`     | Total de entradas pendentes no período                                                                                       |
+| `pendingExpenses`    | Total de despesas pendentes no período                                                                                       |
+| `totalBalance`       | Saldo total somado de todas as contas                                                                                        |
+| `monthForecast`      | Sobra Operacional do Mês (apenas transações): `(completedIncomes + pendingIncomes) - (completedExpenses + pendingExpenses)`        |
+| `monthForecastFinal` | Saldo Final Projetado em Conta (considera o saldo em conta): `totalBalance + pendingIncomes - pendingExpenses`                |
 
 ---
 
