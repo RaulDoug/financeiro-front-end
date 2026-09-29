@@ -23,6 +23,7 @@ import { counterpartyService, type CounterpartyItem } from '../../services/count
 import { renderLucideIcon } from '../shared/IconPicker.tsx';
 import { detectBankByName } from '../../lib/bankDetector.ts';
 import { resolveTransactionStatus } from '../../utils/transactionStatus.ts';
+import { getApiErrorMessage } from '../../utils/apiError.ts';
 import type { TransactionType } from '../../types/transaction.ts';
 import { InstallmentFields } from './InstallmentFields.tsx';
 
@@ -302,6 +303,13 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
       return;
     }
 
+    // AC-332: Validação prévia de tamanho mínimo de descrição
+    const trimmedDesc = description.trim();
+    if (trimmedDesc.length > 0 && trimmedDesc.length < 3) {
+      setErrorBanner('A descrição deve conter no mínimo 3 caracteres');
+      return;
+    }
+
     const defaultDesc =
       type === 'expenses' ? 'Despesa' : type === 'incomings' ? 'Receita' : 'Transferência';
 
@@ -442,11 +450,7 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
       setFirstThisMonth(true);
       onClose();
     } catch (err: any) {
-      const msg =
-        err?.response?.data?.message ||
-        err?.response?.data?.error ||
-        err?.message ||
-        'Não foi possível salvar a transação. Verifique os dados.';
+      const msg = getApiErrorMessage(err);
       setErrorBanner(msg);
     }
   };

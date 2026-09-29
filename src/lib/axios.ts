@@ -33,6 +33,18 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    // Normalizar mensagens de validação da API (ex: Zod { status: 'fail', errors: [{ message, field }] })
+    if (error?.response?.data?.errors && Array.isArray(error.response.data.errors)) {
+      const errorList = error.response.data.errors;
+      const combined = errorList
+        .map((e: any) => e.message || e.error)
+        .filter(Boolean)
+        .join('. ');
+      if (combined && !error.response.data.message) {
+        error.response.data.message = combined;
+      }
+    }
+
     if (error?.response?.status === 401) {
       const store = useAuthStore.getState();
       store.setSessionExpired(true);

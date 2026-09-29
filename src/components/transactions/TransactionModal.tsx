@@ -4,6 +4,7 @@ import { X, ArrowUpRight, ArrowDownLeft, ArrowLeftRight, AlertCircle } from 'luc
 import { TransactionFormBase } from './TransactionFormBase.tsx';
 import { MobileQuickEntry } from './MobileQuickEntry.tsx';
 import { useModalTransition } from '../../hooks/useModalTransition.ts';
+import { getApiErrorMessage } from '../../utils/apiError.ts';
 import type { Transaction, TransactionType } from '../../types/transaction.ts';
 
 interface Props {
@@ -66,12 +67,9 @@ export const TransactionModal: React.FC<Props> = ({
       await onSubmit(data);
     } catch (err: any) {
       const is500 = err?.response?.status === 500 || err?.statusCode === 500;
-      const msg =
-        err?.response?.data?.message ||
-        err?.response?.data?.error ||
-        (is500
-          ? 'Não foi possível atualizar a transação devido a um erro no servidor. Tente novamente.'
-          : err?.message || 'Não foi possível salvar a transação. Verifique os dados.');
+      const msg = is500
+        ? 'Não foi possível atualizar a transação devido a um erro no servidor. Tente novamente.'
+        : getApiErrorMessage(err, 'Não foi possível salvar a transação. Verifique os dados.');
       setErrorBanner(msg);
     }
   };

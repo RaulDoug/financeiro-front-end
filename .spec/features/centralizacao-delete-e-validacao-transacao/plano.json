@@ -1,0 +1,118 @@
+{
+  "runId": "Front-End_Financeiro-centralizacao-delete-e-validacao-transacao-mumqof13",
+  "feature": "centralizacao-delete-e-validacao-transacao",
+  "agent": "antigravity",
+  "modo": "paralelo",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-29 13:55",
+  "branchTrabalho": "spec/centralizacao-delete-e-validacao-transacao",
+  "baseDir": ".spec/features/centralizacao-delete-e-validacao-transacao",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "logsDir": "../onp-worktrees/Front-End_Financeiro-centralizacao-delete-e-validacao-transacao-logs",
+  "ondas": [
+    [
+      "faixa-1",
+      "faixa-2",
+      "faixa-3"
+    ],
+    [
+      "faixa-4"
+    ]
+  ],
+  "faixas": [
+    {
+      "id": "faixa-1",
+      "branch": "spec/centralizacao-delete-e-validacao-transacao-faixa-1",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-centralizacao-delete-e-validacao-transacao-faixa-1",
+      "tarefas": [
+        {
+          "id": "T-215",
+          "titulo": "Centralização e transição suave do `TransactionDeleteDialog` com Portal",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/components/transactions/TransactionDeleteDialog.tsx"
+          ],
+          "refs": [
+            "US-091",
+            "AC-330",
+            "AC-331"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-2",
+      "branch": "spec/centralizacao-delete-e-validacao-transacao-faixa-2",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-centralizacao-delete-e-validacao-transacao-faixa-2",
+      "tarefas": [
+        {
+          "id": "T-216",
+          "titulo": "Normalização de mensagens de erro de validação no cliente Axios e helper",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/lib/axios.ts",
+            "src/utils/apiError.ts"
+          ],
+          "refs": [
+            "US-092",
+            "AC-333"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-3",
+      "branch": "spec/centralizacao-delete-e-validacao-transacao-faixa-3",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-centralizacao-delete-e-validacao-transacao-faixa-3",
+      "tarefas": [
+        {
+          "id": "T-217",
+          "titulo": "Validação de descrição mínima e exibição de erro no `MobileQuickEntry` e `TransactionModal`",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "src/components/transactions/MobileQuickEntry.tsx",
+            "src/components/transactions/TransactionModal.tsx"
+          ],
+          "refs": [
+            "US-092",
+            "AC-332",
+            "AC-333"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-4",
+      "branch": "spec/centralizacao-delete-e-validacao-transacao-faixa-4",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-centralizacao-delete-e-validacao-transacao-faixa-4",
+      "tarefas": [
+        {
+          "id": "T-218",
+          "titulo": "Testes automatizados de especificação AC-330 a AC-333",
+          "modelo": "claude-sonnet-5",
+          "esforco": "low",
+          "arquivos": [
+            "test/centralizacao-delete-e-validacao-transacao.spec.test.js"
+          ],
+          "refs": [
+            "US-091",
+            "US-092",
+            "AC-330",
+            "AC-331",
+            "AC-332",
+            "AC-333"
+          ]
+        }
+      ]
+    }
+  ],
+  "sequenciais": [],
+  "concluidas": [],
+  "avisos": []
+}

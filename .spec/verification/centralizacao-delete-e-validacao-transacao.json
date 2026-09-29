@@ -1,0 +1,32 @@
+{
+  "feature": "centralizacao-delete-e-validacao-transacao",
+  "timestamp": "2026-09-29T14:02:58.672Z",
+  "gitRev": "1aab6d4",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 1,
+  "testsParsed": 337,
+  "results": {
+    "AC-330": {
+      "status": "pass",
+      "testName": "AC-330: Renderização do diálogo de exclusão via Portal no body com centralização total @spec:AC-330",
+      "method": "tap"
+    },
+    "AC-331": {
+      "status": "pass",
+      "testName": "AC-331: Animações de transição suave e suporte ao fechamento por tecla ESC @spec:AC-331",
+      "method": "tap"
+    },
+    "AC-332": {
+      "status": "pass",
+      "testName": "AC-332: Validação prévia de tamanho mínimo de descrição no lançamento rápido mobile @spec:AC-332",
+      "method": "tap"
+    },
+    "AC-333": {
+      "status": "pass",
+      "testName": "AC-333: Extração automática de mensagens de validação da API (status 400 com errors) @spec:AC-333",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}
