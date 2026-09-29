@@ -1,0 +1,27 @@
+{
+  "feature": "calculo-previsao-sobra",
+  "timestamp": "2026-09-29T12:26:59.856Z",
+  "gitRev": "0abdc91",
+  "command": "node --test --test-reporter=tap",
+  "reporter": "tap",
+  "exitCode": 1,
+  "testsParsed": 321,
+  "results": {
+    "AC-315": {
+      "status": "pass",
+      "testName": "AC-315: Suporte ao campo monthForecastFinal no contrato de dados @spec:AC-315",
+      "method": "tap"
+    },
+    "AC-316": {
+      "status": "pass",
+      "testName": "AC-316: Toggle interativo no card de Sobra Projetada @spec:AC-316",
+      "method": "tap"
+    },
+    "AC-317": {
+      "status": "pass",
+      "testName": "AC-317: Persistência e acessibilidade do seletor de previsão @spec:AC-317",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

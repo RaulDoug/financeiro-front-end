@@ -1,7 +1,7 @@
 # Spec: Calculo de Previsao de Sobra com Opcao de Saldo em Conta
 
 > feature: calculo-previsao-sobra
-> status: rascunho
+> status: implementada
 
 ## Contexto
 

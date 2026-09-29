@@ -1,0 +1,63 @@
+{
+  "runId": "Front-End_Financeiro-calculo-previsao-sobra-mumn6xz1",
+  "feature": "calculo-previsao-sobra",
+  "agent": "antigravity",
+  "modo": "sequencial",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-09-29 12:18",
+  "branchTrabalho": "spec/calculo-previsao-sobra",
+  "baseDir": ".spec/features/calculo-previsao-sobra",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "logsDir": "../onp-worktrees/Front-End_Financeiro-calculo-previsao-sobra-logs",
+  "ondas": [],
+  "faixas": [],
+  "sequenciais": [
+    {
+      "id": "T-203",
+      "titulo": "Tipagem e suporte a monthForecastFinal no DashboardSummary",
+      "modelo": "claude-sonnet-5",
+      "esforco": "low",
+      "arquivos": [
+        "src/types/dashboard.ts"
+      ],
+      "refs": [
+        "US-085",
+        "AC-315"
+      ]
+    },
+    {
+      "id": "T-204",
+      "titulo": "Implementar toggle e alternância dinâmica no KpiCards",
+      "modelo": "claude-sonnet-5",
+      "esforco": "medium",
+      "arquivos": [
+        "src/pages/Dashboard/components/KpiCards.tsx"
+      ],
+      "refs": [
+        "US-085",
+        "AC-316",
+        "AC-317"
+      ]
+    },
+    {
+      "id": "T-205",
+      "titulo": "Testes de especificação da funcionalidade de cálculo de sobra",
+      "modelo": "claude-sonnet-5",
+      "esforco": "low",
+      "arquivos": [
+        "test/calculo-previsao-sobra.spec.test.js"
+      ],
+      "refs": [
+        "US-085",
+        "AC-315",
+        "AC-316",
+        "AC-317"
+      ]
+    }
+  ],
+  "concluidas": [],
+  "avisos": []
+}
