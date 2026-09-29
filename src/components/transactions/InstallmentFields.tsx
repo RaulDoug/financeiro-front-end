@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface Props {
   isInstallment: boolean;
@@ -29,6 +29,26 @@ export const InstallmentFields: React.FC<Props> = ({
   isCreditCard,
   transactionType,
 }) => {
+  // AC-342 / AC-343: Estados transitórios para permitir apagar dígitos sem reversão imediata
+  const [rawInstallments, setRawInstallments] = useState<string>(() =>
+    installmentsNumber != null ? String(installmentsNumber) : '2'
+  );
+  const [rawDueDay, setRawDueDay] = useState<string>(() =>
+    dueDay != null ? String(dueDay) : '10'
+  );
+
+  useEffect(() => {
+    if (installmentsNumber != null) {
+      setRawInstallments(String(installmentsNumber));
+    }
+  }, [installmentsNumber]);
+
+  useEffect(() => {
+    if (dueDay != null) {
+      setRawDueDay(String(dueDay));
+    }
+  }, [dueDay]);
+
   // AC-055: Alerta se tentar receita recorrente no cartão
   const isBlockedCreditCardIncome = isCreditCard && transactionType === 'incomings' && isInstallment;
 
@@ -115,10 +135,35 @@ export const InstallmentFields: React.FC<Props> = ({
               </label>
               <input
                 type="number"
+                inputMode="numeric"
+                pattern="[0-9]*"
                 min={2}
                 max={72}
-                value={installmentsNumber || 2}
-                onChange={(e) => onChangeInstallmentsNumber(parseInt(e.target.value, 10) || 2)}
+                value={rawInstallments}
+                onFocus={(e) => e.target.select()}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setRawInstallments(val);
+                  if (val !== '') {
+                    const parsed = parseInt(val, 10);
+                    if (!isNaN(parsed)) {
+                      onChangeInstallmentsNumber(parsed);
+                    }
+                  }
+                }}
+                onBlur={() => {
+                  const parsed = parseInt(rawInstallments, 10);
+                  if (rawInstallments === '' || isNaN(parsed) || parsed < 2) {
+                    setRawInstallments('2');
+                    onChangeInstallmentsNumber(2);
+                  } else if (parsed > 72) {
+                    setRawInstallments('72');
+                    onChangeInstallmentsNumber(72);
+                  } else {
+                    setRawInstallments(String(parsed));
+                    onChangeInstallmentsNumber(parsed);
+                  }
+                }}
                 className="w-full px-2.5 py-1.5 border border-gray-200 dark:border-slate-700 rounded-lg text-sm bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100"
               />
             </div>
@@ -127,10 +172,35 @@ export const InstallmentFields: React.FC<Props> = ({
               <label className="block text-[11px] font-semibold text-gray-600 dark:text-slate-400 mb-1">Dia Vencimento (1–31)</label>
               <input
                 type="number"
+                inputMode="numeric"
+                pattern="[0-9]*"
                 min={1}
                 max={31}
-                value={dueDay || 10}
-                onChange={(e) => onChangeDueDay(parseInt(e.target.value, 10) || 10)}
+                value={rawDueDay}
+                onFocus={(e) => e.target.select()}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setRawDueDay(val);
+                  if (val !== '') {
+                    const parsed = parseInt(val, 10);
+                    if (!isNaN(parsed)) {
+                      onChangeDueDay(parsed);
+                    }
+                  }
+                }}
+                onBlur={() => {
+                  const parsed = parseInt(rawDueDay, 10);
+                  if (rawDueDay === '' || isNaN(parsed) || parsed < 1) {
+                    setRawDueDay('1');
+                    onChangeDueDay(1);
+                  } else if (parsed > 31) {
+                    setRawDueDay('31');
+                    onChangeDueDay(31);
+                  } else {
+                    setRawDueDay(String(parsed));
+                    onChangeDueDay(parsed);
+                  }
+                }}
                 className="w-full px-2.5 py-1.5 border border-gray-200 dark:border-slate-700 rounded-lg text-sm bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100"
               />
             </div>

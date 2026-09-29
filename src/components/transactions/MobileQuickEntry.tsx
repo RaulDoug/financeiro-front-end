@@ -425,15 +425,19 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
       payload.pay_methods_id = payMethodId || payMethodsData[0]?.id;
 
       if (isInstallment) {
-        payload.installments_number = installmentsNumber;
-        payload.due_day = dueDay;
+        // AC-344: Sanitização defensiva para envio seguro de parcelas e dia de vencimento
+        const safeInstallments = Math.max(2, Math.min(72, Number(installmentsNumber) || 2));
+        const safeDueDay = Math.max(1, Math.min(31, Number(dueDay) || 10));
+
+        payload.installments_number = safeInstallments;
+        payload.due_day = safeDueDay;
         payload.first_this_month = firstThisMonth;
 
         if (isRecurrent) {
           payload.is_recurrent = true;
         } else if (!isCreditCard) {
           // Dividir valor em parcelas para métodos que não são cartão
-          payload.value = Number((numericValue / installmentsNumber).toFixed(2));
+          payload.value = Number((numericValue / safeInstallments).toFixed(2));
           payload.is_recurrent = true;
         }
       }
