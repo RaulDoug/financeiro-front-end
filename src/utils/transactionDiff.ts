@@ -57,6 +57,15 @@ export function buildUpdateTransactionDiff(
     }
   }
 
+  // 4b. Data de Compra (purchase_date)
+  if (currentPayload.purchase_date !== undefined) {
+    const origPurchase = initialData.purchase_date ? initialData.purchase_date.split('T')[0] : '';
+    const newPurchase = currentPayload.purchase_date ? String(currentPayload.purchase_date).split('T')[0] : '';
+    if (newPurchase && newPurchase !== origPurchase) {
+      diff.purchase_date = newPurchase;
+    }
+  }
+
   // 5. Data de Pagamento (payment_date)
   if (currentPayload.payment_date !== undefined) {
     const origPayment = initialData.payment_date ? initialData.payment_date.split('T')[0] : '';

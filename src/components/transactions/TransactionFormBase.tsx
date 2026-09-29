@@ -42,6 +42,9 @@ export const TransactionFormBase: React.FC<Props> = ({
   const [dueDate, setDueDate] = useState(
     initialData?.due_date ? initialData.due_date.split('T')[0] : todayStr
   );
+  const [purchaseDate, setPurchaseDate] = useState(
+    initialData?.purchase_date ? initialData.purchase_date.split('T')[0] : todayStr
+  );
   const [isPaid, setIsPaid] = useState(initialData?.status === 'completed' || false);
   const [isCancelled, setIsCancelled] = useState(initialData?.status === 'cancelled' || false);
   const [paymentDate, setPaymentDate] = useState(
@@ -125,6 +128,10 @@ export const TransactionFormBase: React.FC<Props> = ({
       } else if (initialData.counterparty_name && counterpartiesData.length > 0) {
         const found = counterpartiesData.find((cp: CounterpartyItem) => cp.name === initialData.counterparty_name);
         if (found) setCounterpartyId(found.id);
+      }
+
+      if (initialData.purchase_date) {
+        setPurchaseDate(initialData.purchase_date.split('T')[0]);
       }
     }
   }, [initialData, accountsData, payMethodsData, allCategoriesData, counterpartiesData]);
@@ -339,6 +346,10 @@ export const TransactionFormBase: React.FC<Props> = ({
       status: payloadStatus,
       payment_date: isPaid ? paymentDate || todayStr : undefined,
     };
+
+    if (type !== 'transfers') {
+      payload.purchase_date = purchaseDate || todayStr;
+    }
 
     if (resolvedStatus === 'completed') {
       payload.payment_date = paymentDate || todayStr;
@@ -602,6 +613,20 @@ export const TransactionFormBase: React.FC<Props> = ({
               ))}
             </select>
             {errors.payMethodId && <p className="text-xs text-rose-500 mt-1">{errors.payMethodId}</p>}
+          </div>
+
+          {/* Data da Compra */}
+          <div>
+            <label className="block text-xs font-semibold text-gray-700 dark:text-slate-300 mb-1">
+              Data da Compra *
+            </label>
+            <input
+              type="date"
+              value={purchaseDate}
+              onChange={(e) => setPurchaseDate(e.target.value)}
+              data-testid="input-purchase-date"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-slate-700 rounded-lg text-sm bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 focus:ring-blue-500"
+            />
           </div>
 
           {/* Data de Vencimento */}

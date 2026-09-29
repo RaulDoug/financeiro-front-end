@@ -51,6 +51,7 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
   const [valueCents, setValueCents] = useState<number>(0);
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState(() => todayStr);
+  const [purchaseDate, setPurchaseDate] = useState(() => todayStr);
   const [paymentDate, setPaymentDate] = useState(() => todayStr);
   const [categoryId, setCategoryId] = useState('');
   const [bankAccountId, setBankAccountId] = useState('');
@@ -270,6 +271,7 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
   useEffect(() => {
     if (isOpen) {
       setErrorBanner(null);
+      setPurchaseDate(todayStr);
       setIsInstallment(false);
       setIsRecurrent(false);
       setInstallmentsNumber(2);
@@ -314,6 +316,7 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
       type === 'expenses' ? 'Despesa' : type === 'incomings' ? 'Receita' : 'Transferência';
 
     const finalDueDate = dueDate.trim() || todayStr;
+    const finalPurchaseDate = purchaseDate.trim() || todayStr;
     const finalPaymentDate = paymentDate.trim() || todayStr;
 
     // Garantir contraparte válida para evitar erro 400 Bad Request
@@ -382,6 +385,10 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
       payment_date: isPaid ? finalPaymentDate : undefined,
     };
 
+    if (type !== 'transfers') {
+      payload.purchase_date = finalPurchaseDate;
+    }
+
     if (finalCounterpartyId) {
       payload.counterparty_id = finalCounterpartyId;
     }
@@ -447,6 +454,7 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
       await onSubmit(payload);
       setValueCents(0);
       setDescription('');
+      setPurchaseDate(todayStr);
       setIsInstallment(false);
       setIsRecurrent(false);
       setInstallmentsNumber(2);
@@ -502,6 +510,7 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
   };
 
   const formattedDueDateDisplay = formatFriendlyDate(dueDate || todayStr);
+  const formattedPurchaseDateDisplay = formatFriendlyDate(purchaseDate || todayStr);
   const formattedPaymentDateDisplay = formatFriendlyDate(paymentDate || todayStr);
 
   return (
@@ -964,6 +973,39 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
                   )}
                 </select>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* Data da Compra (AC-348) */}
+        {type !== 'transfers' && (
+          <div className="flex flex-col gap-1 relative">
+            <label className="text-[11px] font-medium text-slate-500 dark:text-slate-400 ml-1">
+              Data da Compra
+            </label>
+            <div
+              data-testid="chip-purchase-date"
+              onClick={(e) => {
+                const input = e.currentTarget.querySelector('input');
+                if (input && 'showPicker' in input) {
+                  try {
+                    input.showPicker();
+                  } catch {
+                    input.focus();
+                  }
+                }
+              }}
+              title={`Compra: ${formattedPurchaseDateDisplay}`}
+              className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 rounded-xl px-2.5 h-11 border border-slate-200 dark:border-slate-700 cursor-pointer"
+            >
+              <Calendar className="w-4 h-4 text-blue-500 shrink-0 pointer-events-none" />
+              <input
+                type="date"
+                value={purchaseDate}
+                onChange={(e) => setPurchaseDate(e.target.value)}
+                className="w-full bg-transparent text-xs font-semibold text-slate-800 dark:text-slate-100 focus:outline-none cursor-pointer"
+                data-testid="input-quick-purchase-date"
+              />
             </div>
           </div>
         )}
