@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { authService, AuthError } from '../../services/auth.service.ts';
 import { AuthCard } from '../../components/ui/AuthCard.tsx';
-import { AlertCircle, Lock, Mail, Loader2 } from 'lucide-react';
+import { AlertCircle, Lock, Mail, Loader2, Sparkles } from 'lucide-react';
 
 export const loginSchema = z.object({
   email: z.string().min(1, 'O e-mail é obrigatório').email('Formato de e-mail inválido'),
@@ -131,17 +131,32 @@ export const LoginPage: React.FC = () => {
             'Entrar'
           )}
         </button>
+
+        <div className="relative my-4 flex items-center justify-center">
+          <div className="border-t border-zinc-200 dark:border-zinc-800 w-full" />
+          <span className="bg-white dark:bg-zinc-900 px-2 text-[11px] text-zinc-400 uppercase tracking-wider font-semibold absolute">
+            Ou explore sem login
+          </span>
+        </div>
+
+        <Link
+          to="/demo"
+          data-testid="demo-login-button"
+          className="w-full py-2.5 px-4 rounded-lg border border-violet-500/30 bg-violet-50/60 dark:bg-violet-950/30 hover:bg-violet-100/70 dark:hover:bg-violet-900/40 active:bg-violet-200/60 text-violet-700 dark:text-violet-300 font-semibold text-sm flex items-center justify-center gap-2 transition-all shadow-xs"
+        >
+          <Sparkles className="w-4 h-4 text-violet-500" />
+          <span>Experimentar Modo Demonstração</span>
+        </Link>
       </form>
 
-      <p className="mt-6 text-center text-xs text-zinc-500 dark:text-zinc-400">
-        Não tem uma conta?{' '}
-        <Link
-          to="/register"
-          className="font-semibold text-violet-600 hover:text-violet-500 dark:text-violet-400"
+      <div className="mt-6 text-center">
+        <span
+          data-testid="registration-disabled-badge"
+          className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20"
         >
-          Criar conta
-        </Link>
-      </p>
+          Novos cadastros temporariamente suspensos
+        </span>
+      </div>
     </AuthCard>
   );
 };

@@ -1,0 +1,71 @@
+{
+  "feature": "modo-demo-e-bloqueio-registro",
+  "timestamp": "2026-10-08T14:45:45.000Z",
+  "command": "node --test test/modo-demo-e-bloqueio-registro.spec.test.js",
+  "reporter": "tap",
+  "exitCode": 0,
+  "testsParsed": 12,
+  "results": {
+    "AC-362": {
+      "status": "pass",
+      "testName": "AC-362: Inicialização Direta via Rota /demo @spec:AC-362",
+      "method": "tap"
+    },
+    "AC-363": {
+      "status": "pass",
+      "testName": "AC-363: Atalho para Modo Demo na Tela de Login @spec:AC-363",
+      "method": "tap"
+    },
+    "AC-364": {
+      "status": "pass",
+      "testName": "AC-364: Dataset Mockado Realista @spec:AC-364",
+      "method": "tap"
+    },
+    "AC-365": {
+      "status": "pass",
+      "testName": "AC-365: Interceptação de Rede Transparente @spec:AC-365",
+      "method": "tap"
+    },
+    "AC-366": {
+      "status": "pass",
+      "testName": "AC-366: Lançamento e Recálculo Dinâmico em Memória @spec:AC-366",
+      "method": "tap"
+    },
+    "AC-367": {
+      "status": "pass",
+      "testName": "AC-367: Isolamento do Módulo de Investimentos @spec:AC-367",
+      "method": "tap"
+    },
+    "AC-368": {
+      "status": "pass",
+      "testName": "AC-368: Bloqueio Total da URL /register @spec:AC-368",
+      "method": "tap"
+    },
+    "AC-369": {
+      "status": "pass",
+      "testName": "AC-369: Omissão de Links de Registro @spec:AC-369",
+      "method": "tap"
+    },
+    "AC-370": {
+      "status": "pass",
+      "testName": "AC-370: Banner Informativo de Demonstração @spec:AC-370",
+      "method": "tap"
+    },
+    "AC-372": {
+      "status": "pass",
+      "testName": "AC-372: Rota Raiz / Redireciona para Modo Demo @spec:AC-372",
+      "method": "tap"
+    },
+    "AC-371": {
+      "status": "pass",
+      "testName": "AC-371: Descarte de Dados e Reset ao Sair @spec:AC-371",
+      "method": "tap"
+    },
+    "AC-373": {
+      "status": "pass",
+      "testName": "AC-373: Acesso à Tela de Login a partir da Demonstração @spec:AC-373",
+      "method": "tap"
+    }
+  },
+  "principles": {}
+}

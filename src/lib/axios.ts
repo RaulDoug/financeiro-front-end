@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useAuthStore } from '../stores/auth.store.ts';
 import { useWalletStore } from '../stores/wallet.store.ts';
+import { isDemoRequest, handleDemoMockRequest } from './demoAxiosAdapter.ts';
 
 const isDev = typeof import.meta !== 'undefined' && Boolean(import.meta.env?.DEV);
 
@@ -12,6 +13,10 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
+  if (isDemoRequest(config)) {
+    config.adapter = handleDemoMockRequest;
+    return config;
+  }
   const authState = useAuthStore.getState();
   const token = authState.token || (typeof localStorage !== 'undefined' ? localStorage.getItem('auth_token') : null);
   const activeWalletId =

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useWalletStore } from '../stores/wallet.store.ts';
 import { useAuthStore } from '../stores/auth.store.ts';
+import { useDemoStore } from '../stores/demo.store.ts';
 
 export interface OnboardingRedirectResult {
   shouldRedirect: boolean;
@@ -38,6 +39,7 @@ export function evaluateOnboardingRedirect(
 }
 
 export function useOnboardingCheck(currentPath: string) {
+  const isDemoMode = useDemoStore((state) => state.isDemoMode);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const { wallets, hasCheckedWallets, isLoading, fetchWallets } = useWalletStore();
 
@@ -48,6 +50,13 @@ export function useOnboardingCheck(currentPath: string) {
       });
     }
   }, [isAuthenticated, hasCheckedWallets, isLoading, fetchWallets]);
+
+  if (isDemoMode) {
+    if (currentPath === '/onboarding') {
+      return { shouldRedirect: true, redirectPath: '/dashboard', isLoading: false, needsOnboarding: false };
+    }
+    return { shouldRedirect: false, redirectPath: null, isLoading: false, needsOnboarding: false };
+  }
 
   const evaluation = evaluateOnboardingRedirect(
     isAuthenticated,

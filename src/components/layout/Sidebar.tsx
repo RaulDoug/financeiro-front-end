@@ -10,6 +10,8 @@ import {
   X,
 } from 'lucide-react';
 import { SidebarItem } from './SidebarItem.tsx';
+import { useDemoStore } from '../../stores/demo.store.ts';
+import { useAuthStore } from '../../stores/auth.store.ts';
 
 export interface SidebarProps {
   isOpen?: boolean;
@@ -26,7 +28,19 @@ export const navigationItems = [
   { label: 'Configurações', href: '/configuracoes', icon: Settings },
 ];
 
+export const getNavigationItems = (isDemo = false) => {
+  if (isDemo) {
+    return navigationItems.filter((item) => item.href !== '/investimentos');
+  }
+  return navigationItems;
+};
+
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
+  const isDemoStore = useDemoStore((state) => state.isDemoMode);
+  const token = useAuthStore((state) => state.token);
+  const isDemoMode = isDemoStore || token === 'mock-demo-session-token';
+  const items = getNavigationItems(isDemoMode);
+
   return (
     <aside
       data-testid="app-sidebar"
@@ -57,7 +71,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
 
       {/* Navigation items */}
       <nav className="flex-1 p-4 space-y-1.5 overflow-y-auto">
-        {navigationItems.map((item) => (
+        {items.map((item) => (
           <SidebarItem
             key={item.href}
             label={item.label}

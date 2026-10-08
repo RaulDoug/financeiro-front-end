@@ -12,7 +12,7 @@ export const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const location = useLocation();
 
-  // Redireciona imediatamente se não autenticado — antes de qualquer hook de dados
+  // Redireciona imediatamente se não autenticado para a tela de login
   if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
