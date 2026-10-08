@@ -71,7 +71,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ topbar, sidebar, children 
               <Sparkles className="w-3.5 h-3.5 text-amber-300" />
             </span>
             <span>
-              <strong>Modo Demonstração:</strong> Dados meramente ilustrativos e não refletem a realidade. Nenhuma informação é enviada ao servidor.
+              <strong>Modo Demonstração:</strong> Dados meramente ilustrativos e não refletem a realidade.
             </span>
           </div>
           <button

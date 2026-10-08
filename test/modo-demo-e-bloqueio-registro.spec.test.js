@@ -238,7 +238,7 @@ test('AC-370: Banner Informativo de Demonstração @spec:AC-370', async () => {
     'AppLayout deve incluir banner com data-testid demo-mode-banner'
   );
   assert.equal(
-    content.includes('Dados meramente ilustrativos e não refletem a realidade. Nenhuma informação é enviada ao servidor.'),
+    content.includes('Dados meramente ilustrativos e não refletem a realidade.'),
     true,
     'AppLayout deve conter o disclaimer com a frase solicitada'
   );
