@@ -19,9 +19,11 @@ api.interceptors.request.use((config) => {
   }
   const authState = useAuthStore.getState();
   const token = authState.token || (typeof localStorage !== 'undefined' ? localStorage.getItem('auth_token') : null);
+  const walletState = useWalletStore.getState();
   const activeWalletId =
     authState.activeWalletId ||
-    useWalletStore.getState().currentWalletId ||
+    walletState.currentWalletId ||
+    walletState.wallets[0]?.id ||
     (typeof localStorage !== 'undefined' ? localStorage.getItem('active_wallet_id') : null);
 
   if (token) {
@@ -41,9 +43,14 @@ api.interceptors.response.use(
   (error) => {
     // Normalizar mensagens de validação da API (ex: Zod { status: 'fail', errors: [{ message, field }] })
     if (error?.response?.data?.errors && Array.isArray(error.response.data.errors)) {
-      const errorList = error.response.data.errors;
+      interface ApiValidationError {
+        message?: string;
+        error?: string;
+        field?: string;
+      }
+      const errorList = error.response.data.errors as ApiValidationError[];
       const combined = errorList
-        .map((e: any) => e.message || e.error)
+        .map((e) => e.message || e.error)
         .filter(Boolean)
         .join('. ');
       if (combined && !error.response.data.message) {
@@ -51,15 +58,35 @@ api.interceptors.response.use(
       }
     }
 
+    // 401: Sessão expirada ou token inválido -> Desloga o usuário
     if (error?.response?.status === 401) {
       const store = useAuthStore.getState();
       store.setSessionExpired(true);
       store.logout();
+      useWalletStore.getState().clearWallets();
+      if (typeof localStorage !== 'undefined') {
+        localStorage.removeItem('active_wallet_id');
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('wallet-storage');
+        localStorage.removeItem('auth-storage');
+      }
 
       if (typeof window !== 'undefined' && window.location) {
         if (window.location.pathname !== '/login' && window.location.pathname !== '/register') {
           window.location.href = '/login?expired=true';
         }
+      }
+    }
+
+    // 403: Falta de permissão ou carteira inacessível -> NÃO desloga, apenas limpa carteira órfã
+    if (error?.response?.status === 403) {
+      const isWalletError = error?.response?.data?.message?.toLowerCase().includes('carteira');
+      if (isWalletError) {
+        if (typeof localStorage !== 'undefined') {
+          localStorage.removeItem('active_wallet_id');
+        }
+        useAuthStore.getState().setActiveWalletId(null);
+        useWalletStore.getState().fetchWallets().catch(() => {});
       }
     }
     return Promise.reject(error);

@@ -18,7 +18,7 @@ export const MobileNav: React.FC = () => {
     { label: 'Cartões', href: '/cartoes', icon: CreditCard, testId: 'mobile-nav-cartoes' },
   ];
 
-  const isMoreActive = ['/contas', '/relatorios', '/investimentos', '/configuracoes'].some((path) =>
+  const isMoreActive = ['/budgets', '/orcamentos', '/contas', '/relatorios', '/investimentos', '/configuracoes'].some((path) =>
     location.pathname.startsWith(path)
   );
 

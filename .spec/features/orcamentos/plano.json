@@ -1,0 +1,238 @@
+{
+  "runId": "Front-End_Financeiro-orcamentos-mv45v47z",
+  "feature": "orcamentos",
+  "agent": "antigravity",
+  "modo": "paralelo",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-10-11 18:32",
+  "branchTrabalho": "spec/orcamentos",
+  "baseDir": ".spec/features/orcamentos",
+  "specDir": ".spec",
+  "repoName": "Front-End_Financeiro",
+  "logsDir": "../onp-worktrees/Front-End_Financeiro-orcamentos-logs",
+  "ondas": [
+    [
+      "faixa-1",
+      "faixa-2",
+      "faixa-3"
+    ],
+    [
+      "faixa-4",
+      "faixa-5",
+      "faixa-6"
+    ],
+    [
+      "faixa-7",
+      "faixa-8"
+    ]
+  ],
+  "faixas": [
+    {
+      "id": "faixa-1",
+      "branch": "spec/orcamentos-faixa-1",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-orcamentos-faixa-1",
+      "tarefas": [
+        {
+          "id": "T-248",
+          "titulo": "Tipos TypeScript e Serviço de API de Orçamentos",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/types/budget.ts",
+            "src/services/budget.service.ts"
+          ],
+          "refs": [
+            "US-105",
+            "US-106",
+            "US-107",
+            "AC-374",
+            "AC-375",
+            "AC-378",
+            "AC-381",
+            "AC-382",
+            "AC-383"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-2",
+      "branch": "spec/orcamentos-faixa-2",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-orcamentos-faixa-2",
+      "tarefas": [
+        {
+          "id": "T-249",
+          "titulo": "Hooks React Query para Busca e Mutações de Orçamentos",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/hooks/useBudgets.ts",
+            "src/hooks/useBudgetMutations.ts"
+          ],
+          "refs": [
+            "US-105",
+            "US-106",
+            "US-107",
+            "AC-375",
+            "AC-376",
+            "AC-377",
+            "AC-378",
+            "AC-381",
+            "AC-382",
+            "AC-383"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-3",
+      "branch": "spec/orcamentos-faixa-3",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-orcamentos-faixa-3",
+      "tarefas": [
+        {
+          "id": "T-250",
+          "titulo": "Componente de Resumo Superior com KPI Cards de Caixa e Metas",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/components/budgets/BudgetSummaryCards.tsx"
+          ],
+          "refs": [
+            "US-105",
+            "AC-375"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-4",
+      "branch": "spec/orcamentos-faixa-4",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-orcamentos-faixa-4",
+      "tarefas": [
+        {
+          "id": "T-251",
+          "titulo": "Componentes de Card de Categoria, Barra de Progresso e Ações",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/components/budgets/BudgetCategoryCard.tsx",
+            "src/components/budgets/BudgetProgressBar.tsx"
+          ],
+          "refs": [
+            "US-105",
+            "US-107",
+            "AC-376",
+            "AC-383"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-5",
+      "branch": "spec/orcamentos-faixa-5",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-orcamentos-faixa-5",
+      "tarefas": [
+        {
+          "id": "T-252",
+          "titulo": "Componente de Visão Anual com Gráfico Comparativo Mês a Mês",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/components/budgets/BudgetAnnualChart.tsx"
+          ],
+          "refs": [
+            "US-105",
+            "AC-377"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-6",
+      "branch": "spec/orcamentos-faixa-6",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-orcamentos-faixa-6",
+      "tarefas": [
+        {
+          "id": "T-253",
+          "titulo": "Modais de Formulário de Orçamento com Gestão de Escopo e Conflito",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/components/budgets/BudgetModal.tsx",
+            "src/components/budgets/BudgetDeleteDialog.tsx",
+            "src/schemas/budgetSchema.ts"
+          ],
+          "refs": [
+            "US-106",
+            "US-107",
+            "AC-378",
+            "AC-379",
+            "AC-380",
+            "AC-381",
+            "AC-382"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-7",
+      "branch": "spec/orcamentos-faixa-7",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-orcamentos-faixa-7",
+      "tarefas": [
+        {
+          "id": "T-254",
+          "titulo": "Página Principal de Orçamentos e Integração no Layout/Rotas",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/pages/Budgets/BudgetsPage.tsx",
+            "src/layouts/AppLayout.tsx",
+            "src/components/layout/Sidebar.tsx",
+            "src/components/layout/MoreMenuModal.tsx",
+            "src/routes/index.tsx"
+          ],
+          "refs": [
+            "US-105",
+            "AC-374"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-8",
+      "branch": "spec/orcamentos-faixa-8",
+      "worktree": "../onp-worktrees/Front-End_Financeiro-orcamentos-faixa-8",
+      "tarefas": [
+        {
+          "id": "T-255",
+          "titulo": "Testes Automatizados dos Critérios de Aceite AC-374 a AC-383",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "test/orcamentos.spec.test.js"
+          ],
+          "refs": [
+            "US-105",
+            "US-106",
+            "US-107",
+            "AC-374",
+            "AC-375",
+            "AC-376",
+            "AC-377",
+            "AC-378",
+            "AC-379",
+            "AC-380",
+            "AC-381",
+            "AC-382",
+            "AC-383"
+          ]
+        }
+      ]
+    }
+  ],
+  "sequenciais": [],
+  "concluidas": [],
+  "avisos": []
+}

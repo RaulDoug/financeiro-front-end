@@ -42,7 +42,7 @@ export const transactionService = {
     appendParam('order_by', filters.order_by);
     appendParam('order_dir', filters.order_dir);
     appendParam('page', filters.page ?? 1);
-    appendParam('limit', filters.limit ?? 20);
+    appendParam('limit', Math.min(100, Math.max(1, Number(filters.limit) || 20)));
 
     const response = await api.get<TransactionListResponse>(`/transaction?${params.toString()}`);
     return response.data;

@@ -12,7 +12,7 @@ export interface OnboardingRedirectResult {
 export function evaluateOnboardingRedirect(
   isAuthenticated: boolean,
   hasCheckedWallets: boolean,
-  walletsCount: number,
+  _walletsCount: number,
   currentPath: string
 ): OnboardingRedirectResult {
   if (!isAuthenticated) {
@@ -23,16 +23,8 @@ export function evaluateOnboardingRedirect(
     return { shouldRedirect: false, redirectPath: null, isLoading: true };
   }
 
-  const needsOnboarding = walletsCount === 0;
-
-  if (needsOnboarding) {
-    if (currentPath !== '/onboarding') {
-      return { shouldRedirect: true, redirectPath: '/onboarding', isLoading: false };
-    }
-  } else {
-    if (currentPath === '/onboarding') {
-      return { shouldRedirect: true, redirectPath: '/dashboard', isLoading: false };
-    }
+  if (currentPath === '/onboarding') {
+    return { shouldRedirect: true, redirectPath: '/dashboard', isLoading: false };
   }
 
   return { shouldRedirect: false, redirectPath: null, isLoading: false };

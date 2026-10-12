@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Landmark, BarChart2, TrendingUp, Settings, X } from 'lucide-react';
+import { Landmark, BarChart2, TrendingUp, Settings, Target, X } from 'lucide-react';
 import { useModalTransition } from '../../hooks/useModalTransition.ts';
 import { useDemoStore } from '../../stores/demo.store.ts';
 import { useAuthStore } from '../../stores/auth.store.ts';
@@ -113,6 +113,7 @@ export const MoreMenuModal: React.FC<MoreMenuModalProps> = ({ isOpen, onClose })
   const isDemoMode = isDemoStore || token === 'mock-demo-session-token';
 
   const moreItems = [
+    { label: 'Orçamentos e Metas', href: '/budgets', icon: Target, color: 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/50' },
     { label: 'Contas Bancárias', href: '/contas', icon: Landmark, color: 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50' },
     { label: 'Relatórios Financeiros', href: '/relatorios', icon: BarChart2, color: 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50' },
     ...(isDemoMode ? [] : [{ label: 'Investimentos', href: '/investimentos', icon: TrendingUp, color: 'text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/50' }]),

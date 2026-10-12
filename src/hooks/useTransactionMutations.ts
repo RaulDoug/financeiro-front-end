@@ -20,6 +20,9 @@ export const useTransactionMutations = () => {
       queryClient.invalidateQueries({ queryKey: ['credit-card-summary'] }),
       queryClient.invalidateQueries({ queryKey: ['transaction-detail'] }),
       queryClient.invalidateQueries({ queryKey: ['reports'] }),
+      queryClient.invalidateQueries({ queryKey: ['budgets'] }),
+      queryClient.invalidateQueries({ queryKey: ['budgetSummary'] }),
+      queryClient.invalidateQueries({ queryKey: ['budgetAnnual'] }),
       queryClient.refetchQueries({ queryKey: ['transactions'], type: 'active' }),
       queryClient.refetchQueries({ queryKey: ['transactions-overdue-past'], type: 'active' }),
       queryClient.refetchQueries({ queryKey: ['dashboard'], type: 'active' }),
@@ -27,6 +30,9 @@ export const useTransactionMutations = () => {
       queryClient.refetchQueries({ queryKey: ['bank-accounts'], type: 'active' }),
       queryClient.refetchQueries({ queryKey: ['credit-card-summary'], type: 'active' }),
       queryClient.refetchQueries({ queryKey: ['credit-cards'], type: 'active' }),
+      queryClient.refetchQueries({ queryKey: ['budgets'], type: 'active' }),
+      queryClient.refetchQueries({ queryKey: ['budgetSummary'], type: 'active' }),
+      queryClient.refetchQueries({ queryKey: ['budgetAnnual'], type: 'active' }),
     ]);
   };
 

@@ -13,6 +13,7 @@ import { CreditCardsPage } from '../pages/CreditCardsPage.tsx';
 import { BankAccountsPage } from '../pages/BankAccountsPage.tsx';
 import { InvestmentsPage } from '../pages/Investments/index.tsx';
 import { ReportsPage } from '../pages/Reports/index.tsx';
+import { BudgetsPage } from '../pages/Budgets/BudgetsPage.tsx';
 import { DemoRedirectPage } from '../pages/demo/DemoRedirectPage.tsx';
 import { useDemoStore } from '../stores/demo.store.ts';
 import { useAuthStore } from '../stores/auth.store.ts';
@@ -73,6 +74,8 @@ export const AppRoutes: React.FC = () => {
             <Route path="/transacoes" element={<TransactionsPage />} />
             <Route path="/credit-cards" element={<CreditCardsPage />} />
             <Route path="/cartoes" element={<CreditCardsPage />} />
+            <Route path="/budgets" element={<BudgetsPage />} />
+            <Route path="/orcamentos" element={<BudgetsPage />} />
             <Route path="/bank-accounts" element={<BankAccountsPage />} />
             <Route path="/contas" element={<BankAccountsPage />} />
             <Route path="/investments" element={<InvestmentsRoute />} />

@@ -29,6 +29,9 @@ export const useInvalidateTransactions = () => {
   return () => {
     queryClient.invalidateQueries({ queryKey: ['transactions'] });
     queryClient.invalidateQueries({ queryKey: ['dashboard'] });
+    queryClient.invalidateQueries({ queryKey: ['budgets'] });
+    queryClient.invalidateQueries({ queryKey: ['budgetSummary'] });
+    queryClient.invalidateQueries({ queryKey: ['budgetAnnual'] });
   };
 };
 

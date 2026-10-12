@@ -16,16 +16,19 @@ export interface NavItem {
   href: string;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const APP_SHELL_NAV_ITEMS: NavItem[] = [
   { label: 'Dashboard', href: '/dashboard' },
   { label: 'Transações', href: '/transacoes' },
   { label: 'Cartões', href: '/cartoes' },
+  { label: 'Orçamentos', href: '/budgets' },
   { label: 'Contas', href: '/contas' },
   { label: 'Relatórios', href: '/relatorios' },
   { label: 'Investimentos', href: '/investimentos' },
   { label: 'Configurações', href: '/configuracoes' },
 ];
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function getAppShellNavLinks(isDemo = false): NavItem[] {
   if (isDemo) {
     return APP_SHELL_NAV_ITEMS.filter((item) => item.href !== '/investimentos' && item.href !== '/investments');

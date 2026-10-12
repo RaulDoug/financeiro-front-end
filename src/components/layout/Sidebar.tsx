@@ -6,6 +6,7 @@ import {
   Building2,
   BarChart3,
   TrendingUp,
+  Target,
   Settings,
   X,
 } from 'lucide-react';
@@ -22,6 +23,7 @@ export const navigationItems = [
   { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { label: 'Transações', href: '/transacoes', icon: ArrowLeftRight },
   { label: 'Cartões', href: '/cartoes', icon: CreditCard },
+  { label: 'Orçamentos', href: '/budgets', icon: Target },
   { label: 'Contas', href: '/contas', icon: Building2 },
   { label: 'Relatórios', href: '/relatorios', icon: BarChart3 },
   { label: 'Investimentos', href: '/investimentos', icon: TrendingUp },
