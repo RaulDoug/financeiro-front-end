@@ -100,3 +100,52 @@ test('AC-317: Persistência e acessibilidade do seletor de previsão @spec:AC-31
     'O label deve estar vinculado ao switch por acessibilidade com htmlFor'
   );
 });
+
+// US-085 — Suporte aos campos da API projected_balance e projected_final_balance com tabs e tooltips
+test('AC-318: Suporte a projected_balance, projected_final_balance, tabs, tooltip e cores verde/vermelho @spec:AC-318', () => {
+  const typesSource = readSource('types/dashboard.ts');
+  assert.ok(
+    typesSource.includes('projected_balance?: number;') &&
+    typesSource.includes('projected_final_balance?: number;'),
+    'A interface DashboardSummary deve conter projected_balance e projected_final_balance opcionais'
+  );
+
+  const kpiSource = readSource('pages/Dashboard/components/KpiCards.tsx');
+  assert.ok(
+    kpiSource.includes('summary?.projected_balance ?? summary?.monthForecast ?? 0'),
+    'Deve usar projected_balance com fallback para monthForecast'
+  );
+  assert.ok(
+    kpiSource.includes('summary?.projected_final_balance ?? summary?.monthForecastFinal ?? defaultForecast'),
+    'Deve usar projected_final_balance com fallback para monthForecastFinal'
+  );
+  assert.ok(
+    kpiSource.includes('data-testid="forecast-mode-selector"'),
+    'Deve conter container de tabs de alternância rápida'
+  );
+  assert.ok(
+    kpiSource.includes('data-testid="forecast-mode-pure"'),
+    'Deve conter botão de modo Sobra do Mês'
+  );
+  assert.ok(
+    kpiSource.includes('data-testid="forecast-mode-final"'),
+    'Deve conter botão de modo Saldo em Conta'
+  );
+  assert.ok(
+    kpiSource.includes('forecastTooltip'),
+    'Deve conter mensagem explicativa em tooltip'
+  );
+  assert.ok(
+    kpiSource.includes('data-testid="forecast-legend"'),
+    'Deve conter legenda explicativa contextual'
+  );
+  assert.ok(
+    kpiSource.includes('text-emerald-600') && kpiSource.includes('text-emerald-700'),
+    'Deve destacar valor positivo em verde'
+  );
+  assert.ok(
+    kpiSource.includes('text-rose-600') && kpiSource.includes('text-rose-700'),
+    'Deve destacar valor negativo em vermelho'
+  );
+});
+

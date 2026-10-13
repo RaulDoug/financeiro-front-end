@@ -413,6 +413,8 @@ export const useDemoStore = create<DemoState>()(
           totalBalance: Number(totalBalance.toFixed(2)),
           monthForecast: Number(monthForecast.toFixed(2)),
           monthForecastFinal: Number((totalBalance + monthForecast).toFixed(2)),
+          projected_balance: Number(monthForecast.toFixed(2)),
+          projected_final_balance: Number((totalBalance + monthForecast).toFixed(2)),
         };
       },
 

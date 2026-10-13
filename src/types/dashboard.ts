@@ -6,6 +6,8 @@ export interface DashboardSummary {
   totalBalance: number;
   monthForecast: number;
   monthForecastFinal?: number;
+  projected_balance?: number;
+  projected_final_balance?: number;
 }
 
 export interface AccountBalanceItem {
