@@ -142,41 +142,17 @@ export const KpiCards: React.FC<KpiCardsProps> = ({ summary, isLoading }) => {
 
             {card.isForecast && (
               <div className="mt-3 pt-2.5 border-t border-gray-100 dark:border-slate-800/80">
-                <div className="flex items-center justify-between gap-2">
-                  <label
-                    htmlFor="toggle-forecast-balance"
-                    className="text-[11px] font-medium text-gray-500 dark:text-slate-400 cursor-pointer select-none truncate"
-                    title="Alternar entre sobra operacional do mês e saldo final projetado em conta"
-                  >
-                    Considerar saldo em conta
-                  </label>
-                  <button
-                    type="button"
-                    id="toggle-forecast-balance"
-                    role="switch"
-                    aria-checked={includeBalance}
-                    data-testid="toggle-forecast-balance"
-                    onClick={handleToggle}
-                    title="Considerar saldo em conta"
-                    className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-emerald-500/20 ${
-                      includeBalance ? 'bg-emerald-600' : 'bg-gray-200 dark:bg-slate-700'
-                    }`}
-                  >
-                    <span
-                      className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                        includeBalance ? 'translate-x-4' : 'translate-x-0'
-                      }`}
-                    />
-                  </button>
-                </div>
-
                 {/* Alternância em Tabs Rápidas */}
                 <div
+                  role="tablist"
+                  aria-label="Modo de previsão financeira"
                   data-testid="forecast-mode-selector"
-                  className="mt-2.5 flex items-center bg-gray-100 dark:bg-slate-800/80 p-0.5 rounded-lg text-[10px] font-medium"
+                  className="flex items-center bg-gray-100 dark:bg-slate-800/80 p-0.5 rounded-lg text-[10px] font-medium"
                 >
                   <button
                     type="button"
+                    role="tab"
+                    aria-selected={!includeBalance}
                     data-testid="forecast-mode-pure"
                     onClick={() => {
                       if (includeBalance) handleToggle();
@@ -192,6 +168,8 @@ export const KpiCards: React.FC<KpiCardsProps> = ({ summary, isLoading }) => {
                   </button>
                   <button
                     type="button"
+                    role="tab"
+                    aria-selected={includeBalance}
                     data-testid="forecast-mode-final"
                     onClick={() => {
                       if (!includeBalance) handleToggle();

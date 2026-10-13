@@ -46,16 +46,17 @@ test('AC-315: Suporte ao campo monthForecastFinal no contrato de dados @spec:AC-
 });
 
 // US-085 — Alternância da Previsão de Sobra no Dashboard
-test('AC-316: Toggle interativo no card de Sobra Projetada @spec:AC-316', () => {
+test('AC-316: Seletor interativo em abas no card de Sobra Projetada @spec:AC-316', () => {
   const kpiSource = readSource('pages/Dashboard/components/KpiCards.tsx');
 
   assert.ok(
-    kpiSource.includes('data-testid="toggle-forecast-balance"'),
-    'Deve conter identificador data-testid="toggle-forecast-balance" no switch'
+    kpiSource.includes('data-testid="forecast-mode-selector"'),
+    'Deve conter identificador data-testid="forecast-mode-selector" nas abas'
   );
   assert.ok(
-    kpiSource.includes('Considerar saldo em conta'),
-    'Deve exibir o rótulo "Considerar saldo em conta"'
+    kpiSource.includes('data-testid="forecast-mode-pure"') &&
+    kpiSource.includes('data-testid="forecast-mode-final"'),
+    'Deve conter as opções de modo "Sobra do Mês" e "Saldo em Conta"'
   );
   assert.ok(
     kpiSource.includes('monthForecastFinal ?? defaultForecast'),
@@ -88,16 +89,16 @@ test('AC-317: Persistência e acessibilidade do seletor de previsão @spec:AC-31
     'Deve gravar o estado atualizado no localStorage'
   );
   assert.ok(
-    kpiSource.includes('role="switch"'),
-    'O controle interativo deve possuir o atributo semântico role="switch"'
+    kpiSource.includes('role="tablist"'),
+    'O controle de abas deve possuir o atributo semântico role="tablist"'
   );
   assert.ok(
-    kpiSource.includes('aria-checked={includeBalance}'),
-    'O switch deve refletir o estado de seleção através de aria-checked'
+    kpiSource.includes('role="tab"'),
+    'Os botões de alternância devem possuir role="tab"'
   );
   assert.ok(
-    kpiSource.includes('htmlFor="toggle-forecast-balance"'),
-    'O label deve estar vinculado ao switch por acessibilidade com htmlFor'
+    kpiSource.includes('aria-selected'),
+    'As abas devem refletir o estado ativo através de aria-selected'
   );
 });
 
