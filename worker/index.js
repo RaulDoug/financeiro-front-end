@@ -1,3 +1,5 @@
+const DEFAULT_BACKEND_URL = 'https://api-financeiro-73my.onrender.com';
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -17,7 +19,10 @@ export default {
 };
 
 async function handleApiProxy(request, env) {
-  const backendUrl = env?.BACKEND_URL || (typeof process !== 'undefined' ? process.env?.BACKEND_URL : undefined);
+  const backendUrl =
+    env?.BACKEND_URL ||
+    (typeof process !== 'undefined' ? process.env?.BACKEND_URL : undefined) ||
+    DEFAULT_BACKEND_URL;
 
   if (!backendUrl) {
     return new Response(
@@ -46,4 +51,3 @@ async function handleApiProxy(request, env) {
     body,
   });
 }
-
