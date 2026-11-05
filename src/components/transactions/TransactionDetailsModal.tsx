@@ -25,6 +25,7 @@ import { useTransactionModalStore } from '../../stores/transactionModal.store.ts
 import { useModalTransition } from '../../hooks/useModalTransition.ts';
 import { formatInstallment } from '../../utils/formatInstallment.ts';
 import { formatCurrency } from '../../utils/formatCurrency.ts';
+import { getLocalDateString } from '../../utils/formatDate.ts';
 import type { Transaction } from '../../types/transaction.ts';
 
 export const TransactionDetailsModal: React.FC = () => {
@@ -45,7 +46,7 @@ export const TransactionDetailsModal: React.FC = () => {
   const { updateMutation } = useTransactionMutations();
 
   const [showPaymentForm, setShowPaymentForm] = useState(false);
-  const [paymentDate, setPaymentDate] = useState(() => new Date().toISOString().split('T')[0]);
+  const [paymentDate, setPaymentDate] = useState(() => getLocalDateString());
   const [selectedBankAccountId, setSelectedBankAccountId] = useState('');
   const [selectedPayMethodId, setSelectedPayMethodId] = useState('');
   const [paymentError, setPaymentError] = useState<string | null>(null);
@@ -91,7 +92,7 @@ export const TransactionDetailsModal: React.FC = () => {
   // Sincronizar estados do formulário com a transação ativa
   useEffect(() => {
     if (transaction && isOpen) {
-      setPaymentDate(new Date().toISOString().split('T')[0]);
+      setPaymentDate(getLocalDateString());
       if (transaction.bank_account_id) {
         setSelectedBankAccountId(transaction.bank_account_id);
       }

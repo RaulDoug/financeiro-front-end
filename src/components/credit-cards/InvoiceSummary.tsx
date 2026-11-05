@@ -5,6 +5,7 @@ import { TransactionList } from './TransactionList.tsx';
 import { PayInvoiceModal } from './PayInvoiceModal.tsx';
 import { useCreditCardSummary } from '../../hooks/useCreditCards.ts';
 import { formatCurrency } from '../../utils/formatCurrency.ts';
+import { getLocalDateString } from '../../utils/formatDate.ts';
 import type { CreditCardItem } from '../../types/creditCard.ts';
 
 interface InvoiceSummaryProps {
@@ -22,8 +23,8 @@ export const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ card }) => {
   const firstDay = new Date(year, month, 1);
   const lastDay = new Date(year, month + 1, 0);
 
-  const startDate = firstDay.toISOString().split('T')[0];
-  const endDate = lastDay.toISOString().split('T')[0];
+  const startDate = getLocalDateString(firstDay);
+  const endDate = getLocalDateString(lastDay);
 
   const { data: summaryList = [], isLoading } = useCreditCardSummary({
     startDate,

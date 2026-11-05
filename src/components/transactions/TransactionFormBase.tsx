@@ -9,6 +9,7 @@ import { CategorySelect } from './CategorySelect.tsx';
 import { InstallmentFields } from './InstallmentFields.tsx';
 import { resolveTransactionStatus } from '../../utils/transactionStatus.ts';
 import { formatInstallment } from '../../utils/formatInstallment.ts';
+import { getLocalDateString } from '../../utils/formatDate.ts';
 import { buildUpdateTransactionDiff, type DiffContext } from '../../utils/transactionDiff.ts';
 import type { Transaction, TransactionType, TransactionStatus } from '../../types/transaction.ts';
 
@@ -28,7 +29,7 @@ export const TransactionFormBase: React.FC<Props> = ({
   isSubmitting = false,
 }) => {
   const currentWalletId = useWalletStore((state) => state.currentWalletId);
-  const todayStr = new Date().toISOString().split('T')[0];
+  const todayStr = getLocalDateString();
 
   const [description, setDescription] = useState(initialData?.description || '');
   const [value, setValue] = useState(initialData?.value ? parseFloat(initialData.value) : '');

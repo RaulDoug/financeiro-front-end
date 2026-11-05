@@ -13,6 +13,7 @@ import { TransactionModal } from '../../components/transactions/TransactionModal
 import { TransactionDeleteDialog } from '../../components/transactions/TransactionDeleteDialog.tsx';
 import { useTransactionModalStore } from '../../stores/transactionModal.store.ts';
 import { useFilterStore } from '../../stores/filter.store.ts';
+import { getLocalDateString } from '../../utils/formatDate.ts';
 import type { Transaction, TransactionFilters as FiltersType } from '../../types/transaction.ts';
 
 export const TransactionsPage: React.FC = () => {
@@ -129,7 +130,7 @@ export const TransactionsPage: React.FC = () => {
       filters.bank_account_id,
     ],
     queryFn: async () => {
-      const today = new Date().toISOString().split('T')[0];
+      const today = getLocalDateString();
       const maxDate = filters.due_date_from && filters.due_date_from < today ? filters.due_date_from : today;
       const res = await transactionService.getTransactions({
         type: filters.type,
@@ -196,7 +197,7 @@ export const TransactionsPage: React.FC = () => {
     // Regra Vencidos / Pendentes:
     // Se filtro for 'expired', exibir transações cujo status seja 'expired' OU que sejam 'pending' com due_date < today
     if (filters.status === 'expired') {
-      const today = new Date().toISOString().split('T')[0];
+      const today = getLocalDateString();
       return filteredList.filter(
         (t) =>
           t.status !== 'cancelled' &&
@@ -206,7 +207,7 @@ export const TransactionsPage: React.FC = () => {
 
     // Se filtro for 'pending', exibir transações 'pending' que NÃO estejam vencidas (due_date >= today ou sem data)
     if (filters.status === 'pending') {
-      const today = new Date().toISOString().split('T')[0];
+      const today = getLocalDateString();
       return filteredList.filter(
         (t) => t.status === 'pending' && (!t.due_date || t.due_date >= today)
       );

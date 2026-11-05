@@ -1,4 +1,5 @@
 import type { TransactionStatus } from '../types/transaction.ts';
+import { getLocalDateString } from './formatDate.ts';
 
 export interface ResolveStatusParams {
   isCancelled: boolean;
@@ -27,7 +28,7 @@ export function resolveTransactionStatus({
     return 'completed';
   }
 
-  const todayStr = aliasToday || referenceDate || new Date().toISOString().split('T')[0];
+  const todayStr = aliasToday || referenceDate || getLocalDateString();
   const cleanDueDate = dueDate ? String(dueDate).split('T')[0] : '';
 
   if (cleanDueDate && cleanDueDate < todayStr) {

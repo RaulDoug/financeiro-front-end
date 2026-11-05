@@ -24,6 +24,7 @@ import { renderLucideIcon } from '../shared/IconPicker.tsx';
 import { detectBankByName } from '../../lib/bankDetector.ts';
 import { resolveTransactionStatus } from '../../utils/transactionStatus.ts';
 import { getApiErrorMessage } from '../../utils/apiError.ts';
+import { getLocalDateString } from '../../utils/formatDate.ts';
 import type { TransactionType } from '../../types/transaction.ts';
 import { InstallmentFields } from './InstallmentFields.tsx';
 
@@ -45,7 +46,7 @@ export const MobileQuickEntry: React.FC<MobileQuickEntryProps> = ({
   isSubmitting = false,
 }) => {
   const currentWalletId = useWalletStore((state) => state.currentWalletId);
-  const todayStr = new Date().toISOString().split('T')[0];
+  const todayStr = getLocalDateString();
 
   const [type, setType] = useState<TransactionType>(initialType);
   const [valueCents, setValueCents] = useState<number>(0);
